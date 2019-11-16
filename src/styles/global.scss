@@ -1,0 +1,67 @@
+
+/**
+ * styles/global.scss
+ */
+
+/**
+ * Layout
+ * -----------------------------------------------------------------------------
+ */
+
+// Force the page to be at least the height of the window
+html {
+	display: flex;
+	flex-direction: column;
+
+	height: 100%;
+}
+
+body {
+	display: flex;
+	flex-direction: column;
+
+	flex: 1 0 auto;
+}
+
+/**
+ * Text
+ * -----------------------------------------------------------------------------
+ */
+
+p,
+p a,
+span,
+input,
+select,
+textarea,
+label,
+legend {
+	font-family: 'IBM Plex', helvetica, arial, sans-serif;
+}
+
+/**
+ * Lists
+ * -----------------------------------------------------------------------------
+ */
+
+p {
+	ul, ol {
+		list-style-type: disc;
+	}
+
+	li {
+		margin-left: 30px;
+	}
+}
+
+/**
+ * Cursor
+ * -----------------------------------------------------------------------------
+ */
+
+p,
+h1,
+h2,
+h3 {
+	cursor: default;
+}

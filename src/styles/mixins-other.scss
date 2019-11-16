@@ -1,0 +1,23 @@
+
+/**
+ * styles/mixins-other.scss
+ */
+
+@mixin fade-out-overflow()
+{
+	position: relative;
+
+	&::after {
+		content: '';
+
+		position: absolute;
+		z-index: 100;
+		top: 0;
+		right: 0;
+		bottom: 0;
+
+		width: 40px;
+
+		background-image: linear-gradient(to left, $color-athens-gray 50%, transparent);
+	}
+}
