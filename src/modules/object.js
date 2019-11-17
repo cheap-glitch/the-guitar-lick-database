@@ -47,7 +47,7 @@ export function mapObject(_object, _callback)
 export function checkObject(_object, _key, _permittedValues, _defaultValue)
 {
 	const value	      = _object?.[_key] ?? _defaultValue;
-	const permittedValues = this.isObject(_permittedValues) ? Object.keys(_permittedValues) : _permittedValues;
+	const permittedValues = isObject(_permittedValues) ? Object.keys(_permittedValues) : _permittedValues;
 
 	return permittedValues.includes(value) ? value : _defaultValue;
 }

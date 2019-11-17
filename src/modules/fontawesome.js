@@ -19,6 +19,7 @@ import {
 	faChevronDown,
 	faExternalLinkSquareAlt,
 	faStar as farStar,
+	faTrashAlt,
 
 	// Lick infos
 	faAlbum,
@@ -84,6 +85,7 @@ library.add(
 	faExternalLinkSquareAlt,
 	farStar,
 	fasStar,
+	faTrashAlt,
 
 	// Lick infos
 	faAlbum,

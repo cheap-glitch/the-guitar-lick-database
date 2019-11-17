@@ -24,7 +24,6 @@ div.LickView
 			)
 
 		//- Score
-		VSpinner(v-show="!isLickLoaded")
 		VAlphatab(
 			layout="page"
 			:tex="lickTexTransposed"

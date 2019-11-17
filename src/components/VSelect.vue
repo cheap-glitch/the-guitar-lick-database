@@ -27,7 +27,7 @@ div.select
 	transition(name="fade")
 		div.select__options(v-show="isOpened")
 			p.select__options__item(
-				v-for="option in options"
+				v-for="option in optionsList"
 				:key="`key--v-select-${id}--${option.value}`"
 
 				@click.left="select(option)"
@@ -40,7 +40,7 @@ div.select
 <!--{{{ JavaScript -->
 <script>
 
-import { isObject } from '@/modules/object.js';
+import { isObject, mapObject } from '@/modules/object.js';
 
 export default {
 	name: 'VSelect',
@@ -56,7 +56,7 @@ export default {
 			required: true,
 		},
 		options: {
-			type: Array,
+			type: [Array, Object],
 			required: true,
 		},
 		value: {
@@ -76,9 +76,14 @@ export default {
 	},
 
 	computed: {
+		optionsList()
+		{
+			// If the options are passed as an object, build an option array from the keys and values
+			return Array.isArray(this.options) ? this.options : mapObject(this.options, (_key, _value) => ({ name: _value, value: _key }));
+		},
 		selected()
 		{
-			return this.options.find(_option => _option.value == this.value) || { value: 'loading', name: 'Loading…' };
+			return this?.optionsList?.find(_option => _option.value == this.value) ?? { value: 'loading', name: 'Loading…' };
 		},
 	},
 

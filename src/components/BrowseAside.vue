@@ -116,7 +116,7 @@ div.BrowseAside
 
 import api  from '@/modules/api';
 import data from '@/modules/data';
-import { checkObject, mapObject, filterObject } from '@/modules/object';
+import { isObject, isEmptyObject, checkObject, mapObject, filterObject } from '@/modules/object';
 
 export default {
 	name: 'BrowseAside',
@@ -149,11 +149,11 @@ export default {
 	computed: {
 		artistsNames()
 		{
-			return {
-				'any':  'Any artist',
-				'none': 'No artist',
-				...this.artists.reduce((_acc, _artist) => { _acc[_artist.url] = _artist.name; return _acc; }, {})
-			};
+			return [
+				{ name: 'Any artist', value: 'any'  },
+				{ name: 'No artist',  value: 'none' },
+				...this.artists.map(_artist => ({ name: _artist.name, value: _artist.url }))
+			];
 		},
 		artistsIds()
 		{
