@@ -36,7 +36,7 @@ div.MenuAside
 			span random lick
 
 		// Go to the Fretboarder page
-		router-link.nav-menu__button(
+		//- router-link.nav-menu__button(
 			v-show="$route.path !== '/fretboarder'"
 			to="/fretboarder"
 			)

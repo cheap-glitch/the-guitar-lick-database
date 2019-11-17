@@ -59,5 +59,5 @@ export function isEmptyObject(_object)
 
 export function isObject(_value)
 {
-	return (Object.prototype.toString.call(_value) === '[object Object]');
+	return (_value !== null && Object.prototype.toString.call(_value) === '[object Object]');
 }

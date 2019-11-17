@@ -17,7 +17,6 @@ export default new Vuex.Store(
 	modules: {
 		bookmarks,
 		browse,
-		fretboarder,
 		player,
 	},
 

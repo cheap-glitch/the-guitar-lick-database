@@ -18,7 +18,7 @@ div.VAlphatab(
 <!--{{{ JavaScript -->
 <script>
 
-import { expand } from '@/modules/alphatex';
+import { expandTex } from '@/modules/alphatex';
 
 export default {
 	name: 'VAlphatab',
@@ -122,7 +122,7 @@ export default {
 			tab = `\\tempo ${this.tempo} .
 			       \\ts ${this.timeSignature.replace('/', ' ')}
 			       ${this.countdownBar}
-			       ${!this.isTexExpanded ? expand(tab) : tab}`;
+			       ${!this.isTexExpanded ? expandTex(tab) : tab}`;
 
 			return tab;
 		},
@@ -160,6 +160,7 @@ export default {
 		isPlaybackActive:  'loadSoundFont',
 	},
 
+	// Create the alphaTab instance only when 'window' exists
 	mounted()
 	{
 		const alphatabSettings = {
@@ -198,8 +199,10 @@ export default {
 			alphatabSettings.player = this.soundFontPath;
 		}
 
-		// Create the alphaTab API only when 'window' exists
 		this.alphatab = new alphaTab.platform.javaScript.AlphaTabApi(this.$refs.alphatab, alphatabSettings);
+
+		// Send events while the soundfont is loading (add the percentage loaded)
+		this.alphatab.addSoundFontLoad(_event => this.$emit('player-loading', (_event.loaded / _event.total) * 100));
 
 		// Send an event when the score is fully rendered
 		this.alphatab.addRenderFinished(() => this.$emit('score-rendered'));
@@ -246,8 +249,7 @@ export default {
 			{
 				case 'playing':
 					// Show the beat cursor
-					// @TODO
-					// document.getElementsByClassName('beatCursor')[0].classList.add('is-visible');
+					document.getElementsByClassName('beatCursor').item(0).classList.add('is-visible');
 					this.alphatab.play();
 					break;
 
@@ -257,8 +259,7 @@ export default {
 
 				case 'stopped':
 					// Hide the beat cursor
-					// @TODO
-					// document.getElementsByClassName('beatCursor')[0].classList.remove('is-visible');
+					document.getElementsByClassName('beatCursor').item(0).classList.remove('is-visible');
 					this.alphatab.stop();
 					break;
 			}
@@ -288,6 +289,14 @@ export default {
 }
 
 </script>
+<!--}}}-->
+
+
+<!--{{{ SCSS -->
+<style lang='scss' scoped>
+
+
+</style>
 <!--}}}-->
 
 

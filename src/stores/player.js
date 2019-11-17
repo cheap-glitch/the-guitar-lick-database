@@ -3,7 +3,7 @@
  * stores/player.js
  */
 
-import { expand, transpose } from '@/modules/alphatex';
+import { expandTex, transposeTex } from '@/modules/alphatex';
 
 export default
 {
@@ -32,8 +32,8 @@ export default
 	getters: {
 		// @TODO : déplacer chaque getter dans le composant qui utilise l'utilise
 		lickHasPickingSuggestions: (_state, _getters) => !_state.lick ? false : _state.lick.tab.includes('↑') || _state.lick.tab.includes('↓'),
-		lickTexExpanded:	   (_state, _getters) => !_state.lick ? null  : expand(_state.lick.tab),
-		lickTexTransposed:	   (_state, _getters) => !_state.lick ? null  : transpose(_getters.lickTexExpanded, _state.tonalityShift),
+		lickTexExpanded:	   (_state, _getters) => !_state.lick ? null  : expandTex(_state.lick.tab),
+		lickTexTransposed:	   (_state, _getters) => !_state.lick ? null  : transposeTex(_getters.lickTexExpanded, _state.tonalityShift),
 	},
 
 	mutations: {

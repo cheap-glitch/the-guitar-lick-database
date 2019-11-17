@@ -9,7 +9,7 @@
 export function getFretList(_tex)
 {
 	return [...new Set(
-		this.getElems(_tex)
+		getTexElements(_tex)
 			.reduce(function (_frets, _elem)
 			{
 				// The element is a regular note if it starts
@@ -27,9 +27,9 @@ export function getFretList(_tex)
  * Transpose every note in an alphatex score
  * If '_string' is set, transpose only the notes on the corresponding string
  */
-export function transpose(_tex, _shift, _string = null)
+export function transposeTex(_tex, _shift, _string = null)
 {
-	return this.getElems(_tex)
+	return getTexElements(_tex)
 		.map(function (_elem)
 		{
 			// Ignore all elements that aren't actual notes
@@ -56,7 +56,7 @@ export function transpose(_tex, _shift, _string = null)
  * Return all the elements of an alphatex score in an array
  * The alphatex must be expanded first
  */
-export function getElems(_tex)
+export function getTexElements(_tex)
 {
 	return _tex.trim()
 
@@ -73,7 +73,7 @@ export function getElems(_tex)
 /**
  * Expand the shorthands inside an alphatex score
  */
-export function expand(_tex)
+export function expandTex(_tex)
 {
 	let tex = _tex.trim();
 

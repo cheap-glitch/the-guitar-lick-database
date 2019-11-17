@@ -50,14 +50,6 @@ let routes = [
 		}
 	},
 	{
-		path: '/fretboarder',
-		name: 'fretboarder',
-		components: {
-			view:  loadAsyncComponent('Fretboarder'),
-			aside: loadAsyncComponent('HomeAside'),
-		}
-	},
-	{
 		path: '*',
 		name: '404',
 		components: {

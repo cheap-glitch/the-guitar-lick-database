@@ -24,6 +24,7 @@ div.LickView
 			)
 
 		//- Score
+		VSpinner(v-show="!isLickLoaded")
 		VAlphatab(
 			layout="page"
 			:tex="lickTexTransposed"
@@ -275,6 +276,7 @@ export default {
 
 		...mapState('player', [
 			'lick',
+			'isLickLoaded',
 
 			'scoreType',
 			'zoomLevel',
