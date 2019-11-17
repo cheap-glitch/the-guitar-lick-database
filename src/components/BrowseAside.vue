@@ -68,7 +68,7 @@ div.BrowseAside
 						//- Scale
 						VSelect.scale(
 							id="scale"
-							:options="{ any: 'Any scale', ...data.scalesLicks }"
+							:options="{ any: 'Any scale', ...data.scales }"
 							v-model="searchParams.scale"
 							)
 
@@ -115,15 +115,15 @@ div.BrowseAside
 <script>
 
 import api  from '@/modules/api';
-import Obj  from '@/modules/object';
-import Data from '@/modules/data';
+import data from '@/modules/data';
+import { checkObject, mapObject, filterObject } from '@/modules/object';
 
 export default {
 	name: 'BrowseAside',
 
 	static() {
 		return {
-			data: Data,
+			data: data,
 		}
 	},
 
@@ -135,10 +135,10 @@ export default {
 				tags:		this.$route.query.tags !== undefined ? this.getTagsFromQueryString() : {},
 
 				// Get the search query parameters from the query string and check them against permitted values
-				difficulty:	Obj.check(this.$route.query, 'difficulty', this.data.difficulties, 'any'),
-				genre:		Obj.check(this.$route.query, 'genre',	   this.data.genres,	   'any'),
-				scale:		Obj.check(this.$route.query, 'scale',	   this.data.scales,	   'any'),
-				tonality:	Obj.check(this.$route.query, 'tonality',   this.data.tonalities,   'any'),
+				difficulty:	checkObject(this.$route.query, 'difficulty', this.data.difficulties, 'any'),
+				genre:		checkObject(this.$route.query, 'genre',	     this.data.genres,	     'any'),
+				scale:		checkObject(this.$route.query, 'scale',	     this.data.scales,	     'any'),
+				tonality:	checkObject(this.$route.query, 'tonality',   this.data.tonalities,   'any'),
 			},
 			isSectionArtistOpened: true,
 			isSectionMusicOpened:  true,
@@ -183,8 +183,8 @@ export default {
 	{
 		// Fetch the list of all the artists
 		api.get('artists',
-			_response => {
-				this.artists = _response?.data ?? {};
+			_data => {
+				this.artists = _data || {};
 
 				// Check if the query string has a parameter for the artist and if it's valid
 				let artist = this.$route.query?.artist ?? 'any';
@@ -203,12 +203,12 @@ export default {
 		updateQueryString()
 		{
 			// Filter the search params to remove any wildcard values
-			let queryParams = Obj.filter(this.searchParams, (_p, _v) => _v !== 'any' && !(Obj.isObject(_v) && Obj.isEmpty(_v)));
+			let queryParams = filterObject(this.searchParams, (_p, _v) => _v !== 'any' && !(isObject(_v) && isEmptyObject(_v)));
 
 			// Format the tags for the URL query string
 			if (queryParams.tags)
 			{
-				queryParams.tags = Obj.map(
+				queryParams.tags = mapObject(
 					this.searchParams.tags,
 					(_tag, _state) => `${_state == 'excluded' ? '!' : ''}${_tag}`
 				).join(',');
@@ -233,7 +233,7 @@ export default {
 			api.post(
 				'lick/browse',
 				searchParamsSent,
-				_response => this.$store.commit('browse/updateResults', _response.data),
+				_data => this.$store.commit('browse/updateResults', _data),
 			);
 		},
 
@@ -319,4 +319,5 @@ export default {
 }
 
 </style>
-<!--}}}-->
+<!--}}}-->f
+          f

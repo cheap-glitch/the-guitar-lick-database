@@ -8,7 +8,6 @@ import Vuex	   from 'vuex';
 
 import bookmarks   from '@/stores/bookmarks';
 import browse	   from '@/stores/browse';
-import fretboarder from '@/stores/fretboarder';
 import player	   from '@/stores/player';
 
 Vue.use(Vuex);

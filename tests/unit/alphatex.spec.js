@@ -4,7 +4,7 @@
  */
 
 import { should } from 'chai';
-import Alphatex   from '@/modules/alphatex';
+import * from '@/modules/alphatex';
 
 should();
 

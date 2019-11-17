@@ -3,7 +3,7 @@
  * stores/browse.js
  */
 
-import Data from '@/modules/data';
+import data from '@/modules/data';
 
 export default
 {
@@ -37,7 +37,7 @@ export default
 
 		sortedResults(_state, _getters)
 		{
-			let difficulties  = Object.keys(Data.difficulties);
+			let difficulties  = Object.keys(data.difficulties);
 			let sortedResults = [..._getters.filteredResults];
 
 			// The results are sorted by added date by default

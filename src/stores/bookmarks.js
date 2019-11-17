@@ -3,14 +3,14 @@
  * stores/bookmarks.js
  */
 
-import Storage from '@/modules/storage';
+import storage from '@/modules/storage';
 
 export default
 {
 	namespaced: true,
 
 	state: {
-		bookmarks: Storage.get('bookmarks', []),
+		bookmarks: storage.get('bookmarks', []),
 	},
 
 	getters: {
@@ -18,7 +18,7 @@ export default
 	},
 
 	mutations: {
-		insertBookmark: (_state, _id) => _state.bookmarks = Storage.insert('bookmarks', parseInt(_id)),
-		removeBookmark: (_state, _id) => _state.bookmarks = Storage.remove('bookmarks', parseInt(_id)),
+		insertBookmark: (_state, _id) => _state.bookmarks = storage.insert('bookmarks', parseInt(_id)),
+		removeBookmark: (_state, _id) => _state.bookmarks = storage.remove('bookmarks', parseInt(_id)),
 	},
 }

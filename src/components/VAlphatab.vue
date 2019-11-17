@@ -18,7 +18,7 @@ div.VAlphatab(
 <!--{{{ JavaScript -->
 <script>
 
-import Alphatex from '@/modules/alphatex';
+import { expand } from '@/modules/alphatex';
 
 export default {
 	name: 'VAlphatab',
@@ -122,7 +122,7 @@ export default {
 			tab = `\\tempo ${this.tempo} .
 			       \\ts ${this.timeSignature.replace('/', ' ')}
 			       ${this.countdownBar}
-			       ${!this.isTexExpanded ? Alphatex.expand(tab) : tab}`;
+			       ${!this.isTexExpanded ? expand(tab) : tab}`;
 
 			return tab;
 		},

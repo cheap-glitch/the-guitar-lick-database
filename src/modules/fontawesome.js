@@ -42,18 +42,6 @@ import {
 	faStop,
 	faStopwatch,
 	faUndoAlt,
-
-	// Fretboarder
-	faBullseye,
-	faEraser,
-	faEye,
-	faEyeSlash,
-	faFileDownload,
-	faHandPaper,
-	faInfoCircle,
-	faPlusCircle,
-	faTrashAlt,
-
 } from '@fortawesome/pro-regular-svg-icons';
 
 import {
@@ -120,15 +108,4 @@ library.add(
 	faStop,
 	faStopwatch,
 	faUndoAlt,
-
-	// Fretboarder
-	faBullseye,
-	faEraser,
-	faEye,
-	faEyeSlash,
-	faFileDownload,
-	faHandPaper,
-	faInfoCircle,
-	faPlusCircle,
-	faTrashAlt,
 );

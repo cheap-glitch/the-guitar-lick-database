@@ -83,7 +83,7 @@ div.BrowseView
 				|
 				| {{ data.tonalities[lick.tonality] }}
 				|
-				| {{ data.scalesLicks[lick.scale] }}
+				| {{ data.scales[lick.scale] }}
 				|
 
 				//- Genres
@@ -131,7 +131,7 @@ div.BrowseView
 
 import { mapGetters } from 'vuex';
 
-import Data		  from '@/modules/data';
+import data		  from '@/modules/data';
 import BrowseViewPagelist from '@/components/BrowseViewPagelist';
 
 export default {
@@ -143,7 +143,7 @@ export default {
 
 	static() {
 		return {
-			data: Data,
+			data: data,
 		}
 	},
 

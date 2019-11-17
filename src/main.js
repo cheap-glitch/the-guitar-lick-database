@@ -1,6 +1,7 @@
 
 /**
  * The Guitar Lick Database 2.0
+ * A powerful thesaurus for lead guitarists
  * Copyright (C) 2019  cheap glitch
  *
  * This program is free software: you can redistribute it and/or modify it
@@ -20,7 +21,6 @@
 import Vue	     from 'vue';
 import VueStatic     from 'vue-static';
 import VueSlider     from 'vue-slider-component';
-import VTooltip      from 'v-tooltip';
 import VClickOutside from 'v-click-outside'
 
 import App	     from '@/App';
@@ -31,7 +31,6 @@ import store	     from '@/stores/main';
  * Register plugins, directives & external components
  */
 import '@/modules/fontawesome';
-Vue.use(VTooltip);
 Vue.use(VueStatic);
 Vue.component('vue-slider', VueSlider);
 Vue.directive('click-outside', VClickOutside.directive);

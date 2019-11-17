@@ -86,13 +86,13 @@ div.LickView
 			fa-icon(:icon="['far', 'music']")
 			router-link(
 				:to="`/browse?tonality=${lick.tonality}&scale=${lick.scale}`"
-				) {{ data.tonalities[lick.tonality] + ' ' + data.scalesLicks[lick.scale] }}
+				) {{ data.tonalities[lick.tonality] + ' ' + data.scales[lick.scale] }}
 		//- Tuning
 		p.wrapper-infos__item
 			fa-icon(:icon="['far', 'guitar-electric']")
 			router-link(
 				:to="`/browse?tuning=${lick.tuning}`"
-				) {{ data.tuningsLicks[lick.tuning] }}
+				) {{ data.tunings[lick.tuning] }}
 		//- Tags
 		p.wrapper-infos__item
 			fa-icon(:icon="['far', 'tags']")
@@ -189,9 +189,8 @@ div.LickView
 import MarkdownIt		from 'markdown-it';
 import { mapState, mapGetters } from 'vuex';
 
-import api	from '@/modules/api';
-import Data	from '@/modules/data';
-import Storage	from '@/modules/storage';
+import api  from '@/modules/api';
+import data from '@/modules/data';
 
 export default {
 	name: 'LickView',
@@ -208,7 +207,7 @@ export default {
 
 	static() {
 		return {
-			data: Data,
+			data: data,
 			md: new MarkdownIt({
 				breaks:      true,
 				typographer: true,
@@ -313,12 +312,12 @@ export default {
 			// Fetch the lick
 			api.get(
 				`lick/read/${this.id}`,
-				_response => {
-					this.$store.commit('player/setLick',  _response?.data	     ?? null);
-					this.$store.commit('player/setTempo', _response?.data?.tempo ?? 120);
+				_data => {
+					this.$store.commit('player/setLick',  _data	   || null);
+					this.$store.commit('player/setTempo', _data?.tempo ?? 120);
 
 					// Fetch some suggestions
-					api.post('lick/suggest', this.lick, _response => this.suggestions = _response?.data ?? []);
+					api.post('lick/suggest', this.lick, __data => this.suggestions = __data || []);
 				});
 		},
 
@@ -340,7 +339,7 @@ function navigationGuard(_to, _from, _next)
 {
 	api.get(
 		`lick/exists/${_to.params.id}`,
-		_response => _next(_response.data ? {} : { name: '404', params: [ _to.path ] })
+		_data => _next(_data ? {} : { name: '404', params: [ _to.path ] })
 	);
 }
 

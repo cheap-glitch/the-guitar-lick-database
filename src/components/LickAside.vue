@@ -182,17 +182,17 @@ div.LickAside
 
 import { mapState, mapGetters, mapMutations } from 'vuex';
 
-import Data	   from '@/modules/data';
-import Note	   from '@/modules/note';
-import Alphatex    from '@/modules/alphatex';
-import { Hotkeys } from '@/modules/hotkeys';
+import data		   from '@/modules/data';
+import { Hotkeys }	   from '@/modules/hotkeys';
+import { getFretList }	   from '@/modules/alphatex';
+import { getIntervalNote } from '@/modules/music';
 
 export default {
 	name: 'LickAside',
 
 	static() {
 		return {
-			data: Data,
+			data: data,
 			hotkeys: {},
 		}
 	},
@@ -211,7 +211,7 @@ export default {
 			const transpositions = [];
 			for (let i=this.maxTonalityShiftDown; i<=this.maxTonalityShiftUp; i++)
 			{
-				const tonality = this.data.tonalities[Note.getIntervalNote(this.lick.tonality, i)];
+				const tonality = this.data.tonalities[getIntervalNote(this.lick.tonality, i)];
 
 				transpositions.push({
 					value: i,
@@ -234,7 +234,7 @@ export default {
 		},
 		fretList()
 		{
-			return this.lick ? Alphatex.getFretList(this.lickTexExpanded) : [];
+			return this.lick ? getFretList(this.lickTexExpanded) : [];
 		},
 
 		scoreType:

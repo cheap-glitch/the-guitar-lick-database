@@ -1,6 +1,6 @@
 
 /**
- * modules/router.js
+ * router.js
  */
 
 import Vue    from 'vue';

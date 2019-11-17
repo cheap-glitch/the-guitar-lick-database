@@ -3,7 +3,7 @@
  * modules/hotkeys.js
  */
 
-import Obj from '@/modules/object';
+import { mapToObject } from '@/modules/object';
 
 export function Hotkeys(_hotkeys, _disabled = false)
 {
@@ -13,7 +13,7 @@ export function Hotkeys(_hotkeys, _disabled = false)
 	this.disable  = () => disabled = true;
 
 	// Create an array of hotkeys, each with its state and corresponding action
-	const hotkeys = Obj.mapToObject(_hotkeys, (_key, _action) => ({ isPressed: false, action: _action }));
+	const hotkeys = mapToObject(_hotkeys, (_key, _action) => ({ isPressed: false, action: _action }));
 
 	// Capture a keypress, perform an action if one is tied to it, and mark the key as pressed
 	this.capture = function(_event)
