@@ -42,14 +42,15 @@ $api->get('/lick/read/{id}', function(Request $request, Response $response, arra
 		'lick.tags',
 		'lick.tab',
 		'lick.notes',
+		'lick.timestamp',
 
 		// Source
 		'source' => [
+			'lick.source (sid)',
 			'source.type',
 			'source.name',
 			'source.author',
 			'source.url',
-			'lick.timestamp',
 		],
 
 		// Name and URL of the associated artist

@@ -33,4 +33,9 @@ export default
 	{
 		this.xhr('post', _url, _callback, _data);
 	},
+
+	put(_url, _data, _callback)
+	{
+		this.xhr('put', _url, _callback, _data);
+	},
 }

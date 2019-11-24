@@ -56,6 +56,7 @@ export default
 		'collection':		"Collection",
 		'textbook':		"Method or textbook",
 		'song':			"Song",
+		'article':		"Article",
 	},
 
 	tags: {

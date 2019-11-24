@@ -230,7 +230,7 @@ export default {
 		},
 		lickSourceURL()
 		{
-			// Add an eventual timestamp at the end of YouTube links
+			// Add an potential timestamp at the end of YouTube links
 			return (this.lick.source.type === 'youtube')
 				? this.lick.source.url + (this.lick.source.timestamp > 0 ? `?t=${this.lick.source.timestamp}` : '')
 				: this.lick.source.url;
@@ -244,6 +244,7 @@ export default {
 					song:	    'album',
 					textbook:   'book',
 					youtube:    'youtube',
+					article:    'file-alt',
 				}[this.lick.source.type]
 			];
 		},

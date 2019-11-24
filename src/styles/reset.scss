@@ -9,8 +9,9 @@
  */
 
 html {
-	font-size: 10px;
 	line-height: 1.15;
+
+	font-size: 10px;
 
 	// Prevent adjustments of font size after orientation changes in iOS
 	-webkit-text-size-adjust: 100%;
@@ -81,10 +82,10 @@ button,
 input,
 select,
 textarea {
+	line-height: 1.15;
+
 	font-size: 100%;
 	font-family: inherit;
-
-	line-height: 1.15;
 }
 
 textarea {
