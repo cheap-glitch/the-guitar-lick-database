@@ -13,6 +13,17 @@ module.exports = {
 	// Disable source maps in production
 	productionSourceMap: false,
 
+	// Display both warnings and errors in the dev overlay
+	devServer: {
+		overlay: {
+			errors:   true,
+			warnings: true,
+		}
+	},
+
+	// Don't bother linting during production builds
+	lintOnSave: process.env.NODE_ENV !== 'production',
+
 	/**
 	 * CSS-related settings
 	 */
@@ -52,10 +63,77 @@ module.exports = {
 		}));
 	},
 
-	/**
-	 * Pre-rendering settings
-	 */
 	pluginOptions: {
+		/**
+		 * Font Awesome icons
+		 */
+		fontawesome: {
+			component: 'fa-icon',
+			imports: [
+				{
+					set: 'free-brands',
+					icons: [
+						// Lick infos
+						'youtube',
+					]
+				},
+				{
+					set: 'pro-solid',
+					icons: [
+						// General UI
+						'star',
+
+						// Logo
+						'comment-alt-music',
+						'square-full',
+
+						// Main navigation menu
+						'guitar',
+						'heart',
+						'list-ul',
+						'random',
+					]
+				},
+				{
+					set: 'pro-regular',
+					icons: [
+						// General UI
+						'chevron-down',
+						'external-link-square-alt',
+						'star',
+						'trash-alt',
+
+						// Lick infos
+						'album',
+						'book',
+						'compact-disc',
+						'file-alt',
+						'file-music',
+						'guitar-electric',
+						'mountain',
+						'music',
+						'tags',
+						'user-circle',
+
+						// Player
+						'drum',
+						'minus',
+						'pause',
+						'play',
+						'plus',
+						'search-minus',
+						'search-plus',
+						'stop',
+						'stopwatch',
+						'undo-alt',
+					]
+				},
+			]
+		},
+
+		/**
+		 * Pre-rendering settings
+		 */
 		prerenderSpa: {
 			registry: undefined,
 			headless: true,

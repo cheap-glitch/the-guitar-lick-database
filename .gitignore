@@ -24,5 +24,8 @@ npm-debug.log*
 # Test coverage
 /.nyc_output/
 
+# ESLint
+.eslintrc.json
+
 # Editor files
 .vscode
