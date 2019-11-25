@@ -12,16 +12,21 @@ div.LickView
 	//- Score
 	//----------------------------------------------------------------------
 	section.wrapper-lick(v-if="lick")
-		h2 Lick \#{{ id }}
+		div.wrapper-lick__header
+			h2 Lick \#{{ id }}
 
-		//- Bookmarking button
-		VButton(
-			:icon="[isBookmarked ? 'fas' : 'far', 'star']"
-			:is-active="isBookmarked"
-			:tooltip="`${isBookmarked ? 'Remove from' : 'Add to'} the bookmarks`"
+			//- Bookmarking button
+			VButton(
+				:icon="[isBookmarked ? 'fas' : 'far', 'star']"
+				:is-active="isBookmarked"
+				:tooltip="`${isBookmarked ? 'Remove from' : 'Add to'} the bookmarks`"
 
-			@click="toggleBookmarked"
-			)
+				@click="toggleBookmarked"
+				)
+
+		//- Loading bar
+		div.loading-bar(v-show="!isLickLoaded")
+			p Loading the soundfont… ({{ loadingProgress }}%)
 
 		//- Score
 		VAlphatab(
@@ -43,6 +48,7 @@ div.LickView
 			:is-metronome-on="isMetronomeOn"
 			:is-countdown-on="isCountdownOn"
 
+			@player-loading="updateLoadingProgress"
 			@player-ready="$store.commit('player/setLickLoaded', true)"
 			@player-stopped="$store.commit('player/setPlayerState', 'stopped')"
 			)
@@ -54,6 +60,7 @@ div.LickView
 	//- Infos & notes
 	//----------------------------------------------------------------------
 	section.wrapper-infos(v-if="lick")
+		h3 Informations
 
 		//- Artist
 		p.wrapper-infos__item(v-if="lick.artist !== '0'")
@@ -115,13 +122,15 @@ div.LickView
 				|
 				fa-icon(:icon="lickSourceIcon")
 				| &nbsp;
-				a(
-					:href="lickSourceURL"
-					target="_blank"
-					rel="external nofollow noopener noreferrer"
-				) {{ lickSourceText }}
-				| &nbsp;
-				fa-icon(:icon="['far', 'external-link-square-alt']")
+				span(v-if="lick.source.url.length")
+					a(
+						:href="lickSourceURL"
+						target="_blank"
+						rel="external nofollow noopener noreferrer"
+						) {{ lickSourceText }}
+					| &nbsp;
+					fa-icon(:icon="['far', 'external-link-square-alt']")
+				p(v-else) {{ lickSourceText }}
 
 		//- Link to edition page (only in dev mode)
 		p(v-if="devMode")
@@ -130,8 +139,9 @@ div.LickView
 			fa-icon(:icon="['far', 'external-link-square-alt']")
 
 		//- Notes
-		p.notes(v-if="lick.notes.length")
-			span(v-html="parsedNotes")
+		div(v-if="parsedNotes.length")
+			h3 Notes
+			p.notes(v-html="parsedNotes")
 
 	//----------------------------------------------------------------------
 	//- Variations & suggestions
@@ -140,6 +150,7 @@ div.LickView
 
 		//- Original lick
 		div.original(v-if="lick && lick.originalId")
+			h3 Original lick
 			router-link(
 				:to="`/lick/${lick.originalId}`"
 				)
@@ -151,7 +162,8 @@ div.LickView
 					:zoom="7"
 					)
 		//- Variations
-		div.variations
+		div.variations(v-if="variations.length")
+			h3 Variations
 			router-link(
 				v-for="lick in variations"
 				:key="`variation--${lick.id}`"
@@ -165,7 +177,8 @@ div.LickView
 					:zoom="7"
 					)
 		//- Suggestions
-		div.suggestions
+		div.suggestions(v-if="suggestions.length")
+			h3 Suggestions
 			router-link(
 				v-for="lick in suggestions"
 				:key="`suggestion--${lick.id}`"
@@ -217,8 +230,9 @@ export default {
 
 	data() {
 		return {
-			suggestions:  [],
-			isBookmarked: this.$store.getters['bookmarks/isBookmarked'](this.$route.params.id),
+			suggestions:	 [],
+			isBookmarked:	 this.$store.getters['bookmarks/isBookmarked'](this.$route.params.id),
+			loadingProgress: 0,
 		}
 	},
 
@@ -226,7 +240,7 @@ export default {
 		lickSourceText()
 		{
 			// Concatenate the name and the author
-			return `${this.md.render(this.lick.source.name).replace(/<\/?p>/g, '')} (${this.lick.source.author})`;
+			return `${this.lick.source.name} (${this.lick.source.author})`;
 		},
 		lickSourceURL()
 		{
@@ -307,6 +321,14 @@ export default {
 
 	methods: {
 		/**
+		 * Update the loading percentage of the soundfont
+		 */
+		updateLoadingProgress(_percent)
+		{
+			this.loadingProgress = _percent;
+		},
+
+		/**
 		 * Fetch & update the data
 		 */
 		updateLick()
@@ -372,6 +394,12 @@ function navigationGuard(_to, _from, _next)
 	min-height: 400px;
 }
 
+.wrapper-lick__header {
+	display: flex;
+	align-items: center;
+	@include space-children-h(10px);
+}
+
 .wrapper-infos {
 	grid-area: wrapper-infos;
 }
@@ -397,13 +425,15 @@ function navigationGuard(_to, _from, _next)
 
 .notes {
 	line-height: 1.4;
+
 	text-align: justify;
 }
 
 .credit {
+	text-align: right;
+
 	font-size: 0.8em;
 	font-style: italic;
-	text-align: right;
 
 	color: lightgray;
 

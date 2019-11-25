@@ -30,7 +30,6 @@ export default
 	},
 
 	getters: {
-		// @TODO : déplacer chaque getter dans le composant qui utilise l'utilise
 		lickHasPickingSuggestions: (_state) => !_state.lick ? false : _state.lick.tab.includes('↑') || _state.lick.tab.includes('↓'),
 		lickTexExpanded:	   (_state) => !_state.lick ? null  : expandTex(_state.lick.tab),
 		lickTexTransposed:	   (_state, _getters) => !_state.lick ? null  : transposeTex(_getters.lickTexExpanded, _state.tonalityShift),

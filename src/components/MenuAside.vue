@@ -83,10 +83,11 @@ export default {
 
 	padding: 8px 18px;
 
+	text-decoration: none;
+
 	font-family: 'IBM Plex';
 	font-size: 1em;
 	font-weight: bold;
-	text-decoration: none;
 
 	@include pill;
 

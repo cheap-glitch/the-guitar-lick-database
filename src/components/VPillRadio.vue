@@ -11,14 +11,14 @@ div.p-radio
 	//- Left label
 	p.p-radio__label(
 		v-if="label && labelPosition == 'left'"
-		:class="{ 'is-disabled': isDisabled }"
+		v-mods="{ isDisabled }"
 		) {{ label }}
 
 	//- Choices
 	div.p-radio__choice(
 		v-for="(choiceValue, choiceName) in choices"
 		:key="`p-radio-${choiceValue}`"
-		:class="{ 'is-selected': (choiceValue == value), 'is-disabled': isDisabled }"
+		v-mods="{ isSelected: choiceValue == value, isDisabled }"
 
 		@click.left="select(choiceValue)"
 		)
@@ -30,13 +30,13 @@ div.p-radio
 			)
 		label.p-radio__choice__label(
 			:for="`${fullID}--${choiceValue}`"
-			:class="{ 'is-selected': (choiceValue == value), 'is-disabled': isDisabled }"
+			v-mods="{ isSelected: (choiceValue == value), isDisabled }"
 			) {{ choiceName }}
 
 	//- Right label
 	p.p-radio__label(
 		v-if="label && labelPosition == 'right'"
-		:class="{ 'is-disabled': isDisabled }"
+		v-mods="{ isDisabled }"
 		) {{ label }}
 
 </template>

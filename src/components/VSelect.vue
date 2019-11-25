@@ -10,17 +10,17 @@ div.select
 
 	//- Select bar
 	div.select__bar(
-		:class="{ 'is-disabled': isDisabled }"
-
+		v-mods="{ isDisabled }"
 		v-click-outside="close"
 		@click.left="toggleOpen"
 		)
 		p.select__bar__text(
-			:class="{ 'is-disabled': isDisabled }"
+			v-mods="{ isDisabled }"
 			) {{ selected.name }}
+
 		fa-icon.select__bar__icon(
 			:icon="['far', 'chevron-down']"
-			:class="{ 'is-flipped': isOpened, 'is-disabled': isDisabled }"
+			v-mods="{ isOpened, isDisabled }"
 			)
 
 	//- Options

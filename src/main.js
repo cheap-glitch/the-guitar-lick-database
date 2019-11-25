@@ -21,21 +21,23 @@
  * this program. If not, see <https://www.gnu.org/licenses/>.
  */
 
-import Vue	     from 'vue';
-import VueStatic     from 'vue-static';
-import VueSlider     from 'vue-slider-component';
-import VClickOutside from 'v-click-outside'
+import Vue	       from 'vue';
+import VueStatic       from 'vue-static';
+import VueSlider       from 'vue-slider-component';
+import VClickOutside   from 'v-click-outside'
+import VueCSSModifiers from 'vue-css-modifiers';
 
-import App	     from '@/App';
-import router	     from '@/router';
-import store	     from '@/stores/main';
+import App    from '@/App';
+import store  from '@/stores/main';
+import router from '@/router';
 
 /**
  * Register plugins, directives & external components
  */
 Vue.use(VueStatic);
-Vue.component('vue-slider', VueSlider);
-Vue.directive('click-outside', VClickOutside.directive);
+Vue.directive('click-outside',	VClickOutside.directive);
+Vue.directive('mods',		VueCSSModifiers);
+Vue.component('vue-slider',	VueSlider);
 
 /**
  * Register globally the base components

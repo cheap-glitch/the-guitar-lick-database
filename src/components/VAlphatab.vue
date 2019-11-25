@@ -6,10 +6,7 @@
 <!--{{{ Pug -->
 <template lang='pug'>
 
-div.VAlphatab(
-	:class="{ 'is-layout-page': layout === 'page' }"
-	)
-	div(ref="alphatab")
+div.VAlphatab(v-mods="{ isLayoutPage: layout === 'page' }"): div(ref="alphatab")
 
 </template>
 <!--}}}-->

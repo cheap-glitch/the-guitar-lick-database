@@ -7,7 +7,8 @@
 <template lang='pug'>
 
 div.statebox(
-	:class="[`is-in-state-${states.indexOf(state)}`, { 'is-label-on-left': (labelPosition === 'left') }]"
+	:class="`is-in-state-${states.indexOf(state)}`"
+	v-mods="{ isLabelOnLeft: labelPosition === 'left' }"
 	)
 	input.statebox__checkbox(
 		type="checkbox"
@@ -146,7 +147,6 @@ export default {
 				newModelState[this.value] = this.state;
 
 				// Filter out the keys that are set to the first state
-				// @TODO : have an option for this ?
 				let filteredModelState = filterObject(newModelState, (_key, _state) => _state !== this.states[0]);
 
 				this.$emit('change', filteredModelState);

@@ -97,10 +97,12 @@ export default {
 }
 
 .logo__text {
+	line-height: 60px;
+
+	text-decoration: none;
+
 	font-size: 60px;
 	font-family: 'Bebas Bold';
-	line-height: 60px;
-	text-decoration: none;
 
 	color: transparent;
 	background-image:

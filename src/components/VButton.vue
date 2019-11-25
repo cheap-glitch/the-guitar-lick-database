@@ -8,13 +8,13 @@
 
 button.VButton(
 	:title="tooltip"
-	:class="{ 'is-active': isActive, 'is-disabled': isDisabled, 'is-only-icon': !text }"
+	v-mods="{ isActive, isDisabled, isOnlyIcon: !text }"
 
 	@click.left="click"
 	)
 	fa-icon.VButton__icon(
 		:icon="Array.isArray(icon) ? icon : ['far', icon]"
-		:class="{ 'is-disabled': isDisabled }"
+		v-mods="{ isDisabled }"
 		)
 	p(v-if="text") {{ text }}
 
