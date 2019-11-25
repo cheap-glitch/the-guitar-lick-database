@@ -21,9 +21,6 @@ module.exports = {
 		}
 	},
 
-	// Don't bother linting during production builds
-	lintOnSave: process.env.NODE_ENV !== 'production',
-
 	/**
 	 * CSS-related settings
 	 */

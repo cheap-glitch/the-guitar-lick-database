@@ -25,7 +25,7 @@ npm-debug.log*
 /.nyc_output/
 
 # ESLint
-.eslintrc.json
+/.eslintrc.js
 
 # Editor files
 .vscode

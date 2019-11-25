@@ -40,7 +40,7 @@ div.select
 <!--{{{ JavaScript -->
 <script>
 
-import { isObject, mapObject } from '@/modules/object.js';
+import { mapObject } from '@/modules/object.js';
 
 export default {
 	name: 'VSelect',

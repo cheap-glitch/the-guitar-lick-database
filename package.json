@@ -6,7 +6,8 @@
   "scripts": {
     "serve": "vue-cli-service serve --https",
     "build": "vue-cli-service build --modern",
-    "test:unit": "nyc vue-cli-service test:unit"
+    "test:unit": "nyc vue-cli-service test:unit",
+    "lint": "vue-cli-service lint --no-fix"
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^1.2.25",
@@ -30,12 +31,16 @@
     "@babel/plugin-proposal-optional-chaining": "^7.7.4",
     "@cheap-glitch/vue-cli-plugin-fontawesome": "^1.0.0",
     "@vue/cli-plugin-babel": "^4.0.5",
+    "@vue/cli-plugin-eslint": "^4.0.5",
     "@vue/cli-plugin-router": "^4.0.5",
     "@vue/cli-plugin-unit-mocha": "^4.0.5",
     "@vue/cli-plugin-vuex": "^4.0.5",
     "@vue/cli-service": "^4.0.5",
     "@vue/test-utils": "1.0.0-beta.29",
+    "babel-eslint": "^10.0.3",
     "chai": "^4.2.0",
+    "eslint": "^5.16.0",
+    "eslint-plugin-vue": "^5.0.0",
     "fibers": "^4.0.2",
     "html-minifier": "^4.0.0",
     "jstransformer-markdown-it": "^2.1.0",

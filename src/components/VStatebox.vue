@@ -33,7 +33,7 @@ div.statebox(
 <!--{{{ JavaScript -->
 <script>
 
-import { isObject, checkObject } from '@/modules/object';
+import { isObject, checkObject, filterObject } from '@/modules/object';
 
 export default {
 	name: 'VStatebox',
