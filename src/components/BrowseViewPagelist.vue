@@ -11,12 +11,12 @@ div.BrowseViewPagelist
 		div.pages__item(
 			v-for="n in nbPages"
 			:key="`page-${n}`"
-			:class="{ 'is-current-page': n == currentPage }"
+			v-mods="{ isCurrentPage: n == currentPage }"
 
 			@click.left="goToPage(n)"
 			)
 			p.pages__item__number(
-				:class="{ 'is-current-page': n == currentPage }"
+				v-mods="{ isCurrentPage: n == currentPage }"
 				) {{ n }}
 
 </template>

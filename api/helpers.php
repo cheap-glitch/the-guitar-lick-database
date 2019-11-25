@@ -39,7 +39,7 @@ function lick_format(array $lick)
 		{
 			return in_array($key, [
 				'date',
-				'variation',
+				'original',
 				'tuning',
 				'tonality',
 				'scale',
@@ -48,7 +48,7 @@ function lick_format(array $lick)
 				'triplet',
 				'difficulty',
 				'artist',
-				'tab',
+				'tex',
 				'notes',
 				'timestamp',
 			]);

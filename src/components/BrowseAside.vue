@@ -17,7 +17,7 @@ div.BrowseAside
 				p Guitarist, genre & diffculty
 				fa-icon.section__header__chevron(
 					:icon="['far', 'chevron-down']"
-					:class="{ 'is-flipped': !isSectionArtistOpened }"
+					v-mods="{ isFlipped: !isSectionArtistOpened }"
 					)
 
 			transition(name="fade")
@@ -53,7 +53,7 @@ div.BrowseAside
 				p Tonality & scale
 				fa-icon.section__header__chevron(
 					:icon="['far', 'chevron-down']"
-					:class="{ 'is-flipped': !isSectionMusicOpened }"
+					v-mods="{ isFlipped: !isSectionMusicOpened }"
 					)
 
 			transition(name="fade")
@@ -81,7 +81,7 @@ div.BrowseAside
 				p Tags
 				fa-icon.section__header__chevron(
 					:icon="['far', 'chevron-down']"
-					:class="{ 'is-flipped': !isSectionTagsOpened }"
+					v-mods="{ isFlipped: !isSectionTagsOpened }"
 					)
 
 			//- Tags

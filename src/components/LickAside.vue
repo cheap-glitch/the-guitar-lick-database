@@ -79,7 +79,7 @@ div.LickAside
 			)
 		p.text-tempo(
 			v-show="!isEditingTempo"
-			:class="{ 'is-disabled': !isLickLoaded }"
+			v-mods="{ isDisabled: !isLickLoaded }"
 
 			@click.left="editTempo"
 			) {{ tempo }}
@@ -126,14 +126,14 @@ div.LickAside
 		p.text-volume {{ volMetronome }}
 
 	//----------------------------------------------------------------------
-	//- Score options
+	//- Display & score settings
 	//----------------------------------------------------------------------
 	div.toolbar
 		//- Zoom out
 		VButton(
 			tooltip="Zoom out (-)"
 			icon="search-minus"
-			:is-disabled="!isLickLoaded"
+			:is-disabled="!isLickLoaded || zoomLevel == minZoom"
 
 			@click="zoomOut"
 			)
@@ -141,7 +141,7 @@ div.LickAside
 		VButton(
 			tooltip="Zoom in (+)"
 			icon="search-plus"
-			:is-disabled="!isLickLoaded"
+			:is-disabled="!isLickLoaded || zoomLevel == maxZoom"
 
 			@click="zoomIn"
 			)
@@ -184,7 +184,7 @@ import { mapState, mapGetters, mapMutations } from 'vuex';
 
 import data		   from '@/modules/data';
 import { Hotkeys }	   from '@/modules/hotkeys';
-import { getFretList }	   from '@/modules/alphatex';
+import { getFretList }     from '@/modules/alphatex';
 import { getIntervalNote } from '@/modules/music';
 
 export default {
@@ -236,6 +236,10 @@ export default {
 		{
 			return this.lick ? getFretList(this.lickTexExpanded) : [];
 		},
+		lickHasPickingSuggestions()
+		{
+			return this.lick ? this.lick.tex.includes('↑') || this.lick.tex.includes('↓') : false;
+		},
 
 		scoreType:
 		{
@@ -277,11 +281,15 @@ export default {
 			'isLoopingOn',
 			'isMetronomeOn',
 			'isCountdownOn',
+
+			'zoomLevel',
+			'minZoom',
+			'maxZoom',
 		]),
 
 		...mapGetters('player', [
 			'lickTexExpanded',
-			'lickHasPickingSuggestions',
+			'lickTexTransposed',
 		]),
 	},
 

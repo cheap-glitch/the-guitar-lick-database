@@ -83,7 +83,7 @@ $api->post('/lick/browse', function(Request $request, Response $response, array 
 		'lick.artist',
 		'lick.genres',
 		'lick.tags',
-		'lick.tab',
+		'lick.tex',
 
 		// Name and URL of the associated artist
 		'artist.url  (artistURL)',

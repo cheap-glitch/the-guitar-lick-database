@@ -3,22 +3,28 @@
  * modules/api.js
  */
 
-import axios from 'axios';
+import axios		 from 'axios';
+import { isEmptyObject } from '@/modules/object';
 
 export default
 {
 	xhr(_method, _url, _callback, _data = {})
 	{
-		axios({
-			url:	_url,
-			method: _method,
-			data:	_data,
+		const headers = {
+			common : { 'X-Requested-With': 'XMLHttpRequest' }
+		};
 
-			// Define the API host
+		if (!isEmptyObject(_data))
+			headers.common['Content-Type'] = 'application/json';
+
+		axios({
+			url:	 _url,
 			baseURL: process.env.VUE_APP_API_HOST,
 
-			// Add the 'X-Requested-With' header to every Axios request
-			headers: { common : { 'X-Requested-With': 'XMLHttpRequest' } },
+			method:  _method,
+			data:	 _data,
+
+			headers,
 		})
 		.then(_response => _callback(_response?.data ?? null))
 		.catch(_error	=> console.log(_error));

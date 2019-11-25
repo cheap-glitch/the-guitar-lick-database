@@ -17,7 +17,7 @@ npm-debug.log*
 # Private files
 .env.local
 .env.*.local
-/api/_production.php
+/api/params.prod.php
 /src/components/AdminView.vue
 .htaccess
 

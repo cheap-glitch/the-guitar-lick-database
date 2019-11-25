@@ -24,12 +24,12 @@ $api->get('/lick/read/{id}', function(Request $request, Response $response, arra
 		'[>]source' => ['source' => 'id'],
 
 		// If the lick is a variation, fetch the original
-		'[>]lick (original)' => ['variation' => 'id'],
+		'[>]lick (original)' => ['original' => 'id'],
 
 	], [
 		'lick.id',
 		'lick.date',
-		'lick.variation',
+		'lick.original',
 		'lick.tuning',
 		'lick.tonality',
 		'lick.scale',
@@ -40,7 +40,7 @@ $api->get('/lick/read/{id}', function(Request $request, Response $response, arra
 		'lick.artist',
 		'lick.genres',
 		'lick.tags',
-		'lick.tab',
+		'lick.tex',
 		'lick.notes',
 		'lick.timestamp',
 
@@ -61,7 +61,7 @@ $api->get('/lick/read/{id}', function(Request $request, Response $response, arra
 		'original.id    (originalId)',
 		'original.tempo (originalTempo)',
 		'original.ts    (originalTs)',
-		'original.tab   (originalTab)',
+		'original.tex   (originalTex)',
 	], [
 		'lick.id' => (int) $args['id'],
 	]);
@@ -75,10 +75,10 @@ $api->get('/lick/read/{id}', function(Request $request, Response $response, arra
 			'id',
 			'tempo',
 			'ts',
-			'tab',
+			'tex',
 		], [
-			'variation' => (int) $data['id'],
-			'ORDER'     => ['id' => 'DESC'],
+			'original' => (int) $data['id'],
+			'ORDER'    => ['id' => 'DESC'],
 		]);
 
 	// Pre-parse some of the fields for easier use

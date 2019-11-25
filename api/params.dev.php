@@ -1,7 +1,7 @@
 <?php
 
 /**
- * api/params.php
+ * api/params.dev.php
  */
 
 $PARAM_PRODUCTION_MODE = false;
@@ -13,7 +13,7 @@ $PARAM_PHP_ERROR_REPORTING = E_ALL;
 $PARAM_SLIM_DISPLAY_ERRORS = true;
 
 /**
- * Connexion to the database
+ * Connection to the database
  */
 $PARAMS_DB_CONNECT = [
 	'database_type' => 'mysql',

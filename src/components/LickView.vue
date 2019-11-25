@@ -13,7 +13,7 @@ div.LickView
 	//----------------------------------------------------------------------
 	section.wrapper-lick(v-if="lick")
 		div.wrapper-lick__header
-			h2 Lick \#{{ id }}
+			h2.h2 Lick \#{{ id }}
 
 			//- Bookmarking button
 			VButton(
@@ -60,7 +60,7 @@ div.LickView
 	//- Infos & notes
 	//----------------------------------------------------------------------
 	section.wrapper-infos(v-if="lick")
-		h3 Informations
+		h3.h3 Informations
 
 		//- Artist
 		p.wrapper-infos__item(v-if="lick.artist !== '0'")
@@ -140,7 +140,7 @@ div.LickView
 
 		//- Notes
 		div(v-if="parsedNotes.length")
-			h3 Notes
+			h3.h3 Notes
 			p.notes(v-html="parsedNotes")
 
 	//----------------------------------------------------------------------
@@ -150,20 +150,20 @@ div.LickView
 
 		//- Original lick
 		div.original(v-if="lick && lick.originalId")
-			h3 Original lick
+			h3.h3 Original lick
 			router-link(
 				:to="`/lick/${lick.originalId}`"
 				)
 				p \#{{ lick.originalId }}
 				VAlphatab(
-					:tex="lick.originalTab"
+					:tex="lick.originalTex"
 					:tempo="parseInt(lick.originalTempo)"
 					:time-signature="lick.originalTs"
 					:zoom="7"
 					)
 		//- Variations
 		div.variations(v-if="variations.length")
-			h3 Variations
+			h3.h3 Variations
 			router-link(
 				v-for="lick in variations"
 				:key="`variation--${lick.id}`"
@@ -171,14 +171,14 @@ div.LickView
 				)
 				p \#{{ lick.id }}
 				VAlphatab(
-					:tex="lick.tab"
+					:tex="lick.tex"
 					:tempo="parseInt(lick.tempo)"
 					:time-signature="lick.ts"
 					:zoom="7"
 					)
 		//- Suggestions
 		div.suggestions(v-if="suggestions.length")
-			h3 Suggestions
+			h3.h3 Suggestions
 			router-link(
 				v-for="lick in suggestions"
 				:key="`suggestion--${lick.id}`"
@@ -186,7 +186,7 @@ div.LickView
 				)
 				p \#{{ lick.id }}
 				VAlphatab(
-					:tex="lick.tab"
+					:tex="lick.tex"
 					:tempo="parseInt(lick.tempo)"
 					:time-signature="lick.ts"
 					:zoom="7"

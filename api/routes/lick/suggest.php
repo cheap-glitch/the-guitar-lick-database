@@ -68,7 +68,7 @@ $api->post('/lick/suggest', function(Request $request, Response $response, array
 			'id',
 			'tempo',
 			'ts',
-			'tab',
+			'tex',
 		], array_merge($CONDITIONS[$try], [
 
 			// Exclude licks already selected

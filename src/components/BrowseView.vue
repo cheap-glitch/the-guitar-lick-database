@@ -113,7 +113,7 @@ div.BrowseView
 
 			//- Tablature
 			VAlphatab.results__item__lick(
-				:tex="lick.tab"
+				:tex="lick.tex"
 				:tempo="parseInt(lick.tempo)"
 				:time-signature="lick.ts"
 
