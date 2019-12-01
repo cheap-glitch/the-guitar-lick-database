@@ -136,7 +136,7 @@ div.BrowseView
 
 import { mapGetters } from 'vuex';
 
-import data		  from '@/modules/data';
+import data               from '@/modules/data';
 import BrowseViewPagelist from '@/components/BrowseViewPagelist';
 
 export default {
@@ -154,7 +154,7 @@ export default {
 
 	data() {
 		return {
-			displayType:	'list',
+			displayType:    'list',
 			previewedLicks: {},
 		}
 	},
@@ -162,22 +162,22 @@ export default {
 	computed: {
 		bookmarkFilter:
 		{
-			get()	{ return this.$store.state.browse.bookmarkFilter;	},
-			set(_v) { this.$store.commit('browse/setBookmarkFilter', _v);	},
+			get()   { return this.$store.state.browse.bookmarkFilter;       },
+			set(_v) { this.$store.commit('browse/setBookmarkFilter', _v);   },
 		},
 		sortBy:
 		{
-			get()	{ return this.$store.state.browse.sortBy;		},
-			set(_v) { this.$store.commit('browse/setSortBy', _v);		},
+			get()   { return this.$store.state.browse.sortBy;               },
+			set(_v) { this.$store.commit('browse/setSortBy', _v);           },
 		},
 		sortOrder:
 		{
-			get()	{ return this.$store.state.browse.sortOrder;		},
-			set(_v) { this.$store.commit('browse/setSortOrder', _v);	},
+			get()   { return this.$store.state.browse.sortOrder;            },
+			set(_v) { this.$store.commit('browse/setSortOrder', _v);        },
 		},
 		nbResultsPerPage:
 		{
-			get()	{ return this.$store.state.browse.nbResultsPerPage;	},
+			get()   { return this.$store.state.browse.nbResultsPerPage;     },
 			set(_v) { this.$store.commit('browse/setNbResultsPerPage', _v); },
 		},
 

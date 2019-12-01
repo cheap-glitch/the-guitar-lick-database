@@ -12,9 +12,9 @@ use Psr\Http\Message\ServerRequestInterface as Request;
  */
 $api->post('/licks/add', function(Request $request, Response $response, array $args)
 {
-	$db	= $this->get('medoo');
+	$db     = $this->get('medoo');
 	$params = $request->getParsedBody();
-	$lick	= lick_format($params);
+	$lick   = lick_format($params);
 
 	// Create a new source if needed
 	$lick['source'] = source_insert($db, $params);

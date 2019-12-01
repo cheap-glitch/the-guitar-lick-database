@@ -10,14 +10,14 @@ export default
 	namespaced: true,
 
 	state: {
-		results:	  [],
+		results:           [],
 
-		bookmarkFilter:   'none',
-		sortBy:		  'date',
-		sortOrder:	  'descending',
+		bookmarkFilter:    'none',
+		sortBy:            'date',
+		sortOrder:         'descending',
 
-		currentPage:	  1,
-		nbResultsPerPage: 5,
+		currentPage:       1,
+		nbResultsPerPage:  5,
 	},
 
 	getters: {
@@ -65,20 +65,20 @@ export default
 				_lick => {
 					switch (_state.bookmarkFilter)
 					{
-						case 'bookmarked':	return  _rootGetters['bookmarks/isBookmarked'](_lick.id);
-						case 'not-bookmarked':	return !_rootGetters['bookmarks/isBookmarked'](_lick.id);
-						default:		return true;
+						case 'bookmarked':      return  _rootGetters['bookmarks/isBookmarked'](_lick.id);
+						case 'not-bookmarked':  return !_rootGetters['bookmarks/isBookmarked'](_lick.id);
+						default:                return true;
 					}
 				});
 		},
 	},
 
 	mutations: {
-		updateResults:	     (_state, _value) => _state.results	       = _value,
-		setCurrentPage:	     (_state, _value) => _state.currentPage    = _value,
-		setBookmarkFilter:   (_state, _value) => _state.bookmarkFilter = _value,
-		setSortBy:	     (_state, _value) => _state.sortBy	       = _value,
-		setSortOrder:	     (_state, _value) => _state.sortOrder      = _value,
+		updateResults:      (_state, _value) => _state.results        = _value,
+		setCurrentPage:     (_state, _value) => _state.currentPage    = _value,
+		setBookmarkFilter:  (_state, _value) => _state.bookmarkFilter = _value,
+		setSortBy:          (_state, _value) => _state.sortBy         = _value,
+		setSortOrder:       (_state, _value) => _state.sortOrder      = _value,
 
 		setNbResultsPerPage(_state, _value)
 		{

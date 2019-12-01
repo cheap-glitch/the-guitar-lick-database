@@ -93,8 +93,8 @@ export default {
 
 	static() {
 		return {
-			alphatab:	null,
-			soundFontPath:	'/soundfonts/default.sf2',
+			alphatab:       null,
+			soundFontPath:  '/soundfonts/default.sf2',
 		}
 	},
 
@@ -137,18 +137,18 @@ export default {
 	},
 
 	watch: {
-		tablature:	   'drawScore',
+		tablature:          'drawScore',
 
-		scale:		   'updateRendering',
-		alphatabScoreType: 'updateRendering',
+		scale:              'updateRendering',
+		alphatabScoreType:  'updateRendering',
 
-		playerState:	   'updatePlayerState',
-		volPlayback:	   'updateVolPlayback',
-		volMetronome:	   'updateVolMetronome',
-		isMetronomeOn:	   'updateVolMetronome',
-		isLoopingOn:	   'updateLooping',
+		playerState:        'updatePlayerState',
+		volPlayback:        'updateVolPlayback',
+		volMetronome:       'updateVolMetronome',
+		isMetronomeOn:      'updateVolMetronome',
+		isLoopingOn:        'updateLooping',
 
-		isPlaybackActive:  'loadSoundFont',
+		isPlaybackActive:   'loadSoundFont',
 	},
 
 	mounted()
@@ -174,9 +174,9 @@ export default {
 				layout: {
 					mode: this.layout,
 					additionalSettings: {
-						hideInfo:	true,
-						hideTuning:	true,
-						hideTrackNames:	true,
+						hideInfo:        true,
+						hideTuning:      true,
+						hideTrackNames:  true,
 					}
 				},
 

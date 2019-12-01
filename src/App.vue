@@ -35,7 +35,7 @@ div.App
 <!--{{{ JavaScript -->
 <script>
 
-import api	 from '@/modules/api';
+import api       from '@/modules/api';
 import MenuAside from '@/components/MenuAside';
 
 export default {
@@ -134,9 +134,9 @@ export default {
 <style lang='scss'>
 
 // Load the font faces
-@include font-face('Bebas',	 './assets/fonts/bebas/bebas');
-@include font-face('Bebas Bold', './assets/fonts/bebas/bebas-bold');
-@include font-face('IBM Plex',	 './assets/fonts/ibm-plex/ibm-plex');
+@include font-face('Bebas',       './assets/fonts/bebas/bebas');
+@include font-face('Bebas Bold',  './assets/fonts/bebas/bebas-bold');
+@include font-face('IBM Plex',    './assets/fonts/ibm-plex/ibm-plex');
 
 // Apply the reset stylesheet
 @import '@/styles/reset';

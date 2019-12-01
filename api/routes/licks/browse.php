@@ -16,15 +16,15 @@ $api->post('/licks/browse', function(Request $request, Response $response, array
 
 	// Define all the columns that can be used to select entries (JSON key => [database column, test type])
 	$model = [
-		'tuning'	=> ['column' => 'tuning',	'test' => '='],
-		'tonality'	=> ['column' => 'tonality',	'test' => '='],
-		'scale'		=> ['column' => 'scale',	'test' => '='],
-		'timeSignature'	=> ['column' => 'ts',		'test' => '='],
-		'tempo'		=> ['column' => 'tempo',	'test' => '='],
-		'difficulty'	=> ['column' => 'difficulty',	'test' => '='],
-		'artist'	=> ['column' => 'artist',	'test' => '='],
-		'genre'		=> ['column' => 'genres',	'test' => '~'],
-		'tags'		=> ['column' => 'tags',		'test' => '!'],
+		'tuning'        => ['column' => 'tuning',      'test' => '='],
+		'tonality'      => ['column' => 'tonality',    'test' => '='],
+		'scale'         => ['column' => 'scale',       'test' => '='],
+		'timeSignature' => ['column' => 'ts',          'test' => '='],
+		'tempo'         => ['column' => 'tempo',       'test' => '='],
+		'difficulty'    => ['column' => 'difficulty',  'test' => '='],
+		'artist'        => ['column' => 'artist',      'test' => '='],
+		'genre'         => ['column' => 'genres',      'test' => '~'],
+		'tags'          => ['column' => 'tags',        'test' => '!'],
 	];
 
 	// Filter the search parameters to remove wildcard, empty values and unsupported keys
@@ -47,9 +47,9 @@ $api->post('/licks/browse', function(Request $request, Response $response, array
 
 		switch ($model[$key]['test'])
 		{
-			case '=': $where[$column] = $value;	   break;
+			case '=': $where[$column] = $value;        break;
 			case '~': $where[$column. '[~]'] = $value; break;
-			case '!': /* Ignore the value */	   break;
+			case '!': /* Ignore the value */           break;
 		}
 	}
 

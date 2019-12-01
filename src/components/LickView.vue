@@ -199,7 +199,7 @@ div.LickView
 <!--{{{ JavaScript -->
 <script>
 
-import MarkdownIt		from 'markdown-it';
+import MarkdownIt               from 'markdown-it';
 import { mapState, mapGetters } from 'vuex';
 
 import api  from '@/modules/api';
@@ -230,8 +230,8 @@ export default {
 
 	data() {
 		return {
-			suggestions:	 [],
-			isBookmarked:	 this.$store.getters['bookmarks/isBookmarked'](this.$route.params.id),
+			suggestions:     [],
+			isBookmarked:    this.$store.getters['bookmarks/isBookmarked'](this.$route.params.id),
 			loadingProgress: 0,
 		}
 	},
@@ -255,7 +255,7 @@ export default {
 				this.lick.source.type === 'youtube' ? 'fab' : 'far',
 				{
 					collection: 'file-music',
-					song:	    'album',
+					song:       'album',
 					textbook:   'book',
 					youtube:    'youtube',
 					article:    'file-alt',

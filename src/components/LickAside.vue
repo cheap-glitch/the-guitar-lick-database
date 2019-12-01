@@ -160,8 +160,8 @@ div.LickAside
 
 import { mapState, mapGetters, mapMutations } from 'vuex';
 
-import data		   from '@/modules/data';
-import { Hotkeys }	   from '@/modules/hotkeys';
+import data                from '@/modules/data';
+import { Hotkeys }         from '@/modules/hotkeys';
 import { getFretList }     from '@/modules/alphatex';
 import { getIntervalNote } from '@/modules/music';
 
@@ -220,22 +220,22 @@ export default {
 
 		scoreType:
 		{
-			get()   { return this.$store.state.player.scoreType;	     },
+			get()   { return this.$store.state.player.scoreType;         },
 			set(_v) { this.$store.commit('player/setScoreType', _v);     },
 		},
 		tempo:
 		{
-			get()   { return this.$store.state.player.tempo;	     },
-			set(_v) { this.$store.commit('player/setTempo', _v);	     },
+			get()   { return this.$store.state.player.tempo;             },
+			set(_v) { this.$store.commit('player/setTempo', _v);         },
 		},
 		volPlayback:
 		{
-			get()   { return this.$store.state.player.volPlayback;	     },
+			get()   { return this.$store.state.player.volPlayback;       },
 			set(_v) { this.$store.commit('player/setVolPlayback', _v);   },
 		},
 		volMetronome:
 		{
-			get()   { return this.$store.state.player.volMetronome;	     },
+			get()   { return this.$store.state.player.volMetronome;      },
 			set(_v) { this.$store.commit('player/setVolMetronome', _v);  },
 		},
 		tonalityShift:
@@ -246,7 +246,7 @@ export default {
 		isPickingShown:
 		{
 			get()   { return this.$store.state.player.isPickingShown;    },
-			set(_v) { this.$store.commit('player/setPicking', _v);	     },
+			set(_v) { this.$store.commit('player/setPicking', _v);       },
 		},
 
 		...mapState('player', [

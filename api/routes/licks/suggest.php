@@ -23,9 +23,9 @@ $api->post('/licks/suggest', function(Request $request, Response $response, arra
 		// First try
 		[
 			// Same type of scale, difficulty and tags
-			'scale'	     => $lick['scale'],
+			'scale'      => $lick['scale'],
 			'difficulty' => $lick['difficulty'],
-			'tags'	     => $lick['tags'],
+			'tags'       => $lick['tags'],
 
 			// At least on genre in common
 			'genres[~]'  => $lick['genres'],

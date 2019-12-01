@@ -80,37 +80,37 @@ export function expandTex(_tex)
 	// Replace every '%' with the content between the straight brackets
 	const expr = tex.match(/\[(.*)\]/);
 	if (expr != null) tex = tex.replace(/%/g, expr[1]);
-	tex = tex.replace(/(\[|\])/g,	'');
+	tex = tex.replace(/(\[|\])/g, '');
 
 	// Tuplets
-	tex = tex.replace(/\/\//g,	'{tu 6}');
-	tex = tex.replace(/\//g,	'{tu 3}');
+	tex = tex.replace(/\/\//g, '{tu 6}');
+	tex = tex.replace(/\//g,   '{tu 3}');
 
 	// Hammer-ons & pull-offs
-	tex = tex.replace(/\^/g,	'{h}');
+	tex = tex.replace(/\^/g, '{h}');
 
 	// Slides
-	tex = tex.replace(/--/g,	'{ss}');
+	tex = tex.replace(/--/g, '{ss}');
 
 	// Vibrato
-	tex = tex.replace(/~/g,		'{v}');
+	tex = tex.replace(/~/g, '{v}');
 
 	// Bends
-	tex = tex.replace(/fbr/g,	'b (0 4 0)');
-	tex = tex.replace(/hbr/g,	'b (0 2 0)');
-	tex = tex.replace(/rb/g,	'b (4 0)');
-	tex = tex.replace(/rhb/g,	'b (2 0)');
-	tex = tex.replace(/pb/g,	'b (4 4)');
-	tex = tex.replace(/fb/g,	'b (0 4)');
-	tex = tex.replace(/hb/g,	'b (0 2)');
-	tex = tex.replace(/qb/g,	'b (0 1)');
+	tex = tex.replace(/fbr/g,  'b (0 4 0)');
+	tex = tex.replace(/hbr/g,  'b (0 2 0)');
+	tex = tex.replace(/rb/g,   'b (4 0)');
+	tex = tex.replace(/rhb/g,  'b (2 0)');
+	tex = tex.replace(/pb/g,   'b (4 4)');
+	tex = tex.replace(/fb/g,   'b (0 4)');
+	tex = tex.replace(/hb/g,   'b (0 2)');
+	tex = tex.replace(/qb/g,   'b (0 1)');
 
 	// Picking strokes
-	tex = tex.replace(/↑/g,		'{su}');
-	tex = tex.replace(/↓/g,		'{sd}');
+	tex = tex.replace(/↑/g, '{su}');
+	tex = tex.replace(/↓/g, '{sd}');
 
 	// Combine effects properly
-	tex = tex.replace(/}{/g,	' ');
+	tex = tex.replace(/}{/g, ' ');
 
 	return tex;
 }

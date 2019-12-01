@@ -47,8 +47,8 @@ if ($PARAM_PRODUCTION_MODE)
 	$api->add(function(Request $request, RequestHandler $handler)
 	{
 		// Check for 'Access-Control-Request-Headers' too, in order to allow CORS preflight request to go through correctly
-		$validRequest = strcasecmp($request->getHeaderLine('X-Requested-With'),		        'XMLHttpRequest') === 0
-			     || strcasecmp($request->getHeaderLine('Access-Control-Request-Headers'), 'X-Requested-With') === 0;
+		$validRequest = strcasecmp($request->getHeaderLine('X-Requested-With'),                 'XMLHttpRequest') === 0
+		             || strcasecmp($request->getHeaderLine('Access-Control-Request-Headers'), 'X-Requested-With') === 0;
 
 		if (!$validRequest)
 		{

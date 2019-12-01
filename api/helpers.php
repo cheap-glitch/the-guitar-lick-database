@@ -14,10 +14,10 @@ function source_insert($db, array $params)
 	if ($params['source']['sid'] == 0 && !empty($params['source']['name']))
 	{
 		$db->insert('source', [
-			'type'	 => $params['source']['type'],
-			'name'	 => $params['source']['name'],
+			'type'   => $params['source']['type'],
+			'name'   => $params['source']['name'],
 			'author' => $params['source']['author'],
-			'url'	 => $params['source']['url'],
+			'url'    => $params['source']['url'],
 		]);
 
 		return $db->id();

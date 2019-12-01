@@ -7,7 +7,7 @@ export default
 {
 	get(_key, _defaultValue)
 	{
-		let value	= localStorage.getItem(_key);
+		let value       = localStorage.getItem(_key);
 		let parsedValue = null;
 
 		if (value === null) return _defaultValue;

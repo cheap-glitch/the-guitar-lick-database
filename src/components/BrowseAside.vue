@@ -108,14 +108,14 @@ export default {
 		return {
 			artists: [],
 			searchParams: {
-				artist:		'any',
-				tags:		this.$route.query.tags !== undefined ? this.getTagsFromQueryString() : {},
+				artist:      'any',
+				tags:        this.$route.query.tags !== undefined ? this.getTagsFromQueryString() : {},
 
 				// Get the search query parameters from the query string and check them against permitted values
-				difficulty:	checkObject(this.$route.query, 'difficulty', this.data.difficulties, 'any'),
-				genre:		checkObject(this.$route.query, 'genre',	     this.data.genres,	     'any'),
-				scale:		checkObject(this.$route.query, 'scale',	     this.data.scales,	     'any'),
-				tonality:	checkObject(this.$route.query, 'tonality',   this.data.tonalities,   'any'),
+				difficulty:  checkObject(this.$route.query, 'difficulty', this.data.difficulties, 'any'),
+				genre:       checkObject(this.$route.query, 'genre',      this.data.genres,       'any'),
+				scale:       checkObject(this.$route.query, 'scale',      this.data.scales,       'any'),
+				tonality:    checkObject(this.$route.query, 'tonality',   this.data.tonalities,   'any'),
 			},
 		}
 	},

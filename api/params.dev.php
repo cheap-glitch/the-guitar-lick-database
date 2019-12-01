@@ -18,19 +18,19 @@ $PARAM_SLIM_DISPLAY_ERRORS = true;
 $PARAMS_DB_CONNECT = [
 	'database_type' => 'mysql',
 
-	'server'	=> 'localhost',
+	'server'        => 'localhost',
 	'database_name' => 'tgld',
-	'username'	=> 'root',
-	'password'	=> 'why so serious',
+	'username'      => 'root',
+	'password'      => 'why so serious',
 
-	'charset'	=> 'utf8',
-	'collation'	=> 'utf8_general_ci',
+	'charset'       => 'utf8',
+	'collation'     => 'utf8_general_ci',
 
 	// Command to execute upon connexion
-	'command'	=> ["SET NAMES 'UTF8'"],
+	'command'       => ["SET NAMES 'UTF8'"],
 
 	// PDO options
-	'option'	=> [
+	'option'        => [
 		// Throw an exception when an error occurs
 		PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
 	]

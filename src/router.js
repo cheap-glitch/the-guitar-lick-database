@@ -67,16 +67,16 @@ if (process.env.NODE_ENV === 'development')
 			path: '/add',
 			name: 'add',
 			components: {
-				view:	loadAsyncComponent('AdminView'),
-				aside:	loadAsyncComponent('HomeAside'),
+				view:   loadAsyncComponent('AdminView'),
+				aside:  loadAsyncComponent('HomeAside'),
 			}
 		},
 		{
 			path: '/edit/:id',
 			name: 'edit',
 			components: {
-				view:	loadAsyncComponent('AdminView'),
-				aside:	loadAsyncComponent('HomeAside'),
+				view:   loadAsyncComponent('AdminView'),
+				aside:  loadAsyncComponent('HomeAside'),
 			}
 		}
 	);

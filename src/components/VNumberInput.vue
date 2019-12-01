@@ -91,9 +91,9 @@ export default {
 		{
 			let value = parseInt(_value);
 
-			if (Number.isNaN(value))		value = this.defaultValue;
-			else if (this.max && value > this.max)	value = this.max;
-			else if (this.min && value < this.min)	value = this.min;
+			if (Number.isNaN(value))               value = this.defaultValue;
+			else if (this.max && value > this.max) value = this.max;
+			else if (this.min && value < this.min) value = this.min;
 
 			this.$emit('input', value);
 		},

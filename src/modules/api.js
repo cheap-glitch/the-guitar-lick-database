@@ -3,7 +3,7 @@
  * modules/api.js
  */
 
-import axios		 from 'axios';
+import axios             from 'axios';
 import { isEmptyObject } from '@/modules/object';
 
 export default
@@ -18,16 +18,16 @@ export default
 			headers.common['Content-Type'] = 'application/json';
 
 		axios({
-			url:	 _url,
-			baseURL: process.env.VUE_APP_API_HOST,
+			url:      _url,
+			baseURL:  process.env.VUE_APP_API_HOST,
 
-			method:  _method,
-			data:	 _data,
+			method:   _method,
+			data:     _data,
 
 			headers,
 		})
 		.then(_response => _callback(_response?.data ?? null))
-		.catch(_error	=> console.log(_error));
+		.catch(_error   => console.log(_error));
 	},
 
 	get(_url, _callback)
