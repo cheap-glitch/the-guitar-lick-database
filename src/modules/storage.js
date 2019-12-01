@@ -31,7 +31,7 @@ export default
 	/**
 	 * Check if an array contains a value
 	 */
-	includes(_key, _value)
+	arrayHas(_key, _value)
 	{
 		return this.get(_key, []).includes(_value);
 	},
@@ -39,7 +39,7 @@ export default
 	/**
 	 * Insert a value into an array and return the new array
 	 */
-	insert(_key, _value)
+	arrayInsert(_key, _value)
 	{
 		let array = this.get(_key, []);
 
@@ -56,7 +56,7 @@ export default
 	/**
 	 * Remove a value from an array and return the new array
 	 */
-	remove(_key, _value)
+	arrayRemove(_key, _value)
 	{
 		let array = this.get(_key, []);
 

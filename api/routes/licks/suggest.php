@@ -1,7 +1,7 @@
 <?php
 
 /**
- * routes/lick/suggest.php
+ * routes/licks/suggest.php
  */
 
 use Psr\Http\Message\ResponseInterface      as Response;
@@ -10,7 +10,7 @@ use Psr\Http\Message\ServerRequestInterface as Request;
 /**
  * Randomly select licks similar to a specified lick
  */
-$api->post('/lick/suggest', function(Request $request, Response $response, array $args)
+$api->post('/licks/suggest', function(Request $request, Response $response, array $args)
 {
 	$db   = $this->get('medoo');
 	$lick = $request->getParsedBody();
@@ -64,7 +64,7 @@ $api->post('/lick/suggest', function(Request $request, Response $response, array
 	// Try to get some results, each time with less strict conditions
 	while (count($data) < $NB_RESULTS_NEEDED)
 	{
-		$data = array_merge($data, $db->rand('lick', [
+		$data = array_merge($data, $db->rand('licks', [
 			'id',
 			'tempo',
 			'ts',
@@ -72,8 +72,7 @@ $api->post('/lick/suggest', function(Request $request, Response $response, array
 		], array_merge($CONDITIONS[$try], [
 
 			// Exclude licks already selected
-			// @TODO : arrow function!
-			'id[!]' => array_merge([(int) $lick['id']], array_map(function($lick) { return (int) $lick['id']; }, $data)),
+			'id[!]' => array_merge([(int) $lick['id']], array_map(fn($lick) => (int) $lick['id'], $data)),
 
 			// Take only the number needed to complete the results
 			'LIMIT' => $NB_RESULTS_NEEDED - count($data),

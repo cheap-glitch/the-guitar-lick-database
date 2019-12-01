@@ -16,7 +16,10 @@ button.VButton(
 		:icon="Array.isArray(icon) ? icon : ['far', icon]"
 		v-mods="{ isDisabled }"
 		)
-	p(v-if="text") {{ text }}
+	p.VButton__text(
+		v-if="text"
+		v-mods="{ isDisabled }"
+		) {{ text }}
 
 </template>
 <!--}}}-->
@@ -105,6 +108,14 @@ export default {
 }
 
 .VButton__icon {
+	&.is-disabled {
+		cursor: not-allowed;
+	}
+}
+
+.VButton__text {
+	cursor: pointer;
+
 	&.is-disabled {
 		cursor: not-allowed;
 	}

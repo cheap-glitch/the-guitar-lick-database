@@ -11,167 +11,145 @@ div.LickAside
 	//----------------------------------------------------------------------
 	//- Playback control
 	//----------------------------------------------------------------------
-	div.toolbar
-		//- Play/pause
-		VButton(
-			tooltip="Play/pause (space)"
-			:icon="playerState === 'playing' ? 'pause' : 'play'"
-			:is-disabled="!isLickLoaded"
+	VFold(title="Playback")
+		div.column
+			div.toolbar
+				//- Play/pause
+				VButton(
+					tooltip="Play/pause (space)"
+					:icon="playerState === 'playing' ? 'pause' : 'play'"
+					:is-disabled="!isLickLoaded"
 
-			@click="togglePlayPause"
-			)
-		//- Stop
-		VButton(
-			tooltip="Stop (s)"
-			icon="stop"
-			:is-disabled="!isLickLoaded"
+					@click="togglePlayPause"
+					)
+				//- Stop
+				VButton(
+					tooltip="Stop (s)"
+					icon="stop"
+					:is-disabled="!isLickLoaded"
 
-			@click="setPlayerState('stopped')"
-			)
-		//- Loop
-		VButton(
-			tooltip="Loop (l)"
-			icon="undo-alt"
-			:is-active="isLoopingOn"
-			:is-disabled="!isLickLoaded"
+					@click="setPlayerState('stopped')"
+					)
+				//- Loop
+				VButton(
+					tooltip="Loop (l)"
+					icon="undo-alt"
+					:is-active="isLoopingOn"
+					:is-disabled="!isLickLoaded"
 
-			@click="toggleLooping"
-			)
-		//- Metronome
-		VButton(
-			tooltip="Metronome (m)"
-			icon="drum"
-			:is-active="isMetronomeOn"
-			:is-disabled="!isLickLoaded"
+					@click="toggleLooping"
+					)
+				//- Metronome
+				VButton(
+					tooltip="Metronome (m)"
+					icon="drum"
+					:is-active="isMetronomeOn"
+					:is-disabled="!isLickLoaded"
 
-			@click="toggleMetronome"
-			)
-		//- Countdown
-		VButton(
-			tooltip="Countdown (c)"
-			icon="stopwatch"
-			:is-active="isCountdownOn"
-			:is-disabled="!isLickLoaded"
+					@click="toggleMetronome"
+					)
+				//- Countdown
+				VButton(
+					tooltip="Countdown (c)"
+					icon="stopwatch"
+					:is-active="isCountdownOn"
+					:is-disabled="!isLickLoaded"
 
-			@click="toggleCountdown"
-			)
-	//- Tempo
-	div.toolbar
-		//- Decrease the tempo
-		VButton(
-			tooltip="Decrease tempo"
-			icon="minus"
-			:is-disabled="!isLickLoaded"
+					@click="toggleCountdown"
+					)
 
-			@click="$store.commit('player/tempoDec')"
-			)
-		//- Show the input when clicking on the text
-		input.tempo-input(
-			v-show="isEditingTempo"
-			ref="tempoInput"
+			//- Tempo
+			div.toolbar
+				//- label.label Tempo
+				VNumberInput.input(
+					id="lick-tempo"
+					inner-label="BPM"
 
-			type="text"
-			size="2"
-			maxlength="3"
+					:defaultValue="defaultTempo"
+					:min="tempoMin"
+					:max="tempoMax"
+					:is-disabled="!isLickLoaded"
 
-			v-model.lazy.number="tempo"
-			@blur="isEditingTempo = false"
-			)
-		p.text-tempo(
-			v-show="!isEditingTempo"
-			v-mods="{ isDisabled: !isLickLoaded }"
+					v-model.number="tempo"
+					)
 
-			@click.left="editTempo"
-			) {{ tempo }}
-		//- Increase the tempo
-		VButton(
-			tooltip="Increase tempo"
-			icon="plus"
-			:is-disabled="!isLickLoaded"
+	//----------------------------------------------------------------------
+	//- Playback & metronome volumes
+	//----------------------------------------------------------------------
+	VFold(title="Volumes")
+		//- Playback volume
+		div.toolbar
+			vue-slider.slider(
+				:min="0"
+				:max="20"
+				:interval="1"
+				:disabled="!isLickLoaded"
+				lazy
 
-			@click="$store.commit('player/tempoInc')"
-			)
-		//- Reset the tempo to its initial value
-		VButton(
-			tooltip="Reset tempo"
-			icon="undo-alt"
-			:is-disabled="!isLickLoaded"
+				v-model="volPlayback"
+				)
+			p.text-volume {{ volPlayback }}
+		//- Metronome volume
+		div.toolbar
+			vue-slider.slider(
+				:min="0"
+				:max="20"
+				:interval="1"
+				:disabled="!isLickLoaded"
+				lazy
 
-			@click="$store.commit('player/setTempo', lick.tempo)"
-			)
-
-	//- Playback volume
-	div.toolbar
-		vue-slider.slider(
-			:min="0"
-			:max="20"
-			:interval="1"
-			:disabled="!isLickLoaded"
-			lazy
-
-			v-model="volPlayback"
-			)
-		p.text-volume {{ volPlayback }}
-	//- Metronome volume
-	div.toolbar
-		vue-slider.slider(
-			:min="0"
-			:max="20"
-			:interval="1"
-			:disabled="!isLickLoaded"
-			lazy
-
-			v-model="volMetronome"
-			)
-		p.text-volume {{ volMetronome }}
+				v-model="volMetronome"
+				)
+			p.text-volume {{ volMetronome }}
 
 	//----------------------------------------------------------------------
 	//- Display & score settings
 	//----------------------------------------------------------------------
-	div.toolbar
-		//- Zoom out
-		VButton(
-			tooltip="Zoom out (-)"
-			icon="search-minus"
-			:is-disabled="!isLickLoaded || zoomLevel == minZoom"
+	VFold(title="Score settings")
+		div.toolbar
+			//- Zoom out
+			VButton(
+				tooltip="Zoom out (-)"
+				icon="search-minus"
+				:is-disabled="!isLickLoaded || zoom == zoomMin"
 
-			@click="zoomOut"
+				@click="zoomOut"
+				)
+			//- Zoom in
+			VButton(
+				tooltip="Zoom in (+)"
+				icon="search-plus"
+				:is-disabled="!isLickLoaded || zoom == zoomMax"
+
+				@click="zoomIn"
+				)
+		//- Score type
+		VPillRadio(
+			id="score-type"
+			label="Score type"
+			:choices="{ 'tab only': 'tab', 'score only': 'score', 'both': 'mixed' }"
+			:is-disabled="!isLickLoaded"
+
+			v-model="scoreType"
 			)
-		//- Zoom in
-		VButton(
-			tooltip="Zoom in (+)"
-			icon="search-plus"
-			:is-disabled="!isLickLoaded || zoomLevel == maxZoom"
+		//- Transposition
+		VSelect(
+			id="transposition-tool"
+			:options="transpositions"
+			:is-disabled="!isLickLoaded"
 
-			@click="zoomIn"
+			v-model="tonalityShift"
 			)
-	//- Score type
-	VPillRadio(
-		id="score-type"
-		label="Score type"
-		:choices="{ 'tab only': 'tab', 'score only': 'score', 'both': 'mixed' }"
-		:is-disabled="!isLickLoaded"
+		//- Picking suggestions
+		VPillRadio(
+			v-show="lickHasPickingSuggestions"
 
-		v-model="scoreType"
-		)
-	//- Transposition
-	VSelect(
-		id="transposition-tool"
-		:options="transpositions"
-		:is-disabled="!isLickLoaded"
+			id="is-picking-shown"
+			label="Show picking suggestions"
+			:choices="{ 'yes': true, 'no': false }"
 
-		v-model="tonalityShift"
-		)
-	//- Picking suggestions
-	VPillRadio(
-		v-show="lickHasPickingSuggestions"
-
-		id="is-picking-shown"
-		label="Show picking suggestions"
-		:choices="{ 'yes': true, 'no': false }"
-
-		v-model="isPickingShown"
-		)
+			v-model="isPickingShown"
+			)
 
 </template>
 <!--}}}-->
@@ -199,7 +177,6 @@ export default {
 
 	data() {
 		return {
-			isEditingTempo: false,
 		}
 	},
 
@@ -277,14 +254,19 @@ export default {
 			'highestFret',
 
 			'playerState',
+
+			'defaultTempo',
+			'tempoMin',
+			'tempoMax',
+
 			'isLickLoaded',
 			'isLoopingOn',
 			'isMetronomeOn',
 			'isCountdownOn',
 
-			'zoomLevel',
-			'minZoom',
-			'maxZoom',
+			'zoom',
+			'zoomMin',
+			'zoomMax',
 		]),
 
 		...mapGetters('player', [
@@ -347,6 +329,12 @@ export default {
 <style lang='scss' scoped>
 
 .LickAside {
+	@include space-children-v(20px);
+}
+
+.column {
+	display: flex;
+	flex-direction: column;
 	@include space-children-v(10px);
 }
 
@@ -356,21 +344,16 @@ export default {
 	@include space-children-h(5px);
 }
 
+.input {
+	align-self: flex-start;
+}
+
 .slider {
 	flex: 1 1 100%;
 }
 
-.text-tempo,
 .text-volume {
 	user-select: none;
-}
-
-.text-tempo {
-	cursor: text;
-
-	&.is-disabled {
-		cursor: not-allowed;
-	}
 }
 
 .text-volume {

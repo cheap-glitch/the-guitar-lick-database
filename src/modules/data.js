@@ -9,6 +9,7 @@ export default
 		'beginner':		"Beginner",
 		'easy':			"Easy",
 		'intermediate':		"Intermediate",
+		'tricky':		"Tricky",
 		'advanced':		"Advanced",
 	},
 

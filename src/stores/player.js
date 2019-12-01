@@ -3,6 +3,8 @@
  * stores/player.js
  */
 
+import storage			   from '@/modules/storage';
+import { inBounds }		   from '@/modules/tools';
 import { expandTex, transposeTex } from '@/modules/alphatex';
 
 export default
@@ -10,52 +12,72 @@ export default
 	namespaced: true,
 
 	state: {
-		lick:		null,
+		lick:		   null,
 
-		tonalityShift:	0,
-		highestFret:	24,
+		tonalityShift:	   0,
+		highestFret:	   24,
 
-		scoreType:	'mixed',
-		isPickingShown: true,
-		zoomLevel:	11,
-		minZoom:	7,
-		maxZoom:	20,
+		scoreType:	   storage.get('scoreType', 'mixed'),
+		isPickingShown:    true,
 
-		playerState:	'stopped',
-		tempo:		120,
-		volPlayback:	10,
-		volMetronome:	10,
-		isLickLoaded:	false,
-		isLoopingOn:	false,
-		isMetronomeOn:	false,
-		isCountdownOn:	false,
+		zoom:		   storage.get('zoom', 11),
+		minZoom:	   7,
+		maxZoom:	   20,
+
+		playerState:	   'stopped',
+
+		tempo:		   120,
+		defaultTempo:	   120,
+		tempoMin:	   10,
+		tempoMax:	   400,
+
+		volPlayback:	   10,
+		volMetronome:	   10,
+
+		isLickLoaded:	   false,
+		isLoopingOn:	   storage.get('isLoopingOn',   false),
+		isMetronomeOn:	   storage.get('isMetronomeOn', false),
+		isCountdownOn:	   storage.get('isCountdownOn', false),
+
+		isSpeedTrainerOn:  false,
+		speedTrainer:	   {
+			start:	   80,
+			stop:	   140,
+
+			loops:	   3,
+			loopsMin:  1,
+
+			inc:	   5,
+			incMin:	   1,
+			incMax:	   50,
+		}
 	},
 
 	getters: {
-		lickTexExpanded:   (_state)	      => _state.lick ? expandTex(_state.lick.tex) : '',
-		lickTexTransposed: (_state, _getters) => _state.lick ? transposeTex(_getters.lickTexExpanded, _state.tonalityShift) : '',
+		lickTexExpanded:   _s		  => !_s.lick ? '' : expandTex(_s.lick.tex),
+		lickTexTransposed: (_s, _getters) => !_s.lick ? '' : transposeTex(_getters.lickTexExpanded, _s.tonalityShift),
 	},
 
 	mutations: {
-		setLick:	   (_state, _value) => _state.lick	    = _value,
-		setLickLoaded:	   (_state, _value) => _state.isLickLoaded   = _value,
-		setTonalityShift:  (_state, _value) => _state.tonalityShift  = _value,
-		setScoreType:	   (_state, _value) => _state.scoreType      = _value,
-		setPicking:	   (_state, _value) => _state.isPickingShown = _value,
-		setPlayerState:    (_state, _value) => _state.playerState    = _value,
+		setLick:	   (_s, _v) => _s.lick           = _v,
+		setLickLoaded:	   (_s, _v) => _s.isLickLoaded   = _v,
+		setTonalityShift:  (_s, _v) => _s.tonalityShift  = _v,
+		setPicking:	   (_s, _v) => _s.isPickingShown = _v,
+		setPlayerState:    (_s, _v) => _s.playerState    = _v,
+		setScoreType:	   (_s, _v) => { _s.scoreType    = _v; storage.set('scoreType', _v); },
 
-		setTempo:   	   (_state, _value) => { if (10 <= _value && _value <= 400) _state.tempo	       = parseInt(_value) },
-		setVolPlayback:    (_state, _value) => { if (0  <= _value && _value <=  20) _state.volPlayback  = parseInt(_value) },
-		setVolMetronome:   (_state, _value) => { if (0  <= _value && _value <=  20) _state.volMetronome = parseInt(_value) },
+		setTempo:	   (_s, _v) => { if (inBounds(_v, _s.minTempo, _s.tempoMax)) _s.tempo	     = parseInt(_v) },
+		setDefaultTempo:   (_s, _v) => { if (inBounds(_v, _s.minTempo, _s.tempoMax)) _s.defaultTempo = parseInt(_v) },
 
-		tempoInc:	   (_state) => { if (_state.tempo < 400) _state.tempo += 5; },
-		tempoDec:	   (_state) => { if (_state.tempo >  10) _state.tempo -= 5; },
-		zoomIn:		   (_state) => { if (_state.zoomLevel < _state.maxZoom) _state.zoomLevel += 1; },
-		zoomOut:	   (_state) => { if (_state.zoomLevel > _state.minZoom) _state.zoomLevel -= 1; },
+		setVolPlayback:    (_s, _v) => { if (inBounds(_v, 0, 20)) _s.volPlayback  = parseInt(_v) },
+		setVolMetronome:   (_s, _v) => { if (inBounds(_v, 0, 20)) _s.volMetronome = parseInt(_v) },
 
-		togglePlayPause:   (_state) => _state.playerState   = _state.playerState === 'playing' ? 'paused' : 'playing',
-		toggleLooping:	   (_state) => _state.isLoopingOn   = !_state.isLoopingOn,
-		toggleMetronome:   (_state) => _state.isMetronomeOn = !_state.isMetronomeOn,
-		toggleCountdown:   (_state) => _state.isCountdownOn = !_state.isCountdownOn,
+		zoomIn:		   _s => { if (_s.zoom < _s.maxZoom) storage.set('zoom', ++_s.zoom); },
+		zoomOut:	   _s => { if (_s.zoom > _s.minZoom) storage.set('zoom', --_s.zoom); },
+
+		togglePlayPause:   _s => _s.playerState = _s.playerState === 'playing' ? 'paused' : 'playing',
+		toggleLooping:	   _s => storage.set('isLoopingOn',   _s.isLoopingOn   = !_s.isLoopingOn),
+		toggleMetronome:   _s => storage.set('isMetronomeOn', _s.isMetronomeOn = !_s.isMetronomeOn),
+		toggleCountdown:   _s => storage.set('isCountdownOn', _s.isCountdownOn = !_s.isCountdownOn),
 	},
 }

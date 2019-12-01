@@ -1,7 +1,7 @@
 <?php
 
 /**
- * routes/lick/read.php
+ * routes/licks/read.php
  */
 
 use Psr\Http\Message\ResponseInterface      as Response;
@@ -10,21 +10,21 @@ use Psr\Http\Message\ServerRequestInterface as Request;
 /**
  * Fetch the data of a single lick
  */
-$api->get('/lick/read/{id}', function(Request $request, Response $response, array $args)
+$api->get('/licks/read/{id}', function(Request $request, Response $response, array $args)
 {
 	$db = $this->get('medoo');
 
 	// Fetch all the fields of the lick
-	$data = $db->get('lick', [
+	$data = $db->get('licks (lick)', [
 
 		// Fetch the associated artist (if there is one)
-		'[>]artist' => ['artist' => 'id'],
+		'[>]artists (artist)' => ['lick.artist' => 'id'],
 
 		// Fetch the associated source (if there is one)
-		'[>]source' => ['source' => 'id'],
+		'[>]sources (source)' => ['lick.source' => 'id'],
 
 		// If the lick is a variation, fetch the original
-		'[>]lick (original)' => ['original' => 'id'],
+		'[>]licks (original)' => ['lick.original' => 'id'],
 
 	], [
 		'lick.id',
@@ -70,7 +70,7 @@ $api->get('/lick/read/{id}', function(Request $request, Response $response, arra
 	if (empty($data)) return $response->withStatus(404);
 
 	// Fetch the variations (if there are some)
-	$data['variations'] = $db->select('lick',
+	$data['variations'] = $db->select('licks',
 		[
 			'id',
 			'tempo',

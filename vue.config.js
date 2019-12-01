@@ -33,7 +33,6 @@ module.exports = {
 			sass: {
 				prependData: [
 				'@/styles/mixins',
-				'@/styles/mixins-other',
 				'@/styles/colorscheme',
 				]
 				.map(_file => `@import "${_file}";`)

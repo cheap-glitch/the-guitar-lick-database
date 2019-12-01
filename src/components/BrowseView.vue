@@ -66,7 +66,7 @@ div.BrowseView
 			)
 
 			//- Infos
-			p
+			p.results__item__infos
 				//- ID
 				| \#{{ lick.id }}
 				|
@@ -106,9 +106,10 @@ div.BrowseView
 			//- Preview button
 			VButton(
 				icon="play"
+				:text="getPreviewButtonText(lick.id)"
 				tooltip="Listen to the lick"
 
-				@click.prevent="previewLick(lick.id)"
+				@click.stop.prevent="previewLick(lick.id)"
 				)
 
 			//- Tablature
@@ -117,7 +118,11 @@ div.BrowseView
 				:tempo="parseInt(lick.tempo)"
 				:time-signature="lick.ts"
 
-				:is-playback-active="previewedLicks.includes(lick.id)"
+				:player-state="lick.id in previewedLicks === true ? previewedLicks[lick.id].playerState : 'paused'"
+				:is-playback-active="lick.id in previewedLicks === true"
+
+				@player-loading="(_progress) => updatePreviewedLickProgress(lick.id, _progress)"
+				@player-ready="previewedLicks[lick.id].playerState = 'playing'"
 				)
 
 	BrowseViewPagelist
@@ -149,8 +154,8 @@ export default {
 
 	data() {
 		return {
-			displayType:    'list',
-			previewedLicks: [],
+			displayType:	'list',
+			previewedLicks: {},
 		}
 	},
 
@@ -184,20 +189,49 @@ export default {
 	methods:
 	{
 		/**
-		 * Mark a lick as being ready for preview
-		 */
-		previewLick(_id)
-		{
-			if (!this.previewedLicks.includes(_id))
-				this.previewedLicks.push(_id);
-		},
-
-		/**
 		 * Format a list of tags/genres to display
 		 */
 		formatList(_list, _names)
 		{
 			return _list.trim().split(' ').map(_v => _names[_v]).join(', ');
+		},
+
+		/**
+		 * Load a lick for preview or start the playback if it's already loaded
+		 */
+		previewLick(_id)
+		{
+			if (_id in this.previewedLicks === false)
+			{
+				// Add the lick to the list of previewed licks and trigger the loading of the soundfont
+				this.$set(this.previewedLicks, _id, {
+					progress:    0,
+					playerState: 'paused',
+				});
+			}
+			else
+			{
+				// Start/pause the playback
+				this.previewedLicks[_id].playerState = this.previewedLicks[_id].playerState == 'playing' ? 'paused' : 'playing';
+			}
+		},
+
+		/**
+		 * Update the loading progress of the soundfont for a previewed lick
+		 */
+		updatePreviewedLickProgress(_id, _progress)
+		{
+			this.previewedLicks[_id].progress = _progress;
+		},
+
+		/**
+		 * Return the text for the preview button of a lick depending on whether the lick is previewed, loading or playing
+		 */
+		getPreviewButtonText(_id)
+		{
+			return _id in this.previewedLicks === true
+				? this.previewedLicks[_id].progress < 100 ? `Loading… (${this.previewedLicks[_id].progress}%)` : 'Loaded!'
+				: 'Preview';
 		},
 	},
 }
@@ -230,9 +264,6 @@ export default {
 .results__item {
 	display: block;
 
-	position: relative;
-	height: 230px;
-
 	text-decoration: none;
 
 	cursor: pointer;
@@ -242,11 +273,20 @@ export default {
 	}
 }
 
-.results__item__lick {
-	position: absolute;
-	top: 0;
-	left: 0;
-	right: 0;
+.results__item__lick,
+.results__item__infos {
+	cursor: pointer;
+}
+
+</style>
+<!--}}}-->
+
+
+<!--{{{ Global SCSS -->
+<style lang='scss'>
+
+.results__item__lick * {
+	cursor: pointer !important;
 }
 
 </style>

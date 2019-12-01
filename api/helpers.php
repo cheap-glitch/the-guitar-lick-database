@@ -34,25 +34,21 @@ function lick_format(array $lick)
 	// Only copy the fields that are present in the database table
 	$result = array_filter(
 		$lick,
-		// @TODO : arrows!
-		function($key)
-		{
-			return in_array($key, [
-				'date',
-				'original',
-				'tuning',
-				'tonality',
-				'scale',
-				'tempo',
-				'ts',
-				'triplet',
-				'difficulty',
-				'artist',
-				'tex',
-				'notes',
-				'timestamp',
-			]);
-		},
+		fn($key) => in_array($key, [
+			'date',
+			'original',
+			'tuning',
+			'tonality',
+			'scale',
+			'tempo',
+			'ts',
+			'triplet',
+			'difficulty',
+			'artist',
+			'tex',
+			'notes',
+			'timestamp',
+		]),
 		ARRAY_FILTER_USE_KEY
 	);
 

@@ -24,7 +24,13 @@ div.LickView
 				@click="toggleBookmarked"
 				)
 
-		//- Loading bar
+		//- Link to edition page (only in dev mode)
+		p(v-if="devMode")
+			router-link(:to="`/edit/${id}`") Edit the lick
+			| &nbsp;
+			fa-icon(:icon="['far', 'external-link-square-alt']")
+
+		//- Loading message
 		div.loading-bar(v-show="!isLickLoaded")
 			p Loading the soundfont… ({{ loadingProgress }}%)
 
@@ -37,7 +43,7 @@ div.LickView
 			:time-signature="lick.ts"
 
 			:score-type="scoreType"
-			:zoom="zoomLevel"
+			:zoom="zoom"
 			:is-picking-shown="isPickingShown"
 
 			:player-state="playerState"
@@ -130,13 +136,7 @@ div.LickView
 						) {{ lickSourceText }}
 					| &nbsp;
 					fa-icon(:icon="['far', 'external-link-square-alt']")
-				p(v-else) {{ lickSourceText }}
-
-		//- Link to edition page (only in dev mode)
-		p(v-if="devMode")
-			router-link(:to="`/edit/${id}`") Edit the lick
-			| &nbsp;
-			fa-icon(:icon="['far', 'external-link-square-alt']")
+				span(v-else) {{ lickSourceText }}
 
 		//- Notes
 		div(v-if="parsedNotes.length")
@@ -293,7 +293,7 @@ export default {
 			'isLickLoaded',
 
 			'scoreType',
-			'zoomLevel',
+			'zoom',
 			'isPickingShown',
 
 			'playerState',
@@ -311,12 +311,12 @@ export default {
 	},
 
 	watch: {
-		'$route': 'updateLick',
+		'$route': 'loadLick',
 	},
 
 	created()
 	{
-		this.updateLick();
+		this.loadLick();
 	},
 
 	methods: {
@@ -331,17 +331,18 @@ export default {
 		/**
 		 * Fetch & update the data
 		 */
-		updateLick()
+		loadLick()
 		{
 			// Fetch the lick
 			api.get(
-				`lick/read/${this.id}`,
+				`licks/read/${this.id}`,
 				_data => {
-					this.$store.commit('player/setLick',  _data	   || null);
-					this.$store.commit('player/setTempo', _data?.tempo ?? 120);
+					this.$store.commit('player/setLick',         _data        || null);
+					this.$store.commit('player/setTempo',        _data?.tempo ?? 120);
+					this.$store.commit('player/setDefaultTempo', _data?.tempo ?? 120);
 
 					// Fetch some suggestions
-					api.post('lick/suggest', this.lick, __data => this.suggestions = __data || []);
+					api.post('licks/suggest', this.lick, __data => this.suggestions = __data || []);
 				});
 		},
 
@@ -361,9 +362,14 @@ export default {
  */
 function navigationGuard(_to, _from, _next)
 {
+	// Check that the id parameter is a number
+	if (!_to.params.id.toString().match(/^\d+$/))
+		_next({ name: '404', params: [_to.path] });
+
+	// Check that the lick exists
 	api.get(
-		`lick/exists/${_to.params.id}`,
-		_data => _next(_data ? {} : { name: '404', params: [ _to.path ] })
+		`licks/exists/${_to.params.id}`,
+		_data => _next(_data ? {} : { name: '404', params: [_to.path] })
 	);
 }
 
@@ -373,6 +379,25 @@ function navigationGuard(_to, _from, _next)
 
 <!--{{{ SCSS -->
 <style lang='scss' scoped>
+
+@mixin fade-out-overflow()
+{
+	position: relative;
+
+	&::after {
+		content: '';
+
+		position: absolute;
+		z-index: 100;
+		top: 0;
+		right: 0;
+		bottom: 0;
+
+		width: 40px;
+
+		background-image: linear-gradient(to left, $color-athens-gray 50%, transparent);
+	}
+}
 
 .LickView {
 	display: grid;
@@ -418,6 +443,7 @@ function navigationGuard(_to, _from, _next)
 .wrapper-infos {
 	border-right: 3px dotted lightgray;
 }
+
 
 .wrapper-infos__item {
 	@include space-children-h(10px);

@@ -98,12 +98,6 @@ export default {
 		}
 	},
 
-	data() {
-		return {
-			isSoundFontLoaded: false,
-		}
-	},
-
 	computed: {
 		tablature()
 		{
@@ -157,68 +151,10 @@ export default {
 		isPlaybackActive:  'loadSoundFont',
 	},
 
-	// Create the alphaTab instance only when 'window' exists
 	mounted()
 	{
-		const alphatabSettings = {
-			logging: process.env.NODE_ENV === 'development' ? 'warning' : 'none',
-			fontDirectory: '../font/',
-
-			// General rendering settings
-			scale: this.scale,
-			layout: {
-				mode: this.layout,
-				additionalSettings: {
-					hideInfo:	true,
-					hideTuning:	true,
-					hideTrackNames:	true,
-				}
-			},
-
-			// Score rendering settings
-			extendBendArrowsOnTiedNotes: false,
-			staves: {
-				id: this.alphatabScoreType,
-				additionalSettings: {
-					rhythm: true,
-				}
-			},
-
-			// Player settings
-			cursor: true,
-			autoScroll: 'off',
-		};
-
-		// Load a soundfile if the playback is requested
-		if (this.isPlaybackActive)
-		{
-			this.isSoundFontLoaded  = true;
-			alphatabSettings.player = this.soundFontPath;
-		}
-
-		this.alphatab = new alphaTab.platform.javaScript.AlphaTabApi(this.$refs.alphatab, alphatabSettings);
-
-		// Send events while the soundfont is loading (add the percentage loaded)
-		this.alphatab.addSoundFontLoad(_event => this.$emit('player-loading', (_event.loaded / _event.total) * 100));
-
-		// Send an event when the score is fully rendered
-		this.alphatab.addRenderFinished(() => this.$emit('score-rendered'));
-
-		this.alphatab.addReadyForPlayback(() =>
-		{
-			// Initialize the playback settings
-			this.updateVolPlayback();
-			this.updateVolMetronome();
-			this.updateLooping();
-
-			// Send an event when the playback is ready
-			this.$emit('player-ready');
-		});
-
-		// Send an event whenever the playback reaches the end of the score
-		this.alphatab.addPlayerFinished(() => this.$emit('player-stopped'));
-
-		this.drawScore();
+		// Create the alphaTab instance only when 'window' exists
+		this.initAlphaTab();
 	},
 
 	beforeDestroy()
@@ -227,6 +163,61 @@ export default {
 	},
 
 	methods: {
+		initAlphaTab()
+		{
+			const alphatabSettings = {
+				logging: process.env.NODE_ENV === 'development' ? 'warning' : 'none',
+				fontDirectory: '../font/',
+
+				// General rendering settings
+				scale: this.scale,
+				layout: {
+					mode: this.layout,
+					additionalSettings: {
+						hideInfo:	true,
+						hideTuning:	true,
+						hideTrackNames:	true,
+					}
+				},
+
+				// Score rendering settings
+				extendBendArrowsOnTiedNotes: false,
+				staves: {
+					id: this.alphatabScoreType,
+					additionalSettings: {
+						rhythm: true,
+					}
+				},
+
+				// Player settings
+				cursor: true,
+				autoScroll: 'off',
+			};
+
+			// Load a soundfile if the playback is requested
+			if (this.isPlaybackActive) alphatabSettings.player = this.soundFontPath;
+
+			this.alphatab = new alphaTab.platform.javaScript.AlphaTabApi(this.$refs.alphatab, alphatabSettings);
+
+			// Send events regarding the loading of the soundfile
+			this.alphatab.addSoundFontLoad(_event => this.$emit('player-loading', Math.floor((_event.loaded / _event.total) * 100)));
+			this.alphatab.addRenderFinished(()    => this.$emit('score-rendered'));
+
+			this.alphatab.addReadyForPlayback(() =>
+			{
+				// Initialize the playback settings
+				this.updateVolPlayback();
+				this.updateVolMetronome();
+				this.updateLooping();
+
+				this.$emit('player-ready');
+			});
+
+			// Send an event whenever the playback reaches the end of the score
+			this.alphatab.addPlayerFinished(() => this.$emit('player-stopped'));
+
+			this.drawScore();
+		},
 		drawScore()
 		{
 			if (this.tablature.length)
@@ -275,12 +266,9 @@ export default {
 		},
 		loadSoundFont()
 		{
-			// Don't load the soundfont twice
-			if (!this.isPlaybackActive || this.isSoundFontLoaded)
-				return;
-
-			this.alphatab.isSoundFontLoaded = true;
-			this.alphatab.loadSoundFont(this.soundFontPath);
+			// Destroy and recreate the alphaTab instance
+			this.alphatab.destroy();
+			this.initAlphaTab();
 		}
 	}
 }

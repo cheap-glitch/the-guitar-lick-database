@@ -15,7 +15,7 @@ $api->get('/artists', function(Request $request, Response $response, array $args
 	$db = $this->get('medoo');
 
 	// Fetch all the artists and their data
-	$artists = $db->select('artist', [
+	$artists = $db->select('artists', [
 		'id',
 		'url',
 		'name',

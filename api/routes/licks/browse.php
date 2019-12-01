@@ -1,7 +1,7 @@
 <?php
 
 /**
- * routes/lick/browse.php
+ * routes/licks/browse.php
  */
 
 use Psr\Http\Message\ResponseInterface      as Response;
@@ -10,7 +10,7 @@ use Psr\Http\Message\ServerRequestInterface as Request;
 /**
  * Select all the licks corresponding to the search parameters
  */
-$api->post('/lick/browse', function(Request $request, Response $response, array $args)
+$api->post('/licks/browse', function(Request $request, Response $response, array $args)
 {
 	$db = $this->get('medoo');
 
@@ -69,8 +69,8 @@ $api->post('/lick/browse', function(Request $request, Response $response, array 
 	];
 
 	// Fetch the licks
-	$data = $db->select('lick', [
-		'[>]artist' => ['artist' => 'id'],
+	$data = $db->select('licks (lick)', [
+		'[>]artists (artist)' => ['lick.artist' => 'id'],
 	], [
 		'lick.id',
 		'lick.tuning',

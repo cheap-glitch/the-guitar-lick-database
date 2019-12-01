@@ -12,100 +12,71 @@ div.BrowseAside
 		//- Artist, genre & difficulty
 		//--------------------------------------------------------------
 		section.section
+			VFold(title="Guitarist, genre & diffculty")
+				div.row
+					//- Artist
+					VSelect(
+						id="artist"
+						:options="artistsNames"
 
-			h2.section__header(@click.left="isSectionArtistOpened = !isSectionArtistOpened")
-				p Guitarist, genre & diffculty
-				fa-icon.section__header__chevron(
-					:icon="['far', 'chevron-down']"
-					v-mods="{ isFlipped: !isSectionArtistOpened }"
-					)
-
-			transition(name="fade")
-				div.section__content(v-show="isSectionArtistOpened")
-					div.row
-						//- Artist
-						VSelect(
-							id="artist"
-							:options="artistsNames"
-
-							v-model="searchParams.artist"
-							)
-						//- Genre
-						VSelect(
-							id="genre"
-							:options="{ any: 'Any genre', ...data.genres }"
-							v-model="searchParams.genre"
-							)
-
+						v-model="searchParams.artist"
+						)
 					//- Difficulty
 					VSelect(
 						id="difficulty"
 						:options="{ any: 'Any difficulty', ...data.difficulties }"
 						v-model="searchParams.difficulty"
 						)
+				//- Genre
+				VSelect(
+					id="genre"
+					:options="{ any: 'Any genre', ...data.genres }"
+					v-model="searchParams.genre"
+					)
 
 		//--------------------------------------------------------------
 		//- Tonality & scale
 		//--------------------------------------------------------------
 		section.section
-
-			h2.section__header(@click.left="isSectionMusicOpened = !isSectionMusicOpened")
-				p Tonality & scale
-				fa-icon.section__header__chevron(
-					:icon="['far', 'chevron-down']"
-					v-mods="{ isFlipped: !isSectionMusicOpened }"
-					)
-
-			transition(name="fade")
-				div.section__content(v-show="isSectionMusicOpened")
-					div.row
-						//- Tonality
-						VSelect.tonality(
-							id="tonality"
-							:options="{ any: 'Any', ...data.tonalities }"
-							v-model="searchParams.tonality"
-							)
-						//- Scale
-						VSelect.scale(
-							id="scale"
-							:options="{ any: 'Any scale', ...data.scales }"
-							v-model="searchParams.scale"
-							)
+			VFold(title="Tonality & scale")
+				div.row
+					//- Tonality
+					VSelect.tonality(
+						id="tonality"
+						:options="{ any: 'Any', ...data.tonalities }"
+						v-model="searchParams.tonality"
+						)
+					//- Scale
+					VSelect.scale(
+						id="scale"
+						:options="{ any: 'Any scale', ...data.scales }"
+						v-model="searchParams.scale"
+						)
 
 		//--------------------------------------------------------------
 		//- Tags
 		//--------------------------------------------------------------
 		section.section
+			VFold(title="Tags")
+				div.tags
+					VStatebox(
+						v-for="(name, key) in data.tags"
+						:key="`tag-${key}`"
 
-			h2.section__header(@click.left="isSectionTagsOpened = !isSectionTagsOpened")
-				p Tags
-				fa-icon.section__header__chevron(
-					:icon="['far', 'chevron-down']"
-					v-mods="{ isFlipped: !isSectionTagsOpened }"
-					)
+						:id="`tag-${key}`"
+						:value="key"
+						:label="name"
+						:states="['unchecked', 'included', 'excluded']"
+						mode="buttons-overwrite"
 
-			//- Tags
-			transition(name="fade")
-				div.section__content(v-show="isSectionTagsOpened")
-					div.tags
-						VStatebox(
-							v-for="(name, key) in data.tags"
-							:key="`tag-${key}`"
-
-							:id="`tag-${key}`"
-							:value="key"
-							:label="name"
-							:states="['unchecked', 'included', 'excluded']"
-							mode="buttons-overwrite"
-
-							v-model="searchParams.tags"
-							)
-					VButton(
-						text="Clear the tags"
-						icon="trash-alt"
-
-						@click="clearTags"
+						v-model="searchParams.tags"
 						)
+				VButton(
+					text="Clear the tags"
+					icon="trash-alt"
+
+					@click="clearTags"
+					)
 
 </template>
 <!--}}}-->
@@ -116,7 +87,13 @@ div.BrowseAside
 
 import api  from '@/modules/api';
 import data from '@/modules/data';
-import { isObject, isEmptyObject, checkObject, mapObject, filterObject } from '@/modules/object';
+import {
+	isObject,
+	isEmptyObject,
+	checkObject,
+	mapObject,
+	filterObject
+} from '@/modules/object';
 
 export default {
 	name: 'BrowseAside',
@@ -140,9 +117,6 @@ export default {
 				scale:		checkObject(this.$route.query, 'scale',	     this.data.scales,	     'any'),
 				tonality:	checkObject(this.$route.query, 'tonality',   this.data.tonalities,   'any'),
 			},
-			isSectionArtistOpened: true,
-			isSectionMusicOpened:  true,
-			isSectionTagsOpened:   true,
 		}
 	},
 
@@ -231,7 +205,7 @@ export default {
 
 			// Fetch the licks
 			api.post(
-				'lick/browse',
+				'licks/browse',
 				searchParamsSent,
 				_data => this.$store.commit('browse/updateResults', _data),
 			);
@@ -270,8 +244,6 @@ export default {
 <!--{{{ SCSS -->
 <style lang='scss' scoped>
 
-@import '@/styles/transitions';
-
 .BrowseAside {
 	display: flex;
 	flex-direction: column;
@@ -280,38 +252,18 @@ export default {
 	width: 300px;
 }
 
-.section__header {
-	display: flex;
-	justify-content: space-between;
-
-	margin-bottom: 15px;
-	padding-bottom: 10px;
-
-	font-weight: bold;
-
-	border-bottom: 1px solid $color-oxford-blue;
-
-	color: $color-nepal;
-
-	cursor: pointer;
-	user-select: none;
-}
-
-.section__header__chevron {
-	@include flip();
-}
-
-.section__content {
-	@include space-children-v(10px);
-}
-
 .row {
 	display: flex;
 	@include space-children-h(10px);
 }
 
-.scale	  { flex: 3 1 auto; }
-.tonality { flex: 1 3 auto; }
+.scale {
+	flex: 3 1 auto;
+}
+
+.tonality {
+	flex: 1 3 auto;
+}
 
 .tags {
 	display: flex;
@@ -319,5 +271,4 @@ export default {
 }
 
 </style>
-<!--}}}-->f
-          f
+<!--}}}-->

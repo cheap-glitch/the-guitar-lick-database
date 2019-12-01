@@ -18,7 +18,7 @@ export default
 	},
 
 	mutations: {
-		insertBookmark: (_state, _id) => _state.bookmarks = storage.insert('bookmarks', parseInt(_id)),
-		removeBookmark: (_state, _id) => _state.bookmarks = storage.remove('bookmarks', parseInt(_id)),
+		insertBookmark: (_state, _id) => _state.bookmarks = storage.arrayInsert('bookmarks', parseInt(_id)),
+		removeBookmark: (_state, _id) => _state.bookmarks = storage.arrayRemove('bookmarks', parseInt(_id)),
 	},
 }

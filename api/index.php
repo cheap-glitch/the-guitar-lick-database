@@ -13,7 +13,6 @@ use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Http\Server\RequestHandlerInterface as RequestHandler;
 
 require('../vendor/autoload.php');
-require('params.prod.php');
 require('params.dev.php');
 require('helpers.php');
 
@@ -73,16 +72,16 @@ $api->options('/{routes:.+}', function (Request $request, Response $response) { 
 
 // Declare the API routes
 require('routes/artists/index.php');
-require('routes/lick/browse.php');
-require('routes/lick/count.php');
-require('routes/lick/exists.php');
-require('routes/lick/read.php');
-require('routes/lick/suggest.php');
+require('routes/licks/browse.php');
+require('routes/licks/count.php');
+require('routes/licks/exists.php');
+require('routes/licks/read.php');
+require('routes/licks/suggest.php');
 if (!$PARAM_PRODUCTION_MODE)
 {
-	require('routes/lick/add.php');
-	require('routes/lick/edit.php');
-	require('routes/source/grep.php');
+	require('routes/licks/add.php');
+	require('routes/licks/edit.php');
+	require('routes/sources/grep.php');
 }
 
 // Add a catch-all route to serve a 404 Not Found page if none of the routes match
