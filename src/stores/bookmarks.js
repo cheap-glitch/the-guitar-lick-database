@@ -3,7 +3,7 @@
  * stores/bookmarks.js
  */
 
-import storage from '@/modules/storage';
+import storage from '@/modules/storage'
 
 export default
 {

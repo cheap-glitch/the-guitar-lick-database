@@ -3,9 +3,9 @@
  * stores/player.js
  */
 
-import storage                     from '@/modules/storage';
-import { inBounds }                from '@/modules/tools';
-import { expandTex, transposeTex } from '@/modules/alphatex';
+import storage                     from '@/modules/storage'
+import { inBounds }                from '@/modules/tools'
+import { expandTex, transposeTex } from '@/modules/alphatex'
 
 export default
 {
@@ -66,8 +66,8 @@ export default
 		setPlayerState:    (_s, _v) => _s.playerState    = _v,
 		setScoreType:      (_s, _v) => { _s.scoreType    = _v; storage.set('scoreType', _v); },
 
-		setTempo:          (_s, _v) => { if (inBounds(_v, _s.minTempo, _s.tempoMax)) _s.tempo        = parseInt(_v) },
-		setDefaultTempo:   (_s, _v) => { if (inBounds(_v, _s.minTempo, _s.tempoMax)) _s.defaultTempo = parseInt(_v) },
+		setTempo:          (_s, _v) => { if (inBounds(_v, _s.tempoMin, _s.tempoMax)) _s.tempo        = parseInt(_v) },
+		setDefaultTempo:   (_s, _v) => { if (inBounds(_v, _s.tempoMin, _s.tempoMax)) _s.defaultTempo = parseInt(_v) },
 
 		setVolPlayback:    (_s, _v) => { if (inBounds(_v, 0, 20)) _s.volPlayback  = parseInt(_v) },
 		setVolMetronome:   (_s, _v) => { if (inBounds(_v, 0, 20)) _s.volMetronome = parseInt(_v) },

@@ -3,7 +3,7 @@
  * stores/browse.js
  */
 
-import data from '@/modules/data';
+import data from '@/modules/data'
 
 export default
 {

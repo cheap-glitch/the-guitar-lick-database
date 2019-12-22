@@ -40,7 +40,7 @@ div.select
 <!--{{{ JavaScript -->
 <script>
 
-import { mapObject } from '@/modules/object.js';
+import { objectMap } from '@/modules/object.js'
 
 export default {
 	name: 'VSelect',
@@ -79,7 +79,7 @@ export default {
 		optionsList()
 		{
 			// If the options are passed as an object, build an option array from the keys and values
-			return Array.isArray(this.options) ? this.options : mapObject(this.options, (_key, _value) => ({ name: _value, value: _key }));
+			return Array.isArray(this.options) ? this.options : objectMap(this.options, (_key, _value) => ({ name: _value, value: _key }));
 		},
 		selected()
 		{
@@ -110,7 +110,7 @@ export default {
 <!--{{{ SCSS -->
 <style lang='scss' scoped>
 
-@import '@/styles/transitions';
+@use '@/styles/transitions' as *;
 
 .select {
 	position: relative;

@@ -199,11 +199,11 @@ div.LickView
 <!--{{{ JavaScript -->
 <script>
 
-import MarkdownIt               from 'markdown-it';
-import { mapState, mapGetters } from 'vuex';
+import MarkdownIt               from 'markdown-it'
+import { mapState, mapGetters } from 'vuex'
 
-import api  from '@/modules/api';
-import data from '@/modules/data';
+import api                      from '@/modules/api'
+import data                     from '@/modules/data'
 
 export default {
 	name: 'LickView',

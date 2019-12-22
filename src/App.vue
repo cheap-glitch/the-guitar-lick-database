@@ -35,8 +35,8 @@ div.App
 <!--{{{ JavaScript -->
 <script>
 
-import api       from '@/modules/api';
-import MenuAside from '@/components/MenuAside';
+import api       from '@/modules/api'
+import MenuAside from '@/components/MenuAside'
 
 export default {
 	name: 'App',
@@ -133,15 +133,20 @@ export default {
 <!--{{{ Global styles -->
 <style lang='scss'>
 
+// Apply the reset stylesheet
+@use '@/styles/reset' as *;
+
+// Apply the global styles
+@use '@/styles/global' as *;
+
+// Set the theme color and import the default style for the custom sliders
+@use '~vue-slider-component/lib/theme/default' with (
+	$themeColor: $color-sun
+);
+
 // Load the font faces
 @include font-face('Bebas',       './assets/fonts/bebas/bebas');
 @include font-face('Bebas Bold',  './assets/fonts/bebas/bebas-bold');
 @include font-face('IBM Plex',    './assets/fonts/ibm-plex/ibm-plex');
-
-// Apply the reset stylesheet
-@import '@/styles/reset';
-
-// Apply the global styles
-@import '@/styles/global';
 
 </style>

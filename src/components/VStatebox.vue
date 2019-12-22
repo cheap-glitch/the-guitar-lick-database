@@ -34,7 +34,7 @@ div.statebox(
 <!--{{{ JavaScript -->
 <script>
 
-import { isObject, checkObject, filterObject } from '@/modules/object';
+import { isObject, checkObjectProp, objectFilter } from '@/modules/object'
 
 export default {
 	name: 'VStatebox',
@@ -69,6 +69,7 @@ export default {
 		},
 		modelState: {
 			type: [String, Object],
+			default: null,
 		},
 		mode: {
 			type: String,
@@ -81,7 +82,7 @@ export default {
 		return {
 			// Get the initial state from the v-model (fall back to the first available state if it's invalid)
 			state: isObject(this.modelState)
-				? checkObject(this.modelState, this.value, this.states, this.states[0])
+				? checkObjectProp(this.modelState, this.value, this.states, this.states[0])
 				: this.states.includes(this.modelState) ? this.modelState : this.states[0]
 		}
 	},
@@ -147,7 +148,7 @@ export default {
 				newModelState[this.value] = this.state;
 
 				// Filter out the keys that are set to the first state
-				let filteredModelState = filterObject(newModelState, (_key, _state) => _state !== this.states[0]);
+				let filteredModelState = objectFilter(newModelState, (_key, _state) => _state !== this.states[0]);
 
 				this.$emit('change', filteredModelState);
 

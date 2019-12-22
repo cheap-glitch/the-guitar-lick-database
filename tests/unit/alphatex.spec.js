@@ -3,9 +3,9 @@
  * tests/unit/alphatex.spec.js
  */
 
-import { expect } from 'chai';
+import { expect } from 'chai'
 
-import * as alphatex from '@/modules/alphatex';
+import * as alphatex from '@/modules/alphatex'
 
 describe('@alphatex', () =>
 {

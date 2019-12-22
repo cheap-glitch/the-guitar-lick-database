@@ -6,7 +6,11 @@
 <!--{{{ Pug -->
 <template lang='pug'>
 
-div.VAlphatab(v-mods="{ isLayoutPage: layout === 'page' }"): div(ref="alphatab")
+div.VAlphatab(
+	:style="fixedHeight"
+	v-mods="{ isLayoutPage: layout === 'page' }"
+	)
+	div(ref="alphatab")
 
 </template>
 <!--}}}-->
@@ -15,7 +19,10 @@ div.VAlphatab(v-mods="{ isLayoutPage: layout === 'page' }"): div(ref="alphatab")
 <!--{{{ JavaScript -->
 <script>
 
-import { expandTex } from '@/modules/alphatex';
+import Vue               from 'vue';
+
+import { expandTex }     from '@/modules/alphatex'
+import { objectForEach } from '@/modules/object'
 
 export default {
 	name: 'VAlphatab',
@@ -93,8 +100,13 @@ export default {
 
 	static() {
 		return {
-			alphatab:       null,
-			soundFontPath:  '/soundfonts/default.sf2',
+			alphatab: null,
+		}
+	},
+
+	data() {
+		return {
+			fixedHeight: {},
 		}
 	},
 
@@ -137,24 +149,22 @@ export default {
 	},
 
 	watch: {
-		tablature:          'drawScore',
+		tablature:          'updateScore',
 
-		scale:              'updateRendering',
-		alphatabScoreType:  'updateRendering',
+		scale:              'updateLayout',
+		alphatabScoreType:  'updateLayout',
 
+		isPlaybackActive:   'updatePlayer',
 		playerState:        'updatePlayerState',
 		volPlayback:        'updateVolPlayback',
 		volMetronome:       'updateVolMetronome',
 		isMetronomeOn:      'updateVolMetronome',
 		isLoopingOn:        'updateLooping',
-
-		isPlaybackActive:   'loadSoundFont',
 	},
 
 	mounted()
 	{
-		// Create the alphaTab instance only when 'window' exists
-		this.initAlphaTab();
+		this.initScore();
 	},
 
 	beforeDestroy()
@@ -163,46 +173,47 @@ export default {
 	},
 
 	methods: {
-		initAlphaTab()
+		initScore()
 		{
-			const alphatabSettings = {
-				logging: process.env.NODE_ENV === 'development' ? 'warning' : 'none',
-				fontDirectory: '../font/',
-
-				// General rendering settings
-				scale: this.scale,
-				layout: {
-					mode: this.layout,
-					additionalSettings: {
-						hideInfo:        true,
-						hideTuning:      true,
-						hideTrackNames:  true,
-					}
+			this.alphatab = new alphaTab.platform.javaScript.AlphaTabApi(this.$refs.alphatab, {
+				core: {
+					logLevel:                     process.env.NODE_ENV === 'development' ? 'warning' :  'none',
+					fontDirectory:                '../font/',
+					enableLazyLoading:            false,
 				},
-
-				// Score rendering settings
-				extendBendArrowsOnTiedNotes: false,
-				staves: {
-					id: this.alphatabScoreType,
-					additionalSettings: {
-						rhythm: true,
-					}
+				display: {
+					scale:                        this.scale,
+					layoutMode:                   this.layout,
+					staveProfile:                 this.alphatabScoreType,
 				},
+				notation: {
+					rhythmMode:                   'showwithbars',
+					hideInfo:                     true,
+					hideTuning:                   true,
+					hideTrackNames:               true,
+					extendBendArrowsOnTiedNotes:  false,
+				},
+				player: {
+					enablePlayer:                 this.isPlaybackActive,
+					enableCursor:                 true,
+					scrollMode:                   'off',
+					soundFont:                    '/soundfonts/default.sf2',
+				},
+			});
 
-				// Player settings
-				cursor: true,
-				autoScroll: 'off',
-			};
+			// When the score is fully rendered
+			this.alphatab.addRenderFinished(() =>
+			{
+				this.$emit('score-rendered');
 
-			// Load a soundfile if the playback is requested
-			if (this.isPlaybackActive) alphatabSettings.player = this.soundFontPath;
+				// Lock the min-height of the wrapper to prevent layout spasms when the score is reloaded
+				Vue.nextTick(() => this.fixedHeight = { 'min-height': this.$refs.alphatab.children.item(0).style.height });
+			});
 
-			this.alphatab = new alphaTab.platform.javaScript.AlphaTabApi(this.$refs.alphatab, alphatabSettings);
-
-			// Send events regarding the loading of the soundfile
+			// Send events during the loading of the soundfile
 			this.alphatab.addSoundFontLoad(_event => this.$emit('player-loading', Math.floor((_event.loaded / _event.total) * 100)));
-			this.alphatab.addRenderFinished(()    => this.$emit('score-rendered'));
 
+			// When the player is ready
 			this.alphatab.addReadyForPlayback(() =>
 			{
 				// Initialize the playback settings
@@ -216,20 +227,26 @@ export default {
 			// Send an event whenever the playback reaches the end of the score
 			this.alphatab.addPlayerFinished(() => this.$emit('player-stopped'));
 
-			this.drawScore();
+			// Draw the score
+			this.updateScore();
 		},
-		drawScore()
+		updateScore()
 		{
 			if (this.tablature.length)
 				this.alphatab.tex(this.tablature);
 		},
-		updateRendering()
+		updateLayout()
 		{
-			this.alphatab.settings.scale     = this.scale;
-			this.alphatab.settings.staves.id = this.alphatabScoreType;
+			this.updateSettings('display', {
+				scale:         this.scale,
+				staveProfile:  this.alphatabScoreType,
+			});
 
-			this.alphatab.updateSettings();
 			this.alphatab.render();
+		},
+		updatePlayer()
+		{
+			this.updateSettings('player', { enablePlayer: this.isPlaybackActive });
 		},
 		updatePlayerState()
 		{
@@ -237,7 +254,8 @@ export default {
 			{
 				case 'playing':
 					// Show the beat cursor
-					document.getElementsByClassName('beatCursor').item(0).classList.add('is-visible');
+					document.getElementsByClassName('at-cursor-beat').item(0).classList.add('is-visible');
+
 					this.alphatab.play();
 					break;
 
@@ -247,7 +265,8 @@ export default {
 
 				case 'stopped':
 					// Hide the beat cursor
-					document.getElementsByClassName('beatCursor').item(0).classList.remove('is-visible');
+					document.getElementsByClassName('at-cursor-beat').item(0).classList.remove('is-visible');
+
 					this.alphatab.stop();
 					break;
 			}
@@ -258,18 +277,17 @@ export default {
 		},
 		updateVolMetronome()
 		{
-			this.alphatab.metronomeValue = this.isMetronomeOn ? this.volMetronome / 10 : 0.0;
+			this.alphatab.metronomeVolume = this.isMetronomeOn ? this.volMetronome / 10 : 0.0;
 		},
 		updateLooping()
 		{
 			this.alphatab.isLooping = this.isLoopingOn;
 		},
-		loadSoundFont()
+		updateSettings(_category, _settings)
 		{
-			// Destroy and recreate the alphaTab instance
-			this.alphatab.destroy();
-			this.initAlphaTab();
-		}
+			objectForEach(_settings, (_setting, _value) => this.alphatab.settings[_category][_setting] = _value);
+			this.alphatab.updateSettings();
+		},
 	}
 }
 
@@ -277,41 +295,43 @@ export default {
 <!--}}}-->
 
 
-<!--{{{ SCSS -->
-<style lang='scss' scoped>
-
-
-</style>
-<!--}}}-->
-
-
 <!--{{{ Fixes for the rendering of alphatab -->
 <style lang='scss'>
 
-.beatCursor {
+.at-highlight {
+	color: $color-portage;
+}
+
+.at-cursor-beat {
+	display: none;
+
+	width: 3px;
+
 	// Align the beat cursor with the score
 	transform: translateY(-60px);
 
+	background-color: $color-portage;
+
 	&.is-visible {
-		background-color: $color-portage;
+		display: block;
 	}
 }
 
 // Hide the copyright text
-.alphaTabSurfaceSvg:last-child { display: none; }
+.at-surface-svg:last-child { display: none; }
 
 // Hide the bar numbers
-.alphaTabSurfaceSvg text[fill="#C80000"] { display: none; }
+.at-surface-svg text[fill="#C80000"] { display: none; }
 
 // Hide the bracket at the beginning of the score
-.alphaTabSurfaceSvg > path:last-child,
-.alphaTabSurfaceSvg > rect:last-of-type,
-.alphaTabSurfaceSvg > path:nth-last-child(2) {
+.at-surface-svg > path:last-child,
+.at-surface-svg > rect:last-of-type,
+.at-surface-svg > path:nth-last-child(2) {
 	display: none;
 }
 
 // Remove the empty space above the score in page mode
-.VAlphatab.is-layout-page .alphaTabSurfaceSvg {
+.VAlphatab.is-layout-page .at-surface-svg {
 	&:first-child,
 	&:nth-child(2) {
 		display: none;

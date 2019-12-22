@@ -134,10 +134,10 @@ div.BrowseView
 <!--{{{ JavaScript -->
 <script>
 
-import { mapGetters } from 'vuex';
+import { mapGetters }     from 'vuex'
 
-import data               from '@/modules/data';
-import BrowseViewPagelist from '@/components/BrowseViewPagelist';
+import data               from '@/modules/data'
+import BrowseViewPagelist from '@/components/BrowseViewPagelist'
 
 export default {
 	name: 'BrowseView',

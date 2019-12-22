@@ -59,19 +59,17 @@ div.LickAside
 					)
 
 			//- Tempo
-			div.toolbar
-				//- label.label Tempo
-				VNumberInput.input(
-					id="lick-tempo"
-					inner-label="BPM"
+			VNumberInput.input(
+				id="lick-tempo"
+				inner-label="BPM"
 
-					:defaultValue="defaultTempo"
-					:min="tempoMin"
-					:max="tempoMax"
-					:is-disabled="!isLickLoaded"
+				:defaultValue="defaultTempo"
+				:min="tempoMin"
+				:max="tempoMax"
+				:is-disabled="!isLickLoaded"
 
-					v-model.number="tempo"
-					)
+				v-model.number="tempo"
+				)
 
 	//----------------------------------------------------------------------
 	//- Playback & metronome volumes
@@ -158,12 +156,12 @@ div.LickAside
 <!--{{{ JavaScript -->
 <script>
 
-import { mapState, mapGetters, mapMutations } from 'vuex';
+import { mapState, mapGetters, mapMutations } from 'vuex'
 
-import data                from '@/modules/data';
-import { Hotkeys }         from '@/modules/hotkeys';
-import { getFretList }     from '@/modules/alphatex';
-import { getIntervalNote } from '@/modules/music';
+import data                                   from '@/modules/data'
+import { Hotkeys }                            from '@/modules/hotkeys'
+import { getFretList }                        from '@/modules/alphatex'
+import { getIntervalNote }                    from '@/modules/music'
 
 export default {
 	name: 'LickAside',
@@ -360,16 +358,6 @@ export default {
 	display: block;
 	width: 20px;
 }
-
-</style>
-<!--}}}-->
-
-<!--{{{ Global SCSS -->
-<style lang='scss'>
-
-// Set the theme color and import the default style for the custom sliders
-$themeColor: $color-sun;
-@import '~vue-slider-component/lib/theme/default';
 
 </style>
 <!--}}}-->

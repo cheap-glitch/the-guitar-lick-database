@@ -3,12 +3,12 @@
  * stores/main.js
  */
 
-import Vue       from 'vue';
-import Vuex      from 'vuex';
+import Vue       from 'vue'
+import Vuex      from 'vuex'
 
-import bookmarks from '@/stores/bookmarks';
-import browse    from '@/stores/browse';
-import player    from '@/stores/player';
+import bookmarks from '@/stores/bookmarks'
+import browse    from '@/stores/browse'
+import player    from '@/stores/player'
 
 Vue.use(Vuex);
 

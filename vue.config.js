@@ -3,7 +3,7 @@
  * vue.config.js
  */
 
-const htmlMinifier	  = require('html-minifier').minify;
+const htmlMinifier        = require('html-minifier').minify;
 const filterExternalLinks = require('./src/modules/filters').filterExternalLinks;
 
 module.exports = {
@@ -35,7 +35,7 @@ module.exports = {
 				'@/styles/mixins',
 				'@/styles/colorscheme',
 				]
-				.map(_file => `@import "${_file}";`)
+				.map(_file => `@use "${_file}" as *;`)
 				.join('\n')
 			}
 		},

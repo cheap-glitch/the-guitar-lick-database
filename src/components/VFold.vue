@@ -49,7 +49,7 @@ export default {
 <!--{{{ SCSS -->
 <style lang='scss' scoped>
 
-@import '@/styles/transitions';
+@use '@/styles/transitions' as *;
 
 .VFold__header {
 	display: flex;

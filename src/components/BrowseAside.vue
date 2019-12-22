@@ -85,15 +85,9 @@ div.BrowseAside
 <!--{{{ JavaScript -->
 <script>
 
-import api  from '@/modules/api';
-import data from '@/modules/data';
-import {
-	isObject,
-	isEmptyObject,
-	checkObject,
-	mapObject,
-	filterObject
-} from '@/modules/object';
+import api      from '@/modules/api'
+import data     from '@/modules/data'
+import * as obj from '@/modules/object'
 
 export default {
 	name: 'BrowseAside',
@@ -112,10 +106,10 @@ export default {
 				tags:        this.$route.query.tags !== undefined ? this.getTagsFromQueryString() : {},
 
 				// Get the search query parameters from the query string and check them against permitted values
-				difficulty:  checkObject(this.$route.query, 'difficulty', this.data.difficulties, 'any'),
-				genre:       checkObject(this.$route.query, 'genre',      this.data.genres,       'any'),
-				scale:       checkObject(this.$route.query, 'scale',      this.data.scales,       'any'),
-				tonality:    checkObject(this.$route.query, 'tonality',   this.data.tonalities,   'any'),
+				difficulty:  obj.checkObjectProp(this.$route.query, 'difficulty', this.data.difficulties, 'any'),
+				genre:       obj.checkObjectProp(this.$route.query, 'genre',      this.data.genres,       'any'),
+				scale:       obj.checkObjectProp(this.$route.query, 'scale',      this.data.scales,       'any'),
+				tonality:    obj.checkObjectProp(this.$route.query, 'tonality',   this.data.tonalities,   'any'),
 			},
 		}
 	},
@@ -177,12 +171,12 @@ export default {
 		updateQueryString()
 		{
 			// Filter the search params to remove any wildcard values
-			let queryParams = filterObject(this.searchParams, (_p, _v) => _v !== 'any' && !(isObject(_v) && isEmptyObject(_v)));
+			let queryParams = obj.objectFilter(this.searchParams, (_p, _v) => _v !== 'any' && !(obj.isObject(_v) && obj.isEmptyObject(_v)));
 
 			// Format the tags for the URL query string
 			if (queryParams.tags)
 			{
-				queryParams.tags = mapObject(
+				queryParams.tags = obj.objectMap(
 					this.searchParams.tags,
 					(_tag, _state) => `${_state == 'excluded' ? '!' : ''}${_tag}`
 				).join(',');

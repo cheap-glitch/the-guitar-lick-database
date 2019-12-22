@@ -3,10 +3,10 @@
  * router.js
  */
 
-import Vue    from 'vue';
-import Router from 'vue-router';
+import Vue    from 'vue'
+import Router from 'vue-router'
 
-import store  from '@/stores/main';
+import store  from '@/stores/main'
 
 /**
  * Routes

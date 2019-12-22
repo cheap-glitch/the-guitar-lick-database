@@ -3,9 +3,9 @@
  * tests/unit/tools.spec.js
  */
 
-import { expect } from 'chai';
+import { expect } from 'chai'
 
-import * as object from '@/modules/object';
+import * as object from '@/modules/object'
 
 describe('@object', () =>
 {

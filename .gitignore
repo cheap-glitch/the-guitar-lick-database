@@ -6,26 +6,21 @@
 # NPM
 /node_modules/
 /.npmrc
-npm-debug.log*
 
 # Composer
 /vendor/
 
 # Build
 /build/
+/dist/
+
+# Tests
+/.nyc_output/
+/tests/alphatab/
 
 # Private files
 .env.local
 .env.*.local
+.htaccess
 /api/params.prod.php
 /src/components/AdminView.vue
-.htaccess
-
-# Test coverage
-/.nyc_output/
-
-# ESLint
-/.eslintrc.js
-
-# Editor files
-.vscode

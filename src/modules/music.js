@@ -3,7 +3,7 @@
  * modules/music.js
  */
 
-import data from '@/modules/data';
+import data from '@/modules/data'
 
 /**
  * Return the second note of an interval expressed in half-steps
