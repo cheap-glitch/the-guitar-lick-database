@@ -29,11 +29,12 @@ import VueCSSModifiers from 'vue-css-modifiers'
 
 import App             from '@/App'
 import store           from '@/stores/main'
-import router          from '@/router'
+import routes          from '@/routes'
 
 /**
  * Register plugins, directives & external components
  */
+Vue.use(Router);
 Vue.use(VueStatic);
 Vue.directive('click-outside', VClickOutside.directive);
 Vue.directive('mods',          VueCSSModifiers);
@@ -55,4 +56,16 @@ requireBaseComponents.keys().forEach(function(_fileName)
 /**
  * Create the Vue instance
  */
-new Vue({ store, router, render: _h => _h(App) }).$mount('#app');
+new Vue({
+	render: _h => _h(App),
+	router: new Router({
+		routes,
+
+		mode: 'history',
+		base: process.env.BASE_URL,
+
+		// Reproduce native scrolling behaviour during navigation
+		scrollBehavior: (to, from, savedPosition) => savedPosition ? savedPosition : { x: 0, y: 0 }
+	}),
+	store,
+}).$mount('#app');

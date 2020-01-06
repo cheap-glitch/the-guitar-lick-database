@@ -1,24 +1,24 @@
 
 /**
- * router.js
+ * routes.js
  */
 
-import Vue    from 'vue'
-import Router from 'vue-router'
+const TOTAL_NB_LICKS = 215;
 
-import store  from '@/stores/main'
+// Helper function to load a component asynchronously and split it in its own chunk
+const loadAsyncComponent = _component => (() => import(/* webpackChunkName: "view-[request]" */ `@/components/${_component}`));
 
-/**
- * Routes
- * -----------------------------------------------------------------------------
- */
-let routes = [
+// Define the routes
+const routes = [
 	{
 		path: '/',
 		name: 'home',
 		components: {
 			view:  loadAsyncComponent('HomeView'),
 			aside: loadAsyncComponent('HomeAside'),
+		},
+		sitemap: {
+			priority: 1.0,
 		}
 	},
 	{
@@ -27,15 +27,24 @@ let routes = [
 		components: {
 			view:  loadAsyncComponent('BrowseView'),
 			aside: loadAsyncComponent('BrowseAside'),
+		},
+		sitemap: {
+			changefreq: 'always',
 		}
 	},
 	{
 		path: '/bookmarks',
 		name: 'bookmarks',
+		sitemap: {
+			// ignoreRoute: true,
+		}
 	},
 	{
 		path: '/lick/random',
-		redirect: () => `/lick/${Math.floor(Math.random() * store.state.totalNbLicks)}`,
+		redirect: () => `/lick/${Math.floor(Math.random() * TOTAL_NB_LICKS)}`,
+		sitemap: {
+			// ignoreRoute: true,
+		}
 	},
 	{
 		path: '/lick/:id',
@@ -47,6 +56,10 @@ let routes = [
 		props: {
 			view:  true,
 			aside: true,
+		},
+		sitemap: {
+			changefreq:  'yearly',
+			slugs:       [...new Array(TOTAL_NB_LICKS).keys()].map(_id => _id + 1),
 		}
 	},
 	{
@@ -82,26 +95,4 @@ if (process.env.NODE_ENV === 'development')
 	);
 }
 
-/**
- * Initialization
- * -----------------------------------------------------------------------------
- */
-Vue.use(Router);
-export default new Router({
-	routes,
-
-	mode: 'history',
-	base: process.env.BASE_URL,
-
-	// Reproduce native scrolling behaviour during navigation
-	scrollBehavior: (to, from, savedPosition) => savedPosition ? savedPosition : { x: 0, y: 0 }
-});
-
-/**
- * Helper
- * -----------------------------------------------------------------------------
- */
-function loadAsyncComponent(_component)
-{
-	return () => import(/* webpackChunkName: "view-[request]" */ `@/components/${_component}`)
-}
+module.exports = routes;

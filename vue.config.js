@@ -4,6 +4,8 @@
  */
 
 const htmlMinifier        = require('html-minifier').minify;
+
+const routes              = require('./src/routes');
 const filterExternalLinks = require('./src/modules/filters').filterExternalLinks;
 
 module.exports = {
@@ -61,7 +63,7 @@ module.exports = {
 
 	pluginOptions: {
 		/**
-		 * Font Awesome icons
+		 * Font Awesome
 		 */
 		fontawesome: {
 			component: 'fa-icon',
@@ -128,7 +130,7 @@ module.exports = {
 		},
 
 		/**
-		 * Pre-rendering settings
+		 * Pre-rendering
 		 */
 		prerenderSpa: {
 			registry: undefined,
@@ -152,6 +154,18 @@ module.exports = {
 
 				return _route;
 			}
-		}
+		},
+
+		/**
+		 * Sitemap
+		 */
+		sitemap: {
+			productionOnly: true,
+
+			baseURL:        'https://www.theguitarlickdatabase.com',
+			trailingSlash:  false,
+
+			routes,
+		},
 	},
 }
