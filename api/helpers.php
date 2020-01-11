@@ -23,7 +23,7 @@ function source_insert($db, array $params)
 		return $db->id();
 	}
 
-	return 0;
+	return $params['source']['sid'];
 }
 
 /**
@@ -52,10 +52,13 @@ function lick_format(array $lick)
 		ARRAY_FILTER_USE_KEY
 	);
 
-	// Copy the remaining fields while applying some transformation
+	// Copy the remaining fields while applying some transformations
 	$result['tags']   = ' ' . implode(' ', $lick['tags'])   . ' ';
 	$result['genres'] = ' ' . implode(' ', $lick['genres']) . ' ';
 	$result['source'] = $lick['source']['sid'];
+
+	print_r($lick);
+	print_r($result);
 
 	return $result;
 }
