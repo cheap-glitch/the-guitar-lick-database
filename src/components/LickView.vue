@@ -4,7 +4,7 @@
 
 
 <!--{{{ Pug -->
-<template lang='pug'>
+<template lang="pug">
 
 div.LickView
 
@@ -378,7 +378,7 @@ function navigationGuard(_to, _from, _next)
 
 
 <!--{{{ SCSS -->
-<style lang='scss' scoped>
+<style lang="scss" scoped>
 
 @mixin fade-out-overflow()
 {

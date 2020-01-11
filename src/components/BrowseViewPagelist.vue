@@ -4,7 +4,7 @@
 
 
 <!--{{{ Pug -->
-<template lang='pug'>
+<template lang="pug">
 
 div.BrowseViewPagelist
 	nav.pages(v-show="nbPages > 1")
@@ -54,7 +54,7 @@ export default {
 
 
 <!--{{{ SCSS -->
-<style lang='scss' scoped>
+<style lang="scss" scoped>
 
 .pages {
 	display: flex;

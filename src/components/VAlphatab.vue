@@ -4,7 +4,7 @@
 
 
 <!--{{{ Pug -->
-<template lang='pug'>
+<template lang="pug">
 
 div.VAlphatab(
 	:style="fixedHeight"
@@ -296,7 +296,7 @@ export default {
 
 
 <!--{{{ Fixes for the rendering of alphatab -->
-<style lang='scss'>
+<style lang="scss">
 
 .at-highlight {
 	color: $color-portage;

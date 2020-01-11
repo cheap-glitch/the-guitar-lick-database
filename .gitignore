@@ -23,4 +23,3 @@
 .env.*.local
 .htaccess
 /api/params.prod.php
-/src/components/AdminView.vue

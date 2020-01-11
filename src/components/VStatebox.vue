@@ -4,7 +4,7 @@
 
 
 <!--{{{ Pug -->
-<template lang='pug'>
+<template lang="pug">
 
 div.statebox(
 	:class="`is-in-state-${states.indexOf(state)}`"
@@ -189,7 +189,7 @@ export default {
 
 
 <!--{{{ SCSS -->
-<style lang='scss' scoped>
+<style lang="scss" scoped>
 
 .statebox {
 	padding: 3px;

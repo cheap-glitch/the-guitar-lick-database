@@ -4,7 +4,7 @@
 
 
 <!--{{{ Pug -->
-<template lang='pug'>
+<template lang="pug">
 
 div.BrowseView
 
@@ -241,7 +241,7 @@ export default {
 
 
 <!--{{{ SCSS -->
-<style lang='scss' scoped>
+<style lang="scss" scoped>
 
 .BrowseView {
 	@include space-children-v(10px);
@@ -283,7 +283,7 @@ export default {
 
 
 <!--{{{ Global SCSS -->
-<style lang='scss'>
+<style lang="scss">
 
 .results__item__lick * {
 	cursor: pointer !important;

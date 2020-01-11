@@ -4,7 +4,7 @@
 
 
 <!--{{{ Pug -->
-<template lang='pug'>
+<template lang="pug">
 
 section.VFold
 	h2.VFold__header(@click.left="isOpened = !isOpened")
@@ -47,7 +47,7 @@ export default {
 
 
 <!--{{{ SCSS -->
-<style lang='scss' scoped>
+<style lang="scss" scoped>
 
 @use '@/styles/transitions' as *;
 
@@ -77,7 +77,7 @@ export default {
 
 
 <!--{{{ SCSS -->
-<style lang='scss'>
+<style lang="scss">
 
 .VFold__content {
 	@include space-children-v(10px);

@@ -4,7 +4,7 @@
 
 
 <!--{{{ Pug -->
-<template lang='pug'>
+<template lang="pug">
 
 div.App
 	//----------------------------------------------------------------------
@@ -56,7 +56,7 @@ export default {
 
 
 <!--{{{ SCSS -->
-<style lang='scss' scoped>
+<style lang="scss" scoped>
 
 .App {
 	display: flex;
@@ -131,7 +131,7 @@ export default {
 <!--}}}-->
 
 <!--{{{ Global styles -->
-<style lang='scss'>
+<style lang="scss">
 
 // Apply the reset stylesheet
 @use '@/styles/reset' as *;

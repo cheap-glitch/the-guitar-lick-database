@@ -13,7 +13,7 @@ function source_insert($db, array $params)
 {
 	if ($params['source']['sid'] == 0 && !empty($params['source']['name']))
 	{
-		$db->insert('source', [
+		$db->insert('sources', [
 			'type'   => $params['source']['type'],
 			'name'   => $params['source']['name'],
 			'author' => $params['source']['author'],

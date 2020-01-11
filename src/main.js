@@ -22,6 +22,7 @@
  */
 
 import Vue             from 'vue'
+import Router          from 'vue-router'
 import VueStatic       from 'vue-static'
 import VueSlider       from 'vue-slider-component'
 import VClickOutside   from 'v-click-outside'

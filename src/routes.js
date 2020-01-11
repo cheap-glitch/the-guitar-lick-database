@@ -36,14 +36,14 @@ const routes = [
 		path: '/bookmarks',
 		name: 'bookmarks',
 		sitemap: {
-			// ignoreRoute: true,
+			ignoreRoute: true,
 		}
 	},
 	{
 		path: '/lick/random',
 		redirect: () => `/lick/${Math.floor(Math.random() * TOTAL_NB_LICKS)}`,
 		sitemap: {
-			// ignoreRoute: true,
+			ignoreRoute: true,
 		}
 	},
 	{
