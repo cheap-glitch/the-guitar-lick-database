@@ -81,9 +81,9 @@ export default
 		toggleCountdown:    _s => storage.set('isCountdownOn',     _s.isCountdownOn    = !_s.isCountdownOn),
 		toggleSpeedTrainer: _s => storage.set('isSpeedTrainerOn',  _s.isSpeedTrainerOn = !_s.isSpeedTrainerOn),
 
-		setStStart:         (_s, _v) => { if (inBounds(_v, s.tempoMin,            _s.tempoMax))            _s.speedTrainer.start = _v },
-		setStStop:          (_s, _v) => { if (inBounds(_v, s.tempoMin,            _s.tempoMax))            _s.speedTrainer.stop  = _v },
-		setStInc:           (_s, _v) => { if (inBounds(_v, s.speedTrainer.incMin, _s.speedTrainer.incMax)) _s.speedTrainer.inc   = _v },
-		setStLoop:          (_s, _v) => { if (_v >= _s.speedTrainer.loopsMin)                              _s.speedTrainer.loops = _v },
+		setStStart:         (_s, _v) => { if (inBounds(_v, _s.tempoMin,            _s.tempoMax))            _s.speedTrainer.start = _v },
+		setStStop:          (_s, _v) => { if (inBounds(_v, _s.tempoMin,            _s.tempoMax))            _s.speedTrainer.stop  = _v },
+		setStInc:           (_s, _v) => { if (inBounds(_v, _s.speedTrainer.incMin, _s.speedTrainer.incMax)) _s.speedTrainer.inc   = _v },
+		setStLoop:          (_s, _v) => { if (_v >= _s.speedTrainer.loopsMin)                               _s.speedTrainer.loops = _v },
 	},
 }

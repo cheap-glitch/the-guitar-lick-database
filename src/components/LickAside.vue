@@ -63,7 +63,7 @@ div.LickAside
 				id="lick-tempo"
 				inner-label="BPM"
 
-				:defaultValue="defaultTempo"
+				:default-value="defaultTempo"
 				:min="tempoMin"
 				:max="tempoMax"
 				:is-disabled="!isLickLoaded"
@@ -71,10 +71,6 @@ div.LickAside
 				v-model.number="tempo"
 				)
 
-	//----------------------------------------------------------------------
-	//- Playback & metronome volumes
-	//----------------------------------------------------------------------
-	VFold(title="Volumes")
 		//- Playback volume
 		div.toolbar
 			vue-slider.slider(
@@ -99,6 +95,24 @@ div.LickAside
 				v-model="volMetronome"
 				)
 			p.text-volume {{ volMetronome }}
+
+	//----------------------------------------------------------------------
+	//- Speed trainer
+	//----------------------------------------------------------------------
+	VFold(title="Speed trainer")
+
+		//- Starting & goal tempos
+		//- VNumberInput(
+			id="st-tempo-start"
+			inner-label="BPM"
+
+			:default-value="80"
+			:min="tempoMin"
+			:max="tempoMax"
+			:is-disabled="!isLickLoaded"
+
+			v-model.number="st.start"
+			)
 
 	//----------------------------------------------------------------------
 	//- Display & score settings

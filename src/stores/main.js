@@ -5,6 +5,7 @@
 
 import Vue       from 'vue'
 import Vuex      from 'vuex'
+import pathify   from '@/modules/pathify'
 
 import bookmarks from '@/stores/bookmarks'
 import browse    from '@/stores/browse'
@@ -14,6 +15,10 @@ Vue.use(Vuex);
 
 export default new Vuex.Store(
 {
+	plugins: [
+		pathify.plugin,
+	],
+
 	modules: {
 		bookmarks,
 		browse,
