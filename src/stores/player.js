@@ -21,8 +21,8 @@ export default
 		isPickingShown:     true,
 
 		zoom:               storage.get('zoom', 11),
-		minZoom:            7,
-		maxZoom:            20,
+		zoomMin:            7,
+		zoomMax:            20,
 
 		playerState:        'stopped',
 
@@ -62,7 +62,7 @@ export default
 		setLick:            (_s, _v) => _s.lick           = _v,
 		setLickLoaded:      (_s, _v) => _s.isLickLoaded   = _v,
 		setTonalityShift:   (_s, _v) => _s.tonalityShift  = _v,
-		setPicking:         (_s, _v) => _s.isPickingShown = _v,
+		setIsPickingShown:  (_s, _v) => _s.isPickingShown = _v,
 		setPlayerState:     (_s, _v) => _s.playerState    = _v,
 		setScoreType:       (_s, _v) => { _s.scoreType    = _v; storage.set('scoreType', _v); },
 
@@ -72,8 +72,8 @@ export default
 		setVolPlayback:     (_s, _v) => { if (inBounds(_v, 0, 20)) _s.volPlayback  = parseInt(_v) },
 		setVolMetronome:    (_s, _v) => { if (inBounds(_v, 0, 20)) _s.volMetronome = parseInt(_v) },
 
-		zoomIn:             _s => { if (_s.zoom < _s.maxZoom) storage.set('zoom', ++_s.zoom); },
-		zoomOut:            _s => { if (_s.zoom > _s.minZoom) storage.set('zoom', --_s.zoom); },
+		zoomIn:             _s => { if (_s.zoom < _s.zoomMax) storage.set('zoom', ++_s.zoom); },
+		zoomOut:            _s => { if (_s.zoom > _s.zoomMin) storage.set('zoom', --_s.zoom); },
 
 		togglePlayPause:    _s => _s.playerState = _s.playerState === 'playing' ? 'paused' : 'playing',
 		toggleLooping:      _s => storage.set('isLoopingOn',       _s.isLoopingOn      = !_s.isLoopingOn),

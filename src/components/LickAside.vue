@@ -170,12 +170,13 @@ div.LickAside
 <!--{{{ JavaScript -->
 <script>
 
-import { mapState, mapGetters, mapMutations } from 'vuex'
+import { mapMutations }    from 'vuex'
+import { get, sync }       from 'vuex-pathify'
 
-import data                                   from '@/modules/data'
-import { Hotkeys }                            from '@/modules/hotkeys'
-import { getFretList }                        from '@/modules/alphatex'
-import { getIntervalNote }                    from '@/modules/music'
+import data                from '@/modules/data'
+import { Hotkeys }         from '@/modules/hotkeys'
+import { getFretList }     from '@/modules/alphatex'
+import { getIntervalNote } from '@/modules/music'
 
 export default {
 	name: 'LickAside',
@@ -230,38 +231,7 @@ export default {
 			return this.lick ? this.lick.tex.includes('↑') || this.lick.tex.includes('↓') : false;
 		},
 
-		scoreType:
-		{
-			get()   { return this.$store.state.player.scoreType;         },
-			set(_v) { this.$store.commit('player/setScoreType', _v);     },
-		},
-		tempo:
-		{
-			get()   { return this.$store.state.player.tempo;             },
-			set(_v) { this.$store.commit('player/setTempo', _v);         },
-		},
-		volPlayback:
-		{
-			get()   { return this.$store.state.player.volPlayback;       },
-			set(_v) { this.$store.commit('player/setVolPlayback', _v);   },
-		},
-		volMetronome:
-		{
-			get()   { return this.$store.state.player.volMetronome;      },
-			set(_v) { this.$store.commit('player/setVolMetronome', _v);  },
-		},
-		tonalityShift:
-		{
-			get()   { return this.$store.state.player.tonalityShift;     },
-			set(_v) { this.$store.commit('player/setTonalityShift', _v); },
-		},
-		isPickingShown:
-		{
-			get()   { return this.$store.state.player.isPickingShown;    },
-			set(_v) { this.$store.commit('player/setPicking', _v);       },
-		},
-
-		...mapState('player', [
+		...get('player', [
 			'lick',
 			'highestFret',
 
@@ -279,11 +249,18 @@ export default {
 			'zoom',
 			'zoomMin',
 			'zoomMax',
-		]),
 
-		...mapGetters('player', [
 			'lickTexExpanded',
 			'lickTexTransposed',
+		]),
+
+		...sync('player', [
+			'scoreType',
+			'tempo',
+			'volPlayback',
+			'volMetronome',
+			'tonalityShift',
+			'isPickingShown',
 		]),
 	},
 
