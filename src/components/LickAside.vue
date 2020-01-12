@@ -61,9 +61,9 @@ div.LickAside
 			//- Tempo
 			VNumberInput.input(
 				id="lick-tempo"
-				inner-label="BPM"
+				label-right="BPM"
 
-				:default-value="defaultTempo"
+				:default-value="tempoDefault"
 				:min="tempoMin"
 				:max="tempoMax"
 				:is-disabled="!isLickLoaded"
@@ -102,16 +102,56 @@ div.LickAside
 	VFold(title="Speed trainer")
 
 		//- Starting & goal tempos
-		//- VNumberInput(
+		div.toolbar: VNumberInput(
 			id="st-tempo-start"
-			inner-label="BPM"
+			label-left="Start at"
+			label-right="BPM"
 
-			:default-value="80"
+			:default-value="stStartDefault"
 			:min="tempoMin"
 			:max="tempoMax"
 			:is-disabled="!isLickLoaded"
 
-			v-model.number="st.start"
+			v-model.number="stStart"
+			)
+		div.toolbar: VNumberInput(
+			id="st-tempo-stop"
+			label-left="Stop at"
+			label-right="BPM"
+
+			:default-value="stStopDefault"
+			:min="tempoMin"
+			:max="tempoMax"
+			:is-disabled="!isLickLoaded"
+
+			v-model.number="stStop"
+			)
+
+		//- Number of loops
+		div.toolbar: VNumberInput(
+			id="st-tempo-loops"
+			label-left="Loop"
+			label-right="times"
+
+			:default-value="stLoopsDefault"
+			:min="stLoopsMin"
+			:is-disabled="!isLickLoaded"
+
+			v-model.number="stLoops"
+			)
+
+		//- Increment
+		div.toolbar: VNumberInput(
+			id="st-tempo-inc"
+			label-left="Then add"
+			label-right="BPM"
+
+			:default-value="stIncDefault"
+			:min="stIncMin"
+			:max="stIncMax"
+			:is-disabled="!isLickLoaded"
+
+			v-model.number="stInc"
 			)
 
 	//----------------------------------------------------------------------
@@ -237,7 +277,7 @@ export default {
 
 			'playerState',
 
-			'defaultTempo',
+			'tempoDefault',
 			'tempoMin',
 			'tempoMax',
 
@@ -250,6 +290,14 @@ export default {
 			'zoomMin',
 			'zoomMax',
 
+			'stStartDefault',
+			'stStopDefault',
+			'stLoopsMin',
+			'stLoopsDefault',
+			'stIncMin',
+			'stIncMax',
+			'stIncDefault',
+
 			'lickTexExpanded',
 			'lickTexTransposed',
 		]),
@@ -257,9 +305,17 @@ export default {
 		...sync('player', [
 			'scoreType',
 			'tempo',
+
 			'volPlayback',
 			'volMetronome',
+
 			'tonalityShift',
+
+			'stStart',
+			'stStop',
+			'stInc',
+			'stLoops',
+
 			'isPickingShown',
 		]),
 	},

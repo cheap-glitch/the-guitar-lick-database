@@ -7,6 +7,11 @@
 <template lang="pug">
 
 div.VNumberInput
+	label.VNumberInput__inner-label(
+		v-if="labelLeft"
+		:for="`v-number-input--${id}`"
+		) {{ labelLeft }}
+
 	input.VNumberInput__input(
 		type="text"
 		size="2"
@@ -19,9 +24,9 @@ div.VNumberInput
 	)
 
 	label.VNumberInput__inner-label(
-		v-if="innerLabel"
+		v-if="labelRight"
 		:for="`v-number-input--${id}`"
-		) {{ innerLabel }}
+		) {{ labelRight }}
 
 	div.VNumberInput__toolbar
 		fa-icon.VNumberInput__toolbar__button(
@@ -68,7 +73,11 @@ export default {
 			type: Number,
 			required: true,
 		},
-		innerLabel: {
+		labelLeft: {
+			type: String,
+			default: null,
+		},
+		labelRight: {
 			type: String,
 			default: null,
 		},
