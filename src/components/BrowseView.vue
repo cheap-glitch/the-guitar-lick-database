@@ -107,7 +107,7 @@ div.BrowseView
 			//- Preview buttons
 			div.results__item__buttons
 				VButton(
-					v-show="previewedLick != lick.id || previewedLickProgress < 100"
+					v-show="previewedLick != lick.id || (previewedLick == lick.id && !isPreviewedLickReady)"
 
 					:text="previewedLick == lick.id ? `Loading (${previewedLickProgress} %)` : 'Preview'"
 
@@ -142,6 +142,7 @@ div.BrowseView
 
 				@player-loading="_progress => previewedLickProgress = _progress"
 				@player-ready="isPreviewedLickReady = true, previewedLickPlayerState = 'playing'"
+				@player-stopped="previewedLickPlayerState = 'stopped'"
 				)
 
 	//- Pagelist footer
