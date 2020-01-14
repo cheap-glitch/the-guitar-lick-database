@@ -13,6 +13,7 @@ button.VButton(
 	@click.left="click"
 	)
 	fa-icon.VButton__icon(
+		v-if="icon"
 		:icon="Array.isArray(icon) ? icon : ['far', icon]"
 		v-mods="{ isDisabled }"
 		)
@@ -38,7 +39,7 @@ export default {
 		},
 		icon: {
 			type: [Array, String],
-			required: true,
+			default: null,
 		},
 		tooltip: {
 			type: String,
