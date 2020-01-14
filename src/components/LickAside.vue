@@ -231,6 +231,7 @@ div.LickAside
 <!--{{{ JavaScript -->
 <script>
 
+import Vue                 from 'vue'
 import { mapMutations }    from 'vuex'
 import { get, sync }       from 'vuex-pathify'
 
@@ -296,8 +297,6 @@ export default {
 		...get('player', [
 			'lick',
 			'highestFret',
-
-			'playerState',
 			'nbLoops',
 
 			'tempoDefault',
@@ -328,11 +327,11 @@ export default {
 		...sync('player', [
 			'scoreType',
 			'tempo',
+			'playerState',
+			'tonalityShift',
 
 			'volPlayback',
 			'volMetronome',
-
-			'tonalityShift',
 
 			'stStart',
 			'stStop',
@@ -390,17 +389,22 @@ export default {
 			this.stCurrentLoop    = 0;
 			this.stCurrentTempo   = this.stStart;
 		},
-		updateSpeedTrainer()
+		async updateSpeedTrainer()
 		{
 			if (!this.isSpeedTrainerOn) return;
 
 			if (++this.stCurrentLoop >= this.stLoops)
 			{
-				this.stCurrentLoop   = 0;
-				this.stCurrentTempo += this.stInc;
+				this.stCurrentLoop = 0;
 
-				if (this.stCurrentTempo > this.stStop)
-					this.isSpeedTrainerOn = false;
+				if (this.stCurrentTempo < this.stStop)
+				{
+					this.stCurrentTempo += this.stInc;
+
+					// Wait for the score to update, then resume the playback
+					await Vue.nextTick();
+					this.playerState = 'playing';
+				}
 			}
 		},
 

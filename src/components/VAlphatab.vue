@@ -239,8 +239,10 @@ export default {
 		},
 		updateScore()
 		{
-			if (this.tablature.length)
-				this.alphatab.tex(this.tablature);
+			if (!this.tablature.length) return;
+
+			this.$store.commit('player/setPlayerState', 'stopped');
+			this.alphatab.tex(this.tablature);
 		},
 		updateLayout()
 		{
