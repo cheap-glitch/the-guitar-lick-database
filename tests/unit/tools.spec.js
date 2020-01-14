@@ -17,6 +17,7 @@ describe('@object', () =>
 		it('fails on non-objects', () =>
 		{
 			expect(object.isObject(null)).to.be.false;
+			expect(object.isObject(undefined)).to.be.false;
 			expect(object.isObject(3.14)).to.be.false;
 			expect(object.isObject([])).to.be.false;
 			expect(object.isObject('object')).to.be.false;
