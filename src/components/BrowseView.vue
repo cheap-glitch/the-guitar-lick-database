@@ -104,12 +104,12 @@ div.BrowseView
 				| {{ formatList(lick.tags, data.tags) }}
 
 			//- Preview button
-			VButton(
+			VButton.results__item__preview-button(
 				icon="play"
 				:text="getPreviewButtonText(lick.id)"
 				tooltip="Listen to the lick"
 
-				@click.stop.prevent="previewLick(lick.id)"
+				@click.native.capture.prevent.stop="previewLick(lick.id)"
 				)
 
 			//- Tablature
@@ -248,7 +248,7 @@ export default {
 
 	// The padding is created with a border
 	// to prevent long tabs from overflowing under the fade-out
-	border: 20px solid white;
+	border: 20px solid $color-athens-gray;
 }
 
 .options {
@@ -263,14 +263,19 @@ export default {
 
 .results__item {
 	display: block;
+	position: relative;
 
 	text-decoration: none;
 
 	cursor: pointer;
 
 	&:nth-of-type(odd) {
-		background-color: gold;
+		background-color: #e9e9e9;
 	}
+}
+
+.results__item__preview-button {
+	position: relative;
 }
 
 .results__item__lick,
