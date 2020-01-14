@@ -39,7 +39,7 @@ div.LickView
 			layout="page"
 			:tex="lickTexTransposed"
 			:is-tex-expanded="true"
-			:tempo="tempo"
+			:tempo="isSpeedTrainerOn ? stCurrentTempo : tempo"
 			:time-signature="lick.ts"
 
 			:score-type="scoreType"
@@ -56,6 +56,8 @@ div.LickView
 
 			@player-loading="updateLoadingProgress"
 			@player-ready="$store.commit('player/setLickLoaded', true)"
+			@player-reached-end="$store.commit('player/incrementNbLoops')"
+			@player-stopped="$store.commit('player/setPlayerState', 'stopped')"
 			)
 
 		//- alphaTab credit
@@ -302,6 +304,9 @@ export default {
 			'isLoopingOn',
 			'isMetronomeOn',
 			'isCountdownOn',
+
+			'isSpeedTrainerOn',
+			'stCurrentTempo',
 		]),
 
 		...mapGetters('player', [
@@ -315,6 +320,7 @@ export default {
 
 	created()
 	{
+		this.$store.commit('player/resetNbLoops');
 		this.loadLick();
 	},
 

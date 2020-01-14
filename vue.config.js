@@ -115,6 +115,7 @@ module.exports = {
 
 						// Player
 						'drum',
+						'dumbbell',
 						'minus',
 						'pause',
 						'play',

@@ -16,7 +16,7 @@ div.LickAside
 			div.toolbar
 				//- Play/pause
 				VButton(
-					tooltip="Play/pause (space)"
+					tooltip="Play/pause (p)"
 					:icon="playerState === 'playing' ? 'pause' : 'play'"
 					:is-disabled="!isLickLoaded"
 
@@ -104,18 +104,19 @@ div.LickAside
 		//- Controls
 		div.toolbar
 			VButton(
-				tooltip="Start/pause the speed trainer"
-				:icon="false ? 'pause' : 'play'"
+				tooltip="Toggle the speed trainer"
+				icon="dumbbell"
+				:is-active="isSpeedTrainerOn"
 				:is-disabled="!isLickLoaded"
 
-				@click="startSpeedTrainer"
+				@click="toggleSpeedTrainer"
 				)
 			VButton(
-				tooltip="Stop the speed trainer"
-				icon="stop"
+				tooltip="Reset the speed trainer"
+				icon="undo-alt"
 				:is-disabled="!isLickLoaded"
 
-				@click="stopSpeedTrainer"
+				@click="resetSpeedTrainer"
 				)
 
 		//- Infos
@@ -250,8 +251,7 @@ export default {
 
 	data() {
 		return {
-			stCurrentLoop:  0,
-			stCurrentTempo: 0,
+			stCurrentLoop: 0,
 		}
 	},
 
@@ -298,6 +298,7 @@ export default {
 			'highestFret',
 
 			'playerState',
+			'nbLoops',
 
 			'tempoDefault',
 			'tempoMin',
@@ -337,6 +338,7 @@ export default {
 			'stStop',
 			'stInc',
 			'stLoops',
+			'stCurrentTempo',
 
 			'isPickingShown',
 			'isSpeedTrainerOn',
@@ -344,7 +346,7 @@ export default {
 	},
 
 	watch: {
-		playerState: 'updateStStatus',
+		nbLoops: 'updateSpeedTrainer',
 
 		// Only activate the hotkeys when the lick if full loaded
 		isLickLoaded: function() { if (this.isLickLoaded) this.hotkeys.activate(); },
@@ -353,7 +355,7 @@ export default {
 	created()
 	{
 		this.hotkeys = new Hotkeys({
-			' ': this.togglePlayPause,
+			'p': this.togglePlayPause,
 			's': () => this.setPlayerState('stopped'),
 			'l': this.toggleLooping,
 			'm': this.toggleMetronome,
@@ -379,18 +381,16 @@ export default {
 				this.$refs.tempoInput.select();
 			});
 		},
-		startSpeedTrainer()
+		toggleSpeedTrainer()
 		{
-			this.stCurrentTempo = this.stStart;
-			this.stCurrentLoop  = 0;
-
-			// @TODO
+			this.isSpeedTrainerOn = !this.isSpeedTrainerOn;
 		},
-		stopSpeedTrainer()
+		resetSpeedTrainer()
 		{
-			// @TODO
+			this.stCurrentLoop    = 0;
+			this.stCurrentTempo   = this.stStart;
 		},
-		updateStStatus()
+		updateSpeedTrainer()
 		{
 			if (!this.isSpeedTrainerOn) return;
 
@@ -398,6 +398,9 @@ export default {
 			{
 				this.stCurrentLoop   = 0;
 				this.stCurrentTempo += this.stInc;
+
+				if (this.stCurrentTempo > this.stStop)
+					this.isSpeedTrainerOn = false;
 			}
 		},
 
