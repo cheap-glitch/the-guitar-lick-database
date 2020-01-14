@@ -3,7 +3,7 @@
  * routes.js
  */
 
-const TOTAL_NB_LICKS = 215;
+const TOTAL_NB_LICKS = 220;
 
 // Helper function to load a component asynchronously and split it in its own chunk
 const loadAsyncComponent = _component => (() => import(/* webpackChunkName: "view-[request]" */ `@/components/${_component}`));

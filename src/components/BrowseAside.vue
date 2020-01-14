@@ -13,20 +13,19 @@ div.BrowseAside
 		//--------------------------------------------------------------
 		section.section
 			VFold(title="Guitarist, genre & diffculty")
-				div.row
-					//- Artist
-					VSelect(
-						id="artist"
-						:options="artistsNames"
+				//- Artist
+				VSelect(
+					id="artist"
+					:options="artistsNames"
 
-						v-model="searchParams.artist"
-						)
-					//- Difficulty
-					VSelect(
-						id="difficulty"
-						:options="{ any: 'Any difficulty', ...data.difficulties }"
-						v-model="searchParams.difficulty"
-						)
+					v-model="searchParams.artist"
+					)
+				//- Difficulty
+				VSelect(
+					id="difficulty"
+					:options="{ any: 'Any difficulty', ...data.difficulties }"
+					v-model="searchParams.difficulty"
+					)
 				//- Genre
 				VSelect(
 					id="genre"
@@ -242,8 +241,6 @@ export default {
 	display: flex;
 	flex-direction: column;
 	@include space-children-v(20px);
-
-	width: 300px;
 }
 
 .row {

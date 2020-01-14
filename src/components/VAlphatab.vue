@@ -224,8 +224,15 @@ export default {
 				this.$emit('player-ready');
 			});
 
-			// Send an event whenever the playback reaches the end of the score
-			this.alphatab.addPlayerFinished(() => this.$emit('player-stopped'));
+			// When the playback reaches the end of the score
+			this.alphatab.addPlayerFinished(() =>
+			{
+				// Send an event
+				this.$emit('player-reached-end');
+
+				// Also send a stopping event if the playback is not looping
+				if (!this.isLoopingOn) this.$emit('player-stopped');
+			});
 
 			// Draw the score
 			this.updateScore();

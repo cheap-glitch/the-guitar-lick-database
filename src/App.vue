@@ -77,18 +77,26 @@ export default {
 	left: 0;
 	bottom: 0;
 
-	width: 300px;
+	width: 280px;
 
 	padding: 20px;
 
 	background-color: $color-ebony-clay-2;
 }
 
+.logo {
+	display: flex;
+	@include space-children-h(14px);
+
+	margin-bottom: 20px;
+}
+
 .logo__icon {
+	line-height: 60px;
+
 	margin-right: 10px;
 
-	font-size: 50px;
-	line-height: 50px;
+	font-size: 60px;
 
 	color: $color-ebony-clay-2;
 	background-image:
@@ -97,11 +105,11 @@ export default {
 }
 
 .logo__text {
-	line-height: 60px;
+	line-height: 35px;
 
 	text-decoration: none;
 
-	font-size: 60px;
+	font-size: 35px;
 	font-family: 'Bebas Bold';
 
 	color: transparent;

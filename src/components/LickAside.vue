@@ -101,6 +101,26 @@ div.LickAside
 	//----------------------------------------------------------------------
 	VFold(title="Speed trainer")
 
+		//- Controls
+		div.toolbar
+			VButton(
+				tooltip="Start/pause the speed trainer"
+				:icon="false ? 'pause' : 'play'"
+				:is-disabled="!isLickLoaded"
+
+				@click="startSpeedTrainer"
+				)
+			VButton(
+				tooltip="Stop the speed trainer"
+				icon="stop"
+				:is-disabled="!isLickLoaded"
+
+				@click="stopSpeedTrainer"
+				)
+
+		//- Infos
+		p(v-show="isSpeedTrainerOn") Status: {{ stCurrentLoop }} / {{ stLoops }}, {{ stCurrentTempo }} BPM
+
 		//- Starting & goal tempos
 		div.toolbar: VNumberInput(
 			id="st-tempo-start"
@@ -110,7 +130,7 @@ div.LickAside
 			:default-value="stStartDefault"
 			:min="tempoMin"
 			:max="tempoMax"
-			:is-disabled="!isLickLoaded"
+			:is-disabled="!isLickLoaded || isSpeedTrainerOn"
 
 			v-model.number="stStart"
 			)
@@ -122,7 +142,7 @@ div.LickAside
 			:default-value="stStopDefault"
 			:min="tempoMin"
 			:max="tempoMax"
-			:is-disabled="!isLickLoaded"
+			:is-disabled="!isLickLoaded || isSpeedTrainerOn"
 
 			v-model.number="stStop"
 			)
@@ -135,7 +155,7 @@ div.LickAside
 
 			:default-value="stLoopsDefault"
 			:min="stLoopsMin"
-			:is-disabled="!isLickLoaded"
+			:is-disabled="!isLickLoaded || isSpeedTrainerOn"
 
 			v-model.number="stLoops"
 			)
@@ -149,7 +169,7 @@ div.LickAside
 			:default-value="stIncDefault"
 			:min="stIncMin"
 			:max="stIncMax"
-			:is-disabled="!isLickLoaded"
+			:is-disabled="!isLickLoaded || isSpeedTrainerOn"
 
 			v-model.number="stInc"
 			)
@@ -230,6 +250,8 @@ export default {
 
 	data() {
 		return {
+			stCurrentLoop:  0,
+			stCurrentTempo: 0,
 		}
 	},
 
@@ -317,10 +339,14 @@ export default {
 			'stLoops',
 
 			'isPickingShown',
+			'isSpeedTrainerOn',
 		]),
 	},
 
 	watch: {
+		playerState: 'updateStStatus',
+
+		// Only activate the hotkeys when the lick if full loaded
 		isLickLoaded: function() { if (this.isLickLoaded) this.hotkeys.activate(); },
 	},
 
@@ -352,6 +378,27 @@ export default {
 				this.$refs.tempoInput.focus();
 				this.$refs.tempoInput.select();
 			});
+		},
+		startSpeedTrainer()
+		{
+			this.stCurrentTempo = this.stStart;
+			this.stCurrentLoop  = 0;
+
+			// @TODO
+		},
+		stopSpeedTrainer()
+		{
+			// @TODO
+		},
+		updateStStatus()
+		{
+			if (!this.isSpeedTrainerOn) return;
+
+			if (++this.stCurrentLoop >= this.stLoops)
+			{
+				this.stCurrentLoop   = 0;
+				this.stCurrentTempo += this.stInc;
+			}
 		},
 
 		...mapMutations('player', [

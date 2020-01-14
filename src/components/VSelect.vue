@@ -6,27 +6,30 @@
 <!--{{{ Pug -->
 <template lang="pug">
 
-div.select
+div.VSelect(ref="vselectbar")
 
 	//- Select bar
-	div.select__bar(
+	div.VSelect__bar(
 		v-mods="{ isDisabled }"
 		v-click-outside="close"
 		@click.left="toggleOpen"
 		)
-		p.select__bar__text(
+		p.VSelect__bar__text(
 			v-mods="{ isDisabled }"
 			) {{ selected.name }}
 
-		fa-icon.select__bar__icon(
+		fa-icon.VSelect__bar__chevron(
 			:icon="['far', 'chevron-down']"
-			v-mods="{ isOpened, isDisabled }"
+			v-mods="{ isOpened, isDisabled, isFlipped: isChevronFlipped }"
 			)
 
 	//- Options
 	transition(name="fade")
-		div.select__options(v-show="isOpened")
-			p.select__options__item(
+		div.VSelect__options(
+			v-show="isOpened"
+			v-mods="{ isOpeningDirectionUp: openingDirection == 'up' }"
+			)
+			p.VSelect__options__item(
 				v-for="option in optionsList"
 				:key="`key--v-select-${id}--${option.value}`"
 
@@ -71,7 +74,8 @@ export default {
 
 	data() {
 		return {
-			isOpened: false,
+			isOpened:          false,
+			openingDirection:  'down',
 		}
 	},
 
@@ -85,6 +89,15 @@ export default {
 		{
 			return this?.optionsList?.find(_option => _option.value == this.value) ?? { value: 'loading', name: 'Loading…' };
 		},
+		isChevronFlipped()
+		{
+			return (this.openingDirection == 'down' &&  this.isOpened)
+			    || (this.openingDirection == 'up'   && !this.isOpened)
+		},
+	},
+
+	mounted() {
+		this.updateOpeningDirection();
 	},
 
 	methods: {
@@ -94,11 +107,28 @@ export default {
 		},
 		toggleOpen()
 		{
-			if (!this.isDisabled) this.isOpened = !this.isOpened;
+			if (!this.isDisabled)
+			{
+				if (!this.isOpened)
+					this.updateOpeningDirection();
+
+				this.isOpened = !this.isOpened;
+			}
 		},
 		close()
 		{
 			this.isOpened = false;
+		},
+		updateOpeningDirection()
+		{
+			const windowHeight  = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
+			const elemYPosition = this.$refs.vselectbar.getBoundingClientRect().top;
+
+			// If the element is positioned low in the viewport,
+			// open the options menu upward instead of downward to avoid vertical overflow
+			this.openingDirection = windowHeight - elemYPosition < 380
+				? 'up'
+				: 'down';
 		},
 	},
 }
@@ -112,19 +142,19 @@ export default {
 
 @use '@/styles/transitions' as *;
 
-.select {
+.VSelect {
 	position: relative;
 	flex: 1 1 auto;
 }
 
-.select__bar,
-.select__options {
+.VSelect__bar,
+.VSelect__options {
 	border: 1px solid $color-azure;
 
 	background-color: $color-mirage;
 }
 
-.select__bar {
+.VSelect__bar {
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
@@ -142,9 +172,9 @@ export default {
 	}
 }
 
-.select__bar__text,
-.select__bar__icon,
-.select__options__item {
+.VSelect__bar__text,
+.VSelect__bar__chevron,
+.VSelect__options__item {
 	color: $color-nepal;
 
 	cursor: pointer;
@@ -157,27 +187,34 @@ export default {
 	}
 }
 
-.select__bar__icon {
+.VSelect__bar__chevron {
 	font-size: 0.8em;
 
 	@include flip;
 }
 
-.select__options {
+.VSelect__options {
 	overflow-y: auto;
 
 	position: absolute;
 	z-index: 1000;
-	top: 100%;
 	left: 0;
 	right: 0;
 
 	max-height: 300px;
 
-	border-top: none;
+	&.is-opening-direction-up {
+		bottom: 100%;
+		border-bottom: none;
+	}
+
+	&:not(.is-opening-direction-up) {
+		top: 100%;
+		border-top: none;
+	}
 }
 
-.select__options__item {
+.VSelect__options__item {
 	padding: 8px;
 
 	&:hover {

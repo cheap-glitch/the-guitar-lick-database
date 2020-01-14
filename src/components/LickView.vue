@@ -50,17 +50,16 @@ div.LickView
 			:vol-playback="volPlayback"
 			:vol-metronome="volMetronome"
 			:is-playback-active="true"
-			:is-looping-on="isLoopingOn"
+			:is-looping-on="isLoopingOn || isSpeedTrainerOn"
 			:is-metronome-on="isMetronomeOn"
 			:is-countdown-on="isCountdownOn"
 
 			@player-loading="updateLoadingProgress"
 			@player-ready="$store.commit('player/setLickLoaded', true)"
-			@player-stopped="$store.commit('player/setPlayerState', 'stopped')"
 			)
 
 		//- alphaTab credit
-		p.credit: :external-links:markdown-it(inline) Score & tablature rendered using the awesome [alphTab->](https:\/\/www.alphatab.net)
+		p.credit: :external-links:markdown-it(inline) Scores & tablatures rendered using the awesome [alphTab->](https:\/\/www.alphatab.net)
 
 	//----------------------------------------------------------------------
 	//- Infos & notes

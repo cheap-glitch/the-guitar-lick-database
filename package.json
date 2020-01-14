@@ -5,10 +5,10 @@
   "author": "cheap glitch <cheap.glitch@gmail.com> (https://github.com/cheap-glitch)",
   "scripts": {
     "serve": "nodemon --watch vue.config.js --exec npm run serve-vue-cli",
+    "serve-vue-cli": "vue-cli-service serve --https",
     "build": "vue-cli-service build --modern",
     "test:unit": "nyc vue-cli-service test:unit",
     "lint": "vue-cli-service lint --no-fix 'src/**.vue' '*.js' 'src/**.js' && ./vendor/jakub-onderka/php-parallel-lint/parallel-lint api",
-    "serve-vue-cli": "vue-cli-service serve --https",
     "sitemap": "vue-cli-service sitemap"
   },
   "dependencies": {
