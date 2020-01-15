@@ -47,7 +47,7 @@ export default
 	 * Try to get the value associated with a key in the local storage
 	 * If the key isn't present or its value is invalid, return a default value
 	 */
-	get(_key, _defaultValue)
+	get(_key, _defaultValue, _validator = null)
 	{
 		let value       = localStorage.getItem(`tgld/${_key}`);
 		let parsedValue = null;
@@ -62,7 +62,7 @@ export default
 			return _defaultValue;
 		}
 
-		return parsedValue;
+		return _validator ? (_validator(parsedValue) ? parsedValue : _defaultValue) : parsedValue;
 	},
 
 	/**

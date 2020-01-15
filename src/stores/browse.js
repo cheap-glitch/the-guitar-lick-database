@@ -14,11 +14,11 @@ export default
 		results:           [],
 
 		bookmarkFilter:    'none',
-		sortBy:            storage.get('browse/sortBy',    'date'),
-		sortOrder:         storage.get('browse/sortOrder', 'descending'),
+		sortBy:            storage.get('browse/sortBy',    'date',       _v => ['date',      'difficulty'].includes(_v)),
+		sortOrder:         storage.get('browse/sortOrder', 'descending', _v => ['ascending', 'descending'].includes(_v)),
 
 		currentPage:       1,
-		nbResultsPerPage:  storage.get('browse/nbResultsPerPage', 5),
+		nbResultsPerPage:  storage.get('browse/nbResultsPerPage', 5, _v => [5, 10, 15, 20].includes(_v)),
 	},
 
 	getters: {

@@ -17,10 +17,10 @@ export default
 		tonalityShift:       0,
 		highestFret:         24,
 
-		scoreType:           storage.get('player/scoreType', 'mixed'),
+		scoreType:           storage.get('player/scoreType', 'mixed', _v => ['tab', 'score', 'mixed'].includes(_v)),
 		isPickingShown:      true,
 
-		zoom:                storage.get('player/zoom', 11),
+		zoom:                storage.get('player/zoom', 11, _v => (typeof _v == 'number') && (7 <= _v && _v <= 20)),
 		zoomMin:             7,
 		zoomMax:             20,
 
@@ -36,9 +36,9 @@ export default
 		volMetronome:        10,
 
 		isLickLoaded:        false,
-		isLoopingOn:         storage.get('player/isLoopingOn',   false),
-		isMetronomeOn:       storage.get('player/isMetronomeOn', false),
-		isCountdownOn:       storage.get('player/isCountdownOn', false),
+		isLoopingOn:         storage.get('player/isLoopingOn',   false, _v => typeof _v == 'boolean'),
+		isMetronomeOn:       storage.get('player/isMetronomeOn', false, _v => typeof _v == 'boolean'),
+		isCountdownOn:       storage.get('player/isCountdownOn', false, _v => typeof _v == 'boolean'),
 
 		stStart:             80,
 		stStartDefault:      80,

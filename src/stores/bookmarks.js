@@ -10,7 +10,7 @@ export default
 	namespaced: true,
 
 	state: {
-		bookmarks: storage.get('bookmarks/bookmarks', []),
+		bookmarks: storage.get('bookmarks/bookmarks', [], _v => Array.isArray(_v)),
 	},
 
 	getters: {
