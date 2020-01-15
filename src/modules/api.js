@@ -27,7 +27,7 @@ export default
 			headers,
 		})
 		.then(_response => _callback(_response?.data ?? null))
-		.catch(_error   => console.log(_error));
+		.catch(_error   => { if (process.env.NODE_ENV == 'development') console.log(_error) });
 	},
 
 	get(_url, _callback)

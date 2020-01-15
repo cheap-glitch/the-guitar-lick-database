@@ -61,6 +61,7 @@ div.LickAside
 			//- Tempo
 			VNumberInput.input(
 				id="lick-tempo"
+				label-left="Tempo:"
 				label-right="BPM"
 
 				:default-value="tempoDefault"
@@ -71,30 +72,26 @@ div.LickAside
 				v-model.number="tempo"
 				)
 
-		//- Playback volume
-		div.toolbar
-			vue-slider.slider(
-				:min="0"
-				:max="20"
-				:interval="1"
-				:disabled="!isLickLoaded"
-				lazy
+		p Playback volume
+		vue-slider.slider(
+			:min="0"
+			:max="20"
+			:interval="1"
+			:disabled="!isLickLoaded"
+			lazy
 
-				v-model="volPlayback"
-				)
-			p.text-volume {{ volPlayback }}
-		//- Metronome volume
-		div.toolbar
-			vue-slider.slider(
-				:min="0"
-				:max="20"
-				:interval="1"
-				:disabled="!isLickLoaded"
-				lazy
+			v-model="volPlayback"
+			)
+		p Metronome volume
+		vue-slider.slider(
+			:min="0"
+			:max="20"
+			:interval="1"
+			:disabled="!isLickLoaded"
+			lazy
 
-				v-model="volMetronome"
-				)
-			p.text-volume {{ volMetronome }}
+			v-model="volMetronome"
+			)
 
 	//----------------------------------------------------------------------
 	//- Speed trainer

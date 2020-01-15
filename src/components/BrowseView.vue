@@ -130,6 +130,15 @@ div.BrowseView
 
 					@click.native.capture.prevent.stop="previewedLickPlayerState = 'stopped'"
 					)
+				a(
+					v-if="isDevMode"
+
+					:href="`/edit/${lick.id}`"
+					target="_blank"
+					rel="external nofollow noopener noreferrer"
+
+					@click.capture.stop
+					) Edit the lick
 
 			//- Tablature
 			VAlphatab.results__item__lick(
@@ -155,7 +164,7 @@ div.BrowseView
 <!--{{{ JavaScript -->
 <script>
 
-import { mapGetters }     from 'vuex'
+import { get, sync }      from 'vuex-pathify'
 
 import data               from '@/modules/data'
 import BrowseViewPagelist from '@/components/BrowseViewPagelist'
@@ -186,30 +195,21 @@ export default {
 	},
 
 	computed: {
-		bookmarkFilter:
+		isDevMode()
 		{
-			get()   { return this.$store.state.browse.bookmarkFilter;       },
-			set(_v) { this.$store.commit('browse/setBookmarkFilter', _v);   },
-		},
-		sortBy:
-		{
-			get()   { return this.$store.state.browse.sortBy;               },
-			set(_v) { this.$store.commit('browse/setSortBy', _v);           },
-		},
-		sortOrder:
-		{
-			get()   { return this.$store.state.browse.sortOrder;            },
-			set(_v) { this.$store.commit('browse/setSortOrder', _v);        },
-		},
-		nbResultsPerPage:
-		{
-			get()   { return this.$store.state.browse.nbResultsPerPage;     },
-			set(_v) { this.$store.commit('browse/setNbResultsPerPage', _v); },
+			return process.env.NODE_ENV == 'development';
 		},
 
-		...mapGetters('browse', [
+		...get('browse', [
 			'displayedResults',
-		])
+		]),
+
+		...sync('browse', [
+			'bookmarkFilter',
+			'sortBy',
+			'sortOrder',
+			'nbResultsPerPage',
+		]),
 	},
 
 	methods:

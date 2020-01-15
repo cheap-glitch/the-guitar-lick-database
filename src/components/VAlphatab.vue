@@ -282,7 +282,7 @@ export default {
 		},
 		updateVolPlayback()
 		{
-			this.alphatab.changeTrackVolume(this.alphatab.score.tracks[0], this.volPlayback / 10);
+			this.alphatab.changeTrackVolume([this.alphatab.score.tracks[0]], this.volPlayback / 10);
 		},
 		updateVolMetronome()
 		{
