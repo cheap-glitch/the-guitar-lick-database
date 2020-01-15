@@ -3,7 +3,8 @@
  * stores/browse.js
  */
 
-import data from '@/modules/data'
+import data    from '@/modules/data'
+import storage from '@/modules/storage'
 
 export default
 {
@@ -13,11 +14,11 @@ export default
 		results:           [],
 
 		bookmarkFilter:    'none',
-		sortBy:            'date',
-		sortOrder:         'descending',
+		sortBy:            storage.get('browse/sortBy',    'date'),
+		sortOrder:         storage.get('browse/sortOrder', 'descending'),
 
 		currentPage:       1,
-		nbResultsPerPage:  5,
+		nbResultsPerPage:  storage.get('browse/nbResultsPerPage', 5),
 	},
 
 	getters: {

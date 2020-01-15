@@ -20,7 +20,15 @@ import { isObject, objectForEach } from '@/modules/object'
 const storeOnMutation = _store => _store.subscribe(function(_mutation, _state)
 {
 	const saveUponMutations = {
-		// @TODO
+		'browse/setSortBy':            { name: 'browse/sortBy',           value: _state.browse.sortBy           },
+		'browse/setSortOrder':         { name: 'browse/sortOrder',        value: _state.browse.sortOrder        },
+		'browse/setNbResultsPerPage':  { name: 'browse/nbResultsPerPage', value: _state.browse.nbResultsPerPage },
+
+		'player/setScoreType':         { name: 'player/scoreType',        value: _state.player.scoreType        },
+		'player/zoom(In|Out)':         { name: 'player/zoom',             value: _state.player.zoom             },
+		'player/toggleLooping':        { name: 'player/isLoopingOn',      value: _state.player.isLoopingOn      },
+		'player/toggleMetronome':      { name: 'player/isMetronomeOn',    value: _state.player.isMetronomeOn    },
+		'player/toggleCountdown':      { name: 'player/isCountdownOn',    value: _state.player.isCountdownOn    },
 	};
 
 	objectForEach(saveUponMutations, function(__key, __prop)
