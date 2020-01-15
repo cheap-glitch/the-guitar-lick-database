@@ -26,19 +26,15 @@ div.BrowseViewPagelist
 <!--{{{ JavaScript -->
 <script>
 
-import { mapState, mapGetters } from 'vuex'
+import { get } from 'vuex-pathify'
 
 export default {
 	name: 'BrowseViewPagelist',
 
-	computed: {
-		...mapState('browse', [
-			'currentPage',
-		]),
-		...mapGetters('browse', [
-			'nbPages',
-		]),
-	},
+	computed: get('browse', [
+		'nbPages',
+		'currentPage',
+	]),
 
 	methods: {
 		goToPage(_newPage)

@@ -200,11 +200,11 @@ div.LickView
 <!--{{{ JavaScript -->
 <script>
 
-import MarkdownIt               from 'markdown-it'
-import { mapState, mapGetters } from 'vuex'
+import { get }    from 'vuex-pathify'
+import MarkdownIt from 'markdown-it'
 
-import api                      from '@/modules/api'
-import data                     from '@/modules/data'
+import api        from '@/modules/api'
+import data       from '@/modules/data'
 
 export default {
 	name: 'LickView',
@@ -289,28 +289,26 @@ export default {
 			return process.env.NODE_ENV === 'development';
 		},
 
-		...mapState('player', [
+		...get('player', [
 			'lick',
-			'isLickLoaded',
+			'lickTexTransposed',
 
 			'scoreType',
 			'zoom',
-			'isPickingShown',
 
 			'playerState',
 			'tempo',
 			'volPlayback',
 			'volMetronome',
+
+			'isCountdownOn',
+			'isLickLoaded',
 			'isLoopingOn',
 			'isMetronomeOn',
-			'isCountdownOn',
-
+			'isPickingShown',
 			'isSpeedTrainerOn',
-			'stCurrentTempo',
-		]),
 
-		...mapGetters('player', [
-			'lickTexTransposed',
+			'stCurrentTempo',
 		]),
 	},
 
