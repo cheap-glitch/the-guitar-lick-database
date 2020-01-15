@@ -62,12 +62,12 @@ export default
 	},
 
 	mutations: {
-		setLick:             (_s, _v) => _s.lick             = _v,
-		setLickLoaded:       (_s, _v) => _s.isLickLoaded     = _v,
-		setTonalityShift:    (_s, _v) => _s.tonalityShift    = _v,
-		setIsPickingShown:   (_s, _v) => _s.isPickingShown   = _v,
-		setPlayerState:      (_s, _v) => _s.playerState      = _v,
-		setScoreType:        (_s, _v) => { _s.scoreType      = _v; storage.set('scoreType', _v); },
+		setLick:             (_s, _v) => _s.lick           = _v,
+		setLickLoaded:       (_s, _v) => _s.isLickLoaded   = _v,
+		setTonalityShift:    (_s, _v) => _s.tonalityShift  = _v,
+		setIsPickingShown:   (_s, _v) => _s.isPickingShown = _v,
+		setPlayerState:      (_s, _v) => _s.playerState    = _v,
+		setScoreType:        (_s, _v) => _s.scoreType      = _v,
 
 		resetNbLoops:        _s       => _s.nbLoops = 0,
 		incrementNbLoops:    _s       => _s.nbLoops++,
@@ -78,13 +78,13 @@ export default
 		setVolPlayback:      (_s, _v) => { if (inBounds(_v, 0, 20)) _s.volPlayback  = parseInt(_v) },
 		setVolMetronome:     (_s, _v) => { if (inBounds(_v, 0, 20)) _s.volMetronome = parseInt(_v) },
 
-		zoomIn:              _s       => { if (_s.zoom < _s.zoomMax) storage.set('zoom', ++_s.zoom); },
-		zoomOut:             _s       => { if (_s.zoom > _s.zoomMin) storage.set('zoom', --_s.zoom); },
+		zoomIn:              _s       => { if (_s.zoom < _s.zoomMax) _s.zoom++ },
+		zoomOut:             _s       => { if (_s.zoom > _s.zoomMin) _s.zoom-- },
 
-		togglePlayPause:     _s       => _s.playerState = _s.playerState === 'playing' ? 'paused' : 'playing',
-		toggleLooping:       _s       => storage.set('isLoopingOn',       _s.isLoopingOn      = !_s.isLoopingOn),
-		toggleMetronome:     _s       => storage.set('isMetronomeOn',     _s.isMetronomeOn    = !_s.isMetronomeOn),
-		toggleCountdown:     _s       => storage.set('isCountdownOn',     _s.isCountdownOn    = !_s.isCountdownOn),
+		togglePlayPause:     _s       => _s.playerState   = _s.playerState === 'playing' ? 'paused' : 'playing',
+		toggleLooping:       _s       => _s.isLoopingOn   = !_s.isLoopingOn,
+		toggleMetronome:     _s       => _s.isMetronomeOn = !_s.isMetronomeOn,
+		toggleCountdown:     _s       => _s.isCountdownOn = !_s.isCountdownOn,
 
 		setStStart:          (_s, _v) => { if (inBounds(_v, _s.tempoMin, _s.tempoMax)) _s.stStart = _v },
 		setStStop:           (_s, _v) => { if (inBounds(_v, _s.tempoMin, _s.tempoMax)) _s.stStop  = _v },

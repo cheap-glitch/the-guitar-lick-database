@@ -130,7 +130,7 @@ div.BrowseView
 
 					@click.native.capture.prevent.stop="previewedLickPlayerState = 'stopped'"
 					)
-				a(
+				p: a(
 					v-if="isDevMode"
 
 					:href="`/edit/${lick.id}`"

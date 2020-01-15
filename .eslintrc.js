@@ -1,19 +1,27 @@
 module.exports = {
 	root: true,
 
+	parserOptions: {
+		parser: 'babel-eslint'
+	},
+
 	env: {
 		node: true
 	},
 
-	'extends': [
+	extends: [
 		'eslint:recommended',
 		'plugin:vue/essential',
 		'plugin:vue/recommended',
 	],
 
-	'plugins': [
+	plugins: [
 		'smarter-tabs',
 	],
+
+	globals: {
+		'alphaTab': true,
+	},
 
 	rules: {
 		'no-console':  process.env.NODE_ENV === 'production' ? 'error' : 'off',
@@ -21,10 +29,6 @@ module.exports = {
 
 		'no-mixed-spaces-and-tabs':   ['warn', 'smart-tabs'],
 		'smarter-tabs/smarter-tabs':  'warn',
-	},
-
-	parserOptions: {
-		parser: 'babel-eslint'
 	},
 
 	overrides: [{

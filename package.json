@@ -64,6 +64,7 @@
     "fibers": "^4.0.2",
     "html-minifier": "^4.0.0",
     "jstransformer-markdown-it": "^2.1.0",
+    "nodemon": "^2.0.2",
     "nyc": "^15.0.0",
     "prerender-spa-plugin": "^3.4.0",
     "pug": "^2.0.4",
