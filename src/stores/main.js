@@ -20,6 +20,8 @@ import { isObject, objectForEach } from '@/modules/object'
 const storeOnMutation = _store => _store.subscribe(function(_mutation, _state)
 {
 	const saveUponMutations = {
+		'toggleIsDarkModeOn':          'isDarkModeOn',
+
 		'browse/setSortBy':            { name: 'browse/sortBy',           value: _state.browse.sortBy           },
 		'browse/setSortOrder':         { name: 'browse/sortOrder',        value: _state.browse.sortOrder        },
 		'browse/setNbResultsPerPage':  { name: 'browse/nbResultsPerPage', value: _state.browse.nbResultsPerPage },
@@ -50,6 +52,8 @@ const storeOnMutation = _store => _store.subscribe(function(_mutation, _state)
 Vue.use(Vuex);
 export default new Vuex.Store(
 {
+	test: true,
+
 	plugins: [
 		pathify.plugin,
 		storeOnMutation,
@@ -63,10 +67,16 @@ export default new Vuex.Store(
 
 	state: {
 		totalNbLicks: 200,
+		isDarkModeOn: storage.get('isDarkModeOn', true, _v => typeof _v == 'boolean'),
+	},
+
+	getters: {
+		darkMode: _state => ({ 'dark-mode': _state.isDarkModeOn }),
 	},
 
 	mutations: {
-		setTotalNbLicks: (_state, _value) => _state.totalNbLicks = parseInt(_value),
+		setTotalNbLicks:     (_state, _value) => _state.totalNbLicks = parseInt(_value),
+		toggleIsDarkModeOn:  _state           => _state.isDarkModeOn = !_state.isDarkModeOn,
 	},
 
 	// Activate strict mode during development only
