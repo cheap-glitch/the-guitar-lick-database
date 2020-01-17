@@ -33,9 +33,9 @@ div.AdminView
 
 		//- Tools
 		div.tablature-tools
-			input(type="button" @click.left="tex = lick.tex"          value="Preview")
-			input(type="button" @click.left="playerState = 'playing'" value="Play")
-			input(type="button" @click.left="playerState = 'stopped'" value="Stop")
+			input(type="button" @click.left="tex = lick.tex, playerState = 'stopped'" value ="Preview")
+			input(type="button" @click.left="playerState = 'playing'"                 value ="Play")
+			input(type="button" @click.left="playerState = 'stopped'"                 value ="Stop")
 
 		//- Preview
 		VAlphatab.alphatab(
@@ -46,7 +46,8 @@ div.AdminView
 			:is-playback-active="true"
 			score-type="mixed"
 
-			@playerStopped="playerState = 'stopped'"
+			@player-stopped="playerState = 'stopped'"
+			@player-reached-end="playerState = 'stopped'"
 			)
 
 		//----------------------------------------------------------------------
