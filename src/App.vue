@@ -58,7 +58,7 @@ div.App
 <script>
 
 import api       from '@/modules/api'
-import MenuAside from '@/components/MenuAside'
+import MenuAside from '@/pages/MenuAside'
 
 export default {
 	name: 'App',
