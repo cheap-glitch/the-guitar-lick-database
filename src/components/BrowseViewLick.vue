@@ -179,6 +179,8 @@ export default {
 .BrowseViewLick {
 	display: block;
 
+	min-height: 300px;
+
 	text-decoration: none;
 
 	color: steelblue;
