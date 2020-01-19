@@ -17,8 +17,21 @@ div.HomeView
 <!--{{{ JavaScript -->
 <script>
 
+import api from '@/modules/api'
+
 export default {
 	name: 'HomeView',
+
+	data() {
+		return {
+			latestLicks: [],
+		}
+	},
+
+	created()
+	{
+		api.get('/licks/latest/5', _data => this.latestLicks = _data);
+	}
 }
 
 </script>

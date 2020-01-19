@@ -8,6 +8,21 @@ import { isEmptyObject } from '@/modules/object'
 
 export default
 {
+	get(_url, _callback)
+	{
+		this.xhr('get', _url, _callback);
+	},
+
+	post(_url, _data, _callback)
+	{
+		this.xhr('post', _url, _callback, _data);
+	},
+
+	put(_url, _data, _callback)
+	{
+		this.xhr('put', _url, _callback, _data);
+	},
+
 	xhr(_method, _url, _callback, _data = {})
 	{
 		const headers = {
@@ -28,20 +43,5 @@ export default
 		})
 		.then(_response => _callback(_response?.data ?? null))
 		.catch(_error   => { if (process.env.NODE_ENV == 'development') console.log(_error) });
-	},
-
-	get(_url, _callback)
-	{
-		this.xhr('get', _url, _callback);
-	},
-
-	post(_url, _data, _callback)
-	{
-		this.xhr('post', _url, _callback, _data);
-	},
-
-	put(_url, _data, _callback)
-	{
-		this.xhr('put', _url, _callback, _data);
 	},
 }

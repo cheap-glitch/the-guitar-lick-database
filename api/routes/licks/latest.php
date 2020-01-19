@@ -10,11 +10,11 @@ use Psr\Http\Message\ServerRequestInterface as Request;
 /**
  * Return the n more recently added licks
  */
-$api->post('/licks/latest/{number}', function(Request $request, Response $response, array $args)
+$api->get('/licks/latest/{number}', function(Request $request, Response $response, array $args)
 {
 	$db = $this->get('medoo');
 
-	$db->select('licks (lick)', [
+	$data = $db->select('licks (lick)', [
 		'[>]artists (artist)' => ['lick.artist' => 'id'],
 	], [
 		'lick.id',
@@ -34,6 +34,9 @@ $api->post('/licks/latest/{number}', function(Request $request, Response $respon
 		'artist.url  (artistURL)',
 		'artist.name (artistName)',
 	], [
+		'ORDER' => ['date' => 'DESC', 'id' => 'DESC'],
 		'LIMIT' => (int) $args['number'],
 	]);
+
+	return json_encode_response($response, $data);
 });
