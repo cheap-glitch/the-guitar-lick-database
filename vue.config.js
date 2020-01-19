@@ -71,6 +71,10 @@ module.exports = {
 				{
 					set: 'free-brands',
 					icons: [
+						// Sidebar
+						'github',
+						'twitter',
+
 						// Lick infos
 						'youtube',
 					]
@@ -96,6 +100,7 @@ module.exports = {
 					set: 'pro-regular',
 					icons: [
 						// General UI
+						'adjust',
 						'chevron-down',
 						'external-link-square-alt',
 						'star',

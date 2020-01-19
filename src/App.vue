@@ -17,6 +17,28 @@ div.App
 			fa-icon.logo__icon(icon="comment-alt-music" mask="square-full")
 			span.logo__text(:is="$route.path === '/' ? 'span' : 'router-link'" to="/") The Guitar Lick Database
 
+		//- Links + dark mode switch
+		//- @TODO
+		div.toolbar
+			VButton(
+				icon="adjust"
+				:is-active="$store.state.isDarkModeOn"
+
+				@click="$store.commit('toggleIsDarkModeOn')"
+				)
+			a(
+				href="https://twitter.com/cheap_glitch"
+				target="_blank"
+				rel="external nofollow noreferrer"
+				)
+				fa-icon(:icon="['fab', 'twitter']")
+			a(
+				href="https://github.com/cheap-glitch"
+				target="_blank"
+				rel="external nofollow noreferrer"
+				)
+				fa-icon(:icon="['fab', 'github']")
+
 		//- Page-specific tools/navigation
 		router-view(name="aside")
 
@@ -70,6 +92,7 @@ export default {
 	display: grid;
 	grid-template-rows: auto auto 1fr;
 	grid-template-columns: 100%;
+	@include space-children-v(20px);
 
 	position: fixed;
 	z-index: 100;
@@ -87,8 +110,6 @@ export default {
 .logo {
 	display: flex;
 	@include space-children-h(14px);
-
-	margin-bottom: 20px;
 }
 
 .logo__icon {
@@ -119,6 +140,12 @@ export default {
 	background-clip: text;
 
 	user-select: none;
+}
+
+.toolbar {
+	display: flex;
+	align-items: center;
+	@include space-children-h(20px);
 }
 
 .nav-menu {
