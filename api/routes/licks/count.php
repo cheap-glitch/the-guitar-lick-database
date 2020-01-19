@@ -10,7 +10,7 @@ use Psr\Http\Message\ServerRequestInterface as Request;
 /**
  * Return the total number of licks in the database
  */
-$api->get('/licks/count', function(Request $request, Response $response, array $args)
+$api->get('/licks/count', function(Request $request, Response $response)
 {
 	return json_encode_response($response, $this->get('medoo')->count('licks'));
 });

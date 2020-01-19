@@ -10,7 +10,7 @@ use Psr\Http\Message\ServerRequestInterface as Request;
 /**
  * Grep all the sources according to their names
  */
-$api->post('/sources/grep', function(Request $request, Response $response, array $args)
+$api->post('/sources/grep', function(Request $request, Response $response)
 {
 	$db     = $this->get('medoo');
 	$params = array_filter($request->getParsedBody(), fn($key) => $key === 'name', ARRAY_FILTER_USE_KEY);

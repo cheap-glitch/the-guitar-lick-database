@@ -10,7 +10,7 @@ use Psr\Http\Message\ServerRequestInterface as Request;
 /**
  * Randomly select licks similar to a specified lick
  */
-$api->post('/licks/suggest', function(Request $request, Response $response, array $args)
+$api->post('/licks/suggest', function(Request $request, Response $response)
 {
 	$db   = $this->get('medoo');
 	$lick = $request->getParsedBody();

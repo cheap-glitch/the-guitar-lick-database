@@ -10,7 +10,7 @@ use Psr\Http\Message\ServerRequestInterface as Request;
 /**
  * Add a new lick into the database
  */
-$api->post('/licks/add', function(Request $request, Response $response, array $args)
+$api->post('/licks/add', function(Request $request, Response $response)
 {
 	$db     = $this->get('medoo');
 	$params = $request->getParsedBody();

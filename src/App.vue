@@ -151,7 +151,6 @@ export default {
 .nav-menu {
 	display: flex;
 	flex-direction: column;
-	justify-content: flex-end;
 }
 
 .view {

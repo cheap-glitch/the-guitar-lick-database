@@ -10,7 +10,7 @@ use Psr\Http\Message\ServerRequestInterface as Request;
 /**
  * Return all the artists
  */
-$api->get('/artists', function(Request $request, Response $response, array $args)
+$api->get('/artists', function(Request $request, Response $response)
 {
 	$db = $this->get('medoo');
 

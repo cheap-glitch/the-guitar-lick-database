@@ -10,7 +10,7 @@ use Psr\Http\Message\ServerRequestInterface as Request;
 /**
  * Select all the licks corresponding to the search parameters
  */
-$api->post('/licks/browse', function(Request $request, Response $response, array $args)
+$api->post('/licks/browse', function(Request $request, Response $response)
 {
 	$db = $this->get('medoo');
 

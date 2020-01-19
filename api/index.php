@@ -75,6 +75,7 @@ require('routes/artists/index.php');
 require('routes/licks/browse.php');
 require('routes/licks/count.php');
 require('routes/licks/exists.php');
+require('routes/licks/latest.php');
 require('routes/licks/read.php');
 require('routes/licks/suggest.php');
 if (!$PARAM_PRODUCTION_MODE)

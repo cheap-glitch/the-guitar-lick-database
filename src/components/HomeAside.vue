@@ -26,7 +26,9 @@ export default {
 <!--{{{ SCSS -->
 <style lang="scss" scoped>
 
-
+.HomeAside {
+	display: none;
+}
 
 </style>
 <!--}}}-->
