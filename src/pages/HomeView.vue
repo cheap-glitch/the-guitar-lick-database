@@ -61,7 +61,7 @@ export default {
 
 		api.get('/licks/latest/3', _data => this.latestLicks   = _data || []);
 		api.get('/updates/2',      _data => this.recentUpdates = _data || []);
-	}
+	},
 }
 
 </script>

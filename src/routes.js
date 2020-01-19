@@ -63,11 +63,22 @@ const routes = [
 		}
 	},
 	{
+		path: '/updates',
+		name: 'updates',
+		components: {
+			view:  loadAsyncComponent('UpdatesView'),
+			aside: loadAsyncComponent('HomeAside'),
+		},
+		sitemap: {
+			changefreq: 'weekly',
+		}
+	},
+	{
 		path: '*',
 		name: '404',
 		components: {
 			view:  loadAsyncComponent('Page404View'),
-			aside: loadAsyncComponent('Page404Aside'),
+			aside: loadAsyncComponent('HomeAside'),
 		}
 	}
 ];
