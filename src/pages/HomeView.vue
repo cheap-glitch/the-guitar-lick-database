@@ -30,7 +30,7 @@ export default {
 
 	created()
 	{
-		api.get('/licks/latest/5', _data => this.latestLicks = _data);
+		api.get('/licks/latest/5', _data => this.latestLicks = _data || []);
 	}
 }
 

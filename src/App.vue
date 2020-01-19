@@ -18,7 +18,6 @@ div.App
 			span.logo__text(:is="$route.path === '/' ? 'span' : 'router-link'" to="/") The Guitar Lick Database
 
 		//- Links + dark mode switch
-		//- @TODO
 		div.toolbar
 			VButton(
 				icon="adjust"
@@ -69,7 +68,7 @@ export default {
 
 	created() {
 		// Get the total number of licks in the database
-		api.get('licks/count', _data => this.$store.commit('setTotalNbLicks', _data));
+		api.get('licks/count', _data => this.$store.commit('setTotalNbLicks', _data || 200));
 	}
 }
 

@@ -8,9 +8,9 @@ import { isEmptyObject } from '@/modules/object'
 
 export default
 {
-	get(_url, _defaultValue, _callback)
+	get(_url, _callback)
 	{
-		this.xhr('get', _url, _callback, {}, _defaultValue);
+		this.xhr('get', _url, _callback);
 	},
 
 	post(_url, _data, _callback)
@@ -23,7 +23,7 @@ export default
 		this.xhr('put', _url, _callback, _data);
 	},
 
-	xhr(_method, _url, _callback, _data = {}, _defaultValue = null)
+	xhr(_method, _url, _callback, _data = {})
 	{
 		const headers = {
 			common : { 'X-Requested-With': 'XMLHttpRequest' }
@@ -41,7 +41,7 @@ export default
 
 			headers,
 		})
-		.then(_response => _callback(_response?.data ?? _defaultValue))
+		.then(_response => _callback(_response?.data ?? null))
 		.catch(_error   => { if (process.env.NODE_ENV == 'development') console.log(_error) });
 	},
 }

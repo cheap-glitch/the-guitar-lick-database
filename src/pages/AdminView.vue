@@ -305,13 +305,13 @@ export default {
 	created()
 	{
 		// Fetch the list of all the artists
-		api.get('artists', _data => this.artists = _data);
+		api.get('artists', _data => this.artists = _data || []);
 
 		// When updating a lick, fetch its data first
 		if (!this.isEditPage) return;
 		api.get(`licks/read/${this.$route.params.id}`, _data =>
 		{
-			this.lick = _data;
+			this.lick = _data || {};
 
 			// Erase uneeded source data to avoid problems
 			if (this.lick.source.sid !== 0)
