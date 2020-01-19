@@ -52,109 +52,19 @@ div.BrowseView
 			v-model.number="nbResultsPerPage"
 			)
 
-	//- Pagelist
-	BrowseViewPagelist
-
 	//----------------------------------------------------------------------
 	//- List of results
 	//----------------------------------------------------------------------
+	BrowseViewPagelist
+
 	section.results
-		router-link.results__item(
+		BrowseViewLick.results__item(
 			v-for="lick in displayedResults"
 			:key="lick.id"
 
-			:to="`/lick/${lick.id}`"
+			:lick="lick"
 			)
 
-			//- Infos
-			p.results__item__infos
-				//- ID
-				| \#{{ lick.id }}
-				|
-
-				//- Artist
-				span(v-if="lick.artistName")
-					fa-icon(:icon="['far', 'user-circle']")
-					|
-					| {{ lick.artistName }}
-					|
-
-				//- Tonality & scale
-				fa-icon(:icon="['far', 'music']")
-				|
-				| {{ data.tonalities[lick.tonality] }}
-				|
-				| {{ data.scales[lick.scale] }}
-				|
-
-				//- Genres
-				fa-icon(:icon="['far', 'compact-disc']")
-				|
-				| {{ formatList(lick.genres, data.genres) }}
-				|
-
-				//- Difficulty
-				fa-icon(:icon="['far', 'mountain']")
-				|
-				| {{ data.difficulties[lick.difficulty] }}
-				|
-
-				//- Tags
-				fa-icon(:icon="['far', 'tags']")
-				|
-				| {{ formatList(lick.tags, data.tags) }}
-
-			//- Preview buttons
-			div.results__item__buttons
-				VButton(
-					v-show="previewedLick != lick.id || (previewedLick == lick.id && !isPreviewedLickReady)"
-
-					:text="previewedLick == lick.id ? `Loading (${previewedLickProgress} %)` : 'Preview'"
-
-					@click.native.capture.prevent.stop="previewLick(lick.id)"
-					)
-				VButton(
-					v-show="previewedLick == lick.id && isPreviewedLickReady"
-
-					:icon="previewedLickPlayerState == 'playing' ? 'pause' : 'play'"
-					tooltip="Play/pause"
-
-					@click.native.capture.prevent.stop="\
-						previewedLickPlayerState = previewedLickPlayerState == 'playing' ? 'paused' : 'playing'"
-					)
-				VButton(
-					v-show="previewedLick == lick.id && isPreviewedLickReady"
-
-					icon="stop"
-					tooltip="Stop"
-
-					@click.native.capture.prevent.stop="previewedLickPlayerState = 'stopped'"
-					)
-				p: a(
-					v-if="isDevMode"
-
-					:href="`/edit/${lick.id}`"
-					target="_blank"
-					rel="external nofollow noopener noreferrer"
-
-					@click.capture.stop
-					) Edit the lick
-
-			//- Tablature
-			VAlphatab.results__item__lick(
-				:tex="lick.tex"
-				:tempo="parseInt(lick.tempo)"
-				:time-signature="lick.ts"
-
-				:is-playback-active="previewedLick == lick.id"
-				:player-state="previewedLick == lick.id ? previewedLickPlayerState : 'stopped'"
-
-				@player-loading="_progress => previewedLickProgress = _progress"
-				@player-ready="isPreviewedLickReady = true, previewedLickPlayerState = 'playing'"
-				@player-stopped="previewedLickPlayerState = 'stopped'"
-				)
-
-	//- Pagelist footer
 	BrowseViewPagelist
 
 </template>
@@ -166,40 +76,24 @@ div.BrowseView
 
 import { get, sync }      from 'vuex-pathify'
 
-import data               from '@/modules/data'
+import BrowseViewLick     from '@/components/BrowseViewLick'
 import BrowseViewPagelist from '@/components/BrowseViewPagelist'
 
 export default {
 	name: 'BrowseView',
 
 	components: {
+		BrowseViewLick,
 		BrowseViewPagelist,
-	},
-
-	static() {
-		return {
-			data: data,
-		}
 	},
 
 	data() {
 		return {
-			displayType:              'list',
-
-			previewedLick:            null,
-			previewedLickPlayerState: 'stopped',
-			previewedLickProgress:    0,
-
-			isPreviewedLickReady:     false,
+			displayType: 'list',
 		}
 	},
 
 	computed: {
-		isDevMode()
-		{
-			return process.env.NODE_ENV == 'development';
-		},
-
 		...get('browse', [
 			'displayedResults',
 		]),
@@ -212,60 +106,9 @@ export default {
 		]),
 	},
 
-	methods:
+	created()
 	{
-		/**
-		 * Format a list of tags/genres to display
-		 */
-		formatList(_list, _names)
-		{
-			return _list.trim().split(' ').map(_v => _names[_v]).join(', ');
-		},
-
-		/**
-		 * Load a lick for preview or start the playback if it's already loaded
-		 */
-		previewLick(_id)
-		{
-			if (this.previewedLick == _id) return;
-
-			this.previewedLick         = _id;
-			this.previewedLickProgress = 0;
-			this.isPreviewedLickReady  = false;
-		},
-
-		//- previewLick(_id)
-		//- {
-		//-         if (_id in this.previewedLicks === false)
-		//-         {
-		//-                 // Add the lick to the list of previewed licks and trigger the loading of the soundfont
-		//-                 this.$set(this.previewedLicks, _id, {
-		//-                         progress:    0,
-		//-                         playerState: 'paused',
-		//-                 });
-		//-         }
-		//-         else
-		//-         {
-		//-                 // Start/pause the playback
-		//-                 this.previewedLicks[_id].playerState = this.previewedLicks[_id].playerState == 'playing' ? 'paused' : 'playing';
-		//-         }
-		//- },
-		//- /**
-		//-  * Update the loading progress of the soundfont for a previewed lick
-		//-  */
-		//- updatePreviewedLickProgress(_id, _progress)
-		//- {
-		//-         this.previewedLicks[_id].progress = _progress;
-		//- },
-		//- /**
-		//-  * Return the text for the preview button of a lick depending on whether the lick is previewed, loading or playing
-		//-  */
-		//- getPreviewButtonText(_id)
-		//- {
-		//-         return _id in this.previewedLicks === true
-		//-                 ? this.previewedLicks[_id].progress < 100 ? `Loading… (${this.previewedLicks[_id].progress}%)` : 'Loaded!'
-		//-                 : 'Preview';
-		//- },
+		this.$store.commit('browse/resetLickPreview');
 	},
 }
 
@@ -295,43 +138,9 @@ export default {
 }
 
 .results__item {
-	display: block;
-
-	text-decoration: none;
-
-	color: steelblue;
-
-	cursor: pointer;
-
-	&:active {
-		color: steelblue;
-	}
-
 	&:nth-of-type(odd) {
 		background-color: #e9e9e9;
 	}
-}
-
-.results__item__buttons {
-	display: flex;
-	align-items: center;
-	@include space-children-h(10px);
-}
-
-.results__item__lick,
-.results__item__infos {
-	cursor: pointer;
-}
-
-</style>
-<!--}}}-->
-
-
-<!--{{{ Global SCSS -->
-<style lang="scss">
-
-.results__item__lick * {
-	cursor: pointer !important;
 }
 
 </style>

@@ -200,11 +200,12 @@ div.LickView
 <!--{{{ JavaScript -->
 <script>
 
-import { get }    from 'vuex-pathify'
-import MarkdownIt from 'markdown-it'
+import { get }                from 'vuex-pathify'
+import MarkdownIt             from 'markdown-it'
 
-import api        from '@/modules/api'
-import data       from '@/modules/data'
+import api                    from '@/modules/api'
+import data                   from '@/modules/data'
+import { prettifyTypography } from '@/modules/filters'
 
 export default {
 	name: 'LickView',
@@ -265,20 +266,13 @@ export default {
 		},
 		parsedNotes()
 		{
-			return this.md.render(this.lick.notes.trim().replace(/\r/g, ''))
-
-				// Remove the surrounding <p> tags
-				.replace(/<\/?p>/g, '')
-
-				// Prettify the note names
-				.replace(/([A-G])b\b/g, '$1♭')
-				.replace(/([A-G])#/g,   '$1♯')
-
-				// Correct the typography
-				.replace(/ (:|\?|!)/g, '$1')
-
-				// Insert link to other licks
-				.replace(/{{(\d+)}}/g, '<a href="/lick/$1">#$1</a>');
+			return prettifyTypography(
+				this.md.render(this.lick.notes.trim().replace(/\r/g, ''))
+					// Remove the surrounding <p> tags
+					.replace(/<\/?p>/g, '')
+					// Insert link to other licks
+					.replace(/{{(\d+)}}/g, '<a href="/lick/$1">#$1</a>')
+				);
 		},
 		variations()
 		{

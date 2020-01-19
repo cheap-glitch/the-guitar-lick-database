@@ -11,14 +11,19 @@ export default
 	namespaced: true,
 
 	state: {
-		results:           [],
+		results:                   [],
 
-		bookmarkFilter:    'none',
-		sortBy:            storage.get('browse/sortBy',    'date',       _v => ['date',      'difficulty'].includes(_v)),
-		sortOrder:         storage.get('browse/sortOrder', 'descending', _v => ['ascending', 'descending'].includes(_v)),
+		bookmarkFilter:            'none',
+		sortBy:                    storage.get('browse/sortBy',    'date',       _v => ['date',      'difficulty'].includes(_v)),
+		sortOrder:                 storage.get('browse/sortOrder', 'descending', _v => ['ascending', 'descending'].includes(_v)),
 
-		currentPage:       1,
-		nbResultsPerPage:  storage.get('browse/nbResultsPerPage', 5, _v => [5, 10, 15, 20].includes(_v)),
+		currentPage:               1,
+		nbResultsPerPage:          storage.get('browse/nbResultsPerPage', 5, _v => [5, 10, 15, 20].includes(_v)),
+
+		isPreviewedLickReady:      false,
+		previewedLick:             null,
+		previewedLickPlayerState:  'stopped',
+		previewedLickProgress:     0,
 	},
 
 	getters: {
@@ -75,11 +80,25 @@ export default
 	},
 
 	mutations: {
-		updateResults:      (_state, _value) => _state.results        = _value,
-		setCurrentPage:     (_state, _value) => _state.currentPage    = _value,
-		setBookmarkFilter:  (_state, _value) => _state.bookmarkFilter = _value,
-		setSortBy:          (_state, _value) => _state.sortBy         = _value,
-		setSortOrder:       (_state, _value) => _state.sortOrder      = _value,
+		updateResults:                (_state, _value) => _state.results                  = _value,
+
+		setCurrentPage:               (_state, _value) => _state.currentPage              = _value,
+		setBookmarkFilter:            (_state, _value) => _state.bookmarkFilter           = _value,
+		setSortBy:                    (_state, _value) => _state.sortBy                   = _value,
+		setSortOrder:                 (_state, _value) => _state.sortOrder                = _value,
+
+		setIsPreviewedLickReady:      (_state, _value) => _state.isPreviewedLickReady     = _value,
+		setPreviewedLick:             (_state, _value) => _state.previewedLick            = _value,
+		setPreviewedLickProgress:     (_state, _value) => _state.previewedLickProgress    = _value,
+		setPreviewedLickPlayerState:  (_state, _value) => _state.previewedLickPlayerState = _value,
+
+		resetLickPreview(_state)
+		{
+			_state.isPreviewedLickReady     = false;
+			_state.previewedLick            = null;
+			_state.previewedLickPlayerState = 'stopped';
+			_state.previewedLickProgress    = 0;
+		},
 
 		setNbResultsPerPage(_state, _value)
 		{

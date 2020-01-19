@@ -14,7 +14,7 @@ $api->get('/licks/latest/{number}', function(Request $request, Response $respons
 {
 	$db = $this->get('medoo');
 
-	$data = $db->select('licks (lick)', [
+	$licks = $db->select('licks (lick)', [
 		'[>]artists (artist)' => ['lick.artist' => 'id'],
 	], [
 		'lick.id',
@@ -38,5 +38,5 @@ $api->get('/licks/latest/{number}', function(Request $request, Response $respons
 		'LIMIT' => (int) $args['number'],
 	]);
 
-	return json_encode_response($response, $data);
+	return json_encode_response($response, $licks);
 });
