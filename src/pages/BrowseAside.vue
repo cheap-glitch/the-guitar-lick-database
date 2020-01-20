@@ -99,10 +99,10 @@ export default {
 				tags:        this.$route.query.tags !== undefined ? this.getTagsFromQueryString() : {},
 
 				// Get the search query parameters from the query string and check them against permitted values
-				difficulty:  obj.checkObjectProp(this.$route.query, 'difficulty', this.data.difficulties, 'any'),
-				genre:       obj.checkObjectProp(this.$route.query, 'genre',      this.data.genres,       'any'),
-				scale:       obj.checkObjectProp(this.$route.query, 'scale',      this.data.scales,       'any'),
-				tonality:    obj.checkObjectProp(this.$route.query, 'tonality',   this.data.tonalities,   'any'),
+				difficulty:  obj.checkObjectProp(this.$route.query, 'difficulty', data.difficulties, 'any'),
+				genre:       obj.checkObjectProp(this.$route.query, 'genre',      data.genres,       'any'),
+				scale:       obj.checkObjectProp(this.$route.query, 'scale',      data.scales,       'any'),
+				tonality:    obj.checkObjectProp(this.$route.query, 'tonality',   data.tonalities,   'any'),
 			},
 		}
 	},

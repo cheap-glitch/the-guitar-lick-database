@@ -9,7 +9,7 @@
 div.HomeView
 	section.about
 		h2.h2 About
-		article.about__contents
+		article.about__contents.formatted-text
 			include:external-links:markdown-it(html typographer) ../assets/texts/about.md
 
 	section.recent-updates
@@ -93,6 +93,10 @@ export default {
 }
 
 .about__contents {
+	blockquote p:nth-of-type(2) {
+		text-align: right;
+	}
+
 	& > p:last-of-type {
 		margin-top: 10px;
 	}

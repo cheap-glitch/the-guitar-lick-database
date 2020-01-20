@@ -142,7 +142,7 @@ div.LickView
 		//- Notes
 		div(v-if="parsedNotes.length")
 			h3.h3 Notes
-			p.notes(v-html="parsedNotes")
+			p.formatted-text(v-html="parsedNotes")
 
 	//----------------------------------------------------------------------
 	//- Variations & suggestions
@@ -440,12 +440,6 @@ function navigationGuard(_to, _from, _next)
 
 .wrapper-infos__item {
 	@include space-children-h(10px);
-}
-
-.notes {
-	line-height: 1.4;
-
-	text-align: justify;
 }
 
 .credit {

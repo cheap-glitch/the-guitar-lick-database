@@ -1,7 +1,7 @@
 
-> Funnily enough, what I like about my playing is still the parts that I copied.
+> “Funnily enough, what I like about my playing is still the parts that I copied.
 > If I'm building a solo I'll start with a Freddie King line, then go on to a BB
-> King line and then do something to join them up. And that part will be me.
+> King line and then do something to join them up. And that part will be me.”
 >
 > --- <cite>Eric Clapton, speaking in _Guitar Player_</cite>
 

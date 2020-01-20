@@ -95,6 +95,8 @@ export default {
 .page-wrapper {
 	overflow-x: hidden;
 
+	flex: 1 1 100%;
+
 	margin-left: $layout-aside-width + 40px;
 }
 

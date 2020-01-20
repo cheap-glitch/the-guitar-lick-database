@@ -40,6 +40,41 @@ legend {
 	font-family: 'IBM Plex', helvetica, arial, sans-serif;
 }
 
+cite em {
+	// Italic in italic should cancel itself
+	font-style: normal;
+}
+
+.formatted-text {
+	line-height: 1.4;
+
+	text-align: justify;
+
+	& > p,
+	& > ol,
+	& > ul {
+		&:not(:last-child) {
+			margin-bottom: 10px;
+		}
+	}
+
+	& > blockquote:not(:last-child) {
+		margin-bottom: 20px;
+	}
+
+	ul {
+		list-style: disc inside;
+	}
+
+	li {
+		margin-left: 20px;
+
+		&:not(:last-child) {
+			margin-bottom: 5px;
+		}
+	}
+}
+
 /**
  * Headers
  * -----------------------------------------------------------------------------

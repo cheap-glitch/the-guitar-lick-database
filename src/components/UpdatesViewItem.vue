@@ -9,7 +9,7 @@
 div.UpdatesViewItem
 	h3.h3 {{ title }}
 	p {{ date }}
-	article(v-html="parsedContents")
+	article.formatted-text(v-html="parsedContents")
 
 </template>
 <!--}}}-->
