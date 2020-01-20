@@ -47,7 +47,7 @@ div.App
 	//----------------------------------------------------------------------
 	//- Main view
 	//----------------------------------------------------------------------
-	div.progress-bar
+	ProgressBar
 	section.page-wrapper
 		router-view(name="view")
 
@@ -58,14 +58,16 @@ div.App
 <!--{{{ JavaScript -->
 <script>
 
-import api       from '@/modules/api'
-import MenuAside from '@/pages/MenuAside'
+import api         from '@/modules/api'
+import MenuAside   from '@/components/MenuAside'
+import ProgressBar from '@/components/ProgressBar'
 
 export default {
 	name: 'App',
 
 	components: {
 		MenuAside,
+		ProgressBar,
 	},
 
 	created() {
@@ -81,26 +83,12 @@ export default {
 <!--{{{ SCSS -->
 <style lang="scss" scoped>
 
-$layout-aside-width: 280px;
-
 .App {
 	display: flex;
 
 	flex: 1 0 auto;
 
 	background-color: $color-athens-gray;
-}
-
-.progress-bar {
-	position: fixed;
-	z-index: 1000;
-
-	top: 0;
-	left: $layout-aside-width + 40px;
-	right: 0;
-	height: 4px;
-
-	background-color: $color-cinnabar;
 }
 
 .page-wrapper {
@@ -192,8 +180,7 @@ $layout-aside-width: 280px;
 );
 
 // Load the font faces
-@include font-face('Bebas',       './assets/fonts/bebas/bebas');
-@include font-face('Bebas Bold',  './assets/fonts/bebas/bebas-bold');
-@include font-face('IBM Plex',    './assets/fonts/ibm-plex/ibm-plex');
+@include font-face('Bebas Bold', './assets/fonts/bebas/bebas-bold');
+@include font-face('IBM Plex',   './assets/fonts/ibm-plex/ibm-plex');
 
 </style>

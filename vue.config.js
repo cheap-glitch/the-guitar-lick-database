@@ -34,8 +34,9 @@ module.exports = {
 		loaderOptions: {
 			sass: {
 				prependData: [
-				'@/styles/mixins',
-				'@/styles/colorscheme',
+					'@/styles/colorscheme',
+					'@/styles/layout',
+					'@/styles/mixins',
 				]
 				.map(_file => `@use "${_file}" as *;`)
 				.join('\n')
