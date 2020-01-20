@@ -70,7 +70,8 @@ export default {
 		ProgressBar,
 	},
 
-	created() {
+	created()
+	{
 		// Get the total number of licks in the database
 		api.get('licks/count', _data => this.$store.commit('setTotalNbLicks', _data || 200));
 	},

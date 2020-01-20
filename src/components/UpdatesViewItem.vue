@@ -41,20 +41,19 @@ export default {
 		},
 	},
 
-	static() {
-		return {
-			md: new MarkdownIt({
-				breaks:      true,
-				typographer: true,
-			}),
-		}
-	},
-
 	computed: {
 		parsedContents()
 		{
 			return prettifyTypography(this.md.render(this.contents.trim()));
 		},
+	},
+
+	created()
+	{
+		this.md = new MarkdownIt({
+			breaks:      true,
+			typographer: true,
+		});
 	},
 }
 

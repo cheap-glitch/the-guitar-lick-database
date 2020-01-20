@@ -239,13 +239,6 @@ export default {
 		VueAutosuggest,
 	},
 
-	static() {
-		return {
-			data: data,
-			alphatab: null,
-		}
-	},
-
 	data() {
 		return {
 			artists:                 [],
@@ -304,6 +297,8 @@ export default {
 
 	created()
 	{
+		this.data = data;
+
 		// Fetch the list of all the artists
 		api.get('artists', _data => this.artists = _data || []);
 

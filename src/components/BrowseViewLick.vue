@@ -118,12 +118,6 @@ import { sync } from 'vuex-pathify'
 export default {
 	name: 'BrowseViewLick',
 
-	static() {
-		return {
-			data: data,
-		}
-	},
-
 	props: {
 		lick: {
 			type: Object,
@@ -143,6 +137,11 @@ export default {
 			'previewedLickProgress',
 			'previewedLickPlayerState',
 		]),
+	},
+
+	created()
+	{
+		this.data = data;
 	},
 
 	methods:

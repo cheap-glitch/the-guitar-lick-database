@@ -240,13 +240,6 @@ import { getIntervalNote } from '@/modules/music'
 export default {
 	name: 'LickAside',
 
-	static() {
-		return {
-			data: data,
-			hotkeys: {},
-		}
-	},
-
 	data() {
 		return {
 			stCurrentLoop: 0,
@@ -350,6 +343,7 @@ export default {
 
 	created()
 	{
+		this.data = data;
 		this.hotkeys = new Hotkeys({
 			'p': this.togglePlayPause,
 			's': () => this.setPlayerState('stopped'),

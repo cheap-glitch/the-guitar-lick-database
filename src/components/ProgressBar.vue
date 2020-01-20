@@ -17,13 +17,42 @@ div.ProgressBar(
 <!--{{{ JavaScript -->
 <script>
 
+import { get } from 'vuex-pathify'
+
 export default {
 	name: 'ProgressBar',
 
 	data() {
 		return {
-			progress: 100,
+			progress: 0,
 		}
+	},
+
+	computed: {
+		...get('progressbar', ['isLoading']),
+	},
+
+	watch: {
+		isLoading: 'update',
+	},
+
+	methods: {
+		update()
+		{
+			/*
+			if (this.isLoading)
+			{
+			}
+			else
+			{
+			}
+			*/
+		},
+
+		reset()
+		{
+			this.progress = 0;
+		},
 	},
 }
 

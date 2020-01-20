@@ -98,12 +98,6 @@ export default {
 		},
 	},
 
-	static() {
-		return {
-			alphatab: null,
-		}
-	},
-
 	data() {
 		return {
 			fixedHeight: {},
@@ -162,6 +156,11 @@ export default {
 		isLoopingOn:        'updateLooping',
 	},
 
+	created()
+	{
+		this.$alphatab = null;
+	},
+
 	mounted()
 	{
 		this.initScore();
@@ -169,13 +168,13 @@ export default {
 
 	beforeDestroy()
 	{
-		this.alphatab.destroy();
+		this.$alphatab.destroy();
 	},
 
 	methods: {
 		initScore()
 		{
-			this.alphatab = new alphaTab.platform.javaScript.AlphaTabApi(this.$refs.alphatab, {
+			this.$alphatab = new alphaTab.platform.javaScript.AlphaTabApi(this.$refs.alphatab, {
 				core: {
 					logLevel:                     process.env.NODE_ENV === 'development' ? 'warning' :  'none',
 					fontDirectory:                '../font/',
@@ -202,7 +201,7 @@ export default {
 			});
 
 			// When the score is fully rendered
-			this.alphatab.addRenderFinished(() =>
+			this.$alphatab.addRenderFinished(() =>
 			{
 				this.$emit('score-rendered');
 
@@ -211,10 +210,10 @@ export default {
 			});
 
 			// Send events during the loading of the soundfile
-			this.alphatab.addSoundFontLoad(_event => this.$emit('player-loading', Math.floor((_event.loaded / _event.total) * 100)));
+			this.$alphatab.addSoundFontLoad(_event => this.$emit('player-loading', Math.floor((_event.loaded / _event.total) * 100)));
 
 			// When the player is ready
-			this.alphatab.addReadyForPlayback(() =>
+			this.$alphatab.addReadyForPlayback(() =>
 			{
 				// Initialize the playback settings
 				this.updateVolPlayback();
@@ -225,7 +224,7 @@ export default {
 			});
 
 			// When the playback reaches the end of the score
-			this.alphatab.addPlayerFinished(() =>
+			this.$alphatab.addPlayerFinished(() =>
 			{
 				// Send an event
 				this.$emit('player-reached-end');
@@ -242,7 +241,7 @@ export default {
 			if (!this.tablature.length) return;
 
 			this.$store.commit('player/setPlayerState', 'stopped');
-			this.alphatab.tex(this.tablature);
+			this.$alphatab.tex(this.tablature);
 		},
 		updateLayout()
 		{
@@ -251,7 +250,7 @@ export default {
 				staveProfile:  this.alphatabScoreType,
 			});
 
-			this.alphatab.render();
+			this.$alphatab.render();
 		},
 		updatePlayer()
 		{
@@ -265,37 +264,37 @@ export default {
 					// Show the beat cursor
 					document.getElementsByClassName('at-cursor-beat').item(0).classList.add('is-visible');
 
-					this.alphatab.play();
+					this.$alphatab.play();
 					break;
 
 				case 'paused':
-					this.alphatab.pause();
+					this.$alphatab.pause();
 					break;
 
 				case 'stopped':
 					// Hide the beat cursor
 					document.getElementsByClassName('at-cursor-beat').item(0).classList.remove('is-visible');
 
-					this.alphatab.stop();
+					this.$alphatab.stop();
 					break;
 			}
 		},
 		updateVolPlayback()
 		{
-			this.alphatab.changeTrackVolume([this.alphatab.score.tracks[0]], this.volPlayback / 10);
+			this.$alphatab.changeTrackVolume([this.$alphatab.score.tracks[0]], this.volPlayback / 10);
 		},
 		updateVolMetronome()
 		{
-			this.alphatab.metronomeVolume = this.isMetronomeOn ? this.volMetronome / 10 : 0.0;
+			this.$alphatab.metronomeVolume = this.isMetronomeOn ? this.volMetronome / 10 : 0.0;
 		},
 		updateLooping()
 		{
-			this.alphatab.isLooping = this.isLoopingOn;
+			this.$alphatab.isLooping = this.isLoopingOn;
 		},
 		updateSettings(_category, _settings)
 		{
-			objectForEach(_settings, (_setting, _value) => this.alphatab.settings[_category][_setting] = _value);
-			this.alphatab.updateSettings();
+			objectForEach(_settings, (_setting, _value) => this.$alphatab.settings[_category][_setting] = _value);
+			this.$alphatab.updateSettings();
 		},
 	}
 }

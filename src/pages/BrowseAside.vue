@@ -91,12 +91,6 @@ import * as obj from '@/modules/object'
 export default {
 	name: 'BrowseAside',
 
-	static() {
-		return {
-			data: data,
-		}
-	},
-
 	data() {
 		return {
 			artists: [],
@@ -148,6 +142,8 @@ export default {
 
 	created()
 	{
+		this.data = data;
+
 		// Fetch the list of all the artists
 		api.get('artists',
 			_data => {

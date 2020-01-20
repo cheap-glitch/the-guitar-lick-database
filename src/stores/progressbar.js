@@ -8,11 +8,11 @@ export default
 	namespaced: true,
 
 	state: {
-		percent: 0,
+		isLoading: true,
 	},
 
 	mutations: {
-		start: state => state.percent =   0,
-		stop:  state => state.percent = 100,
+		start: state => state.isLoading = true,
+		stop:  state => state.isLoading = false,
 	},
 }

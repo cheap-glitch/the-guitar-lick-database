@@ -220,16 +220,6 @@ export default {
 		},
 	},
 
-	static() {
-		return {
-			data: data,
-			md: new MarkdownIt({
-				breaks:      true,
-				typographer: true,
-			}),
-		}
-	},
-
 	data() {
 		return {
 			suggestions:     [],
@@ -312,6 +302,12 @@ export default {
 
 	created()
 	{
+		this.data = data;
+		this.md   = new MarkdownIt({
+			breaks:      true,
+			typographer: true,
+		});
+
 		this.$store.commit('player/resetNbLoops');
 		this.loadLick();
 	},

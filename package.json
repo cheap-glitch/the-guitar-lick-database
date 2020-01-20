@@ -42,7 +42,6 @@
     "vue-css-modifiers": "^1.0.5",
     "vue-router": "^3.1.5",
     "vue-slider-component": "^3.1.0",
-    "vue-static": "0.0.5",
     "vuex": "^3.1.2",
     "vuex-pathify": "^1.4.1"
   },
