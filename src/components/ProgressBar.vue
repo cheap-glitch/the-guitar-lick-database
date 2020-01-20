@@ -36,22 +36,35 @@ export default {
 		isLoading: 'update',
 	},
 
+	created()
+	{
+		this.interval = setInterval(() => this.increment(), 200);
+	},
+
+	destroyed()
+	{
+		clearInterval(this.interval);
+	},
+
 	methods: {
-		update()
+		/**
+		 * Increment the progress by a small random amount
+		 * to fake a progressive loading
+		 */
+		increment()
 		{
-			/*
-			if (this.isLoading)
-			{
-			}
-			else
-			{
-			}
-			*/
+			const inc = Math.floor(5 + Math.random()*15);
+
+			if (this.isLoading && this.progress < 100)
+				this.progress = (this.progress + inc < 100) ? this.progress + inc : 100;
 		},
 
-		reset()
+		/**
+		 * Reset/complete the progress
+		 */
+		update()
 		{
-			this.progress = 0;
+			this.progress = this.isLoading ? 0 : 100;
 		},
 	},
 }
@@ -72,6 +85,8 @@ export default {
 	height: 4px;
 
 	background-color: $color-cinnabar;
+
+	transition: opacity 0.1s, right 0.5s;
 }
 
 </style>
