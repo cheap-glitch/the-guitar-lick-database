@@ -101,6 +101,7 @@ module.exports = {
 					icons: [
 						// General UI
 						'adjust',
+						'arrow-circle-left',
 						'chevron-down',
 						'external-link-square-alt',
 						'star',

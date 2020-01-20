@@ -47,7 +47,9 @@ div.App
 	//----------------------------------------------------------------------
 	//- Main view
 	//----------------------------------------------------------------------
-	router-view(name="view").view
+	div.progress-bar
+	section.page-wrapper
+		router-view(name="view")
 
 </template>
 <!--}}}-->
@@ -69,7 +71,7 @@ export default {
 	created() {
 		// Get the total number of licks in the database
 		api.get('licks/count', _data => this.$store.commit('setTotalNbLicks', _data || 200));
-	}
+	},
 }
 
 </script>
@@ -79,12 +81,32 @@ export default {
 <!--{{{ SCSS -->
 <style lang="scss" scoped>
 
+$layout-aside-width: 280px;
+
 .App {
 	display: flex;
 
 	flex: 1 0 auto;
 
 	background-color: $color-athens-gray;
+}
+
+.progress-bar {
+	position: fixed;
+	z-index: 1000;
+
+	top: 0;
+	left: $layout-aside-width + 40px;
+	right: 0;
+	height: 4px;
+
+	background-color: $color-cinnabar;
+}
+
+.page-wrapper {
+	overflow-x: hidden;
+
+	margin-left: $layout-aside-width + 40px;
 }
 
 .aside {
@@ -99,7 +121,7 @@ export default {
 	left: 0;
 	bottom: 0;
 
-	width: 280px;
+	width: $layout-aside-width;
 
 	padding: 20px;
 
@@ -150,14 +172,6 @@ export default {
 .nav-menu {
 	display: flex;
 	flex-direction: column;
-}
-
-.view {
-	overflow-x: hidden;
-
-	flex: 1 1 100%;
-
-	margin-left: 340px;
 }
 
 </style>

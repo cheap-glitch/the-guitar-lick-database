@@ -23,10 +23,10 @@
 
 import Vue             from 'vue'
 import Router          from 'vue-router'
-import VueStatic       from 'vue-static'
-import VueSlider       from 'vue-slider-component'
 import VClickOutside   from 'v-click-outside'
 import VueCSSModifiers from 'vue-css-modifiers'
+import VueSlider       from 'vue-slider-component'
+import VueStatic       from 'vue-static'
 
 import App             from '@/App'
 import store           from '@/stores/main'
@@ -55,18 +55,27 @@ requireBaseComponents.keys().forEach(function(_fileName)
 });
 
 /**
+ * Create the router
+ */
+const router = new Router({
+	routes,
+
+	mode: 'history',
+	base: process.env.BASE_URL,
+
+	// Reproduce native scrolling behaviour during navigation
+	scrollBehavior: (to, from, savedPosition) => savedPosition ? savedPosition : { x: 0, y: 0 }
+});
+
+// Hook the top progress bar to the app navigation
+router.beforeResolve(function(_to, _from, _next)
+{
+	store.commit('progressbar/start');
+	_next();
+});
+router.afterEach(() => store.commit('progressbar/stop'));
+
+/**
  * Create the Vue instance
  */
-new Vue({
-	render: _h => _h(App),
-	router: new Router({
-		routes,
-
-		mode: 'history',
-		base: process.env.BASE_URL,
-
-		// Reproduce native scrolling behaviour during navigation
-		scrollBehavior: (to, from, savedPosition) => savedPosition ? savedPosition : { x: 0, y: 0 }
-	}),
-	store,
-}).$mount('#app');
+new Vue({ router, store, render: _h => _h(App) }).$mount('#app');

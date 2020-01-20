@@ -8,7 +8,9 @@
 
 div.HomeView
 	section.about
-		include:external-links:markdown-it(html typographer) ../assets/texts/about.md
+		h2.h2 About
+		article.about__contents
+			include:external-links:markdown-it(html typographer) ../assets/texts/about.md
 
 	section.recent-updates
 		h2.h2 Recent updates
@@ -71,10 +73,39 @@ export default {
 <!--{{{ SCSS -->
 <style lang="scss" scoped>
 
+.HomeView {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	grid-template-areas: "about updates"
+	                     "licks licks";
+}
+
+.about,
+.latest-licks,
+.recent-updates {
+	padding: 20px;
+}
+
 .about {
+	grid-area: about;
+
+	border-right: $border-section;
+}
+
+.about__contents {
 	& > p:last-of-type {
 		margin-top: 10px;
 	}
+}
+
+.recent-updates {
+	grid-area: updates;
+}
+
+.latest-licks {
+	grid-area: licks;
+
+	border-top: $border-section;
 }
 
 </style>

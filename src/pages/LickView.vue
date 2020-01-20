@@ -434,11 +434,11 @@ function navigationGuard(_to, _from, _next)
 
 .wrapper-infos,
 .wrapper-suggestions {
-	border-top: 3px dotted lightgray;
+	border-top: $border-section;
 }
 
 .wrapper-infos {
-	border-right: 3px dotted lightgray;
+	border-right: $border-section;
 }
 
 
