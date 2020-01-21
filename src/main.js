@@ -66,12 +66,12 @@ const router = new Router({
 });
 
 // Hook the top progress bar to the app navigation
-router.beforeResolve(function(_to, _from, _next)
+router.beforeEach(function(_to, _from, _next)
 {
-	store.commit('progressbar/start');
+	store.commit('setProgressBar', 0);
 	_next();
 });
-router.afterEach(() => store.dispatch('progressbar/stop'));
+// router.afterEach(() => store.commit('@TODO'));
 
 /**
  * Create the Vue instance

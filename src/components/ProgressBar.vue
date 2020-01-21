@@ -10,11 +10,9 @@ div.ProgressBar(
 	ref="progressbar"
 
 	:style="{ right: `${100 - progress}%` }"
-	v-mods="{ isLoading }"
+	v-mods="{ isLoading: progress < 100 }"
 	)
-	div.ProgressBar__peg(
-		v-mods="{ isLoading }"
-		)
+	div.ProgressBar__peg(v-mods="{ isLoading: progress < 100 }")
 
 </template>
 <!--}}}-->
@@ -23,49 +21,29 @@ div.ProgressBar(
 <!--{{{ JavaScript -->
 <script>
 
-//- import { get } from 'vuex-pathify'
+import { sync } from 'vuex-pathify'
 
-const TRICKLE_MIN = 2;
-const TRICKLE_MAX = 8;
-const DEFAULT_PROGRESS_MAX = 90;
+const TRICKLE_MIN          = 1;
+const TRICKLE_MAX          = 3;
+const DEFAULT_PROGRESS_MAX = 100;
 
 export default {
 	name: 'ProgressBar',
 
 	data() {
 		return {
-			progress:     0,
-			progressMax:  DEFAULT_PROGRESS_MAX,
-
-			isLoading:    true,
+			progressMax: DEFAULT_PROGRESS_MAX,
 		}
 	},
 
-	mounted()
+	computed: sync({
+		progress: 'progressBar'
+	}),
+
+	created()
 	{
-		this.$refs.progressbar.addEventListener('transitionend',
-			_event =>
-			{
-				switch (_event.propertyName)
-				{
-					case 'right':
-						// Mask the bar when it's fully loaded
-						if (this.progress == 100)
-							this.isLoading   = false;
-						break;
-
-					case 'opacity':
-						// Reset the bar only after it has disappeared completely
-						this.progress    = 0;
-						this.progressMax = DEFAULT_PROGRESS_MAX;
-						break;
-				}
-			},
-			{ passive: true }
-		);
-
-		// Increment the bar every 200 milliseconds
-		this.interval = setInterval(() => this.trickle(), 200);
+		// Increment the bar every 20 milliseconds
+		this.interval = setInterval(() => this.trickle(), 5);
 	},
 
 	destroyed()
@@ -76,12 +54,16 @@ export default {
 	methods: {
 		trickle()
 		{
-			if (!this.isLoading) return;
+			if (this.progress >= 100)
+				return;
+
+			// Mask the bar when it's fully loaded
+			if (this.progress == 100)
+				this.isLoading = false;
 
 			// Increment the progress by a small random amount to fake a progressive loading
 			const inc = Math.floor(TRICKLE_MIN + Math.random()*(TRICKLE_MAX - TRICKLE_MIN));
 			this.progress = (this.progress + inc < this.progressMax) ? this.progress + inc : this.progressMax;
-
 		},
 	},
 }
@@ -104,12 +86,10 @@ export default {
 	opacity: 0;
 	background-color: $color-cinnabar;
 
-	transition: opacity 1s, right 0.6s;
+	transition: opacity 0.8s;
 
 	&.is-loading {
 		opacity: 1;
-
-		transition: right 0.7s;
 	}
 }
 
@@ -126,10 +106,10 @@ export default {
 
 	transform: rotate(2deg) translateY(-4px);
 
+	transition: opacity 0.8s;
+
 	&.is-loading {
 		opacity: 1;
-
-		transition: right 0.7s;
 	}
 }
 

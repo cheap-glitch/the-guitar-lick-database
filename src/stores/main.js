@@ -9,7 +9,6 @@ import Vuex                        from 'vuex'
 import bookmarks                   from '@/stores/bookmarks'
 import browse                      from '@/stores/browse'
 import player                      from '@/stores/player'
-import progressbar                 from '@/stores/progressbar'
 
 import pathify                     from '@/modules/pathify'
 import storage                     from '@/modules/storage'
@@ -64,12 +63,13 @@ export default new Vuex.Store(
 		bookmarks,
 		browse,
 		player,
-		progressbar,
 	},
 
 	state: {
-		totalNbLicks: 200,
-		isDarkModeOn: storage.get('isDarkModeOn', true, _v => typeof _v == 'boolean'),
+		totalNbLicks:  200,
+		progressBar:   0,
+
+		isDarkModeOn:  storage.get('isDarkModeOn', true, _v => typeof _v == 'boolean'),
 	},
 
 	getters: {
@@ -78,6 +78,7 @@ export default new Vuex.Store(
 
 	mutations: {
 		setTotalNbLicks:     (_state, _value) => _state.totalNbLicks = parseInt(_value),
+		setProgressBar:      (_state, _value) => _state.progressBar  = _value,
 		toggleIsDarkModeOn:  _state           => _state.isDarkModeOn = !_state.isDarkModeOn,
 	},
 
