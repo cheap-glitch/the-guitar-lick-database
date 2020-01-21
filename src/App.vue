@@ -107,7 +107,7 @@ export default {
 	@include space-children-v(20px);
 
 	position: fixed;
-	z-index: 100;
+	z-index: 2000;
 	top: 0;
 	left: 0;
 	bottom: 0;

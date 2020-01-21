@@ -12,6 +12,9 @@ div.ProgressBar(
 	:style="{ right: `${100 - progress}%` }"
 	v-mods="{ isLoading }"
 	)
+	div.ProgressBar__peg(
+		v-mods="{ isLoading }"
+		)
 
 </template>
 <!--}}}-->
@@ -24,7 +27,7 @@ div.ProgressBar(
 
 const TRICKLE_MIN = 2;
 const TRICKLE_MAX = 8;
-const DEFAULT_PROGRESS_MAX = 100;
+const DEFAULT_PROGRESS_MAX = 90;
 
 export default {
 	name: 'ProgressBar',
@@ -96,12 +99,32 @@ export default {
 
 	top: 0;
 	left: $layout-aside-width + 40px;
-	height: 4px;
+	height: 3px;
 
 	opacity: 0;
 	background-color: $color-cinnabar;
 
 	transition: opacity 1s, right 0.6s;
+
+	&.is-loading {
+		opacity: 1;
+
+		transition: right 0.7s;
+	}
+}
+
+.ProgressBar__peg {
+	position: absolute;
+	right: 0;
+	bottom: 0;
+
+	width: 200px;
+	height: 20px;
+
+	opacity: 0;
+	box-shadow: 0 0 20px $color-cinnabar;
+
+	transform: rotate(2deg) translateY(-4px);
 
 	&.is-loading {
 		opacity: 1;
