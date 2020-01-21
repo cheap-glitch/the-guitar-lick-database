@@ -8,6 +8,7 @@
 
 div.ProgressBar(
 	:style="{ right: `${100 - progress}%` }"
+	v-mods="{ isDisplayed: progress < 90 }"
 	)
 
 </template>
@@ -17,11 +18,11 @@ div.ProgressBar(
 <!--{{{ JavaScript -->
 <script>
 
-import { get } from 'vuex-pathify'
+//- import { get } from 'vuex-pathify'
 
-const MIN_TRICKLE       =  4;
-const MAX_TRICKLE       = 12;
-const MAX_FAKE_PROGRESS = 80;
+const MIN_TRICKLE       =  2;
+const MAX_TRICKLE       =  8;
+const MAX_FAKE_PROGRESS = 90;
 
 export default {
 	name: 'ProgressBar',
@@ -30,14 +31,6 @@ export default {
 		return {
 			progress: 0,
 		}
-	},
-
-	computed: {
-		...get('progressbar', ['isLoading']),
-	},
-
-	watch: {
-		isLoading: 'update',
 	},
 
 	created()
@@ -58,17 +51,17 @@ export default {
 		{
 			const inc = Math.floor(MIN_TRICKLE + Math.random()*(MAX_TRICKLE - MIN_TRICKLE));
 
-			if (this.isLoading && this.progress < MAX_FAKE_PROGRESS)
+			if (this.progress < MAX_FAKE_PROGRESS)
 				this.progress = (this.progress + inc < MAX_FAKE_PROGRESS) ? this.progress + inc : MAX_FAKE_PROGRESS;
 		},
 
 		/**
 		 * Reset/complete the progress
 		 */
-		update()
-		{
-			this.progress = this.isLoading ? 0 : 100;
-		},
+		//- update()
+		//- {
+		//-         this.progress = this.isLoading ? 0 : 100;
+		//- },
 	},
 }
 
@@ -87,9 +80,16 @@ export default {
 	left: $layout-aside-width + 40px;
 	height: 4px;
 
+	opacity: 0;
 	background-color: $color-cinnabar;
 
 	transition: right 0.7s;
+
+	&.is-displayed {
+		opacity: 1;
+
+		transition: opacity 0.2s, right 0.7s;
+	}
 }
 
 </style>

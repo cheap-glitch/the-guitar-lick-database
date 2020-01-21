@@ -19,7 +19,7 @@ export default
 	actions: {
 		stop(context)
 		{
-			setTimeout(() => context.commit('stop'), 500);
+			setTimeout(() => context.commit('stop'), 2000);
 		},
 	},
 }
