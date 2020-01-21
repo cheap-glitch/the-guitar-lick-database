@@ -14,42 +14,54 @@ div.App(v-mods="darkMode")
 	aside.aside
 
 		//- Logo
-		header: h1.logo
-			fa-icon.logo__icon(icon="comment-alt-music" mask="square-full")
-			span.logo__text(:is="$route.path === '/' ? 'span' : 'router-link'" to="/") The Guitar Lick Database
-
-		//- Links + dark mode switch
-		div.toolbar
-			VButton(
-				icon="adjust"
-				:is-active="$store.state.isDarkModeOn"
-
-				@click="$store.commit('toggleIsDarkModeOn')"
-				)
-			a(
-				href="https://twitter.com/cheap_glitch"
-				target="_blank"
-				rel="external nofollow noreferrer"
-				)
-				fa-icon(:icon="['fab', 'twitter']")
-			a(
-				href="https://github.com/cheap-glitch"
-				target="_blank"
-				rel="external nofollow noreferrer"
-				)
-				fa-icon(:icon="['fab', 'github']")
+		header.aside__header
+			h1.logo
+				fa-icon.logo__icon(icon="comment-alt-music" mask="square-full")
+				span.logo__text(:is="$route.path === '/' ? 'span' : 'router-link'" to="/") The Guitar Lick Database
 
 		//- Page-specific tools/navigation
 		router-view(name="aside")
 
 		//- Main navigation menu
-		MenuAside.nav-menu
+		MenuAside.aside__nav-menu
+
+		//- Footer
+		footer.aside__footer
+			p.aside__footer__text TGLD v{{ version }} by cheap glitch
+			div.aside__footer__links
+				a.aside__footer__links__item(
+					href="https://twitter.com/cheap_glitch"
+					target="_blank"
+					rel="external nofollow noreferrer"
+					)
+					fa-icon(:icon="['fab', 'twitter']")
+				a.aside__footer__links__item(
+					href="https://github.com/cheap-glitch"
+					target="_blank"
+					rel="external nofollow noreferrer"
+					)
+					fa-icon(:icon="['fab', 'github']")
+
 
 	//----------------------------------------------------------------------
 	//- Main view
 	//----------------------------------------------------------------------
 	ProgressBar
 	section.page-wrapper
+
+		//- Tiny header
+		header.page-header
+			div.dark-mode-toggle
+				fa-icon(:icon="['fas', 'sun']")
+				fa-icon(:icon="['fas', 'moon']")
+				//- VButton(
+					icon="adjust"
+					:is-active="$store.state.isDarkModeOn"
+					@click="$store.commit('toggleIsDarkModeOn')"
+					)
+			fa-icon(:icon="['fas', 'cog']")
+
+		//- Page contents
 		router-view(name="view")
 
 </template>
@@ -74,6 +86,11 @@ export default {
 	},
 
 	computed: {
+		version()
+		{
+			return process.env.VUE_APP_VERSION;
+		},
+
 		darkMode: get('darkMode'),
 	},
 
@@ -106,11 +123,28 @@ export default {
 }
 
 .page-wrapper {
+	position: relative;
 	overflow-x: hidden;
 
 	flex: 1 1 100%;
 
 	margin-left: $layout-aside-width + 40px;
+}
+
+.page-header {
+	display: flex;
+	align-items: center;
+	justify-content: flex-end;
+	@include space-children-h(10px);
+
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+
+	padding: 10px;
+
+	color: darkgray;
 }
 
 .aside {
@@ -130,6 +164,38 @@ export default {
 	padding: 20px;
 
 	background-color: $color-ebony-clay-2;
+}
+
+.aside__nav-menu {
+	display: flex;
+	flex-direction: column;
+}
+
+.aside__footer {
+	display: flex;
+	align-items: flex-end;
+	justify-content: space-between;
+
+	font-size: 1.3rem;
+}
+
+.aside__footer__text {
+	color: $color-nepal;
+}
+
+.aside__footer__links {
+	display: flex;
+	@include space-children-h(10px);
+}
+
+.aside__footer__links__item {
+	color: $color-nepal;
+
+	transition: color 0.2s;
+
+	&:hover {
+		color: $color-sun;
+	}
 }
 
 .logo {
@@ -165,17 +231,6 @@ export default {
 	background-clip: text;
 
 	user-select: none;
-}
-
-.toolbar {
-	display: flex;
-	align-items: center;
-	@include space-children-h(20px);
-}
-
-.nav-menu {
-	display: flex;
-	flex-direction: column;
 }
 
 </style>

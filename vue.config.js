@@ -3,10 +3,11 @@
  * vue.config.js
  */
 
-const htmlMinifier        = require('html-minifier').minify;
+const htmlMinifier          = require('html-minifier').minify;
 
-const routes              = require('./src/routes');
-const filterExternalLinks = require('./src/modules/filters').filterExternalLinks;
+const routes                = require('./src/routes');
+const filterExternalLinks   = require('./src/modules/filters').filterExternalLinks;
+process.env.VUE_APP_VERSION = require('./package.json').version;
 
 module.exports = {
 	// Build the app into the 'build' folder
@@ -84,7 +85,10 @@ module.exports = {
 					set: 'pro-solid',
 					icons: [
 						// General UI
+						'cog',
+						'moon',
 						'star',
+						'sun',
 
 						// Logo
 						'comment-alt-music',
@@ -101,7 +105,6 @@ module.exports = {
 					set: 'pro-regular',
 					icons: [
 						// General UI
-						'adjust',
 						'arrow-circle-left',
 						'chevron-down',
 						'external-link-square-alt',
