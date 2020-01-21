@@ -15,4 +15,11 @@ export default
 		start: state => state.isLoading = true,
 		stop:  state => state.isLoading = false,
 	},
+
+	actions: {
+		stop(context)
+		{
+			setTimeout(() => context.commit('stop'), 500);
+		},
+	},
 }

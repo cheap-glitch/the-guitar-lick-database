@@ -71,7 +71,7 @@ router.beforeResolve(function(_to, _from, _next)
 	store.commit('progressbar/start');
 	_next();
 });
-router.afterEach(() => store.commit('progressbar/stop'));
+router.afterEach(() => store.dispatch('progressbar/stop'));
 
 /**
  * Create the Vue instance

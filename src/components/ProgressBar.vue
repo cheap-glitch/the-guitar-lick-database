@@ -19,6 +19,10 @@ div.ProgressBar(
 
 import { get } from 'vuex-pathify'
 
+const MIN_TRICKLE       =  4;
+const MAX_TRICKLE       = 12;
+const MAX_FAKE_PROGRESS = 80;
+
 export default {
 	name: 'ProgressBar',
 
@@ -38,7 +42,7 @@ export default {
 
 	created()
 	{
-		this.interval = setInterval(() => this.increment(), 200);
+		this.interval = setInterval(() => this.trickle(), 200);
 	},
 
 	destroyed()
@@ -48,15 +52,14 @@ export default {
 
 	methods: {
 		/**
-		 * Increment the progress by a small random amount
-		 * to fake a progressive loading
+		 * Increment the progress by a small random amount to fake a progressive loading
 		 */
-		increment()
+		trickle()
 		{
-			const inc = Math.floor(5 + Math.random()*15);
+			const inc = Math.floor(MIN_TRICKLE + Math.random()*(MAX_TRICKLE - MIN_TRICKLE));
 
-			if (this.isLoading && this.progress < 100)
-				this.progress = (this.progress + inc < 100) ? this.progress + inc : 100;
+			if (this.isLoading && this.progress < MAX_FAKE_PROGRESS)
+				this.progress = (this.progress + inc < MAX_FAKE_PROGRESS) ? this.progress + inc : MAX_FAKE_PROGRESS;
 		},
 
 		/**
@@ -86,7 +89,7 @@ export default {
 
 	background-color: $color-cinnabar;
 
-	transition: opacity 0.1s, right 0.5s;
+	transition: right 0.7s;
 }
 
 </style>
