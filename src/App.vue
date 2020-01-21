@@ -6,7 +6,8 @@
 <!--{{{ Pug -->
 <template lang="pug">
 
-div.App
+div.App(v-mods="darkMode")
+
 	//----------------------------------------------------------------------
 	//- Sidebar
 	//----------------------------------------------------------------------
@@ -58,6 +59,8 @@ div.App
 <!--{{{ JavaScript -->
 <script>
 
+import { get }     from 'vuex-pathify'
+
 import api         from '@/modules/api'
 import MenuAside   from '@/components/MenuAside'
 import ProgressBar from '@/components/ProgressBar'
@@ -68,6 +71,10 @@ export default {
 	components: {
 		MenuAside,
 		ProgressBar,
+	},
+
+	computed: {
+		darkMode: get('darkMode'),
 	},
 
 	created()
@@ -90,6 +97,12 @@ export default {
 	flex: 1 0 auto;
 
 	background-color: $color-athens-gray;
+
+	transition: background-color 0.2s;
+
+	&.dark-mode {
+		background-color: $color-mirage;
+	}
 }
 
 .page-wrapper {

@@ -31,10 +31,12 @@ import { get } from 'vuex-pathify'
 export default {
 	name: 'BrowseViewPagelist',
 
-	computed: get('browse', [
-		'nbPages',
-		'currentPage',
-	]),
+	computed: {
+		...get('browse', [
+			'nbPages',
+			'currentPage',
+		]),
+	},
 
 	methods: {
 		goToPage(_newPage)

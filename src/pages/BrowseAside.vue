@@ -20,18 +20,19 @@ div.BrowseAside
 
 					v-model="searchParams.artist"
 					)
-				//- Difficulty
-				VSelect(
-					id="difficulty"
-					:options="{ any: 'Any difficulty', ...data.difficulties }"
-					v-model="searchParams.difficulty"
-					)
-				//- Genre
-				VSelect(
-					id="genre"
-					:options="{ any: 'Any genre', ...data.genres }"
-					v-model="searchParams.genre"
-					)
+				div.row
+					//- Difficulty
+					VSelect(
+						id="difficulty"
+						:options="{ any: 'Any difficulty', ...data.difficulties }"
+						v-model="searchParams.difficulty"
+						)
+					//- Genre
+					VSelect(
+						id="genre"
+						:options="{ any: 'Any genre', ...data.genres }"
+						v-model="searchParams.genre"
+						)
 
 		//--------------------------------------------------------------
 		//- Tonality & scale

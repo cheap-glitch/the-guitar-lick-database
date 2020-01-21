@@ -7,7 +7,7 @@
 <template lang="pug">
 
 section.VFold
-	h2.VFold__header(@click.left="isOpened = !isOpened")
+	h2.VFold__header(@click.left="toggleOpenClose")
 		p {{ title }}
 		fa-icon.VFold__header__chevron(
 			:icon="['far', 'chevron-down']"
@@ -25,6 +25,8 @@ section.VFold
 <!--{{{ JavaScript -->
 <script>
 
+import storage from '@/modules/storage'
+
 export default {
 	name: 'VFold',
 
@@ -37,8 +39,19 @@ export default {
 
 	data() {
 		return {
-			isOpened: true,
+			isOpened: storage.get(this.getStorageKeyName(), true, _v => typeof _v == 'boolean'),
 		}
+	},
+
+	methods: {
+		toggleOpenClose()
+		{
+			storage.set(this.getStorageKeyName(), this.isOpened = !this.isOpened);
+		},
+		getStorageKeyName()
+		{
+			return `fold/${this.title.replace(' ', '-').toLowerCase()}`;
+		},
 	},
 }
 
