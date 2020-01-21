@@ -66,10 +66,12 @@ export default new Vuex.Store(
 	},
 
 	state: {
-		totalNbLicks:  200,
-		progressBar:   0,
+		totalNbLicks:   200,
 
-		isDarkModeOn:  storage.get('isDarkModeOn', true, _v => typeof _v == 'boolean'),
+		progressBar:    0,
+		progressBarMax: 90,
+
+		isDarkModeOn:   storage.get('isDarkModeOn', true, _v => typeof _v == 'boolean'),
 	},
 
 	getters: {
@@ -77,9 +79,12 @@ export default new Vuex.Store(
 	},
 
 	mutations: {
-		setTotalNbLicks:     (_state, _value) => _state.totalNbLicks = parseInt(_value),
-		setProgressBar:      (_state, _value) => _state.progressBar  = _value,
-		toggleIsDarkModeOn:  _state           => _state.isDarkModeOn = !_state.isDarkModeOn,
+		setTotalNbLicks:     (_state, _value) => _state.totalNbLicks   = parseInt(_value),
+
+		setProgressBar:      (_state, _value) => _state.progressBar    = _value,
+		setProgressBarMax:   (_state, _value) => _state.progressBarMax = _value,
+
+		toggleIsDarkModeOn:  _state           => _state.isDarkModeOn   = !_state.isDarkModeOn,
 	},
 
 	// Activate strict mode during development only

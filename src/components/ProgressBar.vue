@@ -21,24 +21,22 @@ div.ProgressBar(
 <!--{{{ JavaScript -->
 <script>
 
-import { sync } from 'vuex-pathify'
+import { get, sync } from 'vuex-pathify'
 
-const TRICKLE_MIN          = 1;
-const TRICKLE_MAX          = 3;
-const DEFAULT_PROGRESS_MAX = 100;
+const TRICKLE_MIN = 1;
+const TRICKLE_MAX = 3;
 
 export default {
 	name: 'ProgressBar',
 
-	data() {
-		return {
-			progressMax: DEFAULT_PROGRESS_MAX,
-		}
+	computed: {
+		...sync({
+			progress:    'progressBar',
+		}),
+		...get({
+			progressMax: 'progressBarMax',
+		}),
 	},
-
-	computed: sync({
-		progress: 'progressBar'
-	}),
 
 	created()
 	{
@@ -81,7 +79,7 @@ export default {
 
 	top: 0;
 	left: $layout-aside-width + 40px;
-	height: 3px;
+	height: 2px;
 
 	opacity: 0;
 	background-color: $color-cinnabar;

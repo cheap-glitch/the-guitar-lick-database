@@ -68,10 +68,12 @@ const router = new Router({
 // Hook the top progress bar to the app navigation
 router.beforeEach(function(_to, _from, _next)
 {
-	store.commit('setProgressBar', 0);
+	store.commit('setProgressBar',     0);
+	store.commit('setProgressBarMax', 90);
+
 	_next();
 });
-// router.afterEach(() => store.commit('@TODO'));
+router.afterEach(() => store.commit('setProgressBarMax', 100));
 
 /**
  * Create the Vue instance
