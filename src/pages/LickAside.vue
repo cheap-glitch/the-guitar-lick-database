@@ -258,7 +258,7 @@ export default {
 
 				transpositions.push({
 					value: i,
-					name:  (i === 0)
+					name:  (i == 0)
 						? `Original tonality (${tonality})`
 						: `${i > 0 ? '+' : ''}${i} half-step${Math.abs(i) > 1 ? 's' : ''} (${tonality})`
 				});
@@ -281,7 +281,7 @@ export default {
 		},
 		lickHasPickingSuggestions()
 		{
-			return this.lick ? this.lick.tex.includes('↑') || this.lick.tex.includes('↓') : false;
+			return this.lick && /↓|↑/.test(this.lick.tex);
 		},
 
 		...get('player', [

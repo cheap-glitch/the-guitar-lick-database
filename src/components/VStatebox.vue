@@ -65,7 +65,7 @@ export default {
 		states: {
 			type: Array,
 			required: true,
-			validator: _v => (_v.length > 0) && (_v.filter(_elem => typeof(_elem) !== 'string').length == 0)
+			validator: _v => _v.length && _v.every(_elem => typeof(_elem) == 'string')
 		},
 		modelState: {
 			type: [String, Object],

@@ -172,7 +172,7 @@ div.AdminView
 				p {{ `(${lick.source.sid})` }}
 
 			fieldset.fieldset-v(
-				v-show="source.query.length === 0"
+				v-show="!source.query.length"
 				)
 				legend.fieldset__legend Create a new source
 				select(v-model="lick.source.type")
@@ -309,7 +309,7 @@ export default {
 			this.lick = _data || {};
 
 			// Erase uneeded source data to avoid problems
-			if (this.lick.source.sid !== 0)
+			if (this.lick.source.sid != 0)
 			{
 				this.lick.source = {
 					sid:    this.lick.source.sid,
