@@ -240,10 +240,10 @@ export default {
 <style lang="scss">
 
 // Apply the reset stylesheet
-@use '@/styles/reset' as *;
+@use '@cheap-glitch/scss-reset/_reset';
 
 // Apply the global styles
-@use '@/styles/global' as *;
+@use '@/styles/global';
 
 // Set the theme color and import the default style for the custom sliders
 @use '~vue-slider-component/lib/theme/default' with (
