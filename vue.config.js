@@ -35,6 +35,7 @@ module.exports = {
 		loaderOptions: {
 			sass: {
 				prependData: [
+					'sass-mq/_mq.scss',
 					'@cheap-glitch/scss-mixins/_mixins',
 
 					'@/styles/colorscheme',
