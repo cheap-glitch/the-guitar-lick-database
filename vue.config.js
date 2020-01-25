@@ -35,9 +35,10 @@ module.exports = {
 		loaderOptions: {
 			sass: {
 				prependData: [
+					'@cheap-glitch/scss-mixins/_mixins',
+
 					'@/styles/colorscheme',
 					'@/styles/layout',
-					'@/styles/mixins',
 				]
 				.map(_file => `@use "${_file}" as *;`)
 				.join('\n')
