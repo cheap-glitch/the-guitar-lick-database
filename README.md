@@ -8,3 +8,6 @@ a thesaurus for lead guitar players. Features:
    tapping, etc.)
  * In-browser  playback and  training tools:  looping, tempo  adjustment,  speed
    trainer, etc.
+
+## Changelog
+See the full changelog [here](https://github.com/cheap-glitch/the-guitar-lick-database/releases).
