@@ -44,10 +44,10 @@ Vue.directive('click-outside', VClickOutside.directive);
  */
 const requireBaseComponents = require.context('@/components', false, /V[A-Z]\w+\.vue$/);
 
-requireBaseComponents.keys().forEach(function(_fileName)
+requireBaseComponents.keys().forEach(function(fileName)
 {
-	const componentConfig = requireBaseComponents(_fileName);
-	const componentName   = _fileName.split('/').pop().replace(/\.\w+$/, '');
+	const componentConfig = requireBaseComponents(fileName);
+	const componentName   = fileName.split('/').pop().replace(/\.\w+$/, '');
 
 	Vue.component(componentName, componentConfig.default || componentConfig);
 });
@@ -66,16 +66,16 @@ const router = new Router({
 });
 
 // Hook the top progress bar to the app navigation
-router.beforeEach(function(_to, _from, _next)
+router.beforeEach(function(to, from, next)
 {
 	store.commit('setProgressBar',     0);
 	store.commit('setProgressBarMax', 90);
 
-	_next();
+	next();
 });
 router.afterEach(() => store.commit('setProgressBarMax', 100));
 
 /**
  * Create the Vue instance
  */
-new Vue({ router, store, render: _h => _h(App) }).$mount('#app');
+new Vue({ router, store, render: h => h(App) }).$mount('#app');

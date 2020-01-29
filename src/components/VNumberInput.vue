@@ -96,9 +96,9 @@ export default {
 	},
 
 	methods: {
-		changeValue(_value)
+		changeValue(rawValue)
 		{
-			let value = parseInt(_value);
+			let value = parseInt(rawValue);
 
 			if (Number.isNaN(value))               value = this.defaultValue;
 			else if (this.max && value > this.max) value = this.max;
@@ -106,14 +106,14 @@ export default {
 
 			this.$emit('input', value);
 		},
-		incrementValue(_event)
+		incrementValue(event)
 		{
-			const inc = _event.ctrlKey ? 10 : (_event.shiftKey ? 5 : 1);
+			const inc = event.ctrlKey ? 10 : (event.shiftKey ? 5 : 1);
 			this.$emit('input', (this.max && this.value + inc > this.max) ? this.max : this.value + inc);
 		},
-		decrementValue(_event)
+		decrementValue(event)
 		{
-			const inc = _event.ctrlKey ? 10 : (_event.shiftKey ? 5 : 1);
+			const inc = event.ctrlKey ? 10 : (event.shiftKey ? 5 : 1);
 			this.$emit('input', (this.min && this.value - inc < this.min) ? this.min : this.value - inc);
 		},
 	}

@@ -6,66 +6,54 @@
 /**
  * Filter an object and return the filtered copy
  */
-export function objectFilter(_object, _callback)
+export function objectFilter(object, callback)
 {
-	return Object.keys(_object).reduce(
-		function(__result, __key)
+	return Object.keys(object).reduce(
+		function(result, key)
 		{
-			if (_callback(__key, _object[__key]))
-				__result[__key] = _object[__key];
+			if (callback(key, object[key]))
+				result[key] = object[key];
 
-			return __result;
+			return result;
 		}, {});
 }
 
 /**
  * Map a function on an object and return the resulting object with corresponding keys
  */
-export function objectMapToObject(_object, _callback)
+export function objectMapToObject(object, callback)
 {
-	return Object.keys(_object).reduce(
-		function(__result, __key)
+	return Object.keys(object).reduce(
+		function(result, key)
 		{
-			__result[__key] = _callback(__key, _object[__key])
+			result[key] = callback(key, object[key])
 
-			return __result;
+			return result;
 		}, {});
 }
 
 /**
  * Map a function on an object and return the resulting array
  */
-export function objectMap(_object, _callback)
+export function objectMap(object, callback)
 {
-	return Object.keys(_object).map(__key => _callback(__key, _object[__key]));
+	return Object.keys(object).map(key => callback(key, object[key]));
 }
 
 /**
  * Apply a function to every key/value pair of an object
  */
-export function objectForEach(_object, _callback)
+export function objectForEach(object, callback)
 {
-	Object.keys(_object).forEach(__key => _callback(__key, _object[__key]));
+	Object.keys(object).forEach(key => callback(key, object[key]));
 }
 
-/**
- * Check if a key exists in an object, that its value is not null and not empty,
- * and that it belongs to a list of permitted values -- if not, return the provided default instead
- */
-export function checkObjectProp(_object, _key, _permittedValues, _defaultValue)
+export function isEmptyObject(object)
 {
-	const value           = _object?.[_key] ?? _defaultValue;
-	const permittedValues = isObject(_permittedValues) ? Object.keys(_permittedValues) : _permittedValues;
-
-	return permittedValues.includes(value) ? value : _defaultValue;
+	return (Object.keys(object).length == 0);
 }
 
-export function isEmptyObject(_object)
+export function isObject(value)
 {
-	return (Object.keys(_object).length == 0);
-}
-
-export function isObject(_value)
-{
-	return (_value !== null && Object.prototype.toString.call(_value) == '[object Object]');
+	return (value !== null && Object.prototype.toString.call(value) == '[object Object]');
 }

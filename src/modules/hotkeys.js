@@ -5,22 +5,22 @@
 
 import { objectMapToObject } from '@/modules/object'
 
-export function Hotkeys(_hotkeys, _disabled = false)
+export function Hotkeys(hotkeysList, disabledOnStart = false)
 {
-	let disabled = _disabled;
+	let disabled = disabledOnStart;
 
 	this.activate = () => disabled = false;
 	this.disable  = () => disabled = true;
 
 	// Create an array of hotkeys, each with its state and corresponding action
-	const hotkeys = objectMapToObject(_hotkeys, (_key, _action) => ({ isPressed: false, action: _action }));
+	const hotkeys = objectMapToObject(hotkeysList, (key, action) => ({ isPressed: false, action: action }));
 
 	// Capture a keypress, perform an action if one is tied to it, and mark the key as pressed
-	this.capture = function(_event)
+	this.capture = function(event)
 	{
 		if (disabled) return;
 
-		let shortkey = hotkeys[_event.key];
+		let shortkey = hotkeys[event.key];
 
 		// Ignore the event if an input/textarea/editable div is focused
 		const focusedElem = document.activeElement;
@@ -31,7 +31,7 @@ export function Hotkeys(_hotkeys, _disabled = false)
 		// to prevent the action from being called repeatedly
 		if (shortkey && shortkey.isPressed !== true)
 		{
-			_event.preventDefault();
+			event.preventDefault();
 
 			shortkey.action();
 			shortkey.isPressed = true;
@@ -39,10 +39,10 @@ export function Hotkeys(_hotkeys, _disabled = false)
 	};
 
 	// Unmark a key as being pressed when it's released
-	this.release = function(_event)
+	this.release = function(event)
 	{
-		if (hotkeys[_event.key] !== undefined)
-			hotkeys[_event.key].isPressed = false;
+		if (hotkeys[event.key] !== undefined)
+			hotkeys[event.key].isPressed = false;
 	};
 
 	// Add some global event listeners on the page

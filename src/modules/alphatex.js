@@ -6,18 +6,18 @@
 /**
  * Return a list of all the frets used in a lick
  */
-export function getFretList(_tex)
+export function getFretList(tex)
 {
 	return [...new Set(
-		getTexElements(_tex)
-			.reduce(function (_frets, _elem)
+		getTexElements(tex)
+			.reduce(function (frets, elem)
 			{
 				// The element is a regular note if it starts
 				// with a fret number and has at least one dot
-				if (/^\d\d?\./.test(_elem))
-					_frets.push(parseInt(_elem.split('.')[0]));
+				if (/^\d\d?\./.test(elem))
+					frets.push(parseInt(elem.split('.')[0]));
 
-				return _frets;
+				return frets;
 			},
 			[])
 	)];
@@ -25,26 +25,26 @@ export function getFretList(_tex)
 
 /**
  * Transpose every note in an alphatex score
- * If '_string' is set, transpose only the notes on the corresponding string
+ * If a string number is specified, only transpose the notes on that string
  */
-export function transposeTex(_tex, _shift, _string = null)
+export function transposeTex(tex, shift, string = null)
 {
-	return getTexElements(_tex)
-		.map(function (_elem)
+	return getTexElements(tex)
+		.map(function (elem)
 		{
 			// Ignore all elements that aren't actual notes
-			if (!/^\d\d?\./.test(_elem)) return _elem;
+			if (!/^\d\d?\./.test(elem)) return elem;
 
 			// Split the element into its parts (fret, string, [effects, duration])
-			let parts = _elem.split('.');
+			let parts = elem.split('.');
 
 			// Ignore duration on note effects
 			if (parts[0].includes('}'))
-				return _elem;
+				return elem;
 
 			// Increment the fret number
-			if (_string === null || parseInt(parts[1][0]) == _string)
-				parts[0] = parseInt(parts[0]) + _shift;
+			if (string === null || parseInt(parts[1][0]) == string)
+				parts[0] = parseInt(parts[0]) + shift;
 
 			return parts.join('.');
 		})
@@ -56,9 +56,9 @@ export function transposeTex(_tex, _shift, _string = null)
  * Return all the elements of an alphatex score in an array
  * The alphatex must be expanded first
  */
-export function getTexElements(_tex)
+export function getTexElements(tex)
 {
-	return _tex.trim()
+	return tex.trim()
 
 		// Add spaces after opening parentheses (denoting grouped notes on a single beat)
 		.replace(/\(/g, '( ')
@@ -73,13 +73,13 @@ export function getTexElements(_tex)
 /**
  * Expand the shorthands inside an alphatex score
  */
-export function expandTex(_tex)
+export function expandTex(rawTex)
 {
-	let tex = _tex.trim();
+	let tex = rawTex.trim();
 
 	// Replace every '%' with the content between the straight brackets
 	const expr = tex.match(/\[(.*)\]/);
-	if (expr != null) tex = tex.replace(/%/g, expr[1]);
+	if (expr !== null) tex = tex.replace(/%/g, expr[1]);
 	tex = tex.replace(/(\[|\])/g, '');
 
 	// Tuplets

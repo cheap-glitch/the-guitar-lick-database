@@ -41,7 +41,7 @@ module.exports = {
 					'@/styles/colorscheme',
 					'@/styles/layout',
 				]
-				.map(_file => `@use "${_file}" as *;`)
+				.map(file => `@use "${file}" as *;`)
 				.join('\n')
 			}
 		},
@@ -50,8 +50,8 @@ module.exports = {
 	/**
 	 * Pug settings
 	 */
-	chainWebpack: _config => {
-		_config.module
+	chainWebpack: config => {
+		config.module
 		.rule('pug')
 		.oneOf('pug-vue')
 		.use('pug-plain-loader')
@@ -128,26 +128,26 @@ module.exports = {
 		 * Pre-rendering
 		 */
 		prerenderSpa: {
-			registry: undefined,
-			headless: true,
-			onlyProduction: true,
-			useRenderEvent: false,
+			registry:        undefined,
+			headless:        true,
+			onlyProduction:  true,
+			useRenderEvent:  false,
 
 			renderRoutes: [
 				'/',
 			],
 
-			postProcess(_route)
+			postProcess(route)
 			{
-				_route.html =
+				route.html =
 
 					// Minify the Font Awesome-related CSS
-					htmlMinifier(_route.html, { minifyCSS: true })
+					htmlMinifier(route.html, { minifyCSS: true })
 
 					// Tell Vue to trigger hydration
 					.replace('id="app"', 'id="app" data-server-rendered="true"');
 
-				return _route;
+				return route;
 			}
 		},
 

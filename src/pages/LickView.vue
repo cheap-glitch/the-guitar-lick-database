@@ -316,9 +316,9 @@ export default {
 		/**
 		 * Update the loading percentage of the soundfont
 		 */
-		updateLoadingProgress(_percent)
+		updateLoadingProgress(percent)
 		{
-			this.loadingProgress = _percent;
+			this.loadingProgress = percent;
 		},
 
 		/**
@@ -329,13 +329,13 @@ export default {
 			// Fetch the lick
 			api.get(
 				`licks/read/${this.id}`,
-				_data => {
-					this.$store.commit('player/setLick',         _data        || null);
-					this.$store.commit('player/setTempo',        _data?.tempo ?? 120);
-					this.$store.commit('player/setDefaultTempo', _data?.tempo ?? 120);
+				data => {
+					this.$store.commit('player/setLick',         data        || null);
+					this.$store.commit('player/setTempo',        data?.tempo ?? 120);
+					this.$store.commit('player/setDefaultTempo', data?.tempo ?? 120);
 
 					// Fetch some suggestions
-					api.post('licks/suggest', this.lick, __data => this.suggestions = __data || []);
+					api.post('licks/suggest', this.lick, data => this.suggestions = data || []);
 				});
 		},
 
@@ -353,16 +353,16 @@ export default {
 /**
  * Redirect towards the 404 page if the lick doesn't exist
  */
-function navigationGuard(_to, _from, _next)
+function navigationGuard(to, from, next)
 {
 	// Check that the id parameter is a number
-	if (!_to.params.id.toString().match(/^\d+$/))
-		_next({ name: '404', params: [_to.path] });
+	if (!to.params.id.toString().match(/^\d+$/))
+		next({ name: '404', params: [to.path] });
 
 	// Check that the lick exists
 	api.get(
-		`licks/exists/${_to.params.id}`,
-		_data => _next(_data ? {} : { name: '404', params: [_to.path] })
+		`licks/exists/${to.params.id}`,
+		data => next(data ? {} : { name: '404', params: [to.path] })
 	);
 }
 

@@ -27,7 +27,5 @@ export default {
 <!--{{{ SCSS -->
 <style lang="scss" scoped>
 
-
-
 </style>
 <!--}}}-->

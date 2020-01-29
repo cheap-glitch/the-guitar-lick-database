@@ -29,7 +29,7 @@ export default {
 		date: {
 			type: String,
 			required: true,
-			validator: _v => _v.match(/20\d{2}-\d{2}-\d{2}/)
+			validator: v => v.match(/20\d{2}-\d{2}-\d{2}/)
 		},
 		title: {
 			type: String,

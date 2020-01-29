@@ -42,7 +42,7 @@ export default {
 
 	created()
 	{
-		api.get('/updates/0', _data => this.updates = _data || []);
+		api.get('/updates/0', data => this.updates = data || []);
 	},
 }
 
@@ -52,8 +52,6 @@ export default {
 
 <!--{{{ SCSS -->
 <style lang="scss" scoped>
-
-
 
 </style>
 <!--}}}-->

@@ -6,7 +6,7 @@
 const TOTAL_NB_LICKS = 220;
 
 // Helper function to load a component asynchronously and split it in its own chunk
-const loadAsyncComponent = _component => (() => import(/* webpackChunkName: "view-[request]" */ `@/pages/${_component}`));
+const loadAsyncComponent = component => (() => import(/* webpackChunkName: "view-[request]" */ `@/pages/${component}`));
 
 // Define the routes
 const routes = [
@@ -59,7 +59,7 @@ const routes = [
 		},
 		sitemap: {
 			changefreq:  'yearly',
-			slugs:       [...new Array(TOTAL_NB_LICKS).keys()].map(_id => _id + 1),
+			slugs:       [...new Array(TOTAL_NB_LICKS).keys()].map(id => id + 1),
 		}
 	},
 	{

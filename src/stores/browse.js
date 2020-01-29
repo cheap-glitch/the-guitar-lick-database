@@ -14,11 +14,11 @@ export default
 		results:                   [],
 
 		bookmarkFilter:            'none',
-		sortBy:                    storage.get('browse/sortBy',    'date',       _v => ['date',      'difficulty'].includes(_v)),
-		sortOrder:                 storage.get('browse/sortOrder', 'descending', _v => ['ascending', 'descending'].includes(_v)),
+		sortBy:                    storage.get('browse/sortBy',    'date',       v => ['date',      'difficulty'].includes(v)),
+		sortOrder:                 storage.get('browse/sortOrder', 'descending', v => ['ascending', 'descending'].includes(v)),
 
 		currentPage:               1,
-		nbResultsPerPage:          storage.get('browse/nbResultsPerPage', 5, _v => [5, 10, 15, 20].includes(_v)),
+		nbResultsPerPage:          storage.get('browse/nbResultsPerPage', 5, v => [5, 10, 15, 20].includes(v)),
 
 		isPreviewedLickReady:      false,
 		previewedLick:             null,
@@ -27,52 +27,52 @@ export default
 	},
 
 	getters: {
-		nbPages(_state, _getters)
+		nbPages(state, getters)
 		{
-			return Math.ceil(_getters.filteredResults.length / _state.nbResultsPerPage);
+			return Math.ceil(getters.filteredResults.length / state.nbResultsPerPage);
 		},
 
-		displayedResults(_state, _getters)
+		displayedResults(state, getters)
 		{
 			// Keep only the licks on the current page
-			return _getters.sortedResults.slice(
-				(_state.currentPage - 1)*_state.nbResultsPerPage,
-				_state.currentPage*_state.nbResultsPerPage
+			return getters.sortedResults.slice(
+				(state.currentPage - 1)*state.nbResultsPerPage,
+				state.currentPage*state.nbResultsPerPage
 			);
 		},
 
-		sortedResults(_state, _getters)
+		sortedResults(state, getters)
 		{
 			let difficulties  = Object.keys(data.difficulties);
-			let sortedResults = [..._getters.filteredResults];
+			let sortedResults = [...getters.filteredResults];
 
 			// The results are sorted by added date by default
-			if (_state.sortBy !== 'date')
-				sortedResults.sort((_a, _b) => {
-					switch (_state.sortBy)
+			if (state.sortBy !== 'date')
+				sortedResults.sort((a, b) => {
+					switch (state.sortBy)
 					{
 						case 'difficulty':
-							return difficulties.indexOf(_b.difficulty) - difficulties.indexOf(_a.difficulty);
+							return difficulties.indexOf(b.difficulty) - difficulties.indexOf(a.difficulty);
 					}
 
 					return 0;
 				});
 
 			// The results are sorted descendingly by default
-			if (_state.sortOrder !== 'descending')
+			if (state.sortOrder !== 'descending')
 				sortedResults.reverse();
 
 			return sortedResults;
 		},
 
-		filteredResults(_state, _getters, _rootState, _rootGetters)
+		filteredResults(state, getters, rootState, rootGetters)
 		{
-			return _state.results.filter(
-				_lick => {
-					switch (_state.bookmarkFilter)
+			return state.results.filter(
+				lick => {
+					switch (state.bookmarkFilter)
 					{
-						case 'bookmarked':      return  _rootGetters['bookmarks/isBookmarked'](_lick.id);
-						case 'not-bookmarked':  return !_rootGetters['bookmarks/isBookmarked'](_lick.id);
+						case 'bookmarked':      return  rootGetters['bookmarks/isBookmarked'](lick.id);
+						case 'not-bookmarked':  return !rootGetters['bookmarks/isBookmarked'](lick.id);
 						default:                return true;
 					}
 				});
@@ -80,32 +80,32 @@ export default
 	},
 
 	mutations: {
-		updateResults:                (_state, _value) => _state.results                  = _value,
+		updateResults:                (state, value) => state.results                  = value,
 
-		setCurrentPage:               (_state, _value) => _state.currentPage              = _value,
-		setBookmarkFilter:            (_state, _value) => _state.bookmarkFilter           = _value,
-		setSortBy:                    (_state, _value) => _state.sortBy                   = _value,
-		setSortOrder:                 (_state, _value) => _state.sortOrder                = _value,
+		setCurrentPage:               (state, value) => state.currentPage              = value,
+		setBookmarkFilter:            (state, value) => state.bookmarkFilter           = value,
+		setSortBy:                    (state, value) => state.sortBy                   = value,
+		setSortOrder:                 (state, value) => state.sortOrder                = value,
 
-		setIsPreviewedLickReady:      (_state, _value) => _state.isPreviewedLickReady     = _value,
-		setPreviewedLick:             (_state, _value) => _state.previewedLick            = _value,
-		setPreviewedLickProgress:     (_state, _value) => _state.previewedLickProgress    = _value,
-		setPreviewedLickPlayerState:  (_state, _value) => _state.previewedLickPlayerState = _value,
+		setIsPreviewedLickReady:      (state, value) => state.isPreviewedLickReady     = value,
+		setPreviewedLick:             (state, value) => state.previewedLick            = value,
+		setPreviewedLickProgress:     (state, value) => state.previewedLickProgress    = value,
+		setPreviewedLickPlayerState:  (state, value) => state.previewedLickPlayerState = value,
 
-		resetLickPreview(_state)
+		resetLickPreview(state)
 		{
-			_state.isPreviewedLickReady     = false;
-			_state.previewedLick            = null;
-			_state.previewedLickPlayerState = 'stopped';
-			_state.previewedLickProgress    = 0;
+			state.isPreviewedLickReady     = false;
+			state.previewedLick            = null;
+			state.previewedLickPlayerState = 'stopped';
+			state.previewedLickProgress    = 0;
 		},
 
-		setNbResultsPerPage(_state, _value)
+		setNbResultsPerPage(state, value)
 		{
-			_state.nbResultsPerPage = _value,
+			state.nbResultsPerPage = value,
 
 			// Reset the current page number
-			_state.currentPage = 1;
+			state.currentPage = 1;
 		}
 	},
 }

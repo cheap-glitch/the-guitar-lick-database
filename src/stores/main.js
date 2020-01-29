@@ -17,34 +17,34 @@ import { isObject, objectForEach } from '@/modules/object'
 /**
  * Plugin to automatically save some state properties in the local storage upon certain mutations
  */
-const storeOnMutation = _store => _store.subscribe(function(_mutation, _state)
+const storeOnMutation = store => store.subscribe(function(mutation, state)
 {
 	const saveUponMutations = {
 		'toggleIsDarkModeOn':          'isDarkModeOn',
 
-		'browse/setSortBy':            { name: 'browse/sortBy',           value: _state.browse.sortBy           },
-		'browse/setSortOrder':         { name: 'browse/sortOrder',        value: _state.browse.sortOrder        },
-		'browse/setNbResultsPerPage':  { name: 'browse/nbResultsPerPage', value: _state.browse.nbResultsPerPage },
+		'browse/setSortBy':            { name: 'browse/sortBy',           value: state.browse.sortBy           },
+		'browse/setSortOrder':         { name: 'browse/sortOrder',        value: state.browse.sortOrder        },
+		'browse/setNbResultsPerPage':  { name: 'browse/nbResultsPerPage', value: state.browse.nbResultsPerPage },
 
-		'player/setScoreType':         { name: 'player/scoreType',        value: _state.player.scoreType        },
-		'player/zoom(In|Out)':         { name: 'player/zoom',             value: _state.player.zoom             },
-		'player/toggleLooping':        { name: 'player/isLoopingOn',      value: _state.player.isLoopingOn      },
-		'player/toggleMetronome':      { name: 'player/isMetronomeOn',    value: _state.player.isMetronomeOn    },
-		'player/toggleCountdown':      { name: 'player/isCountdownOn',    value: _state.player.isCountdownOn    },
+		'player/setScoreType':         { name: 'player/scoreType',        value: state.player.scoreType        },
+		'player/zoom(In|Out)':         { name: 'player/zoom',             value: state.player.zoom             },
+		'player/toggleLooping':        { name: 'player/isLoopingOn',      value: state.player.isLoopingOn      },
+		'player/toggleMetronome':      { name: 'player/isMetronomeOn',    value: state.player.isMetronomeOn    },
+		'player/toggleCountdown':      { name: 'player/isCountdownOn',    value: state.player.isCountdownOn    },
 	};
 
-	objectForEach(saveUponMutations, function(__key, __prop)
+	objectForEach(saveUponMutations, function(key, value)
 	{
 		// Check that the name of the mutation matches the key
-		const rx = new RegExp(`^${__key}$`);
-		if (!rx.test(_mutation.type)) return;
+		const rx = new RegExp(`^${key}$`);
+		if (!rx.test(mutation.type)) return;
 
 		// Execute the callback to get the prop name or object
-		const prop = typeof __prop == 'function' ? __prop(_mutation.type) : __prop;
+		const prop = typeof value == 'function' ? value(mutation.type) : value;
 
 		storage.set(
 			isObject(prop) ? prop.name  : prop,
-			isObject(prop) ? prop.value : _state[prop]
+			isObject(prop) ? prop.value : state[prop]
 		);
 	});
 });
@@ -71,20 +71,20 @@ export default new Vuex.Store(
 		progressBar:    0,
 		progressBarMax: 90,
 
-		isDarkModeOn:   storage.get('isDarkModeOn', true, _v => typeof _v == 'boolean'),
+		isDarkModeOn:   storage.get('isDarkModeOn', true, v => typeof v == 'boolean'),
 	},
 
 	getters: {
-		darkMode: _state => ({ 'dark-mode': _state.isDarkModeOn }),
+		darkMode: state => ({ 'dark-mode': state.isDarkModeOn }),
 	},
 
 	mutations: {
-		setTotalNbLicks:     (_state, _value) => _state.totalNbLicks   = parseInt(_value),
+		setTotalNbLicks:     (state, value) => state.totalNbLicks   = parseInt(value),
 
-		setProgressBar:      (_state, _value) => _state.progressBar    = _value,
-		setProgressBarMax:   (_state, _value) => _state.progressBarMax = _value,
+		setProgressBar:      (state, value) => state.progressBar    = value,
+		setProgressBarMax:   (state, value) => state.progressBarMax = value,
 
-		toggleIsDarkModeOn:  _state           => _state.isDarkModeOn   = !_state.isDarkModeOn,
+		toggleIsDarkModeOn:  state          => state.isDarkModeOn   = !state.isDarkModeOn,
 	},
 
 	// Activate strict mode during development only

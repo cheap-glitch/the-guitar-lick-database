@@ -97,7 +97,7 @@ export default {
 	created()
 	{
 		// Get the total number of licks in the database
-		api.get('licks/count', _data => this.$store.commit('setTotalNbLicks', _data || 200));
+		api.get('licks/count', data => this.$store.commit('setTotalNbLicks', data || 200));
 	},
 }
 

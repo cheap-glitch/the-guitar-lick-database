@@ -17,10 +17,10 @@ export default
 		tonalityShift:       0,
 		highestFret:         24,
 
-		scoreType:           storage.get('player/scoreType', 'mixed', _v => ['tab', 'score', 'mixed'].includes(_v)),
+		scoreType:           storage.get('player/scoreType', 'mixed', v => ['tab', 'score', 'mixed'].includes(v)),
 		isPickingShown:      true,
 
-		zoom:                storage.get('player/zoom', 11, _v => (typeof _v == 'number') && (7 <= _v && _v <= 20)),
+		zoom:                storage.get('player/zoom', 11, v => (typeof v == 'number') && (7 <= v && v <= 20)),
 		zoomMin:             7,
 		zoomMax:             20,
 
@@ -36,9 +36,9 @@ export default
 		volMetronome:        10,
 
 		isLickLoaded:        false,
-		isLoopingOn:         storage.get('player/isLoopingOn',   false, _v => typeof _v == 'boolean'),
-		isMetronomeOn:       storage.get('player/isMetronomeOn', false, _v => typeof _v == 'boolean'),
-		isCountdownOn:       storage.get('player/isCountdownOn', false, _v => typeof _v == 'boolean'),
+		isLoopingOn:         storage.get('player/isLoopingOn',   false, v => typeof v == 'boolean'),
+		isMetronomeOn:       storage.get('player/isMetronomeOn', false, v => typeof v == 'boolean'),
+		isCountdownOn:       storage.get('player/isCountdownOn', false, v => typeof v == 'boolean'),
 
 		stStart:             80,
 		stStartDefault:      80,
@@ -57,41 +57,41 @@ export default
 	},
 
 	getters: {
-		lickTexExpanded:     _s             => !_s.lick ? '' : expandTex(_s.lick.tex),
-		lickTexTransposed:   (_s, _getters) => !_s.lick ? '' : transposeTex(_getters.lickTexExpanded, _s.tonalityShift),
+		lickTexExpanded:     s            => !s.lick ? '' : expandTex(s.lick.tex),
+		lickTexTransposed:   (s, getters) => !s.lick ? '' : transposeTex(getters.lickTexExpanded, s.tonalityShift),
 	},
 
 	mutations: {
-		setLick:             (_s, _v) => _s.lick           = _v,
-		setLickLoaded:       (_s, _v) => _s.isLickLoaded   = _v,
-		setTonalityShift:    (_s, _v) => _s.tonalityShift  = _v,
-		setIsPickingShown:   (_s, _v) => _s.isPickingShown = _v,
-		setPlayerState:      (_s, _v) => _s.playerState    = _v,
-		setScoreType:        (_s, _v) => _s.scoreType      = _v,
+		setLick:             (s, v) => s.lick           = v,
+		setLickLoaded:       (s, v) => s.isLickLoaded   = v,
+		setTonalityShift:    (s, v) => s.tonalityShift  = v,
+		setIsPickingShown:   (s, v) => s.isPickingShown = v,
+		setPlayerState:      (s, v) => s.playerState    = v,
+		setScoreType:        (s, v) => s.scoreType      = v,
 
-		resetNbLoops:        _s       => _s.nbLoops = 0,
-		incrementNbLoops:    _s       => _s.nbLoops++,
+		resetNbLoops:        s       => s.nbLoops = 0,
+		incrementNbLoops:    s       => s.nbLoops++,
 
-		setTempo:            (_s, _v) => { if (inBounds(_v, _s.tempoMin, _s.tempoMax)) _s.tempo        = parseInt(_v) },
-		setDefaultTempo:     (_s, _v) => { if (inBounds(_v, _s.tempoMin, _s.tempoMax)) _s.tempoDefault = parseInt(_v) },
+		setTempo:            (s, v) => { if (inBounds(v, s.tempoMin, s.tempoMax)) s.tempo        = parseInt(v) },
+		setDefaultTempo:     (s, v) => { if (inBounds(v, s.tempoMin, s.tempoMax)) s.tempoDefault = parseInt(v) },
 
-		setVolPlayback:      (_s, _v) => { if (inBounds(_v, 0, 20)) _s.volPlayback  = parseInt(_v) },
-		setVolMetronome:     (_s, _v) => { if (inBounds(_v, 0, 20)) _s.volMetronome = parseInt(_v) },
+		setVolPlayback:      (s, v) => { if (inBounds(v, 0, 20)) s.volPlayback  = parseInt(v) },
+		setVolMetronome:     (s, v) => { if (inBounds(v, 0, 20)) s.volMetronome = parseInt(v) },
 
-		zoomIn:              _s       => { if (_s.zoom < _s.zoomMax) _s.zoom++ },
-		zoomOut:             _s       => { if (_s.zoom > _s.zoomMin) _s.zoom-- },
+		zoomIn:              s       => { if (s.zoom < s.zoomMax) s.zoom++ },
+		zoomOut:             s       => { if (s.zoom > s.zoomMin) s.zoom-- },
 
-		togglePlayPause:     _s       => _s.playerState   = _s.playerState === 'playing' ? 'paused' : 'playing',
-		toggleLooping:       _s       => _s.isLoopingOn   = !_s.isLoopingOn,
-		toggleMetronome:     _s       => _s.isMetronomeOn = !_s.isMetronomeOn,
-		toggleCountdown:     _s       => _s.isCountdownOn = !_s.isCountdownOn,
+		togglePlayPause:     s       => s.playerState   = s.playerState === 'playing' ? 'paused' : 'playing',
+		toggleLooping:       s       => s.isLoopingOn   = !s.isLoopingOn,
+		toggleMetronome:     s       => s.isMetronomeOn = !s.isMetronomeOn,
+		toggleCountdown:     s       => s.isCountdownOn = !s.isCountdownOn,
 
-		setStStart:          (_s, _v) => { if (inBounds(_v, _s.tempoMin, _s.tempoMax)) _s.stStart = _v },
-		setStStop:           (_s, _v) => { if (inBounds(_v, _s.tempoMin, _s.tempoMax)) _s.stStop  = _v },
-		setStInc:            (_s, _v) => { if (inBounds(_v, _s.stIncMin, _s.stIncMax)) _s.stInc   = _v },
-		setStLoops:          (_s, _v) => { if (_v >= _s.stLoopsMin)                    _s.stLoops = _v },
+		setStStart:          (s, v) => { if (inBounds(v, s.tempoMin, s.tempoMax)) s.stStart = v },
+		setStStop:           (s, v) => { if (inBounds(v, s.tempoMin, s.tempoMax)) s.stStop  = v },
+		setStInc:            (s, v) => { if (inBounds(v, s.stIncMin, s.stIncMax)) s.stInc   = v },
+		setStLoops:          (s, v) => { if (v >= s.stLoopsMin)                   s.stLoops = v },
 
-		setIsSpeedTrainerOn: (_s, _v) => _s.isSpeedTrainerOn = _v,
-		setStCurrentTempo:   (_s, _v) => _s.stCurrentTempo   = _v,
+		setIsSpeedTrainerOn: (s, v) => s.isSpeedTrainerOn = v,
+		setStCurrentTempo:   (s, v) => s.stCurrentTempo   = v,
 	},
 }

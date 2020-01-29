@@ -39,7 +39,7 @@ export default {
 
 	data() {
 		return {
-			isOpened: storage.get(this.getStorageKeyName(), true, _v => typeof _v == 'boolean'),
+			isOpened: storage.get(this.getStorageKeyName(), true, v => typeof v == 'boolean'),
 		}
 	},
 

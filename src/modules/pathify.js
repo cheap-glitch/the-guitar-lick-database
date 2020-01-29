@@ -12,15 +12,15 @@ import pathify from 'vuex-pathify'
  * mutations  setFoo
  * actions    setFooAsync
  */
-pathify.options.mapping = function(_type, _name, _format)
+pathify.options.mapping = function(type, name, format)
 {
-	switch(_type)
+	switch(type)
 	{
-		case 'getters':   return _name;
-		case 'mutations': return _format.camel('set', _name);
-		case 'actions':   return _format.camel('set', _name, 'async');
+		case 'getters':   return name;
+		case 'mutations': return format.camel('set', name);
+		case 'actions':   return format.camel('set', name, 'async');
 	}
 
-	return _name;
+	return name;
 }
 export default pathify;

@@ -39,10 +39,10 @@ export default {
 	},
 
 	methods: {
-		goToPage(_newPage)
+		goToPage(newPage)
 		{
-			if (_newPage != this.currentPage)
-				this.$store.commit('browse/setCurrentPage', _newPage);
+			if (newPage != this.currentPage)
+				this.$store.commit('browse/setCurrentPage', newPage);
 		},
 	},
 }

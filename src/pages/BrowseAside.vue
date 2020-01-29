@@ -114,14 +114,14 @@ export default {
 			return [
 				{ name: 'Any artist', value: 'any'  },
 				{ name: 'No artist',  value: 'none' },
-				...this.artists.map(_artist => ({ name: _artist.name, value: _artist.url }))
+				...this.artists.map(artist => ({ name: artist.name, value: artist.url }))
 			];
 		},
 		artistsIds()
 		{
 			return {
 				'none': 0,
-				...this.artists.reduce((_acc, _artist) => { _acc[_artist.url] = _artist.id; return _acc; }, {})
+				...this.artists.reduce((acc, artist) => { acc[artist.url] = artist.id; return acc; }, {})
 			};
 		},
 		artistsURLs()
@@ -129,7 +129,7 @@ export default {
 			return [
 				'any',
 				'none',
-				...this.artists.map(_artist => _artist.url)
+				...this.artists.map(artist => artist.url)
 			];
 		},
 	},
@@ -147,8 +147,8 @@ export default {
 
 		// Fetch the list of all the artists
 		api.get('artists',
-			_data => {
-				this.artists = _data || {};
+			data => {
+				this.artists = data || {};
 
 				// Check if the query string has a parameter for the artist and if it's valid
 				let artist = this.$route.query?.artist ?? 'any';
@@ -167,19 +167,19 @@ export default {
 		updateQueryString()
 		{
 			// Filter the search params to remove any wildcard values
-			let queryParams = obj.objectFilter(this.searchParams, (_p, _v) => _v !== 'any' && !(obj.isObject(_v) && obj.isEmptyObject(_v)));
+			let queryParams = obj.objectFilter(this.searchParams, (p, v) => v !== 'any' && !(obj.isObject(v) && obj.isEmptyObject(v)));
 
 			if (queryParams.tags)
 			{
 				// Format the tags for the URL query string
 				queryParams.tags = obj.objectMap(
 					this.searchParams.tags,
-					(_tag, _state) => `${_state == 'excluded' ? '!' : ''}${_tag}`
+					(tag, state) => `${state == 'excluded' ? '!' : ''}${tag}`
 				).join(',');
 			}
 
 			// Build the new query string
-			const queryString = obj.objectMap(queryParams, (_param, _value) => `${_param}=${_value}`).join('&');
+			const queryString = obj.objectMap(queryParams, (param, value) => `${param}=${value}`).join('&');
 
 			// Update the query string
 			window.history.replaceState({}, '', '/browse' + (queryString.length ? `?${queryString}` : ''))
@@ -200,7 +200,7 @@ export default {
 			api.post(
 				'licks/browse',
 				searchParamsSent,
-				_data => this.$store.commit('browse/updateResults', _data),
+				data => this.$store.commit('browse/updateResults', data),
 			);
 		},
 
@@ -212,11 +212,11 @@ export default {
 			return !this.$route.query.tags.length
 				? {}
 				: this.$route.query.tags.split(',').reduce(
-					function(_tags, _tag)
+					function(tags, tag)
 					{
-						_tags[_tag.replace('!', '')] = _tag.startsWith('!') ? 'excluded' : 'included';
+						tags[tag.replace('!', '')] = tag.startsWith('!') ? 'excluded' : 'included';
 
-						return _tags;
+						return tags;
 					}, {});
 		},
 

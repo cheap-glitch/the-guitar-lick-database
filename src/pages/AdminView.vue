@@ -300,13 +300,13 @@ export default {
 		this.data = data;
 
 		// Fetch the list of all the artists
-		api.get('artists', _data => this.artists = _data || []);
+		api.get('artists', data => this.artists = data || []);
 
 		// When updating a lick, fetch its data first
 		if (!this.isEditPage) return;
-		api.get(`licks/read/${this.$route.params.id}`, _data =>
+		api.get(`licks/read/${this.$route.params.id}`, data =>
 		{
-			this.lick = _data || {};
+			this.lick = data || {};
 
 			// Erase uneeded source data to avoid problems
 			if (this.lick.source.sid != 0)
@@ -323,13 +323,13 @@ export default {
 	},
 
 	methods: {
-		getSuggestionValue(_suggestion)
+		getSuggestionValue(suggestion)
 		{
-			return _suggestion.item.name;
+			return suggestion.item.name;
 		},
-		selectSource(_suggestion)
+		selectSource(suggestion)
 		{
-			this.lick.source.sid = _suggestion.item.id;
+			this.lick.source.sid = suggestion.item.id;
 		},
 		fetchSources()
 		{
@@ -345,14 +345,14 @@ export default {
 				() => api.post(
 					'sources/grep',
 					{ name: this.source.query.trim() },
-					_data => this.source.suggestions = _data || []
+					data => this.source.suggestions = data || []
 				),
 				this.source.timeout
 			);
 		},
-		updateTimestamp(_event)
+		updateTimestamp(event)
 		{
-			let value = _event.target.value;
+			let value = event.target.value;
 
 			// If a YouTube URL is inputted, parse it to extract the timestamp
 			const match = value.match(/^(https:\/\/youtu.be\/[a-zA-z0-9_-]+)\?t=(\d+)$/);
@@ -388,23 +388,23 @@ export default {
 /**
  * Redirect towards the 404 page if the lick doesn't exist
  */
-function navigationGuard(_to, _from, _next)
+function navigationGuard(to, from, next)
 {
 	// Ignore the verification for the creation page
-	if (_to.path === '/add')
+	if (to.path === '/add')
 	{
-		_next();
+		next();
 		return;
 	}
 
 	// Check that the id parameter is a number
-	if (!_to.params.id.toString().match(/^\d+$/))
-		_next({ name: '404', params: [_to.path] });
+	if (!to.params.id.toString().match(/^\d+$/))
+		next({ name: '404', params: [to.path] });
 
 	// Check that the lick exists
 	api.get(
-		`licks/exists/${_to.params.id}`,
-		_data => _next(_data ? {} : { name: '404', params: [_to.path] })
+		`licks/exists/${to.params.id}`,
+		data => next(data ? {} : { name: '404', params: [to.path] })
 	);
 }
 

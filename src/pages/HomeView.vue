@@ -61,8 +61,8 @@ export default {
 	{
 		this.$store.commit('browse/resetLickPreview');
 
-		api.get('/licks/latest/3', _data => this.latestLicks   = _data || []);
-		api.get('/updates/2',      _data => this.recentUpdates = _data || []);
+		api.get('/licks/latest/3', data => this.latestLicks   = data || []);
+		api.get('/updates/2',      data => this.recentUpdates = data || []);
 	},
 }
 

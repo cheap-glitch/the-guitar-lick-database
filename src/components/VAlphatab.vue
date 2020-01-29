@@ -31,12 +31,12 @@ export default {
 		tempo: {
 			type: Number,
 			default: 120,
-			validator: _v => _v > 0
+			validator: v => v > 0
 		},
 		timeSignature: {
 			type: String,
 			default: '4/4',
-			validator: _v => /1?[1-9]\/1?[1-9]/.test(_v)
+			validator: v => /1?[1-9]\/1?[1-9]/.test(v)
 		},
 		tex: {
 			type: String,
@@ -49,32 +49,32 @@ export default {
 		layout: {
 			type: String,
 			default: 'horizontal',
-			validator: _v => ['page', 'horizontal'].includes(_v)
+			validator: v => ['page', 'horizontal'].includes(v)
 		},
 		zoom: {
 			type: Number,
 			default: 10,
-			validator: _v => (0 < _v) && (_v <= 20)
+			validator: v => (0 < v) && (v <= 20)
 		},
 		scoreType: {
 			type: String,
 			default: 'tab',
-			validator: _v => ['score', 'tab', 'mixed'].includes(_v)
+			validator: v => ['score', 'tab', 'mixed'].includes(v)
 		},
 		playerState: {
 			type: String,
 			default: 'stopped',
-			validator: _v => ['playing', 'paused', 'stopped'].includes(_v)
+			validator: v => ['playing', 'paused', 'stopped'].includes(v)
 		},
 		volPlayback: {
 			type: Number,
 			default: 10,
-			validator: _v => (0 <= _v) && (_v <= 20),
+			validator: v => (0 <= v) && (v <= 20),
 		},
 		volMetronome: {
 			type: Number,
 			default: 10,
-			validator: _v => (0 <= _v) && (_v <= 20),
+			validator: v => (0 <= v) && (v <= 20),
 		},
 		isPlaybackActive: {
 			type: Boolean,
@@ -210,7 +210,7 @@ export default {
 			});
 
 			// Send events during the loading of the soundfile
-			this.$alphatab.addSoundFontLoad(_event => this.$emit('player-loading', Math.floor((_event.loaded / _event.total) * 100)));
+			this.$alphatab.addSoundFontLoad(event => this.$emit('player-loading', Math.floor((event.loaded / event.total) * 100)));
 
 			// When the player is ready
 			this.$alphatab.addReadyForPlayback(() =>
@@ -291,9 +291,9 @@ export default {
 		{
 			this.$alphatab.isLooping = this.isLoopingOn;
 		},
-		updateSettings(_category, _settings)
+		updateSettings(category, settings)
 		{
-			objectForEach(_settings, (_setting, _value) => this.$alphatab.settings[_category][_setting] = _value);
+			objectForEach(settings, (setting, value) => this.$alphatab.settings[category][setting] = value);
 			this.$alphatab.updateSettings();
 		},
 	}

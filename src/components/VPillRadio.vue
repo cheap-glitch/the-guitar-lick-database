@@ -66,7 +66,7 @@ export default {
 		labelPosition: {
 			type: String,
 			default: 'left',
-			validator: _v => ['left', 'right'].includes(_v)
+			validator: v => ['left', 'right'].includes(v)
 		},
 		choices: {
 			type: Object,
@@ -90,9 +90,9 @@ export default {
 	},
 
 	methods: {
-		select(_value)
+		select(value)
 		{
-			if (!this.isDisabled) this.$emit('change', _value);
+			if (!this.isDisabled) this.$emit('change', value);
 		}
 	},
 }

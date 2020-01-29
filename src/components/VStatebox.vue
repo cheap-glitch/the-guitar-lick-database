@@ -60,12 +60,12 @@ export default {
 		labelPosition: {
 			type: String,
 			default: 'right',
-			validator: _v => ['left', 'right'].includes(_v)
+			validator: v => ['left', 'right'].includes(v)
 		},
 		states: {
 			type: Array,
 			required: true,
-			validator: _v => _v.length && _v.every(_elem => typeof(_elem) == 'string')
+			validator: v => v.length && v.every(elem => typeof(elem) == 'string')
 		},
 		modelState: {
 			type: [String, Object],
@@ -74,7 +74,7 @@ export default {
 		mode: {
 			type: String,
 			default: 'cycle',
-			validator: _v => ['cycle', 'buttons', 'buttons-overwrite'].includes(_v)
+			validator: v => ['cycle', 'buttons', 'buttons-overwrite'].includes(v)
 		},
 	},
 
@@ -98,7 +98,7 @@ export default {
 		/**
 		 * Change the state according to user interaction
 		 */
-		changeState(_button)
+		changeState(button)
 		{
 			let index = this.states.indexOf(this.state);
 
@@ -112,7 +112,7 @@ export default {
 				// Switch to the second state on left-clicking, and to the third on right-clicking
 				// Always go through the first "neutral" state when changing states
 				case 'buttons':
-					switch (_button)
+					switch (button)
 					{
 						case 'left':
 							this.state = this.states[(index == 0) ? 1 : 0 ];
@@ -127,7 +127,7 @@ export default {
 				// Switch to the second state on left-clicking, and to the third on right-clicking
 				// Directly overwrite the previous state -- to disable you have to click again with the same button
 				case 'buttons-overwrite':
-					switch (_button)
+					switch (button)
 					{
 						case 'left':
 							this.state = this.states[(index == 1) ? 0 : 1 ];
@@ -148,7 +148,7 @@ export default {
 				newModelState[this.value] = this.state;
 
 				// Filter out the keys that are set to the first state
-				let filteredModelState = objectFilter(newModelState, (_key, _state) => _state !== this.states[0]);
+				let filteredModelState = objectFilter(newModelState, (key, state) => state !== this.states[0]);
 
 				this.$emit('change', filteredModelState);
 

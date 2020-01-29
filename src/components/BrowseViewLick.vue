@@ -99,7 +99,7 @@ router-link.BrowseViewLick(:to="`/lick/${lick.id}`")
 		:is-playback-active="previewedLick == lick.id"
 		:player-state="previewedLick == lick.id ? previewedLickPlayerState : 'stopped'"
 
-		@player-loading="_progress => previewedLickProgress = _progress"
+		@player-loading="progress => previewedLickProgress = progress"
 		@player-ready="isPreviewedLickReady = true, previewedLickPlayerState = 'playing'"
 		@player-stopped="previewedLickPlayerState = 'stopped'"
 		)
@@ -149,19 +149,19 @@ export default {
 		/**
 		 * Format a list of tags/genres to display
 		 */
-		formatList(_list, _names)
+		formatList(list, names)
 		{
-			return _list.trim().split(' ').map(_v => _names[_v]).join(', ');
+			return list.trim().split(' ').map(v => names[v]).join(', ');
 		},
 
 		/**
 		 * Load a lick for preview or start the playback if it's already loaded
 		 */
-		previewLick(_id)
+		previewLick(id)
 		{
-			if (this.previewedLick == _id) return;
+			if (this.previewedLick == id) return;
 
-			this.previewedLick         = _id;
+			this.previewedLick         = id;
 			this.previewedLickProgress = 0;
 			this.isPreviewedLickReady  = false;
 		},

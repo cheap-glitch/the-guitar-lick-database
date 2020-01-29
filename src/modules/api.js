@@ -8,40 +8,40 @@ import { isEmptyObject } from '@/modules/object'
 
 export default
 {
-	get(_url, _callback)
+	get(url, callback)
 	{
-		this.xhr('get', _url, _callback);
+		this.xhr('get', url, callback);
 	},
 
-	post(_url, _data, _callback)
+	post(url, data, callback)
 	{
-		this.xhr('post', _url, _callback, _data);
+		this.xhr('post', url, callback, data);
 	},
 
-	put(_url, _data, _callback)
+	put(url, data, callback)
 	{
-		this.xhr('put', _url, _callback, _data);
+		this.xhr('put', url, callback, data);
 	},
 
-	xhr(_method, _url, _callback, _data = {})
+	xhr(method, url, callback, data = {})
 	{
 		const headers = {
 			common : { 'X-Requested-With': 'XMLHttpRequest' }
 		};
 
-		if (!isEmptyObject(_data))
+		if (!isEmptyObject(data))
 			headers.common['Content-Type'] = 'application/json';
 
 		axios({
-			url:      _url,
+			url:      url,
 			baseURL:  process.env.VUE_APP_API_HOST,
 
-			method:   _method,
-			data:     _data,
+			method:   method,
+			data:     data,
 
 			headers,
 		})
-		.then(_response => _callback(_response?.data ?? null))
-		.catch(_error   => { if (process.env.NODE_ENV == 'development') console.log(_error) });
+		.then(response => callback(response?.data ?? null))
+		.catch(error   => { if (process.env.NODE_ENV == 'development') console.log(error) });
 	},
 }

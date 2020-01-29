@@ -10,15 +10,15 @@ export default
 	namespaced: true,
 
 	state: {
-		bookmarks: storage.get('bookmarks/bookmarks', [], _v => Array.isArray(_v)),
+		bookmarks: storage.get('bookmarks/bookmarks', [], v => Array.isArray(v)),
 	},
 
 	getters: {
-		isBookmarked: _state => _id => _state.bookmarks.includes(parseInt(_id)),
+		isBookmarked: state => id => state.bookmarks.includes(parseInt(id)),
 	},
 
 	mutations: {
-		insertBookmark: (_state, _id) => _state.bookmarks = storage.arrayInsert('bookmarks', parseInt(_id)),
-		removeBookmark: (_state, _id) => _state.bookmarks = storage.arrayRemove('bookmarks', parseInt(_id)),
+		insertBookmark: (state, id) => state.bookmarks = storage.arrayInsert('bookmarks', parseInt(id)),
+		removeBookmark: (state, id) => state.bookmarks = storage.arrayRemove('bookmarks', parseInt(id)),
 	},
 }
