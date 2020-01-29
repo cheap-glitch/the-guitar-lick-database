@@ -14,7 +14,7 @@
     "test": "npm run test:unit",
     "test:unit": "vue-cli-service test:unit",
     "coverage": "nyc npm test",
-    "lint": "vue-cli-service lint --no-fix '**/*.{js,vue}' && ./vendor/jakub-onderka/php-parallel-lint/parallel-lint api",
+    "lint": "vue-cli-service lint --no-fix 'src/**/*.{js,vue}' && ./vendor/jakub-onderka/php-parallel-lint/parallel-lint api",
     "sitemap": "vue-cli-service sitemap"
   },
   "browserslist": [
