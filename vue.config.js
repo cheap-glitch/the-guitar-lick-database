@@ -71,75 +71,57 @@ module.exports = {
 		 */
 		fontawesome: {
 			component: 'fa-icon',
-			imports: [
-				{
-					set: 'free-brands',
-					icons: [
-						// Sidebar
-						'github',
-						'twitter',
+			imports: {
+				// General UI
+				'arrow-circle-left':         'pro-regular',
+				'chevron-down':              'pro-regular',
+				'cog':                       'pro-solid',
+				'external-link-square-alt':  'pro-regular',
+				'moon':                      'pro-solid',
+				'star':                     ['pro-solid', 'pro-regular'],
+				'sun':                       'pro-solid',
+				'trash-alt':                 'pro-regular',
 
-						// Lick infos
-						'youtube',
-					]
-				},
-				{
-					set: 'pro-solid',
-					icons: [
-						// General UI
-						'cog',
-						'moon',
-						'star',
-						'sun',
+				// Logo
+				'comment-alt-music':         'pro-solid',
+				'square-full':               'pro-solid',
 
-						// Logo
-						'comment-alt-music',
-						'square-full',
+				// Main navigation menu
+				'guitar':                    'pro-solid',
+				'heart':                     'pro-solid',
+				'list-ul':                   'pro-solid',
+				'random':                    'pro-solid',
 
-						// Main navigation menu
-						'guitar',
-						'heart',
-						'list-ul',
-						'random',
-					]
-				},
-				{
-					set: 'pro-regular',
-					icons: [
-						// General UI
-						'arrow-circle-left',
-						'chevron-down',
-						'external-link-square-alt',
-						'star',
-						'trash-alt',
+				// Footer
+				'github':                    'free-brands',
+				'twitter':                   'free-brands',
 
-						// Lick infos
-						'album',
-						'book',
-						'compact-disc',
-						'file-alt',
-						'file-music',
-						'guitar-electric',
-						'mountain',
-						'music',
-						'tags',
-						'user-circle',
+				// Lick infos
+				'album':                     'pro-regular',
+				'book':                      'pro-regular',
+				'compact-disc':              'pro-regular',
+				'file-alt':                  'pro-regular',
+				'file-music':                'pro-regular',
+				'guitar-electric':           'pro-regular',
+				'mountain':                  'pro-regular',
+				'music':                     'pro-regular',
+				'tags':                      'pro-regular',
+				'user-circle':               'pro-regular',
+				'youtube':                   'free-brands',
 
-						// Player
-						'drum',
-						'dumbbell',
-						'minus',
-						'pause',
-						'play',
-						'plus',
-						'search-minus',
-						'search-plus',
-						'stop',
-						'stopwatch',
-						'undo-alt',
-					]
-				},
-			]
+				// Player
+				'drum':                      'pro-regular',
+				'dumbbell':                  'pro-regular',
+				'minus':                     'pro-regular',
+				'pause':                     'pro-regular',
+				'play':                      'pro-regular',
+				'plus':                      'pro-regular',
+				'search-minus':              'pro-regular',
+				'search-plus':               'pro-regular',
+				'stop':                      'pro-regular',
+				'stopwatch':                 'pro-regular',
+				'undo-alt':                  'pro-regular',
+			}
 		},
 
 		/**
