@@ -3,8 +3,8 @@
  * modules/api.js
  */
 
-import axios             from 'axios'
-import { isEmptyObject } from '@/modules/object'
+import axios                        from 'axios'
+import { isEmpty as isEmptyObject } from '@/modules/object'
 
 export default
 {

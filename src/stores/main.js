@@ -3,16 +3,16 @@
  * stores/main.js
  */
 
-import Vue                         from 'vue'
-import Vuex                        from 'vuex'
+import Vue       from 'vue'
+import Vuex      from 'vuex'
 
-import bookmarks                   from '@/stores/bookmarks'
-import browse                      from '@/stores/browse'
-import player                      from '@/stores/player'
+import bookmarks from '@/stores/bookmarks'
+import browse    from '@/stores/browse'
+import player    from '@/stores/player'
 
-import pathify                     from '@/modules/pathify'
-import storage                     from '@/modules/storage'
-import { isObject, objectForEach } from '@/modules/object'
+import pathify   from '@/modules/pathify'
+import storage   from '@/modules/storage'
+import * as obj  from '@/modules/object'
 
 /**
  * Plugin to automatically save some state properties in the local storage upon certain mutations
@@ -33,7 +33,7 @@ const storeOnMutation = store => store.subscribe(function(mutation, state)
 		'player/toggleCountdown':      { name: 'player/isCountdownOn',    value: state.player.isCountdownOn    },
 	};
 
-	objectForEach(saveUponMutations, function(key, value)
+	obj.forEach(saveUponMutations, function(key, value)
 	{
 		// Check that the name of the mutation matches the key
 		const rx = new RegExp(`^${key}$`);
@@ -43,8 +43,8 @@ const storeOnMutation = store => store.subscribe(function(mutation, state)
 		const prop = typeof value == 'function' ? value(mutation.type) : value;
 
 		storage.set(
-			isObject(prop) ? prop.name  : prop,
-			isObject(prop) ? prop.value : state[prop]
+			obj.isObject(prop) ? prop.name  : prop,
+			obj.isObject(prop) ? prop.value : state[prop]
 		);
 	});
 });

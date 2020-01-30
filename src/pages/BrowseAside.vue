@@ -167,19 +167,19 @@ export default {
 		updateQueryString()
 		{
 			// Filter the search params to remove any wildcard values
-			let queryParams = obj.objectFilter(this.searchParams, (p, v) => v !== 'any' && !(obj.isObject(v) && obj.isEmptyObject(v)));
+			let queryParams = obj.filter(this.searchParams, (p, v) => v !== 'any' && !(obj.isObject(v) && obj.isEmpty(v)));
 
 			if (queryParams.tags)
 			{
 				// Format the tags for the URL query string
-				queryParams.tags = obj.objectMap(
+				queryParams.tags = obj.map(
 					this.searchParams.tags,
 					(tag, state) => `${state == 'excluded' ? '!' : ''}${tag}`
 				).join(',');
 			}
 
 			// Build the new query string
-			const queryString = obj.objectMap(queryParams, (param, value) => `${param}=${value}`).join('&');
+			const queryString = obj.map(queryParams, (param, value) => `${param}=${value}`).join('&');
 
 			// Update the query string
 			window.history.replaceState({}, '', '/browse' + (queryString.length ? `?${queryString}` : ''))

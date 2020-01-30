@@ -43,7 +43,7 @@ div.VSelect(ref="vselectbar")
 <!--{{{ JavaScript -->
 <script>
 
-import { objectMap } from '@/modules/object.js'
+import { map as objectMap } from '@/modules/object.js'
 
 export default {
 	name: 'VSelect',

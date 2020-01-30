@@ -34,7 +34,7 @@ div.statebox(
 <!--{{{ JavaScript -->
 <script>
 
-import { isObject, checkObjectProp, objectFilter } from '@/modules/object'
+import * as obj from '@/modules/object'
 
 export default {
 	name: 'VStatebox',
@@ -81,7 +81,7 @@ export default {
 	data() {
 		return {
 			// Get the initial state from the v-model (fall back to the first available state if it's invalid)
-			state: this.states.includes(isObject(this.modelState) ? (this.modelState[this.value] || this.states[0]) : this.modelState)
+			state: this.states.includes(obj.isObject(this.modelState) ? (this.modelState[this.value] || this.states[0]) : this.modelState)
 			     ? this.modelState
 			     : this.states[0]
 		}
@@ -141,14 +141,14 @@ export default {
 			}
 
 			// If the v-model is linked to an object (several checkboxes sharing the same v-model)
-			if (isObject(this.modelState))
+			if (obj.isObject(this.modelState))
 			{
 				let newModelState = {...this.modelState};
 
 				newModelState[this.value] = this.state;
 
 				// Filter out the keys that are set to the first state
-				let filteredModelState = objectFilter(newModelState, (key, state) => state !== this.states[0]);
+				let filteredModelState = obj.filter(newModelState, (key, state) => state !== this.states[0]);
 
 				this.$emit('change', filteredModelState);
 
@@ -168,7 +168,7 @@ export default {
 			if (!this.modelState) return;
 
 			// If the v-model is linked to an object
-			if (isObject(this.modelState))
+			if (obj.isObject(this.modelState))
 			{
 				let modelStateCopy = {...this.modelState};
 

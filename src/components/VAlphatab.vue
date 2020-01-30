@@ -19,10 +19,10 @@ div.VAlphatab(
 <!--{{{ JavaScript -->
 <script>
 
-import Vue               from 'vue';
+import Vue                          from 'vue';
 
-import { expandTex }     from '@/modules/alphatex'
-import { objectForEach } from '@/modules/object'
+import { expandTex }                from '@/modules/alphatex'
+import { forEach as objectForEach } from '@/modules/object'
 
 export default {
 	name: 'VAlphatab',
