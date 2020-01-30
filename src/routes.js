@@ -17,8 +17,10 @@ const routes = [
 			view:  loadAsyncComponent('HomeView'),
 			aside: loadAsyncComponent('HomeAside'),
 		},
-		sitemap: {
-			priority: 1.0,
+		meta: {
+			sitemap: {
+				priority: 1.0,
+			}
 		}
 	},
 	{
@@ -28,22 +30,28 @@ const routes = [
 			view:  loadAsyncComponent('BrowseView'),
 			aside: loadAsyncComponent('BrowseAside'),
 		},
-		sitemap: {
-			changefreq: 'always',
+		meta: {
+			sitemap: {
+				changefreq: 'always',
+			}
 		}
 	},
 	{
 		path: '/bookmarks',
 		name: 'bookmarks',
-		sitemap: {
-			ignoreRoute: true,
+		meta: {
+			sitemap: {
+				ignoreRoute: true,
+			}
 		}
 	},
 	{
 		path: '/lick/random',
 		redirect: () => `/lick/${Math.floor(Math.random() * TOTAL_NB_LICKS)}`,
-		sitemap: {
-			ignoreRoute: true,
+		meta: {
+			sitemap: {
+				ignoreRoute: true,
+			}
 		}
 	},
 	{
@@ -57,9 +65,11 @@ const routes = [
 			view:  true,
 			aside: true,
 		},
-		sitemap: {
-			changefreq:  'yearly',
-			slugs:       [...new Array(TOTAL_NB_LICKS).keys()].map(id => id + 1),
+		meta: {
+			sitemap: {
+				changefreq:  'yearly',
+				slugs:       [...new Array(TOTAL_NB_LICKS).keys()].map(id => id + 1),
+			}
 		}
 	},
 	{
@@ -69,8 +79,10 @@ const routes = [
 			view:  loadAsyncComponent('UpdatesView'),
 			aside: loadAsyncComponent('HomeAside'),
 		},
-		sitemap: {
-			changefreq: 'weekly',
+		meta: {
+			sitemap: {
+				changefreq: 'weekly',
+			}
 		}
 	},
 	{
@@ -93,7 +105,12 @@ if (process.env.NODE_ENV === 'development')
 			components: {
 				view:   loadAsyncComponent('AdminView'),
 				aside:  loadAsyncComponent('HomeAside'),
-			}
+			},
+			meta: {
+				sitemap: {
+					ignoreRoute: true,
+				}
+			},
 		},
 		{
 			path: '/edit/:id',
@@ -101,8 +118,13 @@ if (process.env.NODE_ENV === 'development')
 			components: {
 				view:   loadAsyncComponent('AdminView'),
 				aside:  loadAsyncComponent('HomeAside'),
-			}
-		}
+			},
+			meta: {
+				sitemap: {
+					ignoreRoute: true,
+				}
+			},
+		},
 	);
 }
 

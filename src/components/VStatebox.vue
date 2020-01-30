@@ -81,9 +81,9 @@ export default {
 	data() {
 		return {
 			// Get the initial state from the v-model (fall back to the first available state if it's invalid)
-			state: isObject(this.modelState)
-				? checkObjectProp(this.modelState, this.value, this.states, this.states[0])
-				: this.states.includes(this.modelState) ? this.modelState : this.states[0]
+			state: this.states.includes(isObject(this.modelState) ? (this.modelState[this.value] || this.states[0]) : this.modelState)
+			     ? this.modelState
+			     : this.states[0]
 		}
 	},
 
