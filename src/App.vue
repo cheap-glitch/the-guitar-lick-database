@@ -62,7 +62,10 @@ div.App(v-mods="darkMode")
 			//- fa-icon(:icon="['fas', 'cog']")
 
 		//- Page contents
-		router-view(name="view")
+		router-view(
+			name="view"
+			v-mods="darkMode"
+			)
 
 </template>
 <!--}}}-->
@@ -200,6 +203,8 @@ export default {
 
 	padding: 20px;
 
+	border-right: 1px solid $color-oxford-blue;
+
 	background-color: $color-ebony-clay-2;
 }
 
@@ -290,5 +295,13 @@ export default {
 // Load the font faces
 @include font-face('Bebas Bold', './assets/fonts/bebas/bebas-bold');
 @include font-face('IBM Plex',   './assets/fonts/ibm-plex/ibm-plex');
+
+// Global dark mode styles
+.App.dark-mode {
+	a, p, li,
+	h1, h2, h3 {
+		color: $color-nepal;
+	}
+}
 
 </style>

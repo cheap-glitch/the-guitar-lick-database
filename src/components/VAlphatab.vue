@@ -24,6 +24,20 @@ import Vue                          from 'vue';
 import { expandTex }                from '@/modules/alphatex'
 import { forEach as objectForEach } from '@/modules/object'
 
+const lightModeColorscheme = {
+	barSeparatorColor:    '#000',
+	mainGlyphColor:       '#000',
+	secondaryGlyphColor:  '#000',
+	staffLineColor:       '#aaa',
+};
+
+const darkModeColorscheme = {
+	barSeparatorColor:    '#323e4f',
+	mainGlyphColor:       '#8eacc5',
+	secondaryGlyphColor:  '#323e4f',
+	staffLineColor:       '#323e4f',
+};
+
 export default {
 	name: 'VAlphatab',
 
@@ -140,6 +154,10 @@ export default {
 		{
 			return (this.scoreType === 'mixed') ? 'default' : this.scoreType;
 		},
+		colorscheme()
+		{
+			return this.$store.state.isDarkModeOn ? darkModeColorscheme : lightModeColorscheme;
+		},
 	},
 
 	watch: {
@@ -147,6 +165,7 @@ export default {
 
 		scale:              'updateLayout',
 		alphatabScoreType:  'updateLayout',
+		colorscheme:        'updateColorscheme',
 
 		isPlaybackActive:   'updatePlayer',
 		playerState:        'updatePlayerState',
@@ -184,6 +203,7 @@ export default {
 					scale:                        this.scale,
 					layoutMode:                   this.layout,
 					staveProfile:                 this.alphatabScoreType,
+					resources:                    this.colorscheme,
 				},
 				notation: {
 					rhythmMode:                   'showwithbars',
@@ -251,6 +271,11 @@ export default {
 			});
 
 			this.$alphatab.render();
+		},
+		updateColorscheme()
+		{
+			this.$alphatab.destroy();
+			this.initScore();
 		},
 		updatePlayer()
 		{

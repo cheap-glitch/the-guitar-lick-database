@@ -7,12 +7,12 @@
 <template lang="pug">
 
 div.HomeView
-	section.about
+	section.about(v-mods="darkMode")
 		h2.h2 About
 		article.about__contents.formatted-text
 			include:external-links:markdown-it(html typographer) ../assets/texts/about.md
 
-	section.recent-updates
+	section.recent-updates(v-mods="darkMode")
 		h2.h2 Recent updates
 		UpdatesViewItem(
 			v-for="update in recentUpdates"
@@ -21,7 +21,7 @@ div.HomeView
 			v-bind="update"
 			)
 
-	section.latest-licks
+	section.latest-licks(v-mods="darkMode")
 		h2.h2 Latest licks
 		BrowseViewLick(
 			v-for="lick in latestLicks"
@@ -37,8 +37,9 @@ div.HomeView
 <!--{{{ JavaScript -->
 <script>
 
-import api             from '@/modules/api'
+import { get }         from 'vuex-pathify'
 
+import api             from '@/modules/api'
 import BrowseViewLick  from '@/components/BrowseViewLick'
 import UpdatesViewItem from '@/components/UpdatesViewItem'
 
@@ -55,6 +56,10 @@ export default {
 			latestLicks:   [],
 			recentUpdates: [],
 		}
+	},
+
+	computed: {
+		darkMode: get('darkMode'),
 	},
 
 	created()
@@ -84,6 +89,10 @@ export default {
 .latest-licks,
 .recent-updates {
 	padding: 20px;
+
+	&.dark-mode {
+		border-color: $color-oxford-blue;
+	}
 }
 
 .about {
