@@ -298,7 +298,10 @@ export default {
 
 // Global dark mode styles
 .App.dark-mode {
-	a, p, li,
+	a, p, li {
+		color: #b7cada;
+	}
+
 	h1, h2, h3 {
 		color: $color-nepal;
 	}

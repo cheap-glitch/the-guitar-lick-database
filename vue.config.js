@@ -155,12 +155,11 @@ module.exports = {
 		 * Sitemap
 		 */
 		sitemap: {
-			productionOnly: true,
-
-			baseURL:        'https://www.theguitarlickdatabase.com',
-			trailingSlash:  false,
-
 			routes,
+
+			productionOnly: true,
+			trailingSlash:  false,
+			baseURL:        'https://www.theguitarlickdatabase.com',
 		},
 	},
 }

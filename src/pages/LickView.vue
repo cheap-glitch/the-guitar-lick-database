@@ -66,7 +66,10 @@ div.LickView
 	//----------------------------------------------------------------------
 	//- Infos & notes
 	//----------------------------------------------------------------------
-	section.wrapper-infos(v-if="lick")
+	section.wrapper-infos(
+		v-if="lick"
+		v-mods="darkMode"
+		)
 		h3.h3 Informations
 
 		//- Artist
@@ -123,7 +126,7 @@ div.LickView
 						|
 
 		//- Source
-		p.wrapper-infos__item(v-if="lick.source.type")
+		p.wrapper-infos__item.source-info(v-if="lick.source.type")
 			span
 				| Source:
 				|
@@ -147,7 +150,7 @@ div.LickView
 	//----------------------------------------------------------------------
 	//- Variations & suggestions
 	//----------------------------------------------------------------------
-	section.wrapper-suggestions
+	section.wrapper-suggestions(v-mods="darkMode")
 
 		//- Original lick
 		div.original(v-if="lick && lick.originalId")
@@ -273,6 +276,8 @@ export default {
 			return process.env.NODE_ENV === 'development';
 		},
 
+		darkMode: get('darkMode'),
+
 		...get('player', [
 			'lick',
 			'lickTexTransposed',
@@ -390,6 +395,10 @@ function navigationGuard(to, from, next)
 
 		background-image: linear-gradient(to left, $color-athens-gray 50%, transparent);
 	}
+
+	&.dark-mode::after {
+		background-image: linear-gradient(to left, $color-mirage 50%, transparent);
+	}
 }
 
 .LickView {
@@ -431,15 +440,24 @@ function navigationGuard(to, from, next)
 .wrapper-infos,
 .wrapper-suggestions {
 	border-top: $border-section;
+
+	&.dark-mode {
+		border-color: $color-oxford-blue;
+	}
 }
 
 .wrapper-infos {
 	border-right: $border-section;
 }
 
-
 .wrapper-infos__item {
 	@include space-children-h(10px);
+
+	line-height: 1.6;
+}
+
+.source-info {
+	margin-top: 10px;
 }
 
 .credit {

@@ -33,7 +33,7 @@ const lightModeColorscheme = {
 
 const darkModeColorscheme = {
 	barSeparatorColor:    '#323e4f',
-	mainGlyphColor:       '#8eacc5',
+	mainGlyphColor:       '#b7cada',
 	secondaryGlyphColor:  '#323e4f',
 	staffLineColor:       '#323e4f',
 };
