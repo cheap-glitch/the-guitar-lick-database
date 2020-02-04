@@ -51,15 +51,15 @@ div.App(v-mods="darkMode")
 
 		//- Tiny header
 		header.page-header
-			div.dark-mode-toggle
+			div.dark-mode-toggle(
+				@click="$store.commit('toggleIsDarkModeOn')"
+				)
 				fa-icon(:icon="['fas', 'sun']")
-				fa-icon(:icon="['fas', 'moon']")
-				//- VButton(
-					icon="adjust"
-					:is-active="$store.state.isDarkModeOn"
-					@click="$store.commit('toggleIsDarkModeOn')"
+				div.dark-mode-toggle__switch(
+					v-mods="darkMode"
 					)
-			fa-icon(:icon="['fas', 'cog']")
+				fa-icon(:icon="['fas', 'moon']")
+			//- fa-icon(:icon="['fas', 'cog']")
 
 		//- Page contents
 		router-view(name="view")
@@ -145,6 +145,43 @@ export default {
 	padding: 10px;
 
 	color: darkgray;
+}
+
+.dark-mode-toggle {
+	display: flex;
+	align-items: center;
+	@include space-children-h(5px);
+
+	cursor: pointer;
+}
+
+.dark-mode-toggle__switch {
+	position: relative;
+
+	width: 20px;
+	height: 10px;
+	@include pill;
+
+	border: 1px solid gray;
+
+	&::after {
+		content: '';
+
+		position: absolute;
+		top: 0;
+
+		@include circle(8px);
+
+		background-color: $color-sun;
+	}
+
+	&:not(.dark-mode)::after {
+		left: 0;
+	}
+
+	&.dark-mode::after {
+		right: 0;
+	}
 }
 
 .aside {
