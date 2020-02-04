@@ -63,6 +63,7 @@ div.BrowseView
 			:key="lick.id"
 
 			:lick="lick"
+			v-mods="darkMode"
 			)
 
 	BrowseViewPagelist
@@ -94,6 +95,8 @@ export default {
 	},
 
 	computed: {
+		darkMode: get('darkMode'),
+
 		...get('browse', [
 			'displayedResults',
 		]),
@@ -125,6 +128,12 @@ export default {
 	// The padding is created with a border
 	// to prevent long tabs from overflowing under the fade-out
 	border: 20px solid $color-athens-gray;
+
+	transition: border-color 0.2s;
+
+	&.dark-mode {
+		border-color: $color-mirage;
+	}
 }
 
 .options {
@@ -140,6 +149,10 @@ export default {
 .results__item {
 	&:nth-of-type(odd) {
 		background-color: #e9e9e9;
+
+		&.dark-mode {
+			background-color: $color-ebony-clay;
+		}
 	}
 }
 
