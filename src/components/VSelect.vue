@@ -163,6 +163,12 @@ export default {
 
 	cursor: pointer;
 
+	transition: background-color 0.2s;
+
+	&:not(.is-disabled):hover {
+		background-color: $color-ebony-clay;
+	}
+
 	&.is-disabled {
 		border-color: gray;
 

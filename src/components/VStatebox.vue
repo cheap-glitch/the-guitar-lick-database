@@ -192,39 +192,44 @@ export default {
 <style lang="scss" scoped>
 
 .statebox {
-	padding: 3px;
+	margin: 0 5px 5px 0;
+	padding: 4px 8px;
 
-	border: 1px solid gray;
+	border: 1px solid $color-oxford-blue;
 	@include pill;
+
+	background-color: $color-mirage;
+
+	transition: background-color 0.2s;
+
+	&:hover {
+		background-color: $color-ebony-clay;
+	}
 
 	&.is-label-on-left {
 		flex-direction: row-reverse;
 		justify-content: flex-end;
 	}
 
-	&.is-in-state-0 {}
-	&.is-in-state-1 { background-color: green; }
-	&.is-in-state-2 { background-color: red;   }
+	&.is-in-state-1 { border-color: $color-malachite; }
+	&.is-in-state-2 { border-color: $color-crimson;   }
 }
 
 .statebox__checkbox {
 	display: none;
 
-	&.is-in-state-0 { background-color: white; }
-	&.is-in-state-1 { background-color: green; }
-	&.is-in-state-2 { background-color: red;   }
+	&.is-in-state-1 { border-color: $color-malachite; }
+	&.is-in-state-2 { border-color: $color-crimson;   }
 }
 
 .statebox__label {
+	color: $color-nepal;
+
 	cursor: pointer;
 	user-select: none;
 
-	&.is-in-state-0 {}
-	&.is-in-state-1 { color: white; }
 	&.is-in-state-2 {
 		text-decoration-line: line-through;
-
-		color: white;
 	}
 }
 
