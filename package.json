@@ -3,7 +3,7 @@
   "name": "the-guitar-lick-database",
   "description": "A powerful thesaurus for lead guitarists.",
   "version": "2.0.0",
-  "license": "GPL-3.0-only",
+  "license": "LGPL-3.0-only",
   "repository": "github:cheap-glitch/the-guitar-lick-database",
   "author": "cheap glitch <cheap.glitch@gmail.com> (https://github.com/cheap-glitch)",
   "main": "src/main.js",

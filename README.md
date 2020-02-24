@@ -11,3 +11,6 @@ a thesaurus for lead guitar players. Features:
 
 ## Changelog
 See the full changelog [here](https://github.com/cheap-glitch/the-guitar-lick-database/releases).
+
+## License
+This software is distributed under the [GNU LGPL 3.0](https://spdx.org/licenses/LGPL-3.0-only.html).
