@@ -23,4 +23,4 @@
 .env.*.local
 .htaccess
 /api/params.prod.php
-/publish
+/scripts/
