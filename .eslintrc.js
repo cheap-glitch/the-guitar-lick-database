@@ -32,7 +32,7 @@ module.exports = {
 	},
 
 	overrides: [{
-		files: ['tests/unit/*.spec.js'],
+		files: ['test/*.test.js'],
 		env: {
 			mocha: true
 		}

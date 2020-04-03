@@ -1,6 +1,6 @@
 
 /**
- * tests/unit/alphatex.spec.js
+ * test/alphatex.test.js
  */
 
 import { expect } from 'chai'

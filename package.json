@@ -7,15 +7,20 @@
   "repository": "github:cheap-glitch/the-guitar-lick-database",
   "author": "cheap glitch <cheap.glitch@gmail.com> (https://github.com/cheap-glitch)",
   "main": "src/main.js",
+  "directories": {
+    "test": "test"
+  },
   "scripts": {
     "build": "vue-cli-service build --modern",
     "coverage": "nyc npm test",
-    "lint": "vue-cli-service lint --no-fix 'src/**/*.{js,vue}' && ./vendor/jakub-onderka/php-parallel-lint/parallel-lint api",
+    "lint": "run-p 'lint:*'",
+    "lint:js": "vue-cli-service lint --no-fix 'src/**/*.{js,vue}'",
+    "lint:php": "./vendor/jakub-onderka/php-parallel-lint/parallel-lint api",
     "serve": "nodemon --watch vue.config.js --exec npm run serve-vue-cli",
     "serve-vue-cli": "vue-cli-service serve --https",
     "sitemap": "vue-cli-service sitemap",
     "test": "npm run test:unit -- ",
-    "test:unit": "vue-cli-service test:unit"
+    "test:unit": "vue-cli-service test:unit 'test/*.test.js'"
   },
   "browserslist": [
     "last 1 version",
@@ -39,7 +44,7 @@
     "markdown-it": "^10.0.0",
     "v-click-outside": "^3.0.1",
     "vue": "^2.6.11",
-    "vue-autosuggest": "^2.0.4",
+    "vue-autosuggest": "^2.1.1",
     "vue-css-modifiers": "^1.0.6",
     "vue-router": "^3.1.6",
     "vue-slider-component": "^3.1.1",
@@ -68,6 +73,7 @@
     "html-minifier": "^4.0.0",
     "jstransformer-markdown-it": "^2.1.0",
     "nodemon": "^2.0.2",
+    "npm-run-all": "^4.1.5",
     "nyc": "^15.0.0",
     "prerender-spa-plugin": "^3.4.0",
     "pug": "^2.0.4",

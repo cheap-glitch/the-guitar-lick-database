@@ -1,6 +1,6 @@
 
 /**
- * tests/unit/tools.spec.js
+ * test/tools.test.js
  */
 
 import { expect }  from 'chai'
