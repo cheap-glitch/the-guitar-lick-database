@@ -15,7 +15,7 @@
     "coverage": "nyc npm test",
     "lint": "run-p 'lint:*'",
     "lint:js": "vue-cli-service lint --no-fix 'src/**/*.{js,vue}'",
-    "lint:php": "./vendor/jakub-onderka/php-parallel-lint/parallel-lint api",
+    "lint:php": "./vendor/php-parallel-lint/php-parallel-lint/parallel-lint api",
     "serve": "nodemon --watch vue.config.js --exec npm run serve-vue-cli",
     "serve-vue-cli": "vue-cli-service serve --https",
     "sitemap": "vue-cli-service sitemap",
