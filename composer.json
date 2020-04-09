@@ -9,7 +9,7 @@
     "slim/slim": "^4.0.0"
   },
   "require-dev": {
-    "jakub-onderka/php-parallel-lint": "^1.0",
-    "jakub-onderka/php-console-highlighter": "^0.4.0"
+    "php-parallel-lint/php-parallel-lint": "^1.0",
+    "php-parallel-lint/php-console-highlighter": "^0.4.0"
   }
 }
