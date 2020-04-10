@@ -106,8 +106,6 @@ export default {
 
 .p-radio {
 	display: flex;
-
-	background-color: var(--test);
 }
 
 .p-radio__label {
@@ -118,9 +116,15 @@ export default {
 
 .p-radio__label,
 .p-radio__choice {
-	padding: 3px;
+	padding: 4px 8px;
 
-	border: 1px solid gray;
+	border: 1px solid $color-oxford-blue;
+
+	white-space: nowrap;
+	text-overflow: clip;
+
+	color: $color-regent-st-blue;
+	background-color: $color-ebony-clay;
 
 	&:not(:last-child) {
 		border-right: none;
@@ -140,15 +144,17 @@ export default {
 }
 
 .p-radio__choice {
-	cursor: pointer;
+	&:not(.is-disabled):not(.is-selected):hover {
+		cursor: pointer;
 
-	&:not(.is-disabled):hover {
-		background-color: lightgray;
+		background-color: $color-oxford-blue;
 	}
 
 	&.is-selected {
-		background-color: green;
+		background-color: $color-malachite;
 	}
+
+	transition: background-color 0.2s;
 }
 
 .p-radio__choice__input {

@@ -71,7 +71,7 @@ export default new Vuex.Store(
 		progressBar:    0,
 		progressBarMax: 90,
 
-		isDarkModeOn:   storage.get('isDarkModeOn', true, v => typeof v == 'boolean'),
+		isDarkModeOn:   storage.get('isDarkModeOn', false, v => typeof v == 'boolean'),
 	},
 
 	mutations: {

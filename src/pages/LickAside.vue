@@ -96,7 +96,7 @@ div.LickAside
 	//----------------------------------------------------------------------
 	//- Speed trainer
 	//----------------------------------------------------------------------
-	VFold(title="Speed trainer")
+	VFold(title="Speed trainer" is-closed-by-default)
 
 		//- Controls
 		div.toolbar
@@ -197,10 +197,20 @@ div.LickAside
 		VPillRadio(
 			id="score-type"
 			label="Score type"
-			:choices="{ 'tab only': 'tab', 'score only': 'score', 'both': 'mixed' }"
+			:choices="{ tablature: 'tab', score: 'score', both: 'mixed' }"
 			:is-disabled="!isLickLoaded"
 
 			v-model="scoreType"
+			)
+		//- Picking suggestions
+		VPillRadio(
+			v-show="lickHasPickingSuggestions"
+
+			id="is-picking-shown"
+			label="Picking suggestions"
+			:choices="{ 'yes': true, 'no': false }"
+
+			v-model="isPickingShown"
 			)
 		//- Transposition
 		VSelect(
@@ -209,16 +219,6 @@ div.LickAside
 			:is-disabled="!isLickLoaded"
 
 			v-model="tonalityShift"
-			)
-		//- Picking suggestions
-		VPillRadio(
-			v-show="lickHasPickingSuggestions"
-
-			id="is-picking-shown"
-			label="Show picking suggestions"
-			:choices="{ 'yes': true, 'no': false }"
-
-			v-model="isPickingShown"
 			)
 
 </template>

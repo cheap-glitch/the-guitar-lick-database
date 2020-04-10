@@ -144,7 +144,7 @@ export default {
 	left: 0;
 	right: 0;
 
-	padding: 10px;
+	padding: 10px 10px 0 0;
 
 	color: darkgray;
 }

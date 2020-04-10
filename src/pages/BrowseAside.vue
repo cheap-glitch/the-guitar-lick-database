@@ -59,7 +59,7 @@ div.BrowseAside
 		section.section
 			VFold(title="Tags")
 				div.tags
-					VStatebox(
+					VStatebox.tags__item(
 						v-for="(name, key) in data.tags"
 						:key="`tag-${key}`"
 
@@ -253,6 +253,10 @@ export default {
 .tags {
 	display: flex;
 	flex-flow: row wrap;
+}
+
+.tags__item {
+	margin: 0 5px 5px 0;
 }
 
 </style>

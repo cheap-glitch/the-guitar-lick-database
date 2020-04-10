@@ -196,7 +196,6 @@ export default {
 <style lang="scss" scoped>
 
 .statebox {
-	margin: 0 5px 5px 0;
 	padding: 4px 8px;
 
 	border: 1px solid $color-oxford-blue;

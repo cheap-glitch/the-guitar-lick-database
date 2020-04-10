@@ -127,8 +127,8 @@ export default {
 			let tab = this.tex.trim();
 
 			// Remove picking strokes if needed
-			if (!this.isPickingShown)
-				tab = tab.replace(/(↑|↓)/g, '');
+			// @TODO: this is a hack, should be fixed better (why is 'isTexExpanded' needed?
+			if (!this.isPickingShown) tab = tab.replace(/(?:↑|↓|{sd}|{su}|su|sd)/g, '');
 
 			// Expand the alphatex and add the relevant metadata
 			tab = `\\tempo ${this.tempo} .

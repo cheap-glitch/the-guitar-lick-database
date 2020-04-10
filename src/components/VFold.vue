@@ -35,11 +35,15 @@ export default {
 			type: String,
 			required: true,
 		},
+		isClosedByDefault: {
+			type: Boolean,
+			default: false,
+		},
 	},
 
 	data() {
 		return {
-			isOpened: storage.get(this.getStorageKeyName(), true, v => typeof v == 'boolean'),
+			isOpened: storage.get(this.getStorageKeyName(), !this.isClosedByDefault, v => typeof v == 'boolean'),
 		}
 	},
 
