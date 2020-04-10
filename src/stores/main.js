@@ -74,10 +74,6 @@ export default new Vuex.Store(
 		isDarkModeOn:   storage.get('isDarkModeOn', true, v => typeof v == 'boolean'),
 	},
 
-	getters: {
-		darkMode: state => ({ 'dark-mode': state.isDarkModeOn }),
-	},
-
 	mutations: {
 		setTotalNbLicks:     (state, value) => state.totalNbLicks   = parseInt(value),
 

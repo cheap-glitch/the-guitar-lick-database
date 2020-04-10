@@ -19,23 +19,24 @@ div.VAlphatab(
 <!--{{{ JavaScript -->
 <script>
 
-import Vue                          from 'vue';
+import Vue                          from 'vue'
 
+import colors                       from '@/styles/colorscheme.scss'
 import { expandTex }                from '@/modules/alphatex'
 import { forEach as objectForEach } from '@/modules/object'
 
 const lightModeColorscheme = {
-	barSeparatorColor:    '#000',
-	mainGlyphColor:       '#000',
-	secondaryGlyphColor:  '#000',
-	staffLineColor:       '#aaa',
+	barSeparatorColor:    '#000000',
+	mainGlyphColor:       '#000000',
+	secondaryGlyphColor:  '#000000',
+	staffLineColor:       '#aaaaaa',
 };
 
 const darkModeColorscheme = {
-	barSeparatorColor:    '#323e4f',
-	mainGlyphColor:       '#b7cada',
-	secondaryGlyphColor:  '#323e4f',
-	staffLineColor:       '#323e4f',
+	barSeparatorColor:    colors.oxfordBlue,
+	mainGlyphColor:       colors.athensGray,
+	secondaryGlyphColor:  colors.oxfordBlue,
+	staffLineColor:       colors.oxfordBlue,
 };
 
 export default {

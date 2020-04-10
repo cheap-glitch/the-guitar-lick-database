@@ -6,7 +6,7 @@
 <!--{{{ Pug -->
 <template lang="pug">
 
-div.App(v-mods="darkMode")
+div.App(:style="colorscheme")
 
 	//----------------------------------------------------------------------
 	//- Sidebar
@@ -51,21 +51,18 @@ div.App(v-mods="darkMode")
 
 		//- Tiny header
 		header.page-header
-			div.dark-mode-toggle(
-				@click="$store.commit('toggleIsDarkModeOn')"
-				)
+
+			//- Light/Dark switch
+			div.dark-mode-toggle(@click="$store.commit('toggleIsDarkModeOn')")
 				fa-icon(:icon="['fas', 'sun']")
-				div.dark-mode-toggle__switch(
-					v-mods="darkMode"
-					)
+				div.dark-mode-toggle__switch(v-mods="{ isDarkModeOn }")
 				fa-icon(:icon="['fas', 'moon']")
+
+			//- Settings menu
 			//- fa-icon(:icon="['fas', 'cog']")
 
 		//- Page contents
-		router-view(
-			name="view"
-			v-mods="darkMode"
-			)
+		router-view(name="view")
 
 </template>
 <!--}}}-->
@@ -74,11 +71,14 @@ div.App(v-mods="darkMode")
 <!--{{{ JavaScript -->
 <script>
 
-import { get }     from 'vuex-pathify'
+import { get }         from 'vuex-pathify'
 
-import api         from '@/modules/api'
-import MenuAside   from '@/components/MenuAside'
-import ProgressBar from '@/components/ProgressBar'
+import api             from '@/modules/api'
+import colorscheme     from '@/modules/colorscheme'
+import { mapToObject } from '@/modules/object'
+
+import MenuAside       from '@/components/MenuAside'
+import ProgressBar     from '@/components/ProgressBar'
 
 export default {
 	name: 'App',
@@ -89,12 +89,15 @@ export default {
 	},
 
 	computed: {
+		colorscheme()
+		{
+			return mapToObject(colorscheme, (varName, values) => values[this.isDarkModeOn ? 1 : 0]);
+		},
 		version()
 		{
 			return process.env.VUE_APP_VERSION;
 		},
-
-		darkMode: get('darkMode'),
+		isDarkModeOn: get('isDarkModeOn'),
 	},
 
 	created()
@@ -116,13 +119,9 @@ export default {
 
 	flex: 1 0 auto;
 
-	background-color: $color-athens-gray;
+	background-color: var(--color--bg);
 
 	transition: background-color 0.2s;
-
-	&.dark-mode {
-		background-color: $color-mirage;
-	}
 }
 
 .page-wrapper {
@@ -178,11 +177,11 @@ export default {
 		background-color: $color-sun;
 	}
 
-	&:not(.dark-mode)::after {
+	&:not(.is-dark-mode-on)::after {
 		left: 0;
 	}
 
-	&.dark-mode::after {
+	&.is-dark-mode-on::after {
 		right: 0;
 	}
 }
@@ -211,6 +210,8 @@ export default {
 .aside__nav-menu {
 	display: flex;
 	flex-direction: column;
+
+	align-self: flex-end;
 }
 
 .aside__footer {
@@ -295,16 +296,5 @@ export default {
 // Load the font faces
 @include font-face('Bebas Bold', './assets/fonts/bebas/bebas-bold');
 @include font-face('IBM Plex',   './assets/fonts/ibm-plex/ibm-plex');
-
-// Global dark mode styles
-.App.dark-mode {
-	a, p, li {
-		color: #b7cada;
-	}
-
-	h1, h2, h3 {
-		color: $color-nepal;
-	}
-}
 
 </style>

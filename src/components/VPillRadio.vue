@@ -106,6 +106,8 @@ export default {
 
 .p-radio {
 	display: flex;
+
+	background-color: var(--test);
 }
 
 .p-radio__label {

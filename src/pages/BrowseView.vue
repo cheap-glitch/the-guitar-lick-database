@@ -61,9 +61,7 @@ div.BrowseView
 		BrowseViewLick.results__item(
 			v-for="lick in displayedResults"
 			:key="lick.id"
-
 			:lick="lick"
-			v-mods="darkMode"
 			)
 
 	BrowseViewPagelist
@@ -95,8 +93,6 @@ export default {
 	},
 
 	computed: {
-		darkMode: get('darkMode'),
-
 		...get('browse', [
 			'displayedResults',
 		]),
@@ -125,15 +121,13 @@ export default {
 .BrowseView {
 	@include space-children-v(10px);
 
-	// The padding is created with a border
-	// to prevent long tabs from overflowing under the fade-out
-	border: 20px solid $color-athens-gray;
+	/**
+	 * The padding is created with a border
+	 * to prevent long tabs from overflowing under the fade-out
+	 */
+	border: 20px solid var(--color--browse-page--border);
 
 	transition: border-color 0.2s;
-
-	&.dark-mode {
-		border-color: $color-mirage;
-	}
 }
 
 .options {
@@ -146,14 +140,8 @@ export default {
 	min-height: 1200px;
 }
 
-.results__item {
-	&:nth-of-type(odd) {
-		background-color: #e9e9e9;
-
-		&.dark-mode {
-			background-color: $color-ebony-clay;
-		}
-	}
+.results__item:nth-of-type(odd) {
+	background-color: var(--color--browse-page-result--bg);
 }
 
 </style>

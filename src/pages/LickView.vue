@@ -66,10 +66,7 @@ div.LickView
 	//----------------------------------------------------------------------
 	//- Infos & notes
 	//----------------------------------------------------------------------
-	section.wrapper-infos(
-		v-if="lick"
-		v-mods="darkMode"
-		)
+	section.wrapper-infos(v-if="lick")
 		h3.h3 Informations
 
 		//- Artist
@@ -150,7 +147,7 @@ div.LickView
 	//----------------------------------------------------------------------
 	//- Variations & suggestions
 	//----------------------------------------------------------------------
-	section.wrapper-suggestions(v-mods="darkMode")
+	section.wrapper-suggestions
 
 		//- Original lick
 		div.original(v-if="lick && lick.originalId")
@@ -276,8 +273,6 @@ export default {
 			return process.env.NODE_ENV === 'development';
 		},
 
-		darkMode: get('darkMode'),
-
 		...get('player', [
 			'lick',
 			'lickTexTransposed',
@@ -393,11 +388,7 @@ function navigationGuard(to, from, next)
 
 		width: 40px;
 
-		background-image: linear-gradient(to left, $color-athens-gray 50%, transparent);
-	}
-
-	&.dark-mode::after {
-		background-image: linear-gradient(to left, $color-mirage 50%, transparent);
+		background-image: linear-gradient(to left, var(--color--browse-page--border) 50%, transparent);
 	}
 }
 
@@ -440,10 +431,6 @@ function navigationGuard(to, from, next)
 .wrapper-infos,
 .wrapper-suggestions {
 	border-top: $border-section;
-
-	&.dark-mode {
-		border-color: $color-oxford-blue;
-	}
 }
 
 .wrapper-infos {
