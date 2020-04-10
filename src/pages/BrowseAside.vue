@@ -146,18 +146,18 @@ export default {
 		this.data = data;
 
 		// Fetch the list of all the artists
-		api.get('artists',
-			data => {
-				this.artists = data || {};
+		api.get('artists', data =>
+		{
+			this.artists = data || {};
 
-				// Check if the query string has a parameter for the artist and if it's valid
-				let artist = this.$route.query?.artist ?? 'any';
-				this.searchParams.artist = this.artistsURLs.includes(artist) ? artist : 'any';
+			// Check if the query string has a parameter for the artist and if it's valid
+			let artist = this.$route.query?.artist ?? 'any';
+			this.searchParams.artist = this.artistsURLs.includes(artist) ? artist : 'any';
 
-				// Fetch the latest licks and update the query string
-				this.updateResults();
-				this.updateQueryString();
-			});
+			// Fetch the latest licks and update the query string
+			this.updateResults();
+			this.updateQueryString();
+		});
 	},
 
 	methods: {
@@ -209,15 +209,9 @@ export default {
 		 */
 		getTagsFromQueryString()
 		{
-			return !this.$route.query.tags.length
-				? {}
-				: this.$route.query.tags.split(',').reduce(
-					function(tags, tag)
-					{
-						tags[tag.replace('!', '')] = tag.startsWith('!') ? 'excluded' : 'included';
-
-						return tags;
-					}, {});
+			return this.$route.query.tags.length
+				? this.$route.query.tags.split(',').reduce((tags, tag) => ({ ...tags, [tag.replace('!', '')]: tag.startsWith('!') ? 'excluded' : 'included' }), {})
+				: {};
 		},
 
 		/**
