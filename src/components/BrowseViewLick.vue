@@ -55,6 +55,7 @@ router-link.BrowseViewLick(:to="`/lick/${lick.id}`")
 		VButton(
 			v-show="previewedLick != lick.id || (previewedLick == lick.id && !isPreviewedLickReady)"
 
+			icon="play"
 			:text="previewedLick == lick.id ? `Loading (${previewedLickProgress} %)` : 'Preview'"
 
 			@click.native.capture.prevent.stop="previewLick(lick.id)"

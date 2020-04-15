@@ -79,7 +79,9 @@ export default {
 .nav-menu__button {
 	@include space-children-h(10px);
 
+	position: relative;
 	display: block;
+	z-index: 1;
 
 	padding: 8px 18px;
 
@@ -95,6 +97,27 @@ export default {
 	background-color: $color-azure;
 
 	user-select: none;
+
+	&::before {
+		content: '';
+		@include pill;
+
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		z-index: -1;
+
+		background-image: linear-gradient(30deg, $color-portage, $color-azure);
+
+		opacity: 0;
+		transition: opacity 0.4s;
+	}
+
+	&:hover::before {
+		opacity: 1;
+	}
 }
 
 </style>

@@ -39,7 +39,7 @@ export default {
 		},
 		icon: {
 			type: [Array, String],
-			default: null,
+			required: true,
 		},
 		tooltip: {
 			type: String,
@@ -72,24 +72,28 @@ export default {
 
 .VButton {
 	@include center-content;
-	@include space-children-h(10px);
+	@include space-children-h(8px);
 
 	@include pill;
 
-	padding: 8px;
+	padding: 4px 8px;
 
-	border: 1px solid grey;
+	border: 1px solid $color-oxford-blue;
+
+	color: $color-nepal;
+	background-color: $color-mirage;
 
 	cursor: pointer;
 	appearance: none;
 
-	&:hover {
-		background-color: lightblue;
+	transition: background-color 0.2s;
+
+	&:hover:not(.is-disabled) {
+		background-color: $color-ebony-clay;
 	}
 
 	&.is-disabled {
 		cursor: not-allowed;
-		background-color: darkgray;
 	}
 
 	/**
@@ -97,18 +101,24 @@ export default {
 	 * are true, the active background color is combined with the disabled cursor
 	 */
 	&.is-active {
-		background-color: orange;
+		background-color: $color-cinnabar;
 	}
 
 	&.is-only-icon {
-		width: 30px;
-		height: 30px;
+		@include square(35px);
+		padding: 0;
 
 		border-radius: 50%;
+
+		.VButton__icon {
+			font-size: 1.6rem;
+		}
 	}
 }
 
 .VButton__icon {
+	font-size: 1.3rem;
+
 	&.is-disabled {
 		cursor: not-allowed;
 	}
