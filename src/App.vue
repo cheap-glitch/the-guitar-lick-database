@@ -27,6 +27,17 @@ div.App(:style="colorscheme")
 
 		//- Footer
 		footer.aside__footer
+
+			//- Light/dark switch
+			div.dark-mode-toggle(@click="$store.commit('toggleIsDarkModeOn')")
+				fa-icon(:icon="['fas', 'sun']")
+				div.dark-mode-toggle__switch(v-mods="{ isDarkModeOn }")
+				fa-icon(:icon="['fas', 'moon']")
+
+			//- Settings menu
+			//- fa-icon(:icon="['fas', 'cog']")
+
+		//-
 			p.aside__footer__text TGLD v{{ version }} by cheap glitch
 			div.aside__footer__links
 				a.aside__footer__links__item(
@@ -47,22 +58,7 @@ div.App(:style="colorscheme")
 	//- Main view
 	//----------------------------------------------------------------------
 	ProgressBar
-	section.page-wrapper
-
-		//- Tiny header
-		header.page-header
-
-			//- Light/Dark switch
-			div.dark-mode-toggle(@click="$store.commit('toggleIsDarkModeOn')")
-				fa-icon(:icon="['fas', 'sun']")
-				div.dark-mode-toggle__switch(v-mods="{ isDarkModeOn }")
-				fa-icon(:icon="['fas', 'moon']")
-
-			//- Settings menu
-			//- fa-icon(:icon="['fas', 'cog']")
-
-		//- Page contents
-		router-view(name="view")
+	section.page-wrapper: router-view(name="view")
 
 </template>
 <!--}}}-->
@@ -133,59 +129,6 @@ export default {
 	margin-left: $layout-aside-width + 40px;
 }
 
-.page-header {
-	display: flex;
-	align-items: center;
-	justify-content: flex-end;
-	@include space-children-h(10px);
-
-	position: absolute;
-	top: 0;
-	left: 0;
-	right: 0;
-
-	padding: 10px 10px 0 0;
-
-	color: darkgray;
-}
-
-.dark-mode-toggle {
-	display: flex;
-	align-items: center;
-	@include space-children-h(5px);
-
-	cursor: pointer;
-}
-
-.dark-mode-toggle__switch {
-	position: relative;
-
-	width: 20px;
-	height: 10px;
-	@include pill;
-
-	border: 1px solid gray;
-
-	&::after {
-		content: '';
-
-		position: absolute;
-		top: 0;
-
-		@include circle(8px);
-
-		background-color: $color-sun;
-	}
-
-	&:not(.is-dark-mode-on)::after {
-		left: 0;
-	}
-
-	&.is-dark-mode-on::after {
-		right: 0;
-	}
-}
-
 .aside {
 	display: grid;
 	grid-template-rows: auto auto 1fr;
@@ -216,12 +159,11 @@ export default {
 
 .aside__footer {
 	display: flex;
-	align-items: flex-end;
-	justify-content: space-between;
 
-	font-size: 1.3rem;
+	align-self: flex-end;
 }
 
+/*
 .aside__footer__text {
 	color: $color-nepal;
 }
@@ -239,6 +181,41 @@ export default {
 	&:hover {
 		color: $color-sun;
 	}
+}
+*/
+
+.dark-mode-toggle {
+	display: flex;
+	align-items: center;
+	@include space-children-h(5px);
+
+	color: $color-nepal;
+
+	cursor: pointer;
+}
+
+.dark-mode-toggle__switch {
+	position: relative;
+
+	width: 20px;
+	height: 10px;
+	@include pill;
+
+	border: 1px solid gray;
+
+	&::after {
+		content: '';
+
+		position: absolute;
+		top: 0;
+
+		@include circle(8px);
+
+		background-color: $color-sun;
+	}
+
+	&.is-dark-mode-on::after       { right: 0; }
+	&:not(.is-dark-mode-on)::after { left:  0; }
 }
 
 .logo {
