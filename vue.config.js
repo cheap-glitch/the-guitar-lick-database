@@ -18,6 +18,10 @@ module.exports = {
 
 	// Display both warnings and errors in the dev overlay
 	devServer: {
+		https: true,
+		host:  'localhost',
+		port:  8080,
+
 		overlay: {
 			errors:   true,
 			warnings: true,
