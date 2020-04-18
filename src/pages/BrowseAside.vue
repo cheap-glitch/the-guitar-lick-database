@@ -68,12 +68,14 @@ div.BrowseAside
 						:label="name"
 						:states="['unchecked', 'included', 'excluded']"
 						mode="buttons-overwrite"
+						is-dark-by-default
 
 						v-model="searchParams.tags"
 						)
 				VButton(
 					text="Clear the tags"
 					icon="trash-alt"
+					is-dark-by-default
 
 					@click="clearTags"
 					)

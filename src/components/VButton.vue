@@ -8,6 +8,7 @@
 
 button.VButton(
 	:title="tooltip"
+	:style="colorscheme"
 	v-mods="{ isActive, isDisabled, isOnlyIcon: !text }"
 
 	@click.left="click"
@@ -28,6 +29,11 @@ button.VButton(
 
 <!--{{{ JavaScript -->
 <script>
+
+import { get }         from 'vuex-pathify'
+
+import colorscheme     from '@/modules/colorscheme'
+import { mapToObject } from '@/modules/object'
 
 export default {
 	name: 'VButton',
@@ -53,6 +59,19 @@ export default {
 			type: Boolean,
 			default: false,
 		},
+		isDarkByDefault: {
+			type: Boolean,
+			default: false,
+		},
+	},
+
+	computed: {
+		colorscheme()
+		{
+			return mapToObject(colorscheme, (varName, values) => values[(this.isDarkModeOn || this.isDarkByDefault) ? 1 : 0]);
+		},
+
+		...get(['isDarkModeOn']),
 	},
 
 	methods: {
@@ -78,18 +97,19 @@ export default {
 
 	padding: 4px 8px;
 
-	border: 1px solid $color-oxford-blue;
+	appearance: none;
 
-	color: $color-nepal;
-	background-color: $color-mirage;
+	border: 1px solid var(--color--border);
+
+	color: var(--color--text);
+	background-color: var(--color--bg);
 
 	cursor: pointer;
-	appearance: none;
 
 	transition: background-color 0.2s;
 
 	&:hover:not(.is-disabled) {
-		background-color: $color-ebony-clay;
+		background-color: var(--color--bg--light);
 	}
 
 	&.is-disabled {

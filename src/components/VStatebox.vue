@@ -8,6 +8,8 @@
 
 div.statebox(
 	:class="`is-in-state-${states.indexOf(state)}`"
+	:style="colorscheme"
+
 	v-mods="{ isLabelOnLeft: labelPosition === 'left' }"
 	)
 	input.statebox__checkbox(
@@ -34,7 +36,10 @@ div.statebox(
 <!--{{{ JavaScript -->
 <script>
 
-import * as obj from '@/modules/object'
+import { get }     from 'vuex-pathify'
+
+import * as obj    from '@/modules/object'
+import colorscheme from '@/modules/colorscheme'
 
 export default {
 	name: 'VStatebox',
@@ -76,6 +81,10 @@ export default {
 			default: 'cycle',
 			validator: v => ['cycle', 'buttons', 'buttons-overwrite'].includes(v)
 		},
+		isDarkByDefault: {
+			type: Boolean,
+			default: false,
+		},
 	},
 
 	data() {
@@ -89,6 +98,15 @@ export default {
 				return this.states.includes(modelInitialState) ? modelInitialState : this.states[0];
 			})(),
 		}
+	},
+
+	computed: {
+		colorscheme()
+		{
+			return obj.mapToObject(colorscheme, (varName, values) => values[(this.isDarkModeOn || this.isDarkByDefault) ? 1 : 0]);
+		},
+
+		...get(['isDarkModeOn']),
 	},
 
 	watch: {
@@ -198,15 +216,15 @@ export default {
 .statebox {
 	padding: 4px 8px;
 
-	border: 1px solid $color-oxford-blue;
+	border: 1px solid var(--color--border);
 	@include pill;
 
-	background-color: $color-mirage;
+	background-color: var(--color--bg);
 
 	transition: background-color 0.2s;
 
 	&:hover {
-		background-color: $color-ebony-clay;
+		background-color: var(--color--bg--light);
 	}
 
 	&.is-label-on-left {
@@ -226,7 +244,7 @@ export default {
 }
 
 .statebox__label {
-	color: $color-nepal;
+	color: var(--color--text);
 
 	cursor: pointer;
 	user-select: none;
