@@ -28,7 +28,7 @@ div.BrowseView
 		VPillRadio(
 			id="sort-by"
 			label="Sort by"
-			:choices="{ 'added date': 'date', 'difficulty': 'difficulty' }"
+			:choices="{ 'date added': 'date', 'difficulty': 'difficulty' }"
 
 			v-model="sortBy"
 			)
@@ -141,7 +141,7 @@ export default {
 }
 
 .results__item:nth-of-type(odd) {
-	background-color: var(--color--browse-page-result--bg);
+	background-color: var(--color--bg-2);
 }
 
 </style>

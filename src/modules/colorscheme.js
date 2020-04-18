@@ -6,10 +6,14 @@
 import colors from '@/styles/colorscheme.scss'
 
 export default {
-	'--color--bg':                      [colors.athensGray,  colors.mirage],
-	'--color--fg':                      ['#222',             colors.nepal],
-	'--color--border':                  ['lightgray',        colors.oxfordBlue],
+	'--color--bg':                   [colors.athensGray,  colors.mirage],
+	'--color--bg--light':            ['#e9e9e9',          colors.ebonyClay],
+	'--color--bg--lighter':          ['#eee',          colors.oxfordBlue],
 
-	'--color--browse-page--border':     [colors.athensGray,  colors.mirage],
-	'--color--browse-page-result--bg':  ['#e9e9e9',          colors.ebonyClay],
+	'--color--text':                 ['#222',             colors.regentStBlue],
+	'--color--text--dark':           ['gray',             colors.nepal],
+
+	'--color--border':               ['lightgray',        colors.oxfordBlue],
+
+	'--color--browse-page--border':  [colors.athensGray,  colors.mirage],
 }

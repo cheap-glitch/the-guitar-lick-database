@@ -108,23 +108,14 @@ export default {
 	display: flex;
 }
 
-.p-radio__label {
-	font-style: italic;
-
-	user-select: none;
-}
-
 .p-radio__label,
 .p-radio__choice {
 	padding: 4px 8px;
 
-	border: 1px solid $color-oxford-blue;
+	border: 1px solid var(--color--border);
 
 	white-space: nowrap;
 	text-overflow: clip;
-
-	color: $color-regent-st-blue;
-	background-color: $color-ebony-clay;
 
 	&:not(:last-child) {
 		border-right: none;
@@ -143,11 +134,19 @@ export default {
 	}
 }
 
+.p-radio__label {
+	font-style: italic;
+
+	color: var(--color--text--dark);
+
+	user-select: none;
+}
+
 .p-radio__choice {
 	&:not(.is-disabled):not(.is-selected):hover {
 		cursor: pointer;
 
-		background-color: $color-oxford-blue;
+		background-color: var(--color--bg--lighter);
 	}
 
 	&.is-selected {
@@ -162,11 +161,15 @@ export default {
 }
 
 .p-radio__choice__label {
+	color: var(--color--text);
+
 	cursor: pointer;
 	user-select: none;
 
 	&.is-selected {
 		color: white;
+
+		cursor: default;
 	}
 
 	&.is-disabled {
