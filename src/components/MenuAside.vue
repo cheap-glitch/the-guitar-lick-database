@@ -18,7 +18,7 @@ div.MenuAside
 			fa-icon(icon="list-ul")
 			span browse
 
-		// Idem, but with the bookmark filter activated
+		// Same as above, but with the bookmark filter activated
 		router-link.nav-menu__button(
 			v-show="$route.path !== '/browse'"
 			to="/browse"
@@ -35,10 +35,13 @@ div.MenuAside
 			fa-icon(icon="random")
 			span random lick
 
-		// Go to the Fretboarder page
-		//- router-link.nav-menu__button(
-			v-show="$route.path !== '/fretboarder'"
-			to="/fretboarder"
+		// Open Fretboarder in a new tab
+		a.nav-menu__button(
+			v-show="$route.path === '/'"
+
+			href="https://fretboarder.app"
+			target="_blank"
+			rel="external nofollow noopener noreferrer"
 			)
 			fa-icon(icon="guitar")
 			span fretboarder
@@ -93,8 +96,8 @@ export default {
 
 	@include pill;
 
-	color: $color-ebony-clay;
-	background-color: $color-azure;
+	color: $color--ebony-clay;
+	background-color: $color--azure;
 
 	user-select: none;
 
@@ -109,7 +112,7 @@ export default {
 		bottom: 0;
 		z-index: -1;
 
-		background-image: linear-gradient(30deg, $color-portage, $color-azure);
+		background-image: linear-gradient(30deg, $color--portage, $color--azure);
 
 		opacity: 0;
 		transition: opacity 0.4s;

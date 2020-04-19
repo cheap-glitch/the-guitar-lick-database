@@ -333,7 +333,7 @@ export default {
 <style lang="scss">
 
 .at-highlight {
-	color: $color-portage;
+	color: $color--portage;
 }
 
 .at-cursor-beat {
@@ -344,7 +344,7 @@ export default {
 	// Align the beat cursor with the score
 	transform: translateY(-60px);
 
-	background-color: $color-portage;
+	background-color: $color--portage;
 
 	&.is-visible {
 		display: block;

@@ -121,7 +121,7 @@ export default {
 	 * are true, the active background color is combined with the disabled cursor
 	 */
 	&.is-active {
-		background-color: $color-cinnabar;
+		background-color: $color--cinnabar;
 	}
 
 	&.is-only-icon {

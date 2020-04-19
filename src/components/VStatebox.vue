@@ -232,15 +232,15 @@ export default {
 		justify-content: flex-end;
 	}
 
-	&.is-in-state-1 { border-color: $color-malachite; }
-	&.is-in-state-2 { border-color: $color-crimson;   }
+	&.is-in-state-1 { border-color: $color--malachite; }
+	&.is-in-state-2 { border-color: $color--crimson;   }
 }
 
 .statebox__checkbox {
 	display: none;
 
-	&.is-in-state-1 { border-color: $color-malachite; }
-	&.is-in-state-2 { border-color: $color-crimson;   }
+	&.is-in-state-1 { border-color: $color--malachite; }
+	&.is-in-state-2 { border-color: $color--crimson;   }
 }
 
 .statebox__label {

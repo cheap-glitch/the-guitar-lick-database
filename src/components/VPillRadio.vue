@@ -150,7 +150,7 @@ export default {
 	}
 
 	&.is-selected {
-		background-color: $color-malachite;
+		background-color: $color--malachite;
 	}
 
 	transition: background-color 0.2s;

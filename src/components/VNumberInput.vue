@@ -132,9 +132,9 @@ export default {
 
 	padding: 0 10px;
 
-	border: 1px solid $color-ebony-clay-2;
+	border: 1px solid $color--ebony-clay-2;
 
-	background-color: $color-mirage;
+	background-color: $color--mirage;
 }
 
 .VNumberInput__input {
@@ -143,25 +143,25 @@ export default {
 	appearance: none;
 	border: none;
 
-	color: $color-regent-st-blue;
-	background-color: $color-mirage;
+	color: $color--regent-st-blue;
+	background-color: $color--mirage;
 
 	&::selection {
-		color: $color-mirage;
-		background-color: $color-regent-st-blue;
+		color: $color--mirage;
+		background-color: $color--regent-st-blue;
 	}
 }
 
 .VNumberInput__inner-label {
 	margin-right: 10px;
 
-	color: $color-oxford-blue;
+	color: $color--oxford-blue;
 }
 
 .VNumberInput__toolbar {
 	padding: 5px 0 5px 8px;
 
-	border-left: 1px solid $color-ebony-clay-2;
+	border-left: 1px solid $color--ebony-clay-2;
 }
 
 .VNumberInput__toolbar__button {
@@ -171,12 +171,12 @@ export default {
 
 	border-radius: 50%;
 
-	color: $color-nepal;
+	color: $color--nepal;
 
 	cursor: pointer;
 
 	&:hover {
-		background-color: $color-oxford-blue;
+		background-color: $color--oxford-blue;
 	}
 }
 

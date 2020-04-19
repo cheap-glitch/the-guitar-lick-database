@@ -90,7 +90,7 @@ export default {
 .about {
 	grid-area: about;
 
-	border-right: $border-section;
+	border-right: $layout--section--border;
 }
 
 .about__contents {
@@ -110,7 +110,7 @@ export default {
 .latest-licks {
 	grid-area: licks;
 
-	border-top: $border-section;
+	border-top: $layout--section--border;
 }
 
 </style>

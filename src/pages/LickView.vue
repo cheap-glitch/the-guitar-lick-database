@@ -430,11 +430,11 @@ function navigationGuard(to, from, next)
 
 .wrapper-infos,
 .wrapper-suggestions {
-	border-top: $border-section;
+	border-top: $layout--section--border;
 }
 
 .wrapper-infos {
-	border-right: $border-section;
+	border-right: $layout--section--border;
 }
 
 .wrapper-infos__item {

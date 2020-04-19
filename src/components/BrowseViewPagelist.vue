@@ -78,7 +78,7 @@ export default {
 	transition: background-color 0.2s;
 
 	&.is-current-page {
-		background-color: $color-sun;
+		background-color: $color--sun;
 	}
 
 	&:not(.is-current-page):hover {

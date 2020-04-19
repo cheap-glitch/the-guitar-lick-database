@@ -124,11 +124,11 @@ export default {
 			const windowHeight  = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
 			const elemYPosition = this.$refs.vselectbar.getBoundingClientRect().top;
 
-			// If the element is positioned low in the viewport,
-			// open the options menu upward instead of downward to avoid vertical overflow
-			this.openingDirection = windowHeight - elemYPosition < 380
-				? 'up'
-				: 'down';
+			/**
+			 * If the element is positioned low in the viewport,
+			 * open the options menu upward instead of downward to avoid vertical overflow
+			 */
+			this.openingDirection = windowHeight - elemYPosition < 380 ? 'up' : 'down';
 		},
 	},
 }
@@ -149,9 +149,9 @@ export default {
 
 .VSelect__bar,
 .VSelect__options {
-	border: 1px solid $color-azure;
+	border: 1px solid $color--azure;
 
-	background-color: $color-mirage;
+	background-color: $color--mirage;
 }
 
 .VSelect__bar {
@@ -166,7 +166,7 @@ export default {
 	transition: background-color 0.2s;
 
 	&:not(.is-disabled):hover {
-		background-color: $color-ebony-clay;
+		background-color: $color--ebony-clay;
 	}
 
 	&.is-disabled {
@@ -181,7 +181,7 @@ export default {
 .VSelect__bar__text,
 .VSelect__bar__chevron,
 .VSelect__options__item {
-	color: $color-nepal;
+	color: $color--nepal;
 
 	cursor: pointer;
 	user-select: none;
@@ -224,11 +224,11 @@ export default {
 	padding: 8px;
 
 	&:hover {
-		background-color: $color-oxford-blue;
+		background-color: $color--oxford-blue;
 	}
 
 	&:not(:last-child) {
-		border-bottom: 1px solid $color-ebony-clay;
+		border-bottom: 1px solid $color--ebony-clay;
 	}
 }
 

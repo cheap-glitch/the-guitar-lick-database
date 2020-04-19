@@ -77,9 +77,9 @@ export default {
 
 	font-weight: bold;
 
-	border-bottom: 1px solid $color-oxford-blue;
+	border-bottom: 1px solid $color--oxford-blue;
 
-	color: $color-nepal;
+	color: $color--nepal;
 
 	cursor: pointer;
 	user-select: none;

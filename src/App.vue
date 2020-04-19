@@ -126,7 +126,7 @@ export default {
 
 	flex: 1 1 100%;
 
-	margin-left: $layout-aside-width + 40px;
+	margin-left: $layout--aside--width + 40px;
 }
 
 .aside {
@@ -141,13 +141,13 @@ export default {
 	left: 0;
 	bottom: 0;
 
-	width: $layout-aside-width;
+	width: $layout--aside--width;
 
 	padding: 20px;
 
-	border-right: 1px solid $color-oxford-blue;
+	border-right: 1px solid $color--oxford-blue;
 
-	background-color: $color-ebony-clay-2;
+	background-color: $color--ebony-clay-2;
 }
 
 .aside__nav-menu {
@@ -165,7 +165,7 @@ export default {
 
 /*
 .aside__footer__text {
-	color: $color-nepal;
+	color: $color--nepal;
 }
 
 .aside__footer__links {
@@ -174,12 +174,12 @@ export default {
 }
 
 .aside__footer__links__item {
-	color: $color-nepal;
+	color: $color--nepal;
 
 	transition: color 0.2s;
 
 	&:hover {
-		color: $color-sun;
+		color: $color--sun;
 	}
 }
 */
@@ -189,7 +189,7 @@ export default {
 	align-items: center;
 	@include space-children-h(5px);
 
-	color: $color-nepal;
+	color: $color--nepal;
 
 	cursor: pointer;
 }
@@ -211,7 +211,7 @@ export default {
 
 		@include circle(8px);
 
-		background-color: $color-sun;
+		background-color: $color--sun;
 	}
 
 	&.is-dark-mode-on::after       { right: 0; }
@@ -230,10 +230,10 @@ export default {
 
 	font-size: 60px;
 
-	color: $color-ebony-clay-2;
+	color: $color--ebony-clay-2;
 	background-image:
-		radial-gradient(circle at top right, change-color($color-crimson, $alpha: 0.2), transparent),
-		radial-gradient(circle at top left,  $color-sun, $color-cinnabar);
+		radial-gradient(circle at top right, change-color($color--crimson, $alpha: 0.2), transparent),
+		radial-gradient(circle at top left,  $color--sun, $color--cinnabar);
 }
 
 .logo__text {
@@ -246,8 +246,8 @@ export default {
 
 	color: transparent;
 	background-image:
-		radial-gradient(circle at top right, change-color($color-crimson, $alpha: 0.4), transparent),
-		radial-gradient(circle at top left,  $color-sun, $color-cinnabar);
+		radial-gradient(circle at top right, change-color($color--crimson, $alpha: 0.4), transparent),
+		radial-gradient(circle at top left,  $color--sun, $color--cinnabar);
 	background-clip: text;
 
 	user-select: none;
@@ -267,7 +267,7 @@ export default {
 
 // Set the theme color and import the default style for the custom sliders
 @use '~vue-slider-component/lib/theme/default' with (
-	$themeColor: $color-sun
+	$themeColor: $color--sun
 );
 
 // Load the font faces

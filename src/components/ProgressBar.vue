@@ -78,11 +78,11 @@ export default {
 	z-index: 1000;
 
 	top: 0;
-	left: $layout-aside-width + 40px;
+	left: $layout--aside--width + 40px;
 	height: 2px;
 
 	opacity: 0;
-	background-color: $color-cinnabar;
+	background-color: $color--cinnabar;
 
 	transition: opacity 0.8s;
 
@@ -100,7 +100,7 @@ export default {
 	height: 20px;
 
 	opacity: 0;
-	box-shadow: 0 0 20px $color-cinnabar;
+	box-shadow: 0 0 20px $color--cinnabar;
 
 	transform: rotate(2deg) translateY(-4px);
 
