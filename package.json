@@ -1,7 +1,7 @@
 {
   "private": true,
   "name": "the-guitar-lick-database",
-  "description": "A powerful thesaurus for lead guitarists.",
+  "description": "An expansive thesaurus of guitar licks, with real tablatures and in-browser playback.",
   "version": "2.0.0",
   "license": "LGPL-3.0-only",
   "repository": "github:cheap-glitch/the-guitar-lick-database",

@@ -5,7 +5,7 @@
  *   | | |   | -_|  |  |  | | | |  _| .'|  _|  |  |__| |  _| '_|  |  |  | .'|  _| .'| . | .'|_ -| -_|
  *   |_| |_|_|___|  |_____|___|_|_| |__,|_|    |_____|_|___|_,_|  |____/|__,|_| |__,|___|__,|___|___|
  *
- * A powerful thesaurus for lead guitarists.
+ * An expansive thesaurus of guitar licks, with real tablatures and in-browser playback.
  *
  * Copyright (c) 2019-present, cheap glitch
  * This software is distributed under the GNU LGPL 3.0
