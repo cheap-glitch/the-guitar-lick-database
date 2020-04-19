@@ -1,0 +1,53 @@
+
+/**
+ * styles/colorscheme-export.scss
+ */
+
+@use "colorscheme" as *;
+
+/**
+ * Export the color variables to use in the JS scripts
+ */
+:export {
+	sun:          $color--sun;
+	cinnabar:     $color--cinnabar;
+	crimson:      $color--crimson;
+	malachite:    $color--malachite;
+	azure:        $color--azure;
+	dodgerBlue:   $color--dodger-blue;
+	portage:      $color--portage;
+
+	regentStBlue: $color--regent-st-blue;
+	nepal:        $color--nepal;
+
+	athensGray:   $color--athens-gray;
+	barleyWhite:  $color--barley-white;
+
+	oxfordBlue:   $color--oxford-blue;
+	ebonyClay2:   $color--ebony-clay-2;
+	ebonyClay:    $color--ebony-clay;
+	mirage:       $color--mirage;
+
+	ayu: {
+		ayuMarkup:    $color--ayu--markup;
+		ayuConstant:  $color--ayu--constant;
+		ayuOperator:  $color--ayu--operator;
+		ayuTag:       $color--ayu--tag;
+		ayuRegexp:    $color--ayu--regexp;
+		ayuString:    $color--ayu--string;
+		ayuFunction:  $color--ayu--function;
+		ayuSpecial:   $color--ayu--special;
+		ayuKeyword:   $color--ayu--keyword;
+		ayuError:     $color--ayu--error;
+		ayuAccent:    $color--ayu--accent;
+
+		ayuFg:        $color--ayu--fg;
+		ayuFg_text:   $color--ayu--fg-text;
+		ayuComment:   $color--ayu--comment;
+		ayuFg_idle:   $color--ayu--fg-idle;
+
+		ayuSelection: $color--ayu--selection;
+		ayuPanel:     $color--ayu--panel;
+		ayuBg:        $color--ayu--bg;
+	}
+}
