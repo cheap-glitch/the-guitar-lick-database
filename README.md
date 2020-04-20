@@ -10,7 +10,9 @@ powerful thesaurus of licks for lead guitar players. Features:
 #### Credits & acknowledgements
 This project couldn't exist without the awesome [alphaTab](https://github.com/CoderLine/alphaTab) library!
 
-The dark mode colorscheme is heavily borrowed from the [Vue Dark Mode](https://www.growthbunker.dev/vuedarkmode) project.
+Colorschemes:
+  * [Vue Dark Mode](https://www.growthbunker.dev/vuedarkmode) by [Growth Bunker](https://www.growthbunker.dev)
+  * [Ayu Dark](https://github.com/dempfi/ayu) by [Ike Ku](https://github.com/dempfi)
 
 #### License
 This software is distributed under the [GNU LGPL 3.0](https://spdx.org/licenses/LGPL-3.0-only.html).
