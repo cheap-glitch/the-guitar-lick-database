@@ -30,10 +30,10 @@ button.VButton(
 <!--{{{ JavaScript -->
 <script>
 
-import { get }         from 'vuex-pathify'
+import { get }                  from 'vuex-pathify'
 
-import colorscheme     from '@/modules/colorscheme'
-import { mapToObject } from '@/modules/object'
+import { colorschemeUILightBg } from '@/modules/colorscheme'
+import { getColorschemeMode   } from '@/modules/colorscheme'
 
 export default {
 	name: 'VButton',
@@ -59,7 +59,7 @@ export default {
 			type: Boolean,
 			default: false,
 		},
-		isDarkByDefault: {
+		isOnLightBg: {
 			type: Boolean,
 			default: false,
 		},
@@ -68,7 +68,8 @@ export default {
 	computed: {
 		colorscheme()
 		{
-			return mapToObject(colorscheme, (varName, values) => values[(this.isDarkModeOn || this.isDarkByDefault) ? 1 : 0]);
+			// Overwrite some colors to match a light background if needed
+			return this.isOnLightBg ? getColorschemeMode(colorschemeUILightBg, this.isDarkModeOn) : {};
 		},
 
 		...get(['isDarkModeOn']),
@@ -118,7 +119,7 @@ export default {
 
 	/**
 	 * This modifier is placed below on purpose, so that when both 'isActive' and 'isDisabled'
-	 * are true, the active background color is combined with the disabled cursor
+	 * are both true, the active background color can still be combined with the disabled cursor
 	 */
 	&.is-active {
 		background-color: var(--color--ui--bg--highlight);

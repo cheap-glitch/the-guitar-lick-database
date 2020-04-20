@@ -67,14 +67,14 @@ div.App(:style="colorscheme")
 <!--{{{ JavaScript -->
 <script>
 
-import { get }         from 'vuex-pathify'
+import { get }                from 'vuex-pathify'
 
-import api             from '@/modules/api'
-import colorscheme     from '@/modules/colorscheme'
-import { mapToObject } from '@/modules/object'
+import api                    from '@/modules/api'
+import { colorscheme }        from '@/modules/colorscheme'
+import { getColorschemeMode } from '@/modules/colorscheme'
 
-import MenuAside       from '@/components/MenuAside'
-import ProgressBar     from '@/components/ProgressBar'
+import MenuAside              from '@/components/MenuAside'
+import ProgressBar            from '@/components/ProgressBar'
 
 export default {
 	name: 'App',
@@ -87,7 +87,7 @@ export default {
 	computed: {
 		colorscheme()
 		{
-			return mapToObject(colorscheme, (varName, values) => values[this.isDarkModeOn ? 1 : 0]);
+			return getColorschemeMode(colorscheme, this.isDarkModeOn);
 		},
 		version()
 		{

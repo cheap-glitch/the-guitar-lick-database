@@ -140,7 +140,6 @@ export default {
 <!--{{{ SCSS -->
 <style lang="scss" scoped>
 
-@use '@/styles/colors'      as *;
 @use '@/styles/transitions' as *;
 
 .VSelect {
@@ -150,7 +149,7 @@ export default {
 
 .VSelect__bar,
 .VSelect__options {
-	border: 1px solid $color--azure;
+	border: 1px solid var(--color--ui--border);
 
 	background-color: var(--color--ui--bg);
 }

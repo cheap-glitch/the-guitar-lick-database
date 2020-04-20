@@ -104,8 +104,6 @@ export default {
 <!--{{{ SCSS -->
 <style lang="scss" scoped>
 
-@use '@/styles/colors' as *;
-
 .p-radio {
 	display: flex;
 }
@@ -152,7 +150,7 @@ export default {
 	}
 
 	&.is-selected {
-		background-color: $color--malachite;
+		background-color: var(--color--ui--selected);
 	}
 
 	transition: background-color 0.2s;

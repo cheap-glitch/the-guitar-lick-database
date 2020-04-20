@@ -20,6 +20,7 @@ div.BrowseView
 			label="Bookmarked"
 			:states="['none', 'bookmarked', 'not-bookmarked']"
 			mode="buttons-overwrite"
+			is-on-light-bg
 
 			v-model="bookmarkFilter"
 			)

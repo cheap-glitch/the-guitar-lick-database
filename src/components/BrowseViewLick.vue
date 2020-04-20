@@ -57,6 +57,7 @@ router-link.BrowseViewLick(:to="`/lick/${lick.id}`")
 
 			icon="play"
 			:text="previewedLick == lick.id ? `Loading (${previewedLickProgress} %)` : 'Preview'"
+			is-on-light-bg
 
 			@click.native.capture.prevent.stop="previewLick(lick.id)"
 			)
@@ -66,6 +67,7 @@ router-link.BrowseViewLick(:to="`/lick/${lick.id}`")
 
 			:icon="previewedLickPlayerState == 'playing' ? 'pause' : 'play'"
 			tooltip="Play/pause"
+			is-on-light-bg
 
 			@click.native.capture.prevent.stop="previewedLickPlayerState = previewedLickPlayerState == 'playing' ? 'paused' : 'playing'"
 			)
@@ -75,6 +77,7 @@ router-link.BrowseViewLick(:to="`/lick/${lick.id}`")
 
 			icon="stop"
 			tooltip="Stop"
+			is-on-light-bg
 
 			@click.native.capture.prevent.stop="previewedLickPlayerState = 'stopped'"
 			)

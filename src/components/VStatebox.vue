@@ -36,10 +36,11 @@ div.statebox(
 <!--{{{ JavaScript -->
 <script>
 
-import { get }     from 'vuex-pathify'
+import { get }                  from 'vuex-pathify'
 
-import * as obj    from '@/modules/object'
-import colorscheme from '@/modules/colorscheme'
+import * as obj                 from '@/modules/object'
+import { colorschemeUILightBg } from '@/modules/colorscheme'
+import { getColorschemeMode   } from '@/modules/colorscheme'
 
 export default {
 	name: 'VStatebox',
@@ -81,7 +82,7 @@ export default {
 			default: 'cycle',
 			validator: v => ['cycle', 'buttons', 'buttons-overwrite'].includes(v)
 		},
-		isDarkByDefault: {
+		isOnLightBg: {
 			type: Boolean,
 			default: false,
 		},
@@ -103,7 +104,8 @@ export default {
 	computed: {
 		colorscheme()
 		{
-			return obj.mapToObject(colorscheme, (varName, values) => values[(this.isDarkModeOn || this.isDarkByDefault) ? 1 : 0]);
+			// Overwrite some colors to match a light background if needed
+			return this.isOnLightBg ? getColorschemeMode(colorschemeUILightBg, this.isDarkModeOn) : {};
 		},
 
 		...get(['isDarkModeOn']),
@@ -213,8 +215,6 @@ export default {
 <!--{{{ SCSS -->
 <style lang="scss" scoped>
 
-@use '@/styles/colors' as *;
-
 .statebox {
 	padding: 4px 8px;
 
@@ -234,15 +234,15 @@ export default {
 		justify-content: flex-end;
 	}
 
-	&.is-in-state-1 { border-color: $color--malachite; }
-	&.is-in-state-2 { border-color: $color--crimson;   }
+	&.is-in-state-1 { border-color: var(--color--ui--selected); }
+	&.is-in-state-2 { border-color: var(--color--ui--excluded); }
 }
 
 .statebox__checkbox {
 	display: none;
 
-	&.is-in-state-1 { border-color: $color--malachite; }
-	&.is-in-state-2 { border-color: $color--crimson;   }
+	&.is-in-state-1 { border-color: var(--color--ui--selected); }
+	&.is-in-state-2 { border-color: var(--color--ui--excluded); }
 }
 
 .statebox__label {
