@@ -104,6 +104,8 @@ export default {
 <!--{{{ SCSS -->
 <style lang="scss" scoped>
 
+@use '@/styles/colors' as *;
+
 .p-radio {
 	display: flex;
 }
@@ -112,7 +114,7 @@ export default {
 .p-radio__choice {
 	padding: 4px 8px;
 
-	border: 1px solid var(--color--border);
+	border: 1px solid var(--color--ui--border);
 
 	white-space: nowrap;
 	text-overflow: clip;
@@ -137,7 +139,7 @@ export default {
 .p-radio__label {
 	font-style: italic;
 
-	color: var(--color--text--dark);
+	color: var(--color--ui--text--dark);
 
 	user-select: none;
 }
@@ -146,7 +148,7 @@ export default {
 	&:not(.is-disabled):not(.is-selected):hover {
 		cursor: pointer;
 
-		background-color: var(--color--bg--lighter);
+		background-color: var(--color--ui--bg--hover);
 	}
 
 	&.is-selected {
@@ -161,7 +163,7 @@ export default {
 }
 
 .p-radio__choice__label {
-	color: var(--color--text);
+	color: var(--color--ui--text);
 
 	cursor: pointer;
 	user-select: none;

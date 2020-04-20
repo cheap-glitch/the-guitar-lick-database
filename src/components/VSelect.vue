@@ -140,6 +140,7 @@ export default {
 <!--{{{ SCSS -->
 <style lang="scss" scoped>
 
+@use '@/styles/colors'      as *;
 @use '@/styles/transitions' as *;
 
 .VSelect {
@@ -151,7 +152,7 @@ export default {
 .VSelect__options {
 	border: 1px solid $color--azure;
 
-	background-color: $color--mirage;
+	background-color: var(--color--ui--bg);
 }
 
 .VSelect__bar {
@@ -166,7 +167,7 @@ export default {
 	transition: background-color 0.2s;
 
 	&:not(.is-disabled):hover {
-		background-color: $color--ebony-clay;
+		background-color: var(--color--ui--bg--hover);
 	}
 
 	&.is-disabled {
@@ -181,7 +182,7 @@ export default {
 .VSelect__bar__text,
 .VSelect__bar__chevron,
 .VSelect__options__item {
-	color: $color--nepal;
+	color: var(--color--text-2);
 
 	cursor: pointer;
 	user-select: none;
@@ -224,11 +225,11 @@ export default {
 	padding: 8px;
 
 	&:hover {
-		background-color: $color--oxford-blue;
+		background-color: var(--color--ui--border);
 	}
 
 	&:not(:last-child) {
-		border-bottom: 1px solid $color--ebony-clay;
+		border-bottom: 1px solid var(--color--ui--border-2);
 	}
 }
 

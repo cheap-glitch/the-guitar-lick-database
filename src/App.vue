@@ -110,6 +110,8 @@ export default {
 <!--{{{ SCSS -->
 <style lang="scss" scoped>
 
+@use '@/styles/colors' as *;
+
 .App {
 	display: flex;
 
@@ -145,9 +147,9 @@ export default {
 
 	padding: 20px;
 
-	border-right: 1px solid $color--oxford-blue;
+	border-right: 1px solid var(--color--ui--border);
 
-	background-color: $color--ebony-clay-2;
+	background-color: var(--color--ui--bg--accent);
 }
 
 .aside__nav-menu {
@@ -165,7 +167,7 @@ export default {
 
 /*
 .aside__footer__text {
-	color: $color--nepal;
+	color: var(--color--ui--text-2);
 }
 
 .aside__footer__links {
@@ -174,12 +176,12 @@ export default {
 }
 
 .aside__footer__links__item {
-	color: $color--nepal;
+	color: var(--color--ui--text-2);
 
 	transition: color 0.2s;
 
 	&:hover {
-		color: $color--sun;
+		color: var(--color--ui--bg--highlight);
 	}
 }
 */
@@ -189,7 +191,7 @@ export default {
 	align-items: center;
 	@include space-children-h(5px);
 
-	color: $color--nepal;
+	color: var(--color--ui--text-2);
 
 	cursor: pointer;
 }
@@ -211,7 +213,7 @@ export default {
 
 		@include circle(8px);
 
-		background-color: $color--sun;
+		background-color: var(--color--ui--bg--highlight);
 	}
 
 	&.is-dark-mode-on::after       { right: 0; }
@@ -230,7 +232,7 @@ export default {
 
 	font-size: 60px;
 
-	color: $color--ebony-clay-2;
+	color: var(--color--ui--bg--accent);
 	background-image:
 		radial-gradient(circle at top right, change-color($color--crimson, $alpha: 0.2), transparent),
 		radial-gradient(circle at top left,  $color--sun, $color--cinnabar);
@@ -267,7 +269,7 @@ export default {
 
 // Set the theme color and import the default style for the custom sliders
 @use '~vue-slider-component/lib/theme/default' with (
-	$themeColor: $color--sun
+	$themeColor: var(--color--ui--bg--highlight)
 );
 
 // Load the font faces

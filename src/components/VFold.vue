@@ -77,9 +77,9 @@ export default {
 
 	font-weight: bold;
 
-	border-bottom: 1px solid $color--oxford-blue;
+	border-bottom: 1px solid var(--color--ui--border);
 
-	color: $color--nepal;
+	color: var(--color--ui--text-2);
 
 	cursor: pointer;
 	user-select: none;

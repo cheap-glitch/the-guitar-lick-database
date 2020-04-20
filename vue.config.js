@@ -42,10 +42,9 @@ module.exports = {
 					'sass-mq/_mq.scss',
 					'@cheap-glitch/scss-mixins/_mixins',
 
-					'@/styles/colorscheme',
 					'@/styles/layout',
 				]
-				.map(file => `@use "${file}" as *;`)
+				.map(file => `@use '${file}' as *;`)
 				.join('\n')
 			}
 		},

@@ -73,6 +73,8 @@ export default {
 <!--{{{ SCSS -->
 <style lang="scss" scoped>
 
+@use '@/styles/colors' as *;
+
 .ProgressBar {
 	position: fixed;
 	z-index: 1000;

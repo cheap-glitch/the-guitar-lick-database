@@ -213,6 +213,8 @@ export default {
 <!--{{{ SCSS -->
 <style lang="scss" scoped>
 
+@use '@/styles/colors' as *;
+
 .statebox {
 	padding: 4px 8px;
 

@@ -73,21 +73,21 @@ export default {
 
 	@include square(30px);
 
-	background-color: var(--color--bg--light);
+	background-color: var(--color--ui-light--bg);
 
 	transition: background-color 0.2s;
 
 	&.is-current-page {
-		background-color: $color--sun;
+		background-color: var(--color--ui--bg--highlight);
 	}
 
 	&:not(.is-current-page):hover {
-		background-color: var(--color--bg--lighter);
+		background-color: var(--color--ui-light--bg--hover);
 	}
 }
 
 .pages__item__number {
-	color: var(--color--text--dark);
+	color: var(--color--ui-light--text);
 
 	user-select: none;
 

@@ -21,7 +21,7 @@ div.VAlphatab(
 
 import Vue                          from 'vue'
 
-import colors                       from '@/styles/colorscheme.scss'
+import colors                       from '@/styles/colors-export.scss'
 import { expandTex }                from '@/modules/alphatex'
 import { forEach as objectForEach } from '@/modules/object'
 
@@ -332,6 +332,8 @@ export default {
 <!--{{{ Fixes for the rendering of alphatab -->
 <style lang="scss">
 
+@use '@/styles/colors' as *;
+
 .at-highlight {
 	color: $color--portage;
 }
@@ -340,9 +342,6 @@ export default {
 	display: none;
 
 	width: 3px;
-
-	// Align the beat cursor with the score
-	transform: translateY(-60px);
 
 	background-color: $color--portage;
 

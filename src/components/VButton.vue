@@ -99,17 +99,17 @@ export default {
 
 	appearance: none;
 
-	border: 1px solid var(--color--border);
+	border: 1px solid var(--color--ui--border);
 
-	color: var(--color--text);
-	background-color: var(--color--bg);
+	color: var(--color--ui--text);
+	background-color: var(--color--ui--bg);
 
 	cursor: pointer;
 
 	transition: background-color 0.2s;
 
 	&:hover:not(.is-disabled) {
-		background-color: var(--color--bg--light);
+		background-color: var(--color--ui--bg--hover);
 	}
 
 	&.is-disabled {
@@ -121,7 +121,7 @@ export default {
 	 * are true, the active background color is combined with the disabled cursor
 	 */
 	&.is-active {
-		background-color: $color--cinnabar;
+		background-color: var(--color--ui--bg--highlight);
 	}
 
 	&.is-only-icon {

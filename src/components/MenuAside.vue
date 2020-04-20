@@ -75,6 +75,8 @@ export default {
 <!--{{{ SCSS -->
 <style lang="scss" scoped>
 
+@use '@/styles/colors' as *;
+
 .nav-menu {
 	@include space-children-v(10px);
 }
@@ -96,7 +98,7 @@ export default {
 
 	@include pill;
 
-	color: $color--ebony-clay;
+	color: var(--color--ui--bg);
 	background-color: $color--azure;
 
 	user-select: none;
