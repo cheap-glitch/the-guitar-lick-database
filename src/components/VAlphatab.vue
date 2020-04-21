@@ -33,10 +33,10 @@ const lightModeColorscheme = {
 };
 
 const darkModeColorscheme = {
-	barSeparatorColor:    colors.oxfordBlue,
-	mainGlyphColor:       colors.athensGray,
-	secondaryGlyphColor:  colors.oxfordBlue,
-	staffLineColor:       colors.oxfordBlue,
+	barSeparatorColor:    colors.ayuDirtyWhite,
+	mainGlyphColor:       colors.ayuDirtyWhite,
+	secondaryGlyphColor:  colors.ayuDirtyWhite,
+	staffLineColor:       colors.ayuSlate,
 };
 
 export default {

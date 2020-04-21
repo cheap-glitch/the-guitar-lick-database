@@ -112,7 +112,7 @@ export default {
 .p-radio__choice {
 	padding: 4px 8px;
 
-	border: 1px solid var(--color--ui--border);
+	border: 1px solid var(--color--border);
 
 	white-space: nowrap;
 	text-overflow: clip;
@@ -137,7 +137,7 @@ export default {
 .p-radio__label {
 	font-style: italic;
 
-	color: var(--color--ui--text--dark);
+	color: var(--color--text-2);
 
 	user-select: none;
 }
@@ -146,7 +146,7 @@ export default {
 	&:not(.is-disabled):not(.is-selected):hover {
 		cursor: pointer;
 
-		background-color: var(--color--ui--bg--hover);
+		background-color: var(--color--bg--hover);
 	}
 
 	&.is-selected {
@@ -161,7 +161,7 @@ export default {
 }
 
 .p-radio__choice__label {
-	color: var(--color--ui--text);
+	color: var(--color--text);
 
 	cursor: pointer;
 	user-select: none;

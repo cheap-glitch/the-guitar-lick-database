@@ -11,7 +11,7 @@ div.App(:style="colorscheme")
 	//----------------------------------------------------------------------
 	//- Sidebar
 	//----------------------------------------------------------------------
-	aside.aside
+	aside.sidebar
 
 		//- Logo
 		header.aside__header
@@ -20,7 +20,7 @@ div.App(:style="colorscheme")
 				span.logo__text(:is="$route.path === '/' ? 'span' : 'router-link'" to="/") The Guitar Lick Database
 
 		//- Page-specific tools/navigation
-		router-view(name="aside")
+		router-view(name="sidebar")
 
 		//- Main navigation menu
 		MenuAside.aside__nav-menu
@@ -131,7 +131,7 @@ export default {
 	margin-left: $layout--aside--width + 40px;
 }
 
-.aside {
+.sidebar {
 	display: grid;
 	grid-template-rows: auto auto 1fr;
 	grid-template-columns: 100%;
@@ -149,7 +149,7 @@ export default {
 
 	border-right: 1px solid var(--color--ui--border);
 
-	background-color: var(--color--ui--bg--accent);
+	background-color: var(--color--aside--bg);
 }
 
 .aside__nav-menu {
@@ -186,40 +186,6 @@ export default {
 }
 */
 
-.dark-mode-toggle {
-	display: flex;
-	align-items: center;
-	@include space-children-h(5px);
-
-	color: var(--color--ui--text-2);
-
-	cursor: pointer;
-}
-
-.dark-mode-toggle__switch {
-	position: relative;
-
-	width: 20px;
-	height: 10px;
-	@include pill;
-
-	border: 1px solid gray;
-
-	&::after {
-		content: '';
-
-		position: absolute;
-		top: 0;
-
-		@include circle(8px);
-
-		background-color: var(--color--ui--bg--highlight);
-	}
-
-	&.is-dark-mode-on::after       { right: 0; }
-	&:not(.is-dark-mode-on)::after { left:  0; }
-}
-
 .logo {
 	display: flex;
 	@include space-children-h(14px);
@@ -232,7 +198,7 @@ export default {
 
 	font-size: 60px;
 
-	color: var(--color--ui--bg--accent);
+	color: var(--color--aside--bg);
 	background-image:
 		radial-gradient(circle at top right, change-color($color--crimson, $alpha: 0.2), transparent),
 		radial-gradient(circle at top left,  $color--sun, $color--cinnabar);
@@ -253,6 +219,42 @@ export default {
 	background-clip: text;
 
 	user-select: none;
+}
+
+.dark-mode-toggle {
+	display: flex;
+	align-items: center;
+	@include space-children-h(5px);
+
+	color: var(--color--ui--text-2);
+
+	cursor: pointer;
+}
+
+.dark-mode-toggle__switch {
+	position: relative;
+
+	width: 20px;
+	height: 12px;
+	@include pill;
+
+	border: 2px solid var(--color--ui--border);
+
+	&::after {
+		content: '';
+
+		position: absolute;
+		top: 0;
+
+		@include circle(8px);
+
+		background-color: var(--color--ui--bg--highlight);
+
+		transition: position 0.2s;
+	}
+
+	&.is-dark-mode-on::after       { right: 0; }
+	&:not(.is-dark-mode-on)::after { left:  0; }
 }
 
 </style>

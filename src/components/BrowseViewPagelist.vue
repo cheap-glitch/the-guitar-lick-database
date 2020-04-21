@@ -73,7 +73,7 @@ export default {
 
 	@include square(30px);
 
-	background-color: var(--color--ui-light--bg);
+	background-color: var(--color--bg--hover);
 
 	transition: background-color 0.2s;
 
@@ -82,12 +82,12 @@ export default {
 	}
 
 	&:not(.is-current-page):hover {
-		background-color: var(--color--ui-light--bg--hover);
+		background-color: var(--color--bg--accent);
 	}
 }
 
 .pages__item__number {
-	color: var(--color--ui-light--text);
+	color: var(--color--text);
 
 	user-select: none;
 

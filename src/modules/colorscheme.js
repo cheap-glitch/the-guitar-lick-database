@@ -16,31 +16,36 @@ export const colorscheme = {
 	/**
 	 * Text and main view
 	 */
+	'--color--bg':                [colors.athensGray,   colors.ayuDeepBlack],
+	'--color--bg--hover':         ['#e9e9e9',           colors.ayuBlack],
+	'--color--bg--accent':        ['gray',              colors.ayuDeepSlate],
 
-	'--color--bg':                [colors.athensGray,   colors.ayuBg],
+	'--color--text':              ['#222',              colors.ayuDirtyWhite],
+	'--color--text-2':            ['gray',              colors.ayuSlate],
 
-	'--color--text':              ['#222',              colors.ayuFgText],
-	'--color--text-2':            ['gray',              colors.nepal],
+	'--color--border':            ['lightgray',         colors.ayuSlate2],
 
-	'--color--border':            ['lightgray',         colors.mirage],
+	/**
+	 * Sidebar
+	 */
+	'--color--aside--bg':         [colors.ebonyClay2,   colors.ayuDeepSlate],
 
 	/**
 	 * UI components (dark background)
 	 */
+	'--color--ui--bg':            [colors.mirage,       colors.ayuDeepSlate],
+	'--color--ui--bg--hover':     [colors.ebonyClay,    colors.ayuSlate2],
+	'--color--ui--bg--accent':    [colors.ebonyClay2,   colors.ayuSlate],
+	'--color--ui--bg--highlight': [colors.sun,          colors.ayuOrangeYellow],
 
-	'--color--ui--bg':            [colors.mirage,       colors.mirage],
-	'--color--ui--bg--hover':     [colors.ebonyClay,    colors.ebonyClay],
-	'--color--ui--bg--accent':    [colors.ebonyClay2,   colors.ebonyClay2],
-	'--color--ui--bg--highlight': [colors.sun,          colors.sun],
+	'--color--ui--text':          [colors.regentStBlue, colors.ayuIvory],
+	'--color--ui--text-2':        [colors.nepal,        colors.ayuDirtyWhite],
 
-	'--color--ui--text':          [colors.regentStBlue, colors.regentStBlue],
-	'--color--ui--text-2':        [colors.nepal,        colors.nepal],
+	'--color--ui--border':        [colors.oxfordBlue,   colors.ayuSlate],
+	'--color--ui--border-2':      [colors.ebonyClay,    colors.ayuSlate2],
 
-	'--color--ui--border':        [colors.oxfordBlue,   colors.oxfordBlue],
-	'--color--ui--border-2':      [colors.ebonyClay,    colors.ebonyClay],
-
-	'--color--ui--selected':      [colors.malachite,    colors.malachite],
-	'--color--ui--excluded':      [colors.crimson,      colors.crimson],
+	'--color--ui--selected':      [colors.malachite,    colors.ayuGreen],
+	'--color--ui--excluded':      [colors.crimson,      colors.ayuRed],
 
 };
 
@@ -49,11 +54,12 @@ export const colorschemeUILightBg = {
 	/**
 	 * UI components (light background)
 	 */
+	'--color--ui--bg':            colorscheme['--color--bg--hover'],
+	'--color--ui--bg--hover':     colorscheme['--color--bg--hover'],
 
-	'--color--ui--bg':            [colors.athensGray,   colors.mirage],
-	'--color--ui--bg--hover':     ['#e9e9e9',           colors.ebonyClay],
+	'--color--ui--text':          colorscheme['--color--text'],
 
-	'--color--ui--text':          ['gray',              'gray'],
+	'--color--ui--border':        colorscheme['--color--border'],
 };
 
 export function getColorschemeMode(colorscheme, isDarkMode)

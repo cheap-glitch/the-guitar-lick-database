@@ -126,7 +126,7 @@ export default {
 	 * The padding is created with a border
 	 * to prevent long tabs from overflowing under the fade-out
 	 */
-	border: 20px solid var(--color--browse-page--border);
+	border: 20px solid var(--color--bg);
 
 	transition: border-color 0.2s;
 }
@@ -142,7 +142,7 @@ export default {
 }
 
 .results__item:nth-of-type(odd) {
-	background-color: var(--color--bg-2);
+	background-color: var(--color--bg--hover);
 }
 
 </style>

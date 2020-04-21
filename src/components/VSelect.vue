@@ -181,7 +181,7 @@ export default {
 .VSelect__bar__text,
 .VSelect__bar__chevron,
 .VSelect__options__item {
-	color: var(--color--text-2);
+	color: var(--color--ui--text-2);
 
 	cursor: pointer;
 	user-select: none;

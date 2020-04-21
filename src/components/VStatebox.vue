@@ -218,15 +218,15 @@ export default {
 .statebox {
 	padding: 4px 8px;
 
-	border: 1px solid var(--color--border);
+	border: 1px solid var(--color--ui--border);
 	@include pill;
 
-	background-color: var(--color--bg);
+	background-color: var(--color--ui--bg);
 
 	transition: background-color 0.2s;
 
 	&:hover {
-		background-color: var(--color--bg--light);
+		background-color: var(--color--ui--bg--hover);
 	}
 
 	&.is-label-on-left {
@@ -246,7 +246,7 @@ export default {
 }
 
 .statebox__label {
-	color: var(--color--text);
+	color: var(--color--ui--text);
 
 	cursor: pointer;
 	user-select: none;
