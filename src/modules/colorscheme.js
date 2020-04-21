@@ -22,7 +22,7 @@ export const colorscheme = {
 	'--color--text':              ['#222',              colors.ayuFgText],
 	'--color--text-2':            ['gray',              colors.nepal],
 
-	'--color--border':            [colors.athensGray,   colors.mirage],
+	'--color--border':            ['lightgray',         colors.mirage],
 
 	/**
 	 * UI components (dark background)
