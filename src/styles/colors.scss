@@ -22,7 +22,8 @@ $color--portage:           #ab7ef6;
 
 // Light foregrounds
 $color--regent-st-blue:    #a9c7df;
-$color--nepal:             #8eacc5;
+// $color--nepal:             #8eacc5;
+$color--nepal:             color.scale($color--regent-st-blue, $lightness: -35%, $saturation: -65%);
 
 // Light backgrounds
 $color--athens-gray:       #fafbfc;
@@ -30,8 +31,8 @@ $color--barley-white:      #fff5cd;
 
 // Dark backgrounds
 $color--oxford-blue:       #323e4f;
-$color--ebony-clay-2:      #273142;
 $color--ebony-clay:        #222c3c;
+$color--ebony-clay-2:      color.scale($color--ebony-clay, $lightness: +2%);
 $color--mirage:            #1c2532;
 
 /**

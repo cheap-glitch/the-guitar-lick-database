@@ -75,8 +75,6 @@ export default {
 <!--{{{ SCSS -->
 <style lang="scss" scoped>
 
-@use '@/styles/colors' as *;
-
 .nav-menu {
 	@include space-children-v(10px);
 }
@@ -98,8 +96,8 @@ export default {
 
 	@include pill;
 
-	color: var(--color--ui--bg);
-	background-color: $color--azure;
+	color: var(--color--aside--bg);
+	background-color: var(--color--menu-button--bg);
 
 	user-select: none;
 
@@ -114,7 +112,7 @@ export default {
 		bottom: 0;
 		z-index: -1;
 
-		background-image: linear-gradient(30deg, $color--portage, $color--azure);
+		background-image: linear-gradient(30deg, var(--color--menu-button--highlight), var(--color--menu-button--bg));
 
 		opacity: 0;
 		transition: opacity 0.4s;

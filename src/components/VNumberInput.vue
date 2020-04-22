@@ -132,7 +132,7 @@ export default {
 
 	padding: 0 10px;
 
-	border: 1px solid var(--color--ui--border-2);
+	border: 1px solid var(--color--ui--border--secondary);
 
 	background-color: var(--color--ui--bg);
 }

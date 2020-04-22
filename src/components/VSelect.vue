@@ -181,7 +181,7 @@ export default {
 .VSelect__bar__text,
 .VSelect__bar__chevron,
 .VSelect__options__item {
-	color: var(--color--ui--text-2);
+	color: var(--color--ui--text);
 
 	cursor: pointer;
 	user-select: none;
@@ -228,7 +228,7 @@ export default {
 	}
 
 	&:not(:last-child) {
-		border-bottom: 1px solid var(--color--ui--border-2);
+		border-bottom: 1px solid var(--color--ui--border--secondary);
 	}
 }
 

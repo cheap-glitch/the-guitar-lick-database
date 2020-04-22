@@ -7,8 +7,11 @@
 <template lang="pug">
 
 section.VFold
+
 	h2.VFold__header(@click.left="toggleOpenClose")
-		p {{ title }}
+
+		p.VFold__header__title {{ title }}
+
 		fa-icon.VFold__header__chevron(
 			:icon="['far', 'chevron-down']"
 			v-mods="{ isFlipped: !isOpened }"
@@ -79,10 +82,14 @@ export default {
 
 	border-bottom: 1px solid var(--color--ui--border);
 
-	color: var(--color--ui--text-2);
+	color: var(--color--ui--text--secondary);
 
 	cursor: pointer;
 	user-select: none;
+}
+
+.VFold__header__title {
+	cursor: pointer;
 }
 
 .VFold__header__chevron {

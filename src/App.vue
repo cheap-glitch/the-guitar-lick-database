@@ -15,9 +15,15 @@ div.App(:style="colorscheme")
 
 		//- Logo
 		header.aside__header
-			h1.logo
-				fa-icon.logo__icon(icon="comment-alt-music" mask="square-full")
-				span.logo__text(:is="$route.path === '/' ? 'span' : 'router-link'" to="/") The Guitar Lick Database
+			h1: span.logo(
+				:is="$route.path === '/' ? 'span' : 'router-link'"
+				to="/"
+				)
+				fa-icon.logo__icon(
+					icon="comment-alt-music"
+					mask="square-full"
+					)
+				span.logo__text() The Guitar Lick Database
 
 		//- Page-specific tools/navigation
 		router-view(name="sidebar")
@@ -167,7 +173,7 @@ export default {
 
 /*
 .aside__footer__text {
-	color: var(--color--ui--text-2);
+	color: var(--color--ui--text--secondary);
 }
 
 .aside__footer__links {
@@ -176,7 +182,7 @@ export default {
 }
 
 .aside__footer__links__item {
-	color: var(--color--ui--text-2);
+	color: var(--color--ui--text--secondary);
 
 	transition: color 0.2s;
 
@@ -189,6 +195,15 @@ export default {
 .logo {
 	display: flex;
 	@include space-children-h(14px);
+
+	text-decoration: none;
+}
+
+@mixin logo-gradient($alpha)
+{
+	background-image:
+		radial-gradient(circle at top right, change-color($color--crimson, $alpha: $alpha), transparent),
+		radial-gradient(circle at top left,  $color--sun, $color--cinnabar);
 }
 
 .logo__icon {
@@ -199,24 +214,18 @@ export default {
 	font-size: 60px;
 
 	color: var(--color--aside--bg);
-	background-image:
-		radial-gradient(circle at top right, change-color($color--crimson, $alpha: 0.2), transparent),
-		radial-gradient(circle at top left,  $color--sun, $color--cinnabar);
+	@include logo-gradient(0.2);
 }
 
 .logo__text {
 	line-height: 35px;
 
-	text-decoration: none;
-
 	font-size: 35px;
 	font-family: 'Bebas Bold';
 
 	color: transparent;
-	background-image:
-		radial-gradient(circle at top right, change-color($color--crimson, $alpha: 0.4), transparent),
-		radial-gradient(circle at top left,  $color--sun, $color--cinnabar);
 	background-clip: text;
+	@include logo-gradient(0.4);
 
 	user-select: none;
 }
@@ -226,7 +235,7 @@ export default {
 	align-items: center;
 	@include space-children-h(5px);
 
-	color: var(--color--ui--text-2);
+	color: var(--color--ui--text--secondary);
 
 	cursor: pointer;
 }

@@ -16,36 +16,39 @@ export const colorscheme = {
 	/**
 	 * Text and main view
 	 */
-	'--color--bg':                [colors.athensGray,   colors.ayuDeepBlack],
-	'--color--bg--hover':         ['#e9e9e9',           colors.ayuBlack],
-	'--color--bg--accent':        ['gray',              colors.ayuDeepSlate],
+	'--color--bg':                     [colors.athensGray,   colors.ayuDeepBlack],
+	'--color--bg--hover':              ['#e9e9e9',           colors.ayuBlack],
+	'--color--bg--accent':             ['gray',              colors.ayuDeepSlate],
 
-	'--color--text':              ['#222',              colors.ayuDirtyWhite],
-	'--color--text-2':            ['gray',              colors.ayuSlate],
+	'--color--text':                   ['#222',              colors.ayuDirtyWhite],
+	'--color--text--secondary':        ['gray',              colors.ayuSlate],
 
-	'--color--border':            ['lightgray',         colors.ayuSlate2],
+	'--color--border':                 ['lightgray',         colors.ayuSlate2],
 
 	/**
 	 * Sidebar
 	 */
-	'--color--aside--bg':         [colors.ebonyClay2,   colors.ayuDeepSlate],
+	'--color--aside--bg':              [colors.ebonyClay2,   colors.ayuDeepSlate],
+
+	'--color--menu-button--bg':        [colors.azure,        colors.ayuBlue],
+	'--color--menu-button--highlight': [colors.portage,      colors.ayuCyan],
 
 	/**
 	 * UI components (dark background)
 	 */
-	'--color--ui--bg':            [colors.mirage,       colors.ayuDeepSlate],
-	'--color--ui--bg--hover':     [colors.ebonyClay,    colors.ayuSlate2],
-	'--color--ui--bg--accent':    [colors.ebonyClay2,   colors.ayuSlate],
-	'--color--ui--bg--highlight': [colors.sun,          colors.ayuOrangeYellow],
+	'--color--ui--bg':                 [colors.mirage,       colors.ayuDeepSlate],
+	'--color--ui--bg--hover':          [colors.ebonyClay,    colors.ayuSlate2],
+	'--color--ui--bg--accent':         [colors.ebonyClay2,   colors.ayuSlate],
+	'--color--ui--bg--highlight':      [colors.sun,          colors.ayuOrangeYellow],
 
-	'--color--ui--text':          [colors.regentStBlue, colors.ayuIvory],
-	'--color--ui--text-2':        [colors.nepal,        colors.ayuDirtyWhite],
+	'--color--ui--text':               [colors.regentStBlue, colors.ayuDirtyWhite],
+	'--color--ui--text--secondary':    [colors.nepal,        colors.ayuSlate],
 
-	'--color--ui--border':        [colors.oxfordBlue,   colors.ayuSlate],
-	'--color--ui--border-2':      [colors.ebonyClay,    colors.ayuSlate2],
+	'--color--ui--border':             [colors.oxfordBlue,   colors.ayuSlate2],
+	'--color--ui--border--secondary':  [colors.ebonyClay,    colors.ayuDeepSlate],
 
-	'--color--ui--selected':      [colors.malachite,    colors.ayuGreen],
-	'--color--ui--excluded':      [colors.crimson,      colors.ayuRed],
+	'--color--ui--selected':           [colors.malachite,    colors.ayuGreen],
+	'--color--ui--excluded':           [colors.crimson,      colors.ayuRed],
 
 };
 
@@ -54,12 +57,12 @@ export const colorschemeUILightBg = {
 	/**
 	 * UI components (light background)
 	 */
-	'--color--ui--bg':            colorscheme['--color--bg--hover'],
-	'--color--ui--bg--hover':     colorscheme['--color--bg--hover'],
+	'--color--ui--bg':                colorscheme['--color--bg--hover'],
+	'--color--ui--bg--hover':         colorscheme['--color--bg--hover'],
 
-	'--color--ui--text':          colorscheme['--color--text'],
+	'--color--ui--text':              colorscheme['--color--text'],
 
-	'--color--ui--border':        colorscheme['--color--border'],
+	'--color--ui--border':            colorscheme['--color--border'],
 };
 
 export function getColorschemeMode(colorscheme, isDarkMode)

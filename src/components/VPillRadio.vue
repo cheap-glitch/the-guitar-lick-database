@@ -137,7 +137,7 @@ export default {
 .p-radio__label {
 	font-style: italic;
 
-	color: var(--color--text-2);
+	color: var(--color--text--secondary);
 
 	user-select: none;
 }
