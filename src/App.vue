@@ -29,10 +29,10 @@ div.App(:style="colorscheme")
 		router-view(name="sidebar")
 
 		//- Main navigation menu
-		MenuAside.aside__nav-menu
+		MenuAside.sidebar__nav
 
 		//- Footer
-		footer.aside__footer
+		footer.sidebar__footer
 
 			//- Light/dark switch
 			div.dark-mode-toggle(@click="$store.commit('toggleIsDarkModeOn')")
@@ -158,39 +158,12 @@ export default {
 	background-color: var(--color--aside--bg);
 }
 
-.aside__nav-menu {
+.sidebar__nav {
 	display: flex;
 	flex-direction: column;
 
 	align-self: flex-end;
 }
-
-.aside__footer {
-	display: flex;
-
-	align-self: flex-end;
-}
-
-/*
-.aside__footer__text {
-	color: var(--color--ui--text--secondary);
-}
-
-.aside__footer__links {
-	display: flex;
-	@include space-children-h(10px);
-}
-
-.aside__footer__links__item {
-	color: var(--color--ui--text--secondary);
-
-	transition: color 0.2s;
-
-	&:hover {
-		color: var(--color--ui--bg--highlight);
-	}
-}
-*/
 
 .logo {
 	display: flex;
@@ -230,6 +203,13 @@ export default {
 	user-select: none;
 }
 
+.sidebar__footer {
+	display: flex;
+	justify-content: flex-end;
+
+	align-self: flex-end;
+}
+
 .dark-mode-toggle {
 	display: flex;
 	align-items: center;
@@ -254,16 +234,18 @@ export default {
 
 		position: absolute;
 		top: 0;
+		left: 0;
 
 		@include circle(8px);
 
 		background-color: var(--color--ui--bg--highlight);
 
-		transition: position 0.2s;
+		transition: transform 0.2s;
 	}
 
-	&.is-dark-mode-on::after       { right: 0; }
-	&:not(.is-dark-mode-on)::after { left:  0; }
+	&.is-dark-mode-on::after {
+		transform: translateX(8px);
+	}
 }
 
 </style>
