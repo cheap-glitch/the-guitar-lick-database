@@ -141,7 +141,7 @@ export default {
 				this.updateQueryString();
 
 				// Reset the current page number when the search parameters are changed
-				//- this.$store.commit('setCurrentPage', 1);
+				this.$store.commit('browse/setCurrentPage', 1);
 			},
 			deep: true,
 		}
