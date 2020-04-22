@@ -3,5 +3,9 @@
  * styles/layout.scss
  */
 
-$layout--aside--width:    300px;
-$layout--section--border: 3px dotted var(--color--border);
+$layout--sidebar-width:
+(
+	'home':   250px,
+	'browse': 350px,
+	'lick':   60px,
+);

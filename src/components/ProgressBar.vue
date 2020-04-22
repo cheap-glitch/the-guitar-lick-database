@@ -80,7 +80,7 @@ export default {
 	z-index: 1000;
 
 	top: 0;
-	left: $layout--aside--width + 40px;
+	left: 0;
 	height: 2px;
 
 	opacity: 0;

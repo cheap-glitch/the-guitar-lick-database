@@ -146,7 +146,7 @@ export default {
 	&:not(.is-disabled):not(.is-selected):hover {
 		cursor: pointer;
 
-		background-color: var(--color--bg--hover);
+		background-color: var(--color--ui--bg--hover);
 	}
 
 	&.is-selected {

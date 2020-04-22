@@ -90,7 +90,7 @@ export default {
 .about {
 	grid-area: about;
 
-	border-right: $layout--section--border;
+	border-right: 3px dotted var(--color--border);
 }
 
 .about__contents {
@@ -110,7 +110,7 @@ export default {
 .latest-licks {
 	grid-area: licks;
 
-	border-top: $layout--section--border;
+	border-top: 3px dotted var(--color--border);
 }
 
 </style>

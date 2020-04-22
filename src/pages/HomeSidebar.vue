@@ -1,12 +1,12 @@
 
 
-<!-- HomeAside.vue -->
+<!-- pages/HomeSidebar.vue -->
 
 
 <!--{{{ Pug -->
 <template lang="pug">
 
-nav.HomeAside
+nav.HomeSidebar
 
 	//- Go to browsing page
 	router-link.link(
@@ -59,7 +59,7 @@ nav.HomeAside
 <script>
 
 export default {
-	name: 'HomeAside',
+	name: 'HomeSidebar',
 }
 
 </script>
@@ -69,7 +69,7 @@ export default {
 <!--{{{ SCSS -->
 <style lang="scss" scoped>
 
-.HomeAside {
+.HomeSidebar {
 	@include space-children-v(10px);
 }
 

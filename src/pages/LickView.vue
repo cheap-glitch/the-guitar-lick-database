@@ -388,7 +388,7 @@ function navigationGuard(to, from, next)
 
 		width: 40px;
 
-		background-image: linear-gradient(to left, var(--color--browse-page--border) 50%, transparent);
+		background-image: linear-gradient(to left, var(--color--border) 50%, transparent);
 	}
 }
 
@@ -430,11 +430,11 @@ function navigationGuard(to, from, next)
 
 .wrapper-infos,
 .wrapper-suggestions {
-	border-top: $layout--section--border;
+	border-top: 3px dotted var(--color--border);
 }
 
 .wrapper-infos {
-	border-right: $layout--section--border;
+	border-right: 3px dotted var(--color--border);
 }
 
 .wrapper-infos__item {

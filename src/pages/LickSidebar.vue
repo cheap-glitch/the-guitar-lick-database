@@ -1,12 +1,13 @@
 
 
-<!-- LickAside.vue -->
+<!-- pages/LickSidebar.vue -->
 
 
 <!--{{{ Pug -->
 <template lang="pug">
 
-div.LickAside
+div.LickSidebar
+//-
 
 	//----------------------------------------------------------------------
 	//- Playback control
@@ -238,7 +239,7 @@ import { getFretList }     from '@/modules/alphatex'
 import { getIntervalNote } from '@/modules/music'
 
 export default {
-	name: 'LickAside',
+	name: 'LickSidebar',
 
 	data() {
 		return {
@@ -418,7 +419,7 @@ export default {
 <!--{{{ SCSS -->
 <style lang="scss" scoped>
 
-.LickAside {
+.LickSidebar {
 	@include space-children-v(20px);
 }
 

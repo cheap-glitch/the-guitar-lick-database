@@ -11,18 +11,18 @@ div.App(:style="colorscheme")
 	//----------------------------------------------------------------------
 	//- Sidebar
 	//----------------------------------------------------------------------
-	aside.sidebar
+	aside.sidebar(:class="`page-${$route.name}`")
 
 		//- Logo
 		h1: span.logo(
-			:is="$route.path === '/' ? 'span' : 'router-link'"
+			:is="$route.name == 'home' ? 'span' : 'router-link'"
 			to="/"
 			)
 			fa-icon.logo__icon(
 				icon="comment-alt-music"
 				mask="square-full"
 				)
-			span.logo__text The Guitar Lick Database
+			span.logo__text(v-show="$route.name != 'lick'") The Guitar Lick Database
 
 
 		//- Page-specific tools/navigation
@@ -40,8 +40,9 @@ div.App(:style="colorscheme")
 	//----------------------------------------------------------------------
 	//- Main view
 	//----------------------------------------------------------------------
-	ProgressBar
-	section.page-wrapper: router-view(name="view")
+	section.view(:class="`page-${$route.name}`")
+		ProgressBar
+		router-view(name="view")
 
 </template>
 <!--}}}-->
@@ -56,14 +57,12 @@ import api                    from '@/modules/api'
 import { colorscheme }        from '@/modules/colorscheme'
 import { getColorschemeMode } from '@/modules/colorscheme'
 
-import MenuAside              from '@/components/MenuAside'
 import ProgressBar            from '@/components/ProgressBar'
 
 export default {
 	name: 'App',
 
 	components: {
-		MenuAside,
 		ProgressBar,
 	},
 
@@ -71,10 +70,6 @@ export default {
 		colorscheme()
 		{
 			return getColorschemeMode(colorscheme, this.isDarkModeOn);
-		},
-		version()
-		{
-			return process.env.VUE_APP_VERSION;
 		},
 		isDarkModeOn: get('isDarkModeOn'),
 	},
@@ -96,8 +91,6 @@ export default {
 @use '@/styles/colors' as *;
 
 .App {
-	display: flex;
-
 	flex: 1 0 auto;
 
 	background-color: var(--color--bg);
@@ -105,20 +98,10 @@ export default {
 	transition: background-color 0.2s;
 }
 
-.page-wrapper {
-	position: relative;
-	overflow-x: hidden;
-
-	flex: 1 1 100%;
-
-	margin-left: $layout--aside--width + 40px;
-}
-
 .sidebar {
-	display: grid;
-	grid-template-rows: auto auto 1fr;
-	grid-template-columns: 100%;
-	@include space-children-v(20px);
+	display: flex;
+	flex-direction: column;
+	@include space-children-v(40px);
 
 	position: fixed;
 	z-index: 2000;
@@ -126,18 +109,36 @@ export default {
 	left: 0;
 	bottom: 0;
 
-	width: $layout--aside--width;
-
 	padding: 20px;
 
 	border-right: 1px solid var(--color--ui--border);
-
 	background-color: var(--color--aside--bg);
+
+	transition: width 0.2s;
+
+	@each $page, $width in $layout--sidebar-width
+	{
+		&.page-#{$page} { width: $width; }
+	}
+}
+
+.view {
+	position: relative;
+	overflow-x: hidden;
+
+	transition: margin-left 0.2s;
+
+	@each $page, $width in $layout--sidebar-width
+	{
+		&.page-#{$page} { margin-left: calc(#{$width} + 40px); }
+	}
 }
 
 .logo {
 	display: flex;
 	@include space-children-h(14px);
+
+	max-width: 250px;
 
 	text-decoration: none;
 }
@@ -175,9 +176,10 @@ export default {
 
 .sidebar__footer {
 	display: flex;
+	align-items: flex-end;
 	justify-content: flex-end;
 
-	align-self: flex-end;
+	flex: 1 1 100%;
 }
 
 .dark-mode-toggle {

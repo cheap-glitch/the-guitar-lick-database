@@ -19,7 +19,7 @@ const routes = [
 
 		components: {
 			view:    loadAsyncComponent('HomeView'),
-			sidebar: loadAsyncComponent('HomeAside'),
+			sidebar: loadAsyncComponent('HomeSidebar'),
 		},
 
 		meta: {
@@ -34,7 +34,7 @@ const routes = [
 
 		components: {
 			view:    loadAsyncComponent('BrowseView'),
-			sidebar: loadAsyncComponent('BrowseAside'),
+			sidebar: loadAsyncComponent('BrowseSidebar'),
 		},
 
 		meta: {
@@ -59,7 +59,7 @@ const routes = [
 
 		components: {
 			view:    loadAsyncComponent('LickView'),
-			sidebar: loadAsyncComponent('LickAside'),
+			sidebar: loadAsyncComponent('LickSidebar'),
 		},
 
 		props: {
@@ -74,12 +74,27 @@ const routes = [
 		}
 	},
 	{
+		path: '/updates',
+		name: 'updates',
+
+		components: {
+			view:    loadAsyncComponent('UpdatesView'),
+			sidebar: loadAsyncComponent('HomeSidebar'),
+		},
+
+		meta: {
+			sitemap: {
+				changefreq: 'weekly',
+			}
+		}
+	},
+	{
 		path: '*',
 		name: '404',
 
 		components: {
 			view:    loadAsyncComponent('Page404View'),
-			sidebar: loadAsyncComponent('HomeAside'),
+			sidebar: loadAsyncComponent('HomeSidebar'),
 		}
 	}
 ];
@@ -94,7 +109,7 @@ if (process.env.NODE_ENV === 'development')
 
 			components: {
 				view:    loadAsyncComponent('AdminView'),
-				sidebar: loadAsyncComponent('HomeAside'),
+				sidebar: loadAsyncComponent('HomeSidebar'),
 			},
 
 			meta: {
@@ -109,7 +124,7 @@ if (process.env.NODE_ENV === 'development')
 
 			components: {
 				view:    loadAsyncComponent('AdminView'),
-				sidebar: loadAsyncComponent('HomeAside'),
+				sidebar: loadAsyncComponent('HomeSidebar'),
 			},
 
 			meta: {

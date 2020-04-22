@@ -1,82 +1,81 @@
 
 
-<!-- BrowseAside.vue -->
+<!-- pages/BrowseSidebar.vue -->
 
 
 <!--{{{ Pug -->
 <template lang="pug">
 
-div.BrowseAside
-
-		//--------------------------------------------------------------
-		//- Artist, genre & difficulty
-		//--------------------------------------------------------------
-		section.section
-			VFold(title="Guitarist, genre & diffculty")
-				//- Artist
-				VSelect(
-					id="artist"
-					:options="artistsNames"
-
-					v-model="searchParams.artist"
-					)
-				div.row
-					//- Difficulty
-					VSelect(
-						id="difficulty"
-						:options="{ any: 'Any difficulty', ...data.difficulties }"
-						v-model="searchParams.difficulty"
-						)
-					//- Genre
-					VSelect(
-						id="genre"
-						:options="{ any: 'Any genre', ...data.genres }"
-						v-model="searchParams.genre"
-						)
+div.BrowseSidebar
 
 		//--------------------------------------------------------------
 		//- Tonality & scale
 		//--------------------------------------------------------------
-		section.section
-			VFold(title="Tonality & scale")
-				div.row
-					//- Tonality
-					VSelect.tonality(
-						id="tonality"
-						:options="{ any: 'Any', ...data.tonalities }"
-						v-model="searchParams.tonality"
-						)
-					//- Scale
-					VSelect.scale(
-						id="scale"
-						:options="{ any: 'Any scale', ...data.scales }"
-						v-model="searchParams.scale"
-						)
+		div.row
+
+			//- Tonality
+			VSelect.tonality(
+				id="tonality"
+				:options="{ any: 'Any', ...data.tonalities }"
+				v-model="searchParams.tonality"
+				)
+
+			//- Scale
+			VSelect.scale(
+				id="scale"
+				:options="{ any: 'Any scale', ...data.scales }"
+				v-model="searchParams.scale"
+				)
+
+		//--------------------------------------------------------------
+		//- Artist, genre & difficulty
+		//--------------------------------------------------------------
+
+		//- Artist
+		VSelect(
+			id="artist"
+			:options="artistsNames"
+			v-model="searchParams.artist"
+			)
+
+		//- Genre
+		VSelect(
+			id="genre"
+			:options="{ any: 'Any genre', ...data.genres }"
+			v-model="searchParams.genre"
+			)
+
+		//- Difficulty
+		VSelect(
+			id="difficulty"
+			:options="{ any: 'Any difficulty', ...data.difficulties }"
+			v-model="searchParams.difficulty"
+			)
 
 		//--------------------------------------------------------------
 		//- Tags
 		//--------------------------------------------------------------
-		section.section
-			VFold(title="Tags")
-				div.tags
-					VStatebox.tags__item(
-						v-for="(name, key) in data.tags"
-						:key="`tag-${key}`"
+		VFold(title="Tags")
 
-						:id="`tag-${key}`"
-						:value="key"
-						:label="name"
-						:states="['unchecked', 'included', 'excluded']"
-						mode="buttons-overwrite"
+			div.tags: VStatebox.tags__item(
+				v-for="(name, key) in data.tags"
+				:key="`tag-${key}`"
 
-						v-model="searchParams.tags"
-						)
-				VButton(
-					text="Clear the tags"
-					icon="trash-alt"
+				:id="`tag-${key}`"
+				:value="key"
+				:label="name"
+				:states="['unchecked', 'included', 'excluded']"
+				mode="buttons-overwrite"
 
-					@click="clearTags"
-					)
+				v-model="searchParams.tags"
+				)
+
+			//- VButton(
+				text="Clear the tags"
+				icon="trash-alt"
+
+				@click="clearTags"
+				)
 
 </template>
 <!--}}}-->
@@ -90,7 +89,7 @@ import data     from '@/modules/data'
 import * as obj from '@/modules/object'
 
 export default {
-	name: 'BrowseAside',
+	name: 'BrowseSidebar',
 
 	data() {
 		return {
@@ -237,7 +236,7 @@ export default {
 <!--{{{ SCSS -->
 <style lang="scss" scoped>
 
-.BrowseAside {
+.BrowseSidebar {
 	display: flex;
 	flex-direction: column;
 	@include space-children-v(20px);
