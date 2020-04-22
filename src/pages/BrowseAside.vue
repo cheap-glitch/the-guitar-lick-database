@@ -136,7 +136,13 @@ export default {
 
 	watch: {
 		searchParams: {
-			handler: function() { this.updateResults(); this.updateQueryString(); },
+			handler() {
+				this.updateResults();
+				this.updateQueryString();
+
+				// Reset the current page number when the search parameters are changed
+				//- this.$store.commit('setCurrentPage', 1);
+			},
 			deep: true,
 		}
 	},

@@ -12,8 +12,8 @@ div.statebox(
 
 	v-mods="{ isLabelOnLeft: labelPosition === 'left' }"
 
-	@click.left="changeState('left')"
-	@click.right.prevent="changeState('right')"
+	@click.left.prevent.stop=" changeState('left')"
+	@click.right.prevent.stop="changeState('right')"
 	)
 	input.statebox__checkbox(
 		type="checkbox"
@@ -126,13 +126,17 @@ export default {
 
 			switch (this.mode)
 			{
-				// Cycle through the states
+				/**
+				 * Cycle through the states
+				 */
 				case 'cycle':
 					this.state = this.states[(index + 1) % this.states.length];
 					break;
 
-				// Switch to the second state on left-clicking, and to the third on right-clicking
-				// Always go through the first "neutral" state when changing states
+				/**
+				 * Switch to the second state on left-clicking, and to the third on right-clicking
+				 * Always go through the first "neutral" state when changing states
+				 */
 				case 'buttons':
 					switch (button)
 					{
@@ -146,8 +150,10 @@ export default {
 					}
 					break;
 
-				// Switch to the second state on left-clicking, and to the third on right-clicking
-				// Directly overwrite the previous state -- to disable you have to click again with the same button
+				/**
+				 * Switch to the second state on left-clicking, and to the third on right-clicking
+				 * Directly overwrite the previous state -- to disable you have to click again with the same button
+				 */
 				case 'buttons-overwrite':
 					switch (button)
 					{
