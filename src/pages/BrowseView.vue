@@ -120,7 +120,7 @@ export default {
 <style lang="scss" scoped>
 
 .BrowseView {
-	@include space-children-v(10px);
+	@include space-children-v(20px);
 
 	/**
 	 * The padding is created with a border
@@ -138,6 +138,8 @@ export default {
 }
 
 .results {
+	@include space-children-v(10px);
+
 	min-height: 1200px;
 }
 

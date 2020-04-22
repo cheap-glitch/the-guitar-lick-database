@@ -75,12 +75,12 @@ export default {
 	display: flex;
 	justify-content: space-between;
 
-	margin-bottom: 15px;
-	padding-bottom: 10px;
+	margin-bottom: 20px;
+	padding-bottom: 5px;
 
 	font-weight: bold;
 
-	border-bottom: 1px solid var(--color--ui--border);
+	border-bottom: 1px dotted var(--color--ui--border);
 
 	color: var(--color--ui--text--secondary);
 

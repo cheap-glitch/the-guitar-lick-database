@@ -14,22 +14,19 @@ div.App(:style="colorscheme")
 	aside.sidebar
 
 		//- Logo
-		header.aside__header
-			h1: span.logo(
-				:is="$route.path === '/' ? 'span' : 'router-link'"
-				to="/"
+		h1: span.logo(
+			:is="$route.path === '/' ? 'span' : 'router-link'"
+			to="/"
+			)
+			fa-icon.logo__icon(
+				icon="comment-alt-music"
+				mask="square-full"
 				)
-				fa-icon.logo__icon(
-					icon="comment-alt-music"
-					mask="square-full"
-					)
-				span.logo__text() The Guitar Lick Database
+			span.logo__text The Guitar Lick Database
+
 
 		//- Page-specific tools/navigation
 		router-view(name="sidebar")
-
-		//- Main navigation menu
-		MenuAside.sidebar__nav
 
 		//- Footer
 		footer.sidebar__footer
@@ -39,26 +36,6 @@ div.App(:style="colorscheme")
 				fa-icon(:icon="['fas', 'sun']")
 				div.dark-mode-toggle__switch(v-mods="{ isDarkModeOn }")
 				fa-icon(:icon="['fas', 'moon']")
-
-			//- Settings menu
-			//- fa-icon(:icon="['fas', 'cog']")
-
-		//-
-			p.aside__footer__text TGLD v{{ version }} by cheap glitch
-			div.aside__footer__links
-				a.aside__footer__links__item(
-					href="https://twitter.com/cheap_glitch"
-					target="_blank"
-					rel="external nofollow noreferrer"
-					)
-					fa-icon(:icon="['fab', 'twitter']")
-				a.aside__footer__links__item(
-					href="https://github.com/cheap-glitch"
-					target="_blank"
-					rel="external nofollow noreferrer"
-					)
-					fa-icon(:icon="['fab', 'github']")
-
 
 	//----------------------------------------------------------------------
 	//- Main view
@@ -156,13 +133,6 @@ export default {
 	border-right: 1px solid var(--color--ui--border);
 
 	background-color: var(--color--aside--bg);
-}
-
-.sidebar__nav {
-	display: flex;
-	flex-direction: column;
-
-	align-self: flex-end;
 }
 
 .logo {

@@ -6,52 +6,57 @@
 <!--{{{ Pug -->
 <template lang="pug">
 
-router-link.BrowseViewLick(:to="`/lick/${lick.id}`")
+div.BrowseViewLick
 
 	//----------------------------------------------------------------------
 	//- Infos
 	//----------------------------------------------------------------------
-	p.BrowseViewLick__infos
+	div.BrowseViewLick__infos
 		//- ID
-		| \#{{ lick.id }}
-		|
+		p
+			| \#{{ lick.id }}
+			|
 
 		//- Artist
-		span(v-if="lick.artistName")
+		p(v-if="lick.artistName")
 			fa-icon(:icon="['far', 'user-circle']")
 			|
 			| {{ lick.artistName }}
 			|
 
 		//- Tonality & scale
-		fa-icon(:icon="['far', 'music']")
-		|
-		| {{ data.tonalities[lick.tonality] }}
-		|
-		| {{ data.scales[lick.scale] }}
-		|
+		p
+			fa-icon(:icon="['far', 'music']")
+			|
+			| {{ data.tonalities[lick.tonality] }}
+			|
+			| {{ data.scales[lick.scale] }}
+			|
 
 		//- Genres
-		fa-icon(:icon="['far', 'compact-disc']")
-		|
-		| {{ formatList(lick.genres, data.genres) }}
-		|
+		p
+			fa-icon(:icon="['far', 'compact-disc']")
+			|
+			| {{ formatList(lick.genres, data.genres) }}
+			|
 
 		//- Difficulty
-		fa-icon(:icon="['far', 'mountain']")
-		|
-		| {{ data.difficulties[lick.difficulty] }}
-		|
+		p
+			fa-icon(:icon="['far', 'mountain']")
+			|
+			| {{ data.difficulties[lick.difficulty] }}
+			|
 
 		//- Tags
-		fa-icon(:icon="['far', 'tags']")
-		|
-		| {{ formatList(lick.tags, data.tags) }}
+		p
+			fa-icon(:icon="['far', 'tags']")
+			|
+			| {{ formatList(lick.tags, data.tags) }}
 
 	//----------------------------------------------------------------------
 	//- Preview buttons
 	//----------------------------------------------------------------------
-	div.BrowseViewLick__buttons
+	//- div.BrowseViewLick__buttons
 		VButton(
 			v-show="previewedLick != lick.id || (previewedLick == lick.id && !isPreviewedLickReady)"
 
@@ -180,42 +185,32 @@ export default {
 <style lang="scss" scoped>
 
 .BrowseViewLick {
+	//- display: flex;
 	display: block;
 
 	min-height: 300px;
 
+	border-radius: 10px;
+	border: 1px solid var(--color--ui--border);
+
+	color: var(--color--text);
 	text-decoration: none;
 
-	color: steelblue;
-
-	cursor: pointer;
-
 	&:active {
-		color: steelblue;
+		color: var(--color--text);
 	}
 }
 
+/*
 .BrowseViewLick__buttons {
 	display: flex;
 	align-items: center;
 	@include space-children-h(10px);
 }
+*/
 
-.BrowseViewLick__score,
-.BrowseViewLick__infos {
-	cursor: pointer;
-}
-
-</style>
-<!--}}}-->
-
-
-<!--{{{ Global SCSS -->
-<style lang="scss">
-
-.BrowseViewLick__score * {
-	cursor: pointer !important;
-}
+.BrowseViewLick__score { order: 1; }
+.BrowseViewLick__infos { order: 2; }
 
 </style>
 <!--}}}-->

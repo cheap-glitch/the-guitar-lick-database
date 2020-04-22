@@ -58,7 +58,9 @@ export default {
 	display: flex;
 	flex-wrap: wrap;
 	@include space-children-h(5px);
-	@include space-children-v(5px);
+
+	// Cancel the superfluous margin of the bottow row
+	margin-bottom: -5px;
 }
 
 .pages__item,
@@ -72,6 +74,8 @@ export default {
 	@include center-content;
 
 	@include square(30px);
+
+	margin-bottom: 5px;
 
 	background-color: var(--color--bg--hover);
 
