@@ -11,22 +11,20 @@ div.statebox(
 	:style="colorscheme"
 
 	v-mods="{ isLabelOnLeft: labelPosition === 'left' }"
+
+	@click.left="changeState('left')"
+	@click.right.prevent="changeState('right')"
 	)
 	input.statebox__checkbox(
 		type="checkbox"
 		:id="id"
 		:value="value"
 		:class="`is-in-state-${states.indexOf(state)}`"
-
-		@click.left="changeState('left')"
-		@click.right.prevent="changeState('right')"
 		)
 	label.statebox__label(
 		v-if="label"
 		:for="id"
 		:class="`is-in-state-${states.indexOf(state)}`"
-
-		@click.right.prevent="changeState('right')"
 		) {{ label }}
 
 </template>
@@ -225,6 +223,8 @@ export default {
 
 	transition: background-color 0.2s;
 
+	cursor: pointer;
+
 	&:hover {
 		background-color: var(--color--ui--bg--hover);
 	}
@@ -247,8 +247,6 @@ export default {
 
 .statebox__label {
 	color: var(--color--ui--text);
-
-	cursor: pointer;
 	user-select: none;
 
 	&.is-in-state-2 {
