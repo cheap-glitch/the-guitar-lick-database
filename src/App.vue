@@ -89,6 +89,7 @@ export default {
 <style lang="scss" scoped>
 
 @use '@/styles/colors' as *;
+@use '@/styles/layout' as *;
 
 .App {
 	flex: 1 0 auto;

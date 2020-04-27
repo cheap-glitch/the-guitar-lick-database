@@ -140,8 +140,6 @@ export default {
 <!--{{{ SCSS -->
 <style lang="scss" scoped>
 
-@use '@/styles/transitions' as *;
-
 .VSelect {
 	position: relative;
 	flex: 1 1 auto;
@@ -194,9 +192,13 @@ export default {
 }
 
 .VSelect__bar__chevron {
-	font-size: 0.8em;
+	font-size: 0.6em;
 
-	@include flip;
+	transition: transform 0.2s;
+
+	&.is-flipped {
+		transform: rotate(180deg);
+	}
 }
 
 .VSelect__options {

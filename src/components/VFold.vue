@@ -69,8 +69,6 @@ export default {
 <!--{{{ SCSS -->
 <style lang="scss" scoped>
 
-@use '@/styles/transitions' as *;
-
 .VFold__header {
 	display: flex;
 	justify-content: space-between;
@@ -93,7 +91,11 @@ export default {
 }
 
 .VFold__header__chevron {
-	@include flip();
+	transition: transform 0.2s;
+
+	&.is-flipped {
+		transform: rotate(180deg);
+	}
 }
 
 </style>

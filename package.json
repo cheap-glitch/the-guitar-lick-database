@@ -11,6 +11,7 @@
     "test": "test"
   },
   "scripts": {
+    "analyze-bundle": "vue-cli-service build --modern --report-json && webpack-bundle-analyzer dist/report.json",
     "build": "vue-cli-service build --modern",
     "coverage": "nyc npm test",
     "lint": "run-p 'lint:*'",
@@ -45,10 +46,10 @@
     "v-click-outside": "^3.0.1",
     "vue": "^2.6.11",
     "vue-autosuggest": "^2.1.1",
-    "vue-css-modifiers": "^1.0.6",
+    "vue-css-modifiers": "^1.0.7",
     "vue-router": "^3.1.6",
     "vue-slider-component": "^3.1.2",
-    "vuex": "^3.2.0",
+    "vuex": "^3.3.0",
     "vuex-pathify": "^1.4.1"
   },
   "devDependencies": {
@@ -69,7 +70,7 @@
     "eslint": "^6.8.0",
     "eslint-plugin-smarter-tabs": "^1.1.0",
     "eslint-plugin-vue": "^6.2.2",
-    "fibers": "^4.0.2",
+    "fibers": "^5.0.0",
     "html-minifier": "^4.0.0",
     "jstransformer-markdown-it": "^2.1.0",
     "nodemon": "^2.0.3",
@@ -78,11 +79,12 @@
     "prerender-spa-plugin": "^3.4.0",
     "pug": "^2.0.4",
     "pug-plain-loader": "^1.0.0",
-    "sass": "^1.26.3",
+    "sass": "^1.26.5",
     "sass-loader": "^8.0.2",
     "sass-mq": "^5.0.1",
     "vue-cli-plugin-prerender-spa": "^1.1.6",
     "vue-cli-plugin-sitemap": "^2.1.1",
-    "vue-template-compiler": "^2.6.11"
+    "vue-template-compiler": "^2.6.11",
+    "webpack-bundle-analyzer": "^3.7.0"
   }
 }

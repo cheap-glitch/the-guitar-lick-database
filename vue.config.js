@@ -35,19 +35,8 @@ module.exports = {
 		// Enable source maps in dev mode
 		sourceMap: process.env.NODE_ENV === 'development',
 
-		// Import the colorscheme & mixins globally
-		loaderOptions: {
-			sass: {
-				prependData: [
-					'sass-mq/_mq.scss',
-					'@cheap-glitch/scss-mixins/_mixins',
-
-					'@/styles/layout',
-				]
-				.map(file => `@use '${file}' as *;`)
-				.join('\n')
-			}
-		},
+		// Import the mixins in every component
+		loaderOptions: { sass: { prependData: '@use "@cheap-glitch/scss-mixins/_mixins" as *;' } },
 	},
 
 	/**
