@@ -74,21 +74,6 @@ const routes = [
 		}
 	},
 	{
-		path: '/updates',
-		name: 'updates',
-
-		components: {
-			view:    loadAsyncComponent('UpdatesView'),
-			sidebar: loadAsyncComponent('HomeSidebar'),
-		},
-
-		meta: {
-			sitemap: {
-				changefreq: 'weekly',
-			}
-		}
-	},
-	{
 		path: '*',
 		name: '404',
 

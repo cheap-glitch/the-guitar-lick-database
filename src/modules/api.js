@@ -42,6 +42,6 @@ export default
 			headers,
 		})
 		.then(response => callback(response?.data ?? null))
-		.catch(error   => { if (process.env.NODE_ENV == 'development') console.log(error) });
+		.catch(error   => { if (process.env.NODE_ENV == 'development') console.error(error) });
 	},
 }

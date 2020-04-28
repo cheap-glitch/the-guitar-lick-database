@@ -8,21 +8,19 @@
 
 div.HomeView
 	section.about
-		h2.h2 About
+		h2 About
 		article.about__contents.formatted-text
-			include:external-links:markdown-it(html typographer) ../assets/texts/about.md
+			include:external-links:markdown-it(html typographer) ../assets/about.md
 
 	section.recent-updates
-		h2.h2 Recent updates
-		UpdatesViewItem(
-			v-for="update in recentUpdates"
-			:key="update.id"
-
-			v-bind="update"
-			)
+		h2 Recent updates
+		each post in updatePosts
+			article
+				h3= post.date
+				div.formatted-text !{post.contents}
 
 	section.latest-licks
-		h2.h2 Latest licks
+		h2 Latest licks
 		BrowseViewLick(
 			v-for="lick in latestLicks"
 			:key="lick.id"
@@ -39,20 +37,17 @@ div.HomeView
 
 import api             from '@/modules/api'
 import BrowseViewLick  from '@/components/BrowseViewLick'
-import UpdatesViewItem from '@/components/UpdatesViewItem'
 
 export default {
 	name: 'HomeView',
 
 	components: {
 		BrowseViewLick,
-		UpdatesViewItem,
 	},
 
 	data() {
 		return {
-			latestLicks:   [],
-			recentUpdates: [],
+			latestLicks: [],
 		}
 	},
 
@@ -60,8 +55,7 @@ export default {
 	{
 		this.$store.commit('browse/resetLickPreview');
 
-		api.get('/licks/latest/3', data => this.latestLicks   = data || []);
-		api.get('/updates/2',      data => this.recentUpdates = data || []);
+		api.get('/licks/latest/3', data => this.latestLicks = data || []);
 	},
 }
 

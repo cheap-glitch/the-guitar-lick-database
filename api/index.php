@@ -78,7 +78,6 @@ require('routes/licks/exists.php');
 require('routes/licks/latest.php');
 require('routes/licks/read.php');
 require('routes/licks/suggest.php');
-require('routes/updates/index.php');
 if (!$PARAM_PRODUCTION_MODE)
 {
 	require('routes/licks/add.php');

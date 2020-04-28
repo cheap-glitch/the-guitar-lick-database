@@ -7,7 +7,7 @@
 <template lang="pug">
 
 div.AdminView
-	h2.h2 {{ pageTitle }}
+	h2 {{ pageTitle }}
 
 	//- Link to the page of the lick (only on /edit page)
 	p(v-if="$route.name == 'edit'")

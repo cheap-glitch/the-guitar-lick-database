@@ -13,7 +13,7 @@ div.LickView
 	//----------------------------------------------------------------------
 	section.wrapper-lick(v-if="lick")
 		div.wrapper-lick__header
-			h2.h2 Lick \#{{ id }}
+			h2 Lick \#{{ id }}
 
 			//- Bookmarking button
 			VButton(
@@ -67,7 +67,7 @@ div.LickView
 	//- Infos & notes
 	//----------------------------------------------------------------------
 	section.wrapper-infos(v-if="lick")
-		h3.h3 Informations
+		h3 Informations
 
 		//- Artist
 		p.wrapper-infos__item(v-if="lick.artist !== '0'")
@@ -141,7 +141,7 @@ div.LickView
 
 		//- Notes
 		div(v-if="parsedNotes.length")
-			h3.h3 Notes
+			h3 Notes
 			p.formatted-text(v-html="parsedNotes")
 
 	//----------------------------------------------------------------------
@@ -151,7 +151,7 @@ div.LickView
 
 		//- Original lick
 		div.original(v-if="lick && lick.originalId")
-			h3.h3 Original lick
+			h3 Original lick
 			router-link(
 				:to="`/lick/${lick.originalId}`"
 				)
@@ -164,7 +164,7 @@ div.LickView
 					)
 		//- Variations
 		div.variations(v-if="variations.length")
-			h3.h3 Variations
+			h3 Variations
 			router-link(
 				v-for="lick in variations"
 				:key="`variation--${lick.id}`"
@@ -179,7 +179,7 @@ div.LickView
 					)
 		//- Suggestions
 		div.suggestions(v-if="suggestions.length")
-			h3.h3 Suggestions
+			h3 Suggestions
 			router-link(
 				v-for="lick in suggestions"
 				:key="`suggestion--${lick.id}`"
@@ -256,13 +256,12 @@ export default {
 		},
 		parsedNotes()
 		{
-			return prettifyTypography(
-				this.md.render(this.lick.notes.trim().replace(/\r/g, ''))
-					// Remove the surrounding <p> tags
-					.replace(/<\/?p>/g, '')
-					// Insert link to other licks
-					.replace(/{{(\d+)}}/g, '<a href="/lick/$1">#$1</a>')
-				);
+			return prettifyTypography(this.markdown.render(this.lick.notes.trim().replace(/\r/g, ''))
+				// Remove the surrounding <p> tags
+				.replace(/<\/?p>/g, '')
+				// Insert links to other licks
+				.replace(/{{(\d+)}}/g, '<a href="/lick/$1">#$1</a>')
+			);
 		},
 		variations()
 		{
@@ -302,8 +301,8 @@ export default {
 
 	created()
 	{
-		this.data = data;
-		this.md   = new MarkdownIt({
+		this.data     = data;
+		this.markdown = new MarkdownIt({
 			breaks:      true,
 			typographer: true,
 		});

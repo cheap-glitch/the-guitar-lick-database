@@ -3,16 +3,22 @@
  * vue.config.js
  */
 
-const htmlMinifier          = require('html-minifier').minify;
+const fs                    = require('fs');
+const path                  = require('path');
+const walk                  = require('klaw-sync');
+const minify                = require('html-minifier').minify;
+const MarkdownIt            = require('markdown-it');
 
 const routes                = require('./src/routes');
 const filterExternalLinks   = require('./src/modules/filters').filterExternalLinks;
 process.env.VUE_APP_VERSION = require('./package.json').version;
 
-module.exports = {
-	// Build the app into the 'build' folder
-	outputDir: 'build',
+const markdown = new MarkdownIt({
+	breaks:      true,
+	typographer: true,
+});
 
+module.exports = {
 	// Disable source maps in production
 	productionSourceMap: false,
 
@@ -49,10 +55,21 @@ module.exports = {
 		.use('pug-plain-loader')
 		.loader('pug-plain-loader')
 		.tap(() => ({
+			data: {
+				/**
+				 * Load the contents of all update posts
+				 */
+				updatePosts: walk(path.resolve(__dirname, './src/assets/posts')).map(file => ({
+					date:     file.path.split('/').pop().split('_')[0],
+					contents: markdown.render(fs.readFileSync(file.path).toString()),
+				}))
+			},
 			filters: {
-				// Add a text filter to parse the custom syntax for
-				// external links in Markdown files
-				'external-links': filterExternalLinks,
+				/**
+				 * Add a text filter to parse the custom syntax
+				 * for external links in Markdown files
+				 */
+				'external-links': filterExternalLinks
 			}
 		}));
 	},
@@ -65,54 +82,54 @@ module.exports = {
 			component: 'fa-icon',
 			imports: {
 				// General UI
-				'arrow-circle-left':         'pro-regular',
-				'chevron-down':              'pro-regular',
-				'cog':                       'pro-solid',
-				'external-link-square-alt':  'pro-regular',
-				'moon':                      'pro-solid',
-				'star':                     ['pro-solid', 'pro-regular'],
-				'sun':                       'pro-solid',
-				'trash-alt':                 'pro-regular',
+				'arrow-circle-left':        'pro-regular',
+				'chevron-down':             'pro-regular',
+				'cog':                      'pro-solid',
+				'external-link-square-alt': 'pro-regular',
+				'moon':                     'pro-solid',
+				'star':                    ['pro-solid', 'pro-regular'],
+				'sun':                      'pro-solid',
+				'trash-alt':                'pro-regular',
 
 				// Logo
-				'comment-alt-music':         'pro-solid',
-				'square-full':               'pro-solid',
+				'comment-alt-music':        'pro-solid',
+				'square-full':              'pro-solid',
 
 				// Main navigation menu
-				'guitar':                    'pro-solid',
-				'heart':                     'pro-solid',
-				'list-ul':                   'pro-solid',
-				'random':                    'pro-solid',
+				'guitar':                   'pro-solid',
+				'heart':                    'pro-solid',
+				'list-ul':                  'pro-solid',
+				'random':                   'pro-solid',
 
 				// Footer
-				'github':                    'free-brands',
-				'twitter':                   'free-brands',
+				'github':                   'free-brands',
+				'twitter':                  'free-brands',
 
 				// Lick infos
-				'album':                     'pro-regular',
-				'book':                      'pro-regular',
-				'compact-disc':              'pro-regular',
-				'file-alt':                  'pro-regular',
-				'file-music':                'pro-regular',
-				'guitar-electric':           'pro-regular',
-				'mountain':                  'pro-regular',
-				'music':                     'pro-regular',
-				'tags':                      'pro-regular',
-				'user-circle':               'pro-regular',
-				'youtube':                   'free-brands',
+				'album':                    'pro-regular',
+				'book':                     'pro-regular',
+				'compact-disc':             'pro-regular',
+				'file-alt':                 'pro-regular',
+				'file-music':               'pro-regular',
+				'guitar-electric':          'pro-regular',
+				'mountain':                 'pro-regular',
+				'music':                    'pro-regular',
+				'tags':                     'pro-regular',
+				'user-circle':              'pro-regular',
+				'youtube':                  'free-brands',
 
 				// Player
-				'drum':                      'pro-regular',
-				'dumbbell':                  'pro-regular',
-				'minus':                     'pro-regular',
-				'pause':                     'pro-regular',
-				'play':                      'pro-regular',
-				'plus':                      'pro-regular',
-				'search-minus':              'pro-regular',
-				'search-plus':               'pro-regular',
-				'stop':                      'pro-regular',
-				'stopwatch':                 'pro-regular',
-				'undo-alt':                  'pro-regular',
+				'drum':                     'pro-regular',
+				'dumbbell':                 'pro-regular',
+				'minus':                    'pro-regular',
+				'pause':                    'pro-regular',
+				'play':                     'pro-regular',
+				'plus':                     'pro-regular',
+				'search-minus':             'pro-regular',
+				'search-plus':              'pro-regular',
+				'stop':                     'pro-regular',
+				'stopwatch':                'pro-regular',
+				'undo-alt':                 'pro-regular',
 			}
 		},
 
@@ -120,10 +137,10 @@ module.exports = {
 		 * Pre-rendering
 		 */
 		prerenderSpa: {
-			registry:        undefined,
-			headless:        true,
-			onlyProduction:  true,
-			useRenderEvent:  false,
+			registry:       undefined,
+			headless:       true,
+			onlyProduction: true,
+			useRenderEvent: false,
 
 			renderRoutes: [
 				'/',
@@ -131,15 +148,12 @@ module.exports = {
 
 			postProcess(route)
 			{
-				route.html =
-
+				return { ...route, html:
 					// Minify the Font Awesome-related CSS
-					htmlMinifier(route.html, { minifyCSS: true })
-
+					minify(route.html, { minifyCSS: true })
 					// Tell Vue to trigger hydration
-					.replace('id="app"', 'id="app" data-server-rendered="true"');
-
-				return route;
+					.replace('id="app"', 'id="app" data-server-rendered="true"')
+				};
 			}
 		},
 
