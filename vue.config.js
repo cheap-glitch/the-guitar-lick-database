@@ -3,15 +3,17 @@
  * vue.config.js
  */
 
-const fs                    = require('fs');
-const path                  = require('path');
-const walk                  = require('klaw-sync');
-const minify                = require('html-minifier').minify;
-const MarkdownIt            = require('markdown-it');
+const fs                        = require('fs');
+const path                      = require('path');
+const walk                      = require('klaw-sync');
+const minify                    = require('html-minifier').minify;
+const MarkdownIt                = require('markdown-it');
 
-const routes                = require('./src/routes');
-const filterExternalLinks   = require('./src/modules/filters').filterExternalLinks;
-process.env.VUE_APP_VERSION = require('./package.json').version;
+const routes                    = require('./src/routes');
+const filterExternalLinks       = require('./src/modules/filters').filterExternalLinks;
+
+process.env.VUE_APP_VERSION     = require('./package.json').version;
+process.env.VUE_APP_DESCRIPTION = require('./package.json').description;
 
 const markdown = new MarkdownIt({
 	breaks:      true,
@@ -19,10 +21,8 @@ const markdown = new MarkdownIt({
 });
 
 module.exports = {
-	// Disable source maps in production
 	productionSourceMap: false,
 
-	// Display both warnings and errors in the dev overlay
 	devServer: {
 		https: true,
 		host:  'localhost',
@@ -35,10 +35,10 @@ module.exports = {
 	},
 
 	/**
-	 * CSS-related settings
+	 * SCSS
 	 */
 	css: {
-		// Enable source maps in dev mode
+		// Enable source maps in dev mode only
 		sourceMap: process.env.NODE_ENV === 'development',
 
 		// Import the mixins in every component
@@ -46,7 +46,7 @@ module.exports = {
 	},
 
 	/**
-	 * Pug settings
+	 * Pug templates
 	 */
 	chainWebpack: config => {
 		config.module
@@ -76,7 +76,7 @@ module.exports = {
 
 	pluginOptions: {
 		/**
-		 * Font Awesome
+		 * Font Awesome icons
 		 */
 		fontawesome: {
 			component: 'fa-icon',
@@ -161,11 +161,11 @@ module.exports = {
 		 * Sitemap
 		 */
 		sitemap: {
-			routes,
-
 			productionOnly: true,
-			trailingSlash:  false,
-			baseURL:        'https://www.theguitarlickdatabase.com',
+
+			routes,
+			baseURL: 'https://www.theguitarlickdatabase.com',
+			trailingSlash: false,
 		},
 	},
 }

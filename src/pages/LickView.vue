@@ -387,7 +387,7 @@ function navigationGuard(to, from, next)
 
 		width: 40px;
 
-		background-image: linear-gradient(to left, var(--color--border) 50%, transparent);
+		background-image: linear-gradient(to left, var(--color--bg) 50%, transparent);
 	}
 }
 
