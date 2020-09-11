@@ -45,7 +45,7 @@
     "core-js": "^3.6.5",
     "markdown-it": "^10.0.0",
     "v-click-outside": "^3.0.1",
-    "vue": "^2.6.11",
+    "vue": "^2.6.12",
     "vue-autosuggest": "^2.1.1",
     "vue-css-modifiers": "^1.0.7",
     "vue-router": "^3.1.6",
