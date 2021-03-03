@@ -79,7 +79,7 @@
     "npm-run-all": "^4.1.5",
     "nyc": "^15.0.1",
     "prerender-spa-plugin": "^3.4.0",
-    "pug": "^2.0.4",
+    "pug": "^3.0.1",
     "pug-plain-loader": "^1.0.0",
     "sass": "^1.26.5",
     "sass-loader": "^8.0.2",
